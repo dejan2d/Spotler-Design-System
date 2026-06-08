@@ -1,0 +1,85 @@
+/* Segmented Button — Spotler Design System
+   Spec: references/components/segmented-button.md
+   Joined segments inside one bordered container; the selected segment is filled. */
+
+.sds-segmented-button {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--segmented-button-stroke);
+  border-radius: var(--border-small);
+  overflow: hidden;
+  font-family: var(--font-family);
+}
+
+.sds-segmented-button__segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--segmented-button-default-rest-text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+/* Divider between joined segments. */
+.sds-segmented-button__segment + .sds-segmented-button__segment {
+  border-left: 1px solid var(--segmented-button-stroke);
+}
+
+.sds-segmented-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--segmented-button-default-rest-icon);
+}
+
+.sds-segmented-button__label {
+  display: inline-block;
+}
+
+/* ===== Hover ===== */
+.sds-segmented-button__segment:hover:not(:disabled):not(
+    .sds-segmented-button__segment--selected
+  ) {
+  color: var(--segmented-button-hover-text);
+}
+
+.sds-segmented-button__segment:hover:not(:disabled):not(
+    .sds-segmented-button__segment--selected
+  )
+  .sds-segmented-button__icon {
+  color: var(--segmented-button-hover-icon);
+}
+
+.sds-segmented-button__segment:focus-visible {
+  outline: 2px solid var(--segmented-button-hover-text);
+  outline-offset: -2px;
+}
+
+/* ===== Selected ===== */
+.sds-segmented-button__segment--selected {
+  background: var(--segmented-button-default-selected-background);
+  color: var(--segmented-button-default-selected-text);
+}
+
+.sds-segmented-button__segment--selected .sds-segmented-button__icon {
+  color: var(--segmented-button-default-selected-icon);
+}
+
+/* ===== Disabled ===== */
+.sds-segmented-button__segment:disabled {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-segmented-button__segment:disabled .sds-segmented-button__icon {
+  color: var(--disabled-text);
+}

@@ -1,0 +1,242 @@
+/* Folders — Spotler Design System
+   Spec: references/components/folders.md
+   Folder Menu container: header + scrollable folder items. 150ms transitions. */
+
+.sds-folders {
+  display: flex;
+  flex-direction: column;
+  width: 304px;
+  padding: var(--spacing-s-8);
+  background: var(--folders-frame-background);
+  border: var(--border-small) solid var(--folders-frame-stroke);
+  border-radius: var(--border-small);
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+/* ===== Header ===== */
+.sds-folders__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+}
+
+.sds-folders__title {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
+  color: var(--folders-header-text);
+}
+
+.sds-folders__header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+}
+
+.sds-folders__header-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--folders-header-actions);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.sds-folders__header-action:last-child {
+  color: var(--folders-header-sort);
+}
+
+.sds-folders__header-action:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
+}
+
+.sds-folders__divider {
+  display: block;
+  width: 288px;
+  max-width: 100%;
+  border-top: var(--border-small) solid var(--monochrome-gray-200);
+}
+
+/* ===== List ===== */
+.sds-folders__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+}
+
+.sds-folders__list li {
+  display: flex;
+}
+
+/* ===== Item ===== */
+.sds-folders__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  width: 100%;
+  min-height: 36px;
+  padding: var(--spacing-s-8);
+  border-radius: var(--border-small);
+  background: transparent;
+  transition: background-color 150ms ease-in-out;
+}
+
+.sds-folders__item-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--folders-item-default-text);
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  cursor: pointer;
+  text-align: left;
+}
+
+.sds-folders__item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--folders-item-default-icon);
+}
+
+.sds-folders__item-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sds-folders__item-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--folders-item-hover-action);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.sds-folders__item-button:focus-visible,
+.sds-folders__item-actions:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
+}
+
+/* Hover */
+.sds-folders__item:hover {
+  background: var(--folders-item-hover-background);
+}
+
+.sds-folders__item:hover .sds-folders__item-button {
+  color: var(--folders-item-hover-text);
+}
+
+.sds-folders__item:hover .sds-folders__item-icon {
+  color: var(--folders-item-hover-icon);
+}
+
+.sds-folders__item:hover .sds-folders__item-actions {
+  visibility: visible;
+}
+
+/* Selected */
+.sds-folders__item--selected,
+.sds-folders__item--selected:hover {
+  background: var(--folders-item-selected-background);
+}
+
+.sds-folders__item--selected .sds-folders__item-button {
+  color: var(--folders-item-selected-text);
+  font-weight: 600;
+}
+
+.sds-folders__item--selected .sds-folders__item-icon {
+  color: var(--folders-item-selected-icon);
+}
+
+/* Disabled */
+.sds-folders__item--disabled .sds-folders__item-button {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-folders__item--disabled .sds-folders__item-icon {
+  color: var(--disabled-text);
+}
+
+/* ===== New / inline edit ===== */
+.sds-folders__item--new {
+  gap: var(--spacing-s-8);
+}
+
+.sds-folders__new-input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  background: var(--folders-item-new-background);
+  border: var(--border-small) solid var(--folders-item-new-stroke);
+  border-radius: var(--border-small);
+  color: var(--folders-item-new-text);
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  outline: none;
+}
+
+.sds-folders__new-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--border-circular);
+  color: var(--folders-item-new-stroke);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.sds-folders__new-confirm:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}

@@ -1,0 +1,83 @@
+/* Breadcrumb — Spotler Design System
+   Spec: references/components/breadcrumb.md
+   No dedicated tokens — composes from Link color + Monochrome grays.
+   Body/Paragraph - Regular (14/20). Single line, no wrapping. */
+
+.sds-breadcrumb {
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+}
+
+.sds-breadcrumb__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: var(--spacing-s-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.sds-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  min-width: 0;
+}
+
+.sds-breadcrumb__link {
+  color: var(--primary-conceptual-conceptual);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.sds-breadcrumb__link:hover {
+  color: var(--primary-conceptual-conceptual-darker);
+}
+
+.sds-breadcrumb__link:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
+}
+
+.sds-breadcrumb__current {
+  color: var(--monochrome-gray-1000);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sds-breadcrumb__separator {
+  color: var(--monochrome-gray-700);
+  user-select: none;
+}
+
+/* ===== Back-link form ===== */
+.sds-breadcrumb__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  color: var(--primary-conceptual-conceptual);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.sds-breadcrumb__back:hover {
+  color: var(--primary-conceptual-conceptual-darker);
+}
+
+.sds-breadcrumb__back:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
+}
+
+.sds-breadcrumb__back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

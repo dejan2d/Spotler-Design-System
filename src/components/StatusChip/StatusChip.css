@@ -1,0 +1,67 @@
+/* Status Chip — Spotler Design System
+   Spec: references/components/status-chip.md
+   Row, padding 4px 8px, gap 8px, radius large (8px), 24px tall. Non-interactive. */
+
+.sds-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  height: 24px;
+  padding: var(--spacing-s-4) var(--spacing-s-8);
+  border-radius: var(--border-large);
+  font-family: var(--font-family);
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  cursor: default;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.sds-status-chip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.sds-status-chip__label {
+  display: inline-block;
+}
+
+/* ===== Default (neutral) ===== */
+.sds-status-chip--default {
+  background: var(--status-chip-default-background);
+  color: var(--status-chip-default-text);
+}
+.sds-status-chip--default .sds-status-chip__icon { color: var(--status-chip-default-icon); }
+
+/* ===== Blue (info) ===== */
+.sds-status-chip--blue {
+  background: var(--status-chip-blue-background);
+  color: var(--status-chip-blue-text);
+}
+.sds-status-chip--blue .sds-status-chip__icon { color: var(--status-chip-blue-icon); }
+
+/* ===== Alert (error) ===== */
+.sds-status-chip--alert {
+  background: var(--status-chip-alert-background);
+  color: var(--status-chip-alert-text);
+}
+.sds-status-chip--alert .sds-status-chip__icon { color: var(--status-chip-alert-icon); }
+
+/* ===== Warning ===== */
+.sds-status-chip--warning {
+  background: var(--status-chip-warning-background);
+  color: var(--status-chip-warning-text);
+}
+.sds-status-chip--warning .sds-status-chip__icon { color: var(--status-chip-warning-icon); }
+
+/* ===== Success ===== */
+.sds-status-chip--success {
+  background: var(--status-chip-success-background);
+  color: var(--status-chip-success-text);
+}
+.sds-status-chip--success .sds-status-chip__icon { color: var(--status-chip-success-icon); }

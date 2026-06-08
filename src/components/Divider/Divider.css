@@ -1,0 +1,20 @@
+/* Divider — Spotler Design System
+   Spec: references/components/divider.md. 1px thickness, color Divider/* (#E7ECED). */
+
+.sds-divider {
+  border: none;
+  flex-shrink: 0;
+}
+
+.sds-divider--horizontal {
+  width: 100%;
+  height: 1px;
+  background: var(--divider-horizontal);
+}
+
+.sds-divider--vertical {
+  width: 1px;
+  height: 100%;
+  align-self: stretch;
+  background: var(--divider-vertical);
+}

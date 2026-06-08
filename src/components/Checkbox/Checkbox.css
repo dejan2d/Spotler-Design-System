@@ -1,0 +1,167 @@
+/* Checkbox — Spotler Design System
+   Spec: references/components/checkbox.md
+   Square box with Border/Small radius, 20px label gap. */
+
+.sds-checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  font-family: var(--font-family);
+}
+
+.sds-checkbox__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-s-20);
+}
+
+.sds-checkbox__control {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* Native input sits on top, transparent, for hit area + a11y semantics */
+.sds-checkbox__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.sds-checkbox__box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--checkbox-default-background);
+  border: 1px solid var(--checkbox-default-border);
+  border-radius: var(--border-small);
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
+    color 150ms ease-in-out;
+}
+
+.sds-checkbox__check {
+  width: 16px;
+  height: 16px;
+  color: var(--checkbox-checked-checkmark);
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.sds-checkbox__dash {
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  border-radius: var(--border-small);
+  background: var(--checkbox-checked-checkmark);
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.sds-checkbox__label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--checkbox-label);
+  cursor: pointer;
+}
+
+.sds-checkbox__hint {
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  color: var(--checkbox-help-text);
+}
+
+/* ===== Checked ===== */
+.sds-checkbox__input:checked ~ .sds-checkbox__box {
+  background: var(--checkbox-checked-background);
+  border-color: var(--checkbox-checked-border);
+}
+
+.sds-checkbox__input:checked ~ .sds-checkbox__box .sds-checkbox__check {
+  opacity: 1;
+}
+
+.sds-checkbox__input:checked ~ .sds-checkbox__box .sds-checkbox__dash {
+  opacity: 0;
+}
+
+/* ===== Indeterminate (overrides checked glyph with a dash) ===== */
+.sds-checkbox__input:indeterminate ~ .sds-checkbox__box {
+  background: var(--checkbox-checked-background);
+  border-color: var(--checkbox-checked-border);
+}
+
+.sds-checkbox__input:indeterminate ~ .sds-checkbox__box .sds-checkbox__check {
+  opacity: 0;
+}
+
+.sds-checkbox__input:indeterminate ~ .sds-checkbox__box .sds-checkbox__dash {
+  opacity: 1;
+}
+
+/* ===== Hover ===== */
+.sds-checkbox__input:hover:not(:disabled) ~ .sds-checkbox__box {
+  border-color: var(--checkbox-checked-border);
+}
+
+/* ===== Focus ===== */
+.sds-checkbox__input:focus-visible ~ .sds-checkbox__box {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+/* ===== Error ===== */
+.sds-checkbox--error .sds-checkbox__box {
+  background: var(--checkbox-error-background);
+  border-color: var(--checkbox-error-border);
+}
+
+.sds-checkbox--error .sds-checkbox__check,
+.sds-checkbox--error .sds-checkbox__dash {
+  color: var(--checkbox-error-icon);
+  background: var(--checkbox-error-icon);
+}
+
+.sds-checkbox--error .sds-checkbox__check {
+  background: transparent;
+}
+
+.sds-checkbox--error .sds-checkbox__hint {
+  color: var(--checkbox-error-text);
+}
+
+/* ===== Disabled ===== */
+.sds-checkbox--disabled .sds-checkbox__box {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
+}
+
+.sds-checkbox--disabled .sds-checkbox__check,
+.sds-checkbox--disabled .sds-checkbox__dash {
+  color: var(--disabled-icon);
+  background: var(--disabled-icon);
+}
+
+.sds-checkbox--disabled .sds-checkbox__check {
+  background: transparent;
+}
+
+.sds-checkbox--disabled .sds-checkbox__label,
+.sds-checkbox--disabled .sds-checkbox__hint {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-checkbox--disabled .sds-checkbox__input,
+.sds-checkbox--disabled .sds-checkbox__label {
+  cursor: not-allowed;
+}

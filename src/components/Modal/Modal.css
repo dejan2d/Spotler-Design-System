@@ -1,0 +1,91 @@
+/* Modal — Spotler Design System
+   Spec: references/components/modal.md. Composes Overlay/* surfaces with Headers/Modal/* tokens.
+   Header / body / footer all white; overlay shadow. */
+
+.sds-modal__scrim {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-s-24);
+  /* No scrim token exists in the system; derive the 16% tint from Monochrome/Gray-1000 (#353B40),
+     the same base color as the overlay shadow, so no raw color is hardcoded. */
+  background: color-mix(in srgb, var(--monochrome-gray-1000) 16%, transparent);
+  z-index: 1000;
+}
+
+.sds-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  border-radius: var(--border-large);
+  box-shadow: var(--elevation-overlay);
+  font-family: var(--font-family);
+  overflow: hidden;
+  outline: none;
+}
+
+.sds-modal__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-16) var(--spacing-s-24);
+  background: var(--overlay-header-background);
+}
+
+.sds-modal__header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--headers-modal-icon);
+}
+
+.sds-modal__title {
+  flex: 1;
+  margin: 0;
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line);
+  font-weight: var(--font-h3-weight);
+  color: var(--headers-modal-text);
+}
+
+.sds-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: var(--spacing-s-4);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--headers-modal-close-icon);
+}
+
+.sds-modal__close:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+.sds-modal__body {
+  flex: 1;
+  overflow: auto;
+  padding: var(--spacing-s-24);
+  background: var(--monochrome-white);
+  color: var(--overlay-header-text);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+}
+
+.sds-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-16) var(--spacing-s-24);
+  background: var(--overlay-footer-background);
+}

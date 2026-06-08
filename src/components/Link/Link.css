@@ -1,0 +1,37 @@
+/* Link — Spotler Design System
+   Spec: references/components/link.md
+   Inline text link; inherits surrounding text size; always underlined. */
+
+.sds-link {
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--button-textlink-rest-text);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.sds-link:hover {
+  color: var(--button-textlink-hover-text);
+  text-decoration: underline;
+}
+
+.sds-link:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+/* ===== Selected / active ===== */
+.sds-link--selected {
+  color: var(--button-textlink-selected-text);
+  font-weight: 600;
+}
+
+/* ===== Disabled ===== */
+.sds-link--disabled {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+  pointer-events: none;
+}

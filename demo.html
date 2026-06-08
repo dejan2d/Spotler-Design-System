@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spotler Components — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="src/styles/tokens.css" />
+<link rel="stylesheet" href="src/styles/component-tokens.css" />
+<link rel="stylesheet" href="src/components/Accordion/Accordion.css" />
+<link rel="stylesheet" href="src/components/ActionCard/ActionCard.css" />
+<link rel="stylesheet" href="src/components/Alert/Alert.css" />
+<link rel="stylesheet" href="src/components/Avatar/Avatar.css" />
+<link rel="stylesheet" href="src/components/Badge/Badge.css" />
+<link rel="stylesheet" href="src/components/BarChart/BarChart.css" />
+<link rel="stylesheet" href="src/components/Breadcrumb/Breadcrumb.css" />
+<link rel="stylesheet" href="src/components/Button/Button.css" />
+<link rel="stylesheet" href="src/components/Calendar/Calendar.css" />
+<link rel="stylesheet" href="src/components/Card/Card.css" />
+<link rel="stylesheet" href="src/components/Checkbox/Checkbox.css" />
+<link rel="stylesheet" href="src/components/ColorPicker/ColorPicker.css" />
+<link rel="stylesheet" href="src/components/ContextMenu/ContextMenu.css" />
+<link rel="stylesheet" href="src/components/DatePicker/DatePicker.css" />
+<link rel="stylesheet" href="src/components/Divider/Divider.css" />
+<link rel="stylesheet" href="src/components/DropdownMenu/DropdownMenu.css" />
+<link rel="stylesheet" href="src/components/EmptyState/EmptyState.css" />
+<link rel="stylesheet" href="src/components/Folders/Folders.css" />
+<link rel="stylesheet" href="src/components/Header/Header.css" />
+<link rel="stylesheet" href="src/components/IconButton/IconButton.css" />
+<link rel="stylesheet" href="src/components/KpiCard/KpiCard.css" />
+<link rel="stylesheet" href="src/components/LineChart/LineChart.css" />
+<link rel="stylesheet" href="src/components/Link/Link.css" />
+<link rel="stylesheet" href="src/components/Modal/Modal.css" />
+<link rel="stylesheet" href="src/components/Navigation/Navigation.css" />
+<link rel="stylesheet" href="src/components/Pagination/Pagination.css" />
+<link rel="stylesheet" href="src/components/PieChart/PieChart.css" />
+<link rel="stylesheet" href="src/components/ProgressBar/ProgressBar.css" />
+<link rel="stylesheet" href="src/components/RadioButton/RadioButton.css" />
+<link rel="stylesheet" href="src/components/SearchBar/SearchBar.css" />
+<link rel="stylesheet" href="src/components/SegmentedButton/SegmentedButton.css" />
+<link rel="stylesheet" href="src/components/Slider/Slider.css" />
+<link rel="stylesheet" href="src/components/StatusChip/StatusChip.css" />
+<link rel="stylesheet" href="src/components/Stepper/Stepper.css" />
+<link rel="stylesheet" href="src/components/Switch/Switch.css" />
+<link rel="stylesheet" href="src/components/Table/Table.css" />
+<link rel="stylesheet" href="src/components/Tabs/Tabs.css" />
+<link rel="stylesheet" href="src/components/TextField/TextField.css" />
+<link rel="stylesheet" href="src/components/TimePicker/TimePicker.css" />
+<link rel="stylesheet" href="src/components/Tooltip/Tooltip.css" />
+<link rel="stylesheet" href="src/components/Upload/Upload.css" />
+<style>
+  body { font-family: var(--font-family); background: var(--monochrome-gray-100); margin: 0; padding: 40px; color: var(--monochrome-gray-1000); }
+  h1 { font-size: var(--font-h1-size); line-height: var(--font-h1-line); font-weight: var(--font-h1-weight); }
+  h2 { font-size: var(--font-h2-size); line-height: var(--font-h2-line); font-weight: var(--font-h2-weight); margin-top: 56px; padding-bottom: 8px; border-bottom: 2px solid var(--monochrome-gray-300); }
+  h3 { font-size: var(--font-h3-size); line-height: var(--font-h3-line); font-weight: var(--font-h3-weight); margin-top: 32px; }
+  .lead { color: var(--monochrome-gray-700); }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
+  .row--top { align-items: flex-start; }
+  .panel { max-width: 1100px; margin: 0 auto; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .stack { display: flex; flex-direction: column; gap: 12px; margin: 16px 0; }
+  .label-tag { display: inline-block; font-size: 12px; color: var(--monochrome-gray-700); margin: 16px 0 4px; }
+  .surface { background: var(--monochrome-white); border-radius: 8px; padding: 16px; }
+  .nav-demo { display: inline-flex; height: 460px; border-radius: 8px; overflow: hidden; }
+  /* Static visibility overrides for overlay/floating components (visibility only — no color changes). */
+  .overlay-static { position: static !important; display: block !important; }
+  .overlay-static .sds-tooltip__surface,
+  .tooltip-static .sds-tooltip__surface { position: static !important; transform: none !important; margin: 0 !important; }
+  .modal-static .sds-modal__scrim { position: static; inset: auto; padding: 0; background: transparent; display: block; }
+  .dropdown-open .sds-dropdown-menu__popover,
+  .datepicker-open .sds-date-picker__popover,
+  .timepicker-open .sds-time-picker__listbox { position: static !important; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="panel">
+  <h1>Spotler Components — Preview</h1>
+  <p class="lead">Every component rendered with the real generated token CSS. This mirrors the React component DOM output. Overlay components (Modal, ContextMenu, Tooltip, open DropdownMenu, DatePicker/TimePicker popovers) are forced visible inline.</p>
+
+  <!-- ============================================================ -->
+  <h2>Buttons &amp; Actions</h2>
+  <!-- ============================================================ -->
+
+  <h3>Button — variants</h3>
+  <div class="row">
+    <button class="sds-button sds-button--primary"><span class="sds-button__label">Primary</span></button>
+    <button class="sds-button sds-button--primary-accent"><span class="sds-button__icon">+</span><span class="sds-button__label">Create new</span></button>
+    <button class="sds-button sds-button--secondary"><span class="sds-button__label">Secondary</span></button>
+    <button class="sds-button sds-button--tertiary"><span class="sds-button__label">Tertiary</span></button>
+    <button class="sds-button sds-button--destructive"><span class="sds-button__label">Delete</span></button>
+    <button class="sds-button sds-button--destructive-outline"><span class="sds-button__label">Remove</span></button>
+    <button class="sds-button sds-button--warning"><span class="sds-button__label">Archive</span></button>
+  </div>
+  <h3>Button — states (Primary)</h3>
+  <div class="row">
+    <button class="sds-button sds-button--primary"><span class="sds-button__label">Default</span></button>
+    <button class="sds-button sds-button--primary sds-button--selected" aria-pressed="true"><span class="sds-button__label">Selected</span></button>
+    <button class="sds-button sds-button--primary" disabled aria-disabled="true"><span class="sds-button__label">Disabled</span></button>
+  </div>
+
+  <h3>Icon Button</h3>
+  <div class="row">
+    <button class="sds-icon-button sds-icon-button--secondary" aria-label="Edit"><span class="sds-icon-button__icon">✎</span></button>
+    <button class="sds-icon-button sds-icon-button--secondary sds-icon-button--selected" aria-label="Star" aria-pressed="true"><span class="sds-icon-button__icon">★</span></button>
+    <button class="sds-icon-button sds-icon-button--tertiary" aria-label="More"><span class="sds-icon-button__icon">⋯</span></button>
+    <button class="sds-icon-button sds-icon-button--secondary" aria-label="Delete" disabled aria-disabled="true"><span class="sds-icon-button__icon">🗑</span></button>
+  </div>
+
+  <h3>Segmented Button</h3>
+  <div class="row">
+    <div class="sds-segmented-button" role="radiogroup" aria-label="View">
+      <button type="button" role="radio" aria-checked="true" class="sds-segmented-button__segment sds-segmented-button__segment--selected"><span class="sds-segmented-button__label">List</span></button>
+      <button type="button" role="radio" aria-checked="false" class="sds-segmented-button__segment"><span class="sds-segmented-button__label">Board</span></button>
+      <button type="button" role="radio" aria-checked="false" class="sds-segmented-button__segment"><span class="sds-segmented-button__label">Calendar</span></button>
+    </div>
+    <div class="sds-segmented-button" role="radiogroup" aria-label="Align">
+      <button type="button" role="radio" aria-checked="true" class="sds-segmented-button__segment sds-segmented-button__segment--selected" aria-label="Left"><span class="sds-segmented-button__icon">⇤</span></button>
+      <button type="button" role="radio" aria-checked="false" class="sds-segmented-button__segment" aria-label="Center"><span class="sds-segmented-button__icon">↔</span></button>
+      <button type="button" role="radio" aria-checked="false" class="sds-segmented-button__segment" aria-label="Right"><span class="sds-segmented-button__icon">⇥</span></button>
+    </div>
+  </div>
+
+  <h3>Link</h3>
+  <div class="row">
+    <a class="sds-link" href="#">Default link</a>
+    <a class="sds-link sds-link--selected" href="#" aria-current="page">Selected link</a>
+    <a class="sds-link sds-link--disabled" aria-disabled="true">Disabled link</a>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Inputs &amp; Forms</h2>
+  <!-- ============================================================ -->
+
+  <h3>Text Field — states</h3>
+  <div class="grid">
+    <div class="sds-textfield">
+      <label class="sds-textfield__label">Email</label>
+      <div class="sds-textfield__field"><input class="sds-textfield__input" placeholder="you@company.com" /></div>
+      <p class="sds-textfield__hint">We'll never share it.</p>
+    </div>
+    <div class="sds-textfield sds-textfield--error">
+      <label class="sds-textfield__label">Email</label>
+      <div class="sds-textfield__field"><input class="sds-textfield__input" value="not-an-email" /></div>
+      <p class="sds-textfield__hint">Please enter a valid email address.</p>
+    </div>
+    <div class="sds-textfield sds-textfield--disabled">
+      <label class="sds-textfield__label">Email <span class="sds-textfield__optional">(optional)</span></label>
+      <div class="sds-textfield__field"><input class="sds-textfield__input" placeholder="Disabled" disabled /></div>
+    </div>
+  </div>
+
+  <h3>Checkbox</h3>
+  <div class="stack surface">
+    <div class="sds-checkbox">
+      <div class="sds-checkbox__row">
+        <span class="sds-checkbox__control">
+          <input type="checkbox" class="sds-checkbox__input" id="cb1" />
+          <span class="sds-checkbox__box" aria-hidden="true">
+            <svg class="sds-checkbox__check" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="sds-checkbox__dash"></span>
+          </span>
+        </span>
+        <label class="sds-checkbox__label" for="cb1">Unchecked option</label>
+      </div>
+    </div>
+    <div class="sds-checkbox">
+      <div class="sds-checkbox__row">
+        <span class="sds-checkbox__control">
+          <input type="checkbox" class="sds-checkbox__input" id="cb2" checked />
+          <span class="sds-checkbox__box" aria-hidden="true">
+            <svg class="sds-checkbox__check" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="sds-checkbox__dash"></span>
+          </span>
+        </span>
+        <label class="sds-checkbox__label" for="cb2">Checked option</label>
+      </div>
+    </div>
+    <div class="sds-checkbox">
+      <div class="sds-checkbox__row">
+        <span class="sds-checkbox__control">
+          <input type="checkbox" class="sds-checkbox__input" id="cb3" />
+          <span class="sds-checkbox__box" aria-hidden="true">
+            <svg class="sds-checkbox__check" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="sds-checkbox__dash"></span>
+          </span>
+        </span>
+        <label class="sds-checkbox__label" for="cb3">Indeterminate (select all)</label>
+      </div>
+    </div>
+    <div class="sds-checkbox sds-checkbox--error">
+      <div class="sds-checkbox__row">
+        <span class="sds-checkbox__control">
+          <input type="checkbox" class="sds-checkbox__input" id="cb4" />
+          <span class="sds-checkbox__box" aria-hidden="true">
+            <svg class="sds-checkbox__check" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="sds-checkbox__dash"></span>
+          </span>
+        </span>
+        <label class="sds-checkbox__label" for="cb4">You must accept the terms</label>
+      </div>
+      <p class="sds-checkbox__hint" id="cb4-hint">This field is required.</p>
+    </div>
+    <div class="sds-checkbox sds-checkbox--disabled">
+      <div class="sds-checkbox__row">
+        <span class="sds-checkbox__control">
+          <input type="checkbox" class="sds-checkbox__input" id="cb5" disabled />
+          <span class="sds-checkbox__box" aria-hidden="true">
+            <svg class="sds-checkbox__check" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="sds-checkbox__dash"></span>
+          </span>
+        </span>
+        <label class="sds-checkbox__label" for="cb5">Disabled option</label>
+      </div>
+    </div>
+  </div>
+
+  <h3>Radio Button</h3>
+  <div class="stack surface">
+    <div class="sds-radio">
+      <span class="sds-radio__control">
+        <input type="radio" name="plan" class="sds-radio__input" id="r1" checked />
+        <span class="sds-radio__circle" aria-hidden="true"><span class="sds-radio__dot"></span></span>
+      </span>
+      <label class="sds-radio__label" for="r1">Monthly billing</label>
+    </div>
+    <div class="sds-radio">
+      <span class="sds-radio__control">
+        <input type="radio" name="plan" class="sds-radio__input" id="r2" />
+        <span class="sds-radio__circle" aria-hidden="true"><span class="sds-radio__dot"></span></span>
+      </span>
+      <label class="sds-radio__label" for="r2">Annual billing</label>
+    </div>
+    <div class="sds-radio sds-radio--disabled">
+      <span class="sds-radio__control">
+        <input type="radio" name="plan" class="sds-radio__input" id="r3" disabled />
+        <span class="sds-radio__circle" aria-hidden="true"><span class="sds-radio__dot"></span></span>
+      </span>
+      <label class="sds-radio__label" for="r3">Enterprise (contact sales)</label>
+    </div>
+  </div>
+
+  <h3>Switch</h3>
+  <div class="stack surface">
+    <div class="sds-switch">
+      <span class="sds-switch__control">
+        <input type="checkbox" role="switch" class="sds-switch__input" id="sw1" />
+        <span class="sds-switch__track" aria-hidden="true"><span class="sds-switch__knob"></span></span>
+      </span>
+      <label class="sds-switch__label" for="sw1">Email notifications (off)</label>
+    </div>
+    <div class="sds-switch">
+      <span class="sds-switch__control">
+        <input type="checkbox" role="switch" class="sds-switch__input" id="sw2" checked />
+        <span class="sds-switch__track" aria-hidden="true"><span class="sds-switch__knob"></span></span>
+      </span>
+      <label class="sds-switch__label" for="sw2">Dark mode (on)</label>
+    </div>
+    <div class="sds-switch sds-switch--disabled">
+      <span class="sds-switch__control">
+        <input type="checkbox" role="switch" class="sds-switch__input" id="sw3" checked disabled />
+        <span class="sds-switch__track" aria-hidden="true"><span class="sds-switch__knob"></span></span>
+      </span>
+      <label class="sds-switch__label" for="sw3">Locked setting (disabled)</label>
+    </div>
+  </div>
+
+  <h3>Slider</h3>
+  <div class="stack surface" style="max-width: 360px;">
+    <div class="sds-slider">
+      <div class="sds-slider__header">
+        <label class="sds-slider__label" for="sl1">Volume</label>
+        <span class="sds-slider__value" aria-hidden="true">60</span>
+      </div>
+      <input type="range" class="sds-slider__input" id="sl1" min="0" max="100" value="60" style="--sds-slider-fill:60%;" />
+    </div>
+    <div class="sds-slider sds-slider--disabled">
+      <div class="sds-slider__header">
+        <label class="sds-slider__label" for="sl2">Brightness (disabled)</label>
+        <span class="sds-slider__value" aria-hidden="true">30</span>
+      </div>
+      <input type="range" class="sds-slider__input" id="sl2" min="0" max="100" value="30" disabled style="--sds-slider-fill:30%;" />
+    </div>
+  </div>
+
+  <h3>Color Picker</h3>
+  <div class="grid">
+    <div class="sds-color-picker sds-color-picker--filled">
+      <label class="sds-color-picker__label" for="cp1">Brand color</label>
+      <div class="sds-color-picker__field">
+        <span class="sds-color-picker__swatch"><input type="color" class="sds-color-picker__swatch-input" id="cp1" value="#005499" /></span>
+        <input type="text" class="sds-color-picker__text" value="#005499" />
+      </div>
+      <p class="sds-color-picker__hint">Hex value</p>
+    </div>
+    <div class="sds-color-picker sds-color-picker--empty">
+      <label class="sds-color-picker__label" for="cp2">Accent color</label>
+      <div class="sds-color-picker__field">
+        <span class="sds-color-picker__swatch"><input type="color" class="sds-color-picker__swatch-input" id="cp2" value="#000000" /></span>
+        <input type="text" class="sds-color-picker__text" placeholder="#000000" />
+      </div>
+    </div>
+  </div>
+
+  <h3>Search Bar</h3>
+  <div class="grid">
+    <div class="sds-search-bar">
+      <label class="sds-search-bar__visually-hidden" for="sb1">Search</label>
+      <div class="sds-search-bar__field">
+        <span class="sds-search-bar__icon sds-search-bar__icon--start" aria-hidden="true">🔍</span>
+        <input type="search" role="searchbox" class="sds-search-bar__input" id="sb1" placeholder="Search…" />
+      </div>
+    </div>
+    <div class="sds-search-bar">
+      <label class="sds-search-bar__visually-hidden" for="sb2">Search</label>
+      <div class="sds-search-bar__field">
+        <span class="sds-search-bar__icon sds-search-bar__icon--start" aria-hidden="true">🔍</span>
+        <input type="search" role="searchbox" class="sds-search-bar__input" id="sb2" value="Newsletter" />
+        <button type="button" class="sds-search-bar__clear" aria-label="Clear search"><span class="sds-search-bar__icon sds-search-bar__icon--end" aria-hidden="true">✕</span></button>
+      </div>
+    </div>
+    <div class="sds-search-bar sds-search-bar--error">
+      <label class="sds-search-bar__visually-hidden" for="sb3">Search</label>
+      <div class="sds-search-bar__field">
+        <span class="sds-search-bar__icon sds-search-bar__icon--start" aria-hidden="true">🔍</span>
+        <input type="search" role="searchbox" class="sds-search-bar__input" id="sb3" value="??" aria-invalid="true" />
+        <button type="button" class="sds-search-bar__clear" aria-label="Clear search"><span class="sds-search-bar__icon sds-search-bar__icon--end" aria-hidden="true">✕</span></button>
+      </div>
+    </div>
+  </div>
+
+  <h3>Dropdown Menu — open state</h3>
+  <div class="row row--top">
+    <div class="sds-dropdown-menu sds-dropdown-menu--open dropdown-open" style="width: 280px;">
+      <span class="sds-dropdown-menu__label" id="dd1-label">Country</span>
+      <button type="button" id="dd1" class="sds-dropdown-menu__trigger" aria-haspopup="listbox" aria-expanded="true">
+        <span class="sds-dropdown-menu__value">Netherlands</span>
+        <span class="sds-dropdown-menu__chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="sds-dropdown-menu__popover">
+        <ul class="sds-dropdown-menu__list" role="listbox" aria-labelledby="dd1-label">
+          <li role="option" aria-selected="false" class="sds-dropdown-menu__option"><span class="sds-dropdown-menu__option-label">Belgium</span></li>
+          <li role="option" aria-selected="true" class="sds-dropdown-menu__option sds-dropdown-menu__option--selected"><span class="sds-dropdown-menu__option-label">Netherlands</span></li>
+          <li role="option" aria-selected="false" class="sds-dropdown-menu__option sds-dropdown-menu__option--active"><span class="sds-dropdown-menu__option-label">Germany (hover)</span></li>
+          <li role="option" aria-disabled="true" class="sds-dropdown-menu__option sds-dropdown-menu__option--disabled"><span class="sds-dropdown-menu__option-label">France (disabled)</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sds-dropdown-menu" style="width: 280px;">
+      <span class="sds-dropdown-menu__label">Language (closed, placeholder)</span>
+      <button type="button" class="sds-dropdown-menu__trigger" aria-haspopup="listbox" aria-expanded="false">
+        <span class="sds-dropdown-menu__value sds-dropdown-menu__value--placeholder">Select…</span>
+        <span class="sds-dropdown-menu__chevron" aria-hidden="true">▾</span>
+      </button>
+    </div>
+  </div>
+
+  <h3>Date Picker — open popover</h3>
+  <div class="row row--top">
+    <div class="sds-date-picker datepicker-open" style="width: 280px;">
+      <label class="sds-date-picker__label" for="dp1">Start date</label>
+      <div class="sds-date-picker__field">
+        <input type="text" readonly class="sds-date-picker__input" id="dp1" value="2026-06-15" />
+        <button type="button" class="sds-date-picker__trigger" aria-label="Open calendar" tabindex="-1"><span class="sds-date-picker__icon" aria-hidden="true">📅</span></button>
+      </div>
+      <div class="sds-date-picker__popover" role="dialog" aria-label="Start date">
+        <div class="sds-calendar" role="group" aria-label="June 2026">
+          <div class="sds-calendar__header">
+            <button type="button" class="sds-calendar__nav" aria-label="Previous month"><span aria-hidden="true">‹</span></button>
+            <span class="sds-calendar__title">June 2026</span>
+            <button type="button" class="sds-calendar__nav" aria-label="Next month"><span aria-hidden="true">›</span></button>
+          </div>
+          <div class="sds-calendar__grid" role="grid">
+            <div class="sds-calendar__weekdays" role="row">
+              <span class="sds-calendar__weekday" role="columnheader">Mo</span>
+              <span class="sds-calendar__weekday" role="columnheader">Tu</span>
+              <span class="sds-calendar__weekday" role="columnheader">We</span>
+              <span class="sds-calendar__weekday" role="columnheader">Th</span>
+              <span class="sds-calendar__weekday" role="columnheader">Fr</span>
+              <span class="sds-calendar__weekday" role="columnheader">Sa</span>
+              <span class="sds-calendar__weekday" role="columnheader">Su</span>
+            </div>
+            <div class="sds-calendar__weeks">
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">26</button>
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">27</button>
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">28</button>
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">29</button>
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">30</button>
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">31</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">1</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">2</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">3</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">4</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">5</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">6</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">7</button>
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--current" aria-current="date">8</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">9</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">10</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">11</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">12</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">13</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">14</button>
+              <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--selected" aria-selected="true">15</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">16</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">17</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">18</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">19</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">20</button>
+              <button type="button" role="gridcell" class="sds-calendar__day">21</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Calendar (inline)</h3>
+  <div class="row row--top">
+    <div class="sds-calendar" role="group" aria-label="June 2026">
+      <div class="sds-calendar__header">
+        <button type="button" class="sds-calendar__nav" aria-label="Previous month"><span aria-hidden="true">‹</span></button>
+        <span class="sds-calendar__title">June 2026</span>
+        <button type="button" class="sds-calendar__nav" aria-label="Next month"><span aria-hidden="true">›</span></button>
+      </div>
+      <div class="sds-calendar__grid" role="grid">
+        <div class="sds-calendar__weekdays" role="row">
+          <span class="sds-calendar__weekday" role="columnheader">Mo</span>
+          <span class="sds-calendar__weekday" role="columnheader">Tu</span>
+          <span class="sds-calendar__weekday" role="columnheader">We</span>
+          <span class="sds-calendar__weekday" role="columnheader">Th</span>
+          <span class="sds-calendar__weekday" role="columnheader">Fr</span>
+          <span class="sds-calendar__weekday" role="columnheader">Sa</span>
+          <span class="sds-calendar__weekday" role="columnheader">Su</span>
+        </div>
+        <div class="sds-calendar__weeks">
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">26</button>
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">27</button>
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">28</button>
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">29</button>
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">30</button>
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--previous">31</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">1</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">2</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">3</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">4</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">5</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">6</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">7</button>
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--current" aria-current="date">8</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">9</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">10</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">11</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">12</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">13</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">14</button>
+          <button type="button" role="gridcell" class="sds-calendar__day sds-calendar__day--selected" aria-selected="true">15</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">16</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">17</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">18</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">19</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">20</button>
+          <button type="button" role="gridcell" class="sds-calendar__day">21</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Time Picker — open listbox</h3>
+  <div class="row row--top">
+    <div class="sds-time-picker timepicker-open" style="width: 220px;">
+      <label class="sds-time-picker__label" for="tp1">Meeting time</label>
+      <div class="sds-time-picker__field">
+        <input type="text" readonly class="sds-time-picker__input" id="tp1" value="09:30" />
+        <button type="button" class="sds-time-picker__trigger" aria-label="Open time options" tabindex="-1"><span class="sds-time-picker__icon" aria-hidden="true">🕐</span></button>
+      </div>
+      <ul class="sds-time-picker__listbox" role="listbox" aria-label="Meeting time">
+        <li role="option" aria-selected="false" class="sds-time-picker__option" tabindex="0">09:00</li>
+        <li role="option" aria-selected="true" class="sds-time-picker__option sds-time-picker__option--selected" tabindex="0">09:30</li>
+        <li role="option" aria-selected="false" class="sds-time-picker__option" tabindex="0">10:00</li>
+        <li role="option" aria-selected="false" class="sds-time-picker__option" tabindex="0">10:30</li>
+        <li role="option" aria-selected="false" class="sds-time-picker__option" tabindex="0">11:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Upload</h3>
+  <div class="stack" style="max-width: 520px;">
+    <div class="sds-upload">
+      <div class="sds-upload__zone">
+        <span class="sds-upload__zone-icon" aria-hidden="true">⬆</span>
+        <p class="sds-upload__title">Drag and drop files here</p>
+        <p class="sds-upload__paragraph">or browse to choose files</p>
+        <button type="button" class="sds-upload__browse">Browse files</button>
+        <input class="sds-upload__input" type="file" />
+      </div>
+      <ul class="sds-upload__list">
+        <li class="sds-upload__item sds-upload__item--uploaded">
+          <span class="sds-upload__item-icon" aria-hidden="true">📄</span>
+          <div class="sds-upload__item-body">
+            <div class="sds-upload__item-line"><span class="sds-upload__item-name">report.pdf</span><span class="sds-upload__item-size">2.4 MB</span></div>
+          </div>
+          <span class="sds-upload__status sds-upload__status--uploaded"><span class="sds-upload__status-icon" aria-hidden="true">✓</span><span class="sds-upload__status-text">Uploaded</span></span>
+          <button type="button" class="sds-upload__action" aria-label="Remove report.pdf">Remove</button>
+        </li>
+        <li class="sds-upload__item sds-upload__item--uploading">
+          <span class="sds-upload__item-icon" aria-hidden="true">📄</span>
+          <div class="sds-upload__item-body">
+            <div class="sds-upload__item-line"><span class="sds-upload__item-name">video.mp4</span><span class="sds-upload__item-size">48 MB</span></div>
+            <div class="sds-upload__progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64"><div class="sds-upload__progress-bar" style="width:64%;"></div></div>
+          </div>
+          <span class="sds-upload__status sds-upload__status--uploading"><span class="sds-upload__status-icon" aria-hidden="true">↑</span><span class="sds-upload__status-text">Uploading</span></span>
+        </li>
+        <li class="sds-upload__item sds-upload__item--upload-failed">
+          <span class="sds-upload__item-icon" aria-hidden="true">📄</span>
+          <div class="sds-upload__item-body">
+            <div class="sds-upload__item-line"><span class="sds-upload__item-name">archive.zip</span><span class="sds-upload__item-size">120 MB</span></div>
+            <p class="sds-upload__item-error">File exceeds the 100 MB limit.</p>
+          </div>
+          <span class="sds-upload__status sds-upload__status--upload-failed"><span class="sds-upload__status-icon" aria-hidden="true">!</span><span class="sds-upload__status-text">Upload failed</span></span>
+          <button type="button" class="sds-upload__action" aria-label="Retry uploading archive.zip">Retry</button>
+          <button type="button" class="sds-upload__action" aria-label="Remove archive.zip">Remove</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Display</h2>
+  <!-- ============================================================ -->
+
+  <h3>Card — variants</h3>
+  <div class="grid">
+    <div class="sds-card sds-card--info">
+      <div class="sds-card__header"><span class="sds-card__heading-icon">ℹ</span><span class="sds-card__heading">Info card</span></div>
+      <div class="sds-card__body">Compact read-only information block with a heading and body copy.</div>
+    </div>
+    <div class="sds-card sds-card--action">
+      <div class="sds-card__header"><span class="sds-card__heading">Action card</span><button class="sds-card__close" aria-label="Close">✕</button></div>
+      <div class="sds-card__body">A card with a close control and actions.</div>
+    </div>
+    <div class="sds-card sds-card--product-specific sds-card--selected" tabindex="0">
+      <div class="sds-card__body">Product-specific card (selectable) — shown selected.</div>
+    </div>
+  </div>
+
+  <h3>Action Card</h3>
+  <div class="row row--top">
+    <div class="sds-action-card" style="width: 460px;">
+      <h4 class="sds-action-card__heading">Account settings</h4>
+      <a class="sds-action-card__item" href="#">
+        <span class="sds-action-card__item-icon" aria-hidden="true">👤</span>
+        <span class="sds-action-card__item-body">
+          <span class="sds-action-card__item-label">Profile</span>
+          <span class="sds-action-card__item-description">Name, photo and contact details</span>
+        </span>
+        <span class="sds-action-card__item-trailing"><span class="sds-action-card__chevron" aria-hidden="true">›</span></span>
+      </a>
+      <a class="sds-action-card__item" href="#">
+        <span class="sds-action-card__item-icon" aria-hidden="true">🔒</span>
+        <span class="sds-action-card__item-body">
+          <span class="sds-action-card__item-label">Security</span>
+          <span class="sds-action-card__item-description">Password and two-factor auth</span>
+        </span>
+        <span class="sds-action-card__item-trailing"><span class="sds-action-card__chevron" aria-hidden="true">›</span></span>
+      </a>
+      <button type="button" class="sds-action-card__item sds-action-card__item--compact">
+        <span class="sds-action-card__item-icon" aria-hidden="true">🔔</span>
+        <span class="sds-action-card__item-body">
+          <span class="sds-action-card__item-label">Notifications (compact)</span>
+        </span>
+        <span class="sds-action-card__item-trailing"><span class="sds-action-card__chevron" aria-hidden="true">›</span></span>
+      </button>
+    </div>
+  </div>
+
+  <h3>Avatar</h3>
+  <div class="row">
+    <span class="sds-avatar sds-avatar--small" role="img" aria-label="Ann Smith"><span class="sds-avatar__fallback" aria-hidden="true">AS</span></span>
+    <span class="sds-avatar sds-avatar--medium" role="img" aria-label="Ben Lee"><span class="sds-avatar__fallback" aria-hidden="true">BL</span></span>
+    <span class="sds-avatar sds-avatar--large" role="img" aria-label="Carla Diaz"><span class="sds-avatar__fallback" aria-hidden="true">CD</span></span>
+    <span class="sds-avatar sds-avatar--large" role="img" aria-label="Photo avatar"><img class="sds-avatar__image" src="https://i.pravatar.cc/104?img=12" alt="" /></span>
+  </div>
+
+  <h3>Badge</h3>
+  <div class="row">
+    <span class="sds-badge sds-badge--dot sds-badge--neutral" aria-label="neutral"></span>
+    <span class="sds-badge sds-badge--dot sds-badge--primary" aria-label="primary"></span>
+    <span class="sds-badge sds-badge--dot sds-badge--inactive" aria-label="inactive"></span>
+    <span class="sds-badge sds-badge--dot sds-badge--warrning" aria-label="warning"></span>
+    <span class="sds-badge sds-badge--dot sds-badge--active" aria-label="active"></span>
+    <span class="sds-badge sds-badge--circle sds-badge--neutral">3</span>
+    <span class="sds-badge sds-badge--circle sds-badge--primary">9</span>
+    <span class="sds-badge sds-badge--circle sds-badge--inactive">0</span>
+    <span class="sds-badge sds-badge--circle sds-badge--warrning">5</span>
+    <span class="sds-badge sds-badge--circle sds-badge--active">12</span>
+  </div>
+
+  <h3>Status Chip</h3>
+  <div class="row">
+    <span class="sds-status-chip sds-status-chip--default"><span class="sds-status-chip__label">Draft</span></span>
+    <span class="sds-status-chip sds-status-chip--blue"><span class="sds-status-chip__icon" aria-hidden="true">ℹ</span><span class="sds-status-chip__label">Info</span></span>
+    <span class="sds-status-chip sds-status-chip--success"><span class="sds-status-chip__icon" aria-hidden="true">✓</span><span class="sds-status-chip__label">Active</span></span>
+    <span class="sds-status-chip sds-status-chip--warning"><span class="sds-status-chip__icon" aria-hidden="true">⚠</span><span class="sds-status-chip__label">Pending</span></span>
+    <span class="sds-status-chip sds-status-chip--alert"><span class="sds-status-chip__icon" aria-hidden="true">✕</span><span class="sds-status-chip__label">Failed</span></span>
+  </div>
+
+  <h3>Divider</h3>
+  <div class="surface" style="max-width: 420px;">
+    <p style="margin:0 0 12px;">Content above the divider.</p>
+    <div class="sds-divider sds-divider--horizontal"></div>
+    <p style="margin:12px 0;">Content below the divider.</p>
+    <div class="row" style="height: 40px;">
+      <span>Left</span>
+      <div class="sds-divider sds-divider--vertical"></div>
+      <span>Right</span>
+    </div>
+  </div>
+
+  <h3>Accordion</h3>
+  <div class="stack" style="max-width: 520px;">
+    <div class="sds-accordion-group">
+      <div class="sds-accordion sds-accordion--with-background sds-accordion--expanded">
+        <button type="button" class="sds-accordion__header" aria-expanded="true">
+          <span class="sds-accordion__heading">What is included in the plan?</span>
+          <span class="sds-accordion__chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="sds-accordion__panel" role="region">
+          <div class="sds-accordion__content">All core components, unlimited projects, and priority support are included.</div>
+        </div>
+      </div>
+      <div class="sds-accordion sds-accordion--with-background">
+        <button type="button" class="sds-accordion__header" aria-expanded="false">
+          <span class="sds-accordion__heading">Can I cancel anytime? (collapsed)</span>
+          <span class="sds-accordion__chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="sds-accordion__panel" role="region" hidden>
+          <div class="sds-accordion__content">Yes, cancel from billing settings at any time.</div>
+        </div>
+      </div>
+    </div>
+    <div class="sds-accordion sds-accordion--no-background sds-accordion--expanded">
+      <button type="button" class="sds-accordion__header" aria-expanded="true">
+        <span class="sds-accordion__icon-start" aria-hidden="true">📁</span>
+        <span class="sds-accordion__heading">No-background variant</span>
+        <span class="sds-accordion__chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="sds-accordion__panel" role="region">
+        <div class="sds-accordion__content">A bordered accordion with a leading icon.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Table</h3>
+  <div class="row row--top">
+    <div class="sds-table__container" style="width: 100%;">
+      <table class="sds-table">
+        <caption class="sds-table__caption">Recent campaigns</caption>
+        <thead class="sds-table__head">
+          <tr>
+            <th scope="col" class="sds-table__header sds-table__header--select">
+              <input type="checkbox" class="sds-table__checkbox" aria-label="Select all rows" />
+            </th>
+            <th scope="col" class="sds-table__header sds-table__header--sortable sds-table__header--active" aria-sort="ascending">
+              <button type="button" class="sds-table__sort-button"><span class="sds-table__header-label">Name</span><span class="sds-table__sort-icon" aria-hidden="true">▲</span></button>
+            </th>
+            <th scope="col" class="sds-table__header sds-table__header--sortable" aria-sort="none">
+              <button type="button" class="sds-table__sort-button"><span class="sds-table__header-label">Sent</span><span class="sds-table__sort-icon" aria-hidden="true">↕</span></button>
+            </th>
+            <th scope="col" class="sds-table__header"><span class="sds-table__header-label">Status</span></th>
+          </tr>
+        </thead>
+        <tbody class="sds-table__body">
+          <tr class="sds-table__row sds-table__row--selected" aria-selected="true">
+            <td class="sds-table__cell sds-table__cell--select"><input type="checkbox" class="sds-table__checkbox" aria-label="Select row 1" checked /></td>
+            <td class="sds-table__cell">Spring Sale</td>
+            <td class="sds-table__cell">12,430</td>
+            <td class="sds-table__cell"><span class="sds-status-chip sds-status-chip--success"><span class="sds-status-chip__label">Sent</span></span></td>
+          </tr>
+          <tr class="sds-table__row">
+            <td class="sds-table__cell sds-table__cell--select"><input type="checkbox" class="sds-table__checkbox" aria-label="Select row 2" /></td>
+            <td class="sds-table__cell">Product Launch</td>
+            <td class="sds-table__cell">8,210</td>
+            <td class="sds-table__cell"><span class="sds-status-chip sds-status-chip--warning"><span class="sds-status-chip__label">Scheduled</span></span></td>
+          </tr>
+          <tr class="sds-table__row">
+            <td class="sds-table__cell sds-table__cell--select"><input type="checkbox" class="sds-table__checkbox" aria-label="Select row 3" /></td>
+            <td class="sds-table__cell">Re-engagement</td>
+            <td class="sds-table__cell">—</td>
+            <td class="sds-table__cell"><span class="sds-status-chip sds-status-chip--default"><span class="sds-status-chip__label">Draft</span></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>Progress Bar</h3>
+  <div class="stack surface" style="max-width: 420px;">
+    <div class="sds-progress-bar sds-progress-bar--primary">
+      <div class="sds-progress-bar__track" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="72%"><div class="sds-progress-bar__fill" style="width:72%;"></div></div>
+      <span class="sds-progress-bar__label">72%</span>
+    </div>
+    <div class="sds-progress-bar sds-progress-bar--neutral">
+      <div class="sds-progress-bar__track" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" aria-label="35%"><div class="sds-progress-bar__fill" style="width:35%;"></div></div>
+      <span class="sds-progress-bar__label">35%</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Feedback</h2>
+  <!-- ============================================================ -->
+
+  <h3>Alert — intents</h3>
+  <div class="stack">
+    <div class="sds-alert sds-alert--primary" role="alert">
+      <span class="sds-alert__icon-start" aria-hidden="true">ℹ</span>
+      <div class="sds-alert__content"><p class="sds-alert__header">Heads up</p><p class="sds-alert__body">A new version of the dashboard is available.</p></div>
+      <button type="button" class="sds-alert__dismiss" aria-label="Dismiss"><span class="sds-alert__icon-end" aria-hidden="true">×</span></button>
+    </div>
+    <div class="sds-alert sds-alert--regular" role="alert">
+      <span class="sds-alert__icon-start" aria-hidden="true">•</span>
+      <div class="sds-alert__content"><p class="sds-alert__header">Neutral notice</p><p class="sds-alert__body">This is a regular, low-emphasis message.</p></div>
+    </div>
+    <div class="sds-alert sds-alert--success" role="alert">
+      <span class="sds-alert__icon-start" aria-hidden="true">✓</span>
+      <div class="sds-alert__content"><p class="sds-alert__header">Saved</p><p class="sds-alert__body">Your changes were saved successfully.</p></div>
+      <button type="button" class="sds-alert__dismiss" aria-label="Dismiss"><span class="sds-alert__icon-end" aria-hidden="true">×</span></button>
+    </div>
+    <div class="sds-alert sds-alert--warrning" role="alert">
+      <span class="sds-alert__icon-start" aria-hidden="true">⚠</span>
+      <div class="sds-alert__content"><p class="sds-alert__header">Almost out of space</p><p class="sds-alert__body">You have used 92% of your storage quota.</p></div>
+      <button type="button" class="sds-alert__dismiss" aria-label="Dismiss"><span class="sds-alert__icon-end" aria-hidden="true">×</span></button>
+    </div>
+    <div class="sds-alert sds-alert--error" role="alert">
+      <span class="sds-alert__icon-start" aria-hidden="true">✕</span>
+      <div class="sds-alert__content"><p class="sds-alert__header">Something went wrong</p><p class="sds-alert__body">We couldn't process the request. Please try again.</p></div>
+      <button type="button" class="sds-alert__dismiss" aria-label="Dismiss"><span class="sds-alert__icon-end" aria-hidden="true">×</span></button>
+    </div>
+  </div>
+
+  <h3>Modal (shown inline, open state)</h3>
+  <div class="modal-static" style="max-width: 560px;">
+    <div class="sds-modal__scrim">
+      <div role="dialog" aria-modal="true" class="sds-modal" tabindex="-1">
+        <header class="sds-modal__header">
+          <span class="sds-modal__header-icon" aria-hidden="true">🗑</span>
+          <h2 class="sds-modal__title">Delete campaign?</h2>
+          <button type="button" class="sds-modal__close" aria-label="Close">✕</button>
+        </header>
+        <div class="sds-modal__body">This action permanently removes “Spring Sale” and all of its analytics. This cannot be undone.</div>
+        <footer class="sds-modal__footer">
+          <button class="sds-button sds-button--tertiary"><span class="sds-button__label">Cancel</span></button>
+          <button class="sds-button sds-button--destructive"><span class="sds-button__label">Delete</span></button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <h3>Tooltip (shown inline, open state)</h3>
+  <div class="row tooltip-static">
+    <span class="sds-tooltip">
+      <span class="sds-tooltip__anchor"><button class="sds-button sds-button--secondary"><span class="sds-button__label">Hover me</span></button></span>
+      <span role="tooltip" class="sds-tooltip__surface sds-tooltip__surface--top">More information about this action</span>
+    </span>
+  </div>
+
+  <h3>Empty State — variants</h3>
+  <div class="grid--2 grid">
+    <div class="sds-empty-state sds-empty-state--page">
+      <span class="sds-empty-state__icon" aria-hidden="true">📭</span>
+      <h2 class="sds-empty-state__heading">No campaigns yet</h2>
+      <p class="sds-empty-state__help-text">Create your first campaign to get started.</p>
+      <div class="sds-empty-state__action"><button class="sds-button sds-button--primary-accent"><span class="sds-button__icon">+</span><span class="sds-button__label">New campaign</span></button></div>
+    </div>
+    <div class="sds-empty-state sds-empty-state--table">
+      <span class="sds-empty-state__icon" aria-hidden="true">🔍</span>
+      <h2 class="sds-empty-state__heading">No results</h2>
+      <p class="sds-empty-state__help-text">Try adjusting your filters.</p>
+    </div>
+    <div class="sds-empty-state sds-empty-state--image">
+      <span class="sds-empty-state__icon" aria-hidden="true">🖼</span>
+      <h2 class="sds-empty-state__heading">No image uploaded</h2>
+      <p class="sds-empty-state__help-text">Drag a file here or browse to upload.</p>
+    </div>
+    <div class="sds-empty-state sds-empty-state--loading" aria-busy="true">
+      <h2 class="sds-empty-state__heading">Loading…</h2>
+      <p class="sds-empty-state__help-text">Fetching your data.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Navigation</h2>
+  <!-- ============================================================ -->
+
+  <h3>Header — page &amp; modal</h3>
+  <div class="stack">
+    <div class="surface">
+      <header class="sds-header sds-header--page">
+        <span class="sds-header__icon" aria-hidden="true">📊</span>
+        <h2 class="sds-header__title">Dashboard</h2>
+        <div class="sds-header__actions">
+          <button class="sds-button sds-button--secondary"><span class="sds-button__label">Export</span></button>
+          <button class="sds-button sds-button--primary"><span class="sds-button__label">New</span></button>
+        </div>
+      </header>
+    </div>
+    <div class="surface">
+      <header class="sds-header sds-header--modal">
+        <span class="sds-header__icon" aria-hidden="true">⚙</span>
+        <h2 class="sds-header__title">Settings</h2>
+        <button type="button" class="sds-header__close" aria-label="Close">✕</button>
+      </header>
+    </div>
+  </div>
+
+  <h3>Breadcrumb</h3>
+  <div class="stack surface">
+    <nav class="sds-breadcrumb" aria-label="Breadcrumb">
+      <ol class="sds-breadcrumb__list">
+        <li class="sds-breadcrumb__item"><a class="sds-breadcrumb__link" href="#">Home</a><span class="sds-breadcrumb__separator" aria-hidden="true">/</span></li>
+        <li class="sds-breadcrumb__item"><a class="sds-breadcrumb__link" href="#">Campaigns</a><span class="sds-breadcrumb__separator" aria-hidden="true">/</span></li>
+        <li class="sds-breadcrumb__item"><span class="sds-breadcrumb__current" aria-current="page">Spring Sale</span></li>
+      </ol>
+    </nav>
+    <nav class="sds-breadcrumb" aria-label="Breadcrumb">
+      <a class="sds-breadcrumb__back" href="#"><span class="sds-breadcrumb__back-icon" aria-hidden="true">←</span><span>Campaigns</span></a>
+    </nav>
+  </div>
+
+  <h3>Tabs — horizontal</h3>
+  <div class="row row--top">
+    <div class="sds-tabs sds-tabs--horizontal" style="width: 100%;">
+      <div class="sds-tabs__list" role="tablist" aria-orientation="horizontal">
+        <button type="button" role="tab" aria-selected="true" tabindex="0" class="sds-tabs__tab sds-tabs__tab--selected"><span class="sds-tabs__icon" aria-hidden="true">📈</span><span class="sds-tabs__label">Overview</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" class="sds-tabs__tab"><span class="sds-tabs__label">Recipients</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" class="sds-tabs__tab"><span class="sds-tabs__label">Settings</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" class="sds-tabs__tab" disabled aria-disabled="true"><span class="sds-tabs__label">Archive</span></button>
+      </div>
+      <div class="sds-tabs__panel" role="tabpanel" tabindex="0">Overview panel content.</div>
+    </div>
+  </div>
+
+  <h3>Tabs — vertical</h3>
+  <div class="row row--top">
+    <div class="sds-tabs sds-tabs--vertical surface" style="min-width: 420px;">
+      <div class="sds-tabs__list" role="tablist" aria-orientation="vertical">
+        <button type="button" role="tab" aria-selected="true" tabindex="0" class="sds-tabs__tab sds-tabs__tab--selected"><span class="sds-tabs__label">General</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" class="sds-tabs__tab"><span class="sds-tabs__label">Billing</span></button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1" class="sds-tabs__tab"><span class="sds-tabs__label">Members</span></button>
+      </div>
+      <div class="sds-tabs__panel" role="tabpanel" tabindex="0">General settings panel.</div>
+    </div>
+  </div>
+
+  <h3>Pagination</h3>
+  <div class="row">
+    <nav class="sds-pagination" aria-label="Pagination">
+      <button type="button" class="sds-pagination__nav" aria-label="Go to previous page"><span class="sds-pagination__icon" aria-hidden="true">‹</span></button>
+      <ul class="sds-pagination__list">
+        <li><button type="button" class="sds-pagination__number" aria-label="Go to page 1">1</button></li>
+        <li><button type="button" class="sds-pagination__number sds-pagination__number--selected" aria-current="page" aria-label="Go to page 2">2</button></li>
+        <li><button type="button" class="sds-pagination__number" aria-label="Go to page 3">3</button></li>
+        <li aria-hidden="true"><span class="sds-pagination__ellipsis sds-pagination__ellipsis--next">…</span></li>
+        <li><button type="button" class="sds-pagination__number" aria-label="Go to page 12">12</button></li>
+      </ul>
+      <button type="button" class="sds-pagination__nav" aria-label="Go to next page"><span class="sds-pagination__icon" aria-hidden="true">›</span></button>
+      <label class="sds-pagination__size-changer">
+        <select class="sds-pagination__size-select" aria-label="Items per page">
+          <option>10 / page</option>
+          <option selected>25 / page</option>
+          <option>50 / page</option>
+        </select>
+      </label>
+    </nav>
+  </div>
+
+  <h3>Stepper — horizontal</h3>
+  <div class="row row--top">
+    <ol class="sds-stepper sds-stepper--horizontal surface" style="width: 100%;">
+      <li class="sds-stepper__step sds-stepper__step--finished">
+        <div class="sds-stepper__head">
+          <span class="sds-stepper__icon sds-stepper__icon--finished" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="sds-stepper__title">Details</span>
+          <span class="sds-stepper__tail" aria-hidden="true"><span class="sds-stepper__line"></span></span>
+        </div>
+      </li>
+      <li class="sds-stepper__step sds-stepper__step--current" aria-current="step">
+        <div class="sds-stepper__head">
+          <span class="sds-stepper__icon sds-stepper__icon--current" aria-hidden="true"><span class="sds-stepper__number">2</span></span>
+          <span class="sds-stepper__title">Recipients</span>
+          <span class="sds-stepper__tail" aria-hidden="true"><span class="sds-stepper__line"></span></span>
+        </div>
+      </li>
+      <li class="sds-stepper__step sds-stepper__step--waiting">
+        <div class="sds-stepper__head">
+          <span class="sds-stepper__icon sds-stepper__icon--waiting" aria-hidden="true"><span class="sds-stepper__number">3</span></span>
+          <span class="sds-stepper__title">Review</span>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Stepper — vertical (with error &amp; warning)</h3>
+  <div class="row row--top">
+    <ol class="sds-stepper sds-stepper--vertical surface" style="min-width: 320px;">
+      <li class="sds-stepper__step sds-stepper__step--finished">
+        <div class="sds-stepper__head">
+          <span class="sds-stepper__icon sds-stepper__icon--finished" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="sds-stepper__title">Account created</span>
+        </div>
+        <div class="sds-stepper__content"><span class="sds-stepper__description">Completed 2 days ago</span></div>
+        <span class="sds-stepper__connector" aria-hidden="true"><span class="sds-stepper__line"></span></span>
+      </li>
+      <li class="sds-stepper__step sds-stepper__step--error">
+        <div class="sds-stepper__head">
+          <span class="sds-stepper__icon sds-stepper__icon--error" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <span class="sds-stepper__title">Payment failed</span>
+        </div>
+        <div class="sds-stepper__content"><span class="sds-stepper__description">Card was declined</span></div>
+        <span class="sds-stepper__connector" aria-hidden="true"><span class="sds-stepper__line"></span></span>
+      </li>
+      <li class="sds-stepper__step sds-stepper__step--warning">
+        <div class="sds-stepper__head">
+          <span class="sds-stepper__icon sds-stepper__icon--warning" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M8 2l6 11H2L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 6.5v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r="0.75" fill="currentColor"/></svg></span>
+          <span class="sds-stepper__title">Verify identity</span>
+        </div>
+        <div class="sds-stepper__content"><span class="sds-stepper__description">Action recommended</span></div>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Context Menu (shown inline, open state)</h3>
+  <div class="row row--top">
+    <div role="menu" class="sds-context-menu">
+      <button type="button" role="menuitem" tabindex="-1" class="sds-context-menu__item sds-context-menu__item--basic"><span class="sds-context-menu__icon" aria-hidden="true">✎</span><span class="sds-context-menu__label">Edit</span></button>
+      <button type="button" role="menuitem" tabindex="-1" class="sds-context-menu__item sds-context-menu__item--basic"><span class="sds-context-menu__icon" aria-hidden="true">⧉</span><span class="sds-context-menu__label">Duplicate</span></button>
+      <button type="button" role="menuitemradio" aria-checked="true" tabindex="-1" class="sds-context-menu__item sds-context-menu__item--specific sds-context-menu__item--selected"><span class="sds-context-menu__label">Pin to top</span><span class="sds-context-menu__checkmark" aria-hidden="true">✓</span></button>
+      <button type="button" role="menuitem" tabindex="-1" class="sds-context-menu__item sds-context-menu__item--basic sds-context-menu__item--destructive"><span class="sds-context-menu__icon" aria-hidden="true">🗑</span><span class="sds-context-menu__label">Delete</span></button>
+      <button type="button" role="menuitem" tabindex="-1" disabled aria-disabled="true" class="sds-context-menu__item sds-context-menu__item--basic"><span class="sds-context-menu__icon" aria-hidden="true">⤓</span><span class="sds-context-menu__label">Export (disabled)</span></button>
+    </div>
+  </div>
+
+  <h3>Folders</h3>
+  <div class="row row--top">
+    <div class="sds-folders">
+      <div class="sds-folders__header">
+        <span class="sds-folders__title">Folders</span>
+        <div class="sds-folders__header-actions">
+          <button type="button" class="sds-folders__header-action" aria-label="Add folder">+</button>
+          <button type="button" class="sds-folders__header-action" aria-label="Sort folders">⇅</button>
+        </div>
+      </div>
+      <span class="sds-folders__divider" aria-hidden="true"></span>
+      <ul class="sds-folders__list">
+        <li>
+          <div class="sds-folders__item sds-folders__item--selected">
+            <button type="button" class="sds-folders__item-button" aria-current="true">
+              <span class="sds-folders__item-icon" aria-hidden="true">📁</span>
+              <span class="sds-folders__item-label">Inbox</span>
+            </button>
+            <button type="button" class="sds-folders__item-actions" aria-label="Item actions">⋮</button>
+          </div>
+        </li>
+        <li>
+          <div class="sds-folders__item">
+            <button type="button" class="sds-folders__item-button">
+              <span class="sds-folders__item-icon" aria-hidden="true">📁</span>
+              <span class="sds-folders__item-label">Drafts</span>
+            </button>
+            <button type="button" class="sds-folders__item-actions" aria-label="Item actions">⋮</button>
+          </div>
+        </li>
+        <li>
+          <div class="sds-folders__item sds-folders__item--disabled">
+            <button type="button" class="sds-folders__item-button" disabled>
+              <span class="sds-folders__item-icon" aria-hidden="true">📁</span>
+              <span class="sds-folders__item-label">Archived (disabled)</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Navigation (sidebar)</h3>
+  <div class="row row--top">
+    <div class="nav-demo">
+      <nav class="sds-navigation sds-navigation--expanded" aria-label="Primary">
+        <div class="sds-navigation__header"><span style="color: var(--monochrome-white); font-weight: 700;">Spotler</span></div>
+        <ul class="sds-navigation__items">
+          <li class="sds-navigation__section">
+            <ul class="sds-navigation__section-items">
+              <li>
+                <button type="button" class="sds-navigation__item sds-navigation__item--selected" aria-current="page">
+                  <span class="sds-navigation__icon" aria-hidden="true">📊</span>
+                  <span class="sds-navigation__label">Dashboard</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="sds-navigation__item">
+                  <span class="sds-navigation__icon" aria-hidden="true">✉</span>
+                  <span class="sds-navigation__label">Campaigns</span>
+                  <span class="sds-navigation__badge"><span class="sds-badge sds-badge--circle sds-badge--primary">3</span></span>
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li class="sds-navigation__section">
+            <span class="sds-navigation__divider" aria-hidden="true"></span>
+            <span class="sds-navigation__section-label">Settings</span>
+            <ul class="sds-navigation__section-items">
+              <li>
+                <button type="button" class="sds-navigation__item">
+                  <span class="sds-navigation__icon" aria-hidden="true">⚙</span>
+                  <span class="sds-navigation__label">Account</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="sds-navigation__item" disabled aria-disabled="true">
+                  <span class="sds-navigation__icon" aria-hidden="true">🔒</span>
+                  <span class="sds-navigation__label">Admin (disabled)</span>
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="sds-navigation__footer">Signed in as Ann Smith</div>
+      </nav>
+      <nav class="sds-navigation sds-navigation--collapsed" aria-label="Primary collapsed">
+        <div class="sds-navigation__header"><span style="color: var(--monochrome-white); font-weight: 700;">S</span></div>
+        <ul class="sds-navigation__items">
+          <li class="sds-navigation__section">
+            <ul class="sds-navigation__section-items">
+              <li><button type="button" class="sds-navigation__item sds-navigation__item--selected" aria-current="page" title="Dashboard"><span class="sds-navigation__icon" aria-hidden="true">📊</span></button></li>
+              <li><button type="button" class="sds-navigation__item" title="Campaigns"><span class="sds-navigation__icon" aria-hidden="true">✉</span></button></li>
+              <li><button type="button" class="sds-navigation__item" title="Account"><span class="sds-navigation__icon" aria-hidden="true">⚙</span></button></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Dashboard</h2>
+  <!-- ============================================================ -->
+
+  <h3>KPI Card</h3>
+  <div class="grid">
+    <div class="sds-kpi-card">
+      <div class="sds-kpi-card__header">
+        <span class="sds-kpi-card__title-icon sds-kpi-card__title-icon--start" aria-hidden="true">📧</span>
+        <h3 class="sds-kpi-card__title">Open rate</h3>
+        <span class="sds-kpi-card__title-icon sds-kpi-card__title-icon--end" aria-hidden="true">ℹ</span>
+      </div>
+      <div class="sds-kpi-card__value-area">
+        <div class="sds-kpi-card__value-row">
+          <span class="sds-kpi-card__value">42.8%</span>
+          <span class="sds-kpi-card__chip sds-kpi-card__chip--success">Up 5%</span>
+        </div>
+        <p class="sds-kpi-card__help-text">vs. last 30 days</p>
+      </div>
+    </div>
+    <div class="sds-kpi-card">
+      <div class="sds-kpi-card__header">
+        <span class="sds-kpi-card__title-icon sds-kpi-card__title-icon--start" aria-hidden="true">🖱</span>
+        <h3 class="sds-kpi-card__title">Click rate</h3>
+      </div>
+      <div class="sds-kpi-card__value-area">
+        <div class="sds-kpi-card__value-row">
+          <span class="sds-kpi-card__value">3.1%</span>
+          <span class="sds-kpi-card__chip sds-kpi-card__chip--alert">Down 2%</span>
+        </div>
+        <p class="sds-kpi-card__help-text">vs. last 30 days</p>
+      </div>
+    </div>
+    <div class="sds-kpi-card">
+      <div class="sds-kpi-card__header">
+        <span class="sds-kpi-card__title-icon sds-kpi-card__title-icon--start" aria-hidden="true">👥</span>
+        <h3 class="sds-kpi-card__title">Subscribers</h3>
+      </div>
+      <div class="sds-kpi-card__value-area">
+        <div class="sds-kpi-card__value-row">
+          <span class="sds-kpi-card__value">18,402</span>
+          <span class="sds-kpi-card__chip sds-kpi-card__chip--blue">New</span>
+        </div>
+        <p class="sds-kpi-card__help-text">Total active contacts</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Bar Chart (legend + plot slot)</h3>
+  <div class="row row--top">
+    <div class="sds-bar-chart" role="group" aria-label="Sends by channel" style="width: 480px;">
+      <div class="sds-bar-chart__header">
+        <span class="sds-bar-chart__header-icon" aria-hidden="true">📊</span>
+        <span class="sds-bar-chart__header-text">Sends by channel</span>
+        <span class="sds-bar-chart__period-picker">Last 7 days ▾</span>
+      </div>
+      <div class="sds-bar-chart__plot" style="height: 140px; display:flex; align-items:flex-end; gap:16px; padding:0 8px;">
+        <div style="flex:1; height:80%; background: var(--diagrams-bar-chart-chart-1); border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1; height:55%; background: var(--diagrams-bar-chart-chart-2); border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1; height:95%; background: var(--diagrams-bar-chart-chart-3); border-radius:4px 4px 0 0;"></div>
+        <div style="flex:1; height:40%; background: var(--diagrams-bar-chart-chart-4); border-radius:4px 4px 0 0;"></div>
+      </div>
+      <ul class="sds-bar-chart__legend">
+        <li class="sds-bar-chart__legend-item"><span class="sds-bar-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-bar-chart-chart-1);"></span><span class="sds-bar-chart__legend-label">Email</span><span class="sds-bar-chart__legend-value">8.2k</span></li>
+        <li class="sds-bar-chart__legend-item"><span class="sds-bar-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-bar-chart-chart-2);"></span><span class="sds-bar-chart__legend-label">SMS</span><span class="sds-bar-chart__legend-value">5.6k</span></li>
+        <li class="sds-bar-chart__legend-item"><span class="sds-bar-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-bar-chart-chart-3);"></span><span class="sds-bar-chart__legend-label">Push</span><span class="sds-bar-chart__legend-value">9.7k</span></li>
+        <li class="sds-bar-chart__legend-item"><span class="sds-bar-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-bar-chart-chart-4);"></span><span class="sds-bar-chart__legend-label">Web</span><span class="sds-bar-chart__legend-value">4.0k</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Line Chart (legend + plot slot)</h3>
+  <div class="row row--top">
+    <div class="sds-line-chart" role="group" aria-label="Engagement over time" style="width: 480px;">
+      <div class="sds-line-chart__header">
+        <span class="sds-line-chart__header-icon" aria-hidden="true">📈</span>
+        <span class="sds-line-chart__header-text">Engagement over time</span>
+        <span class="sds-line-chart__period-picker">This year ▾</span>
+      </div>
+      <div class="sds-line-chart__plot" style="height: 140px;">
+        <svg viewBox="0 0 460 140" width="100%" height="140" preserveAspectRatio="none" aria-hidden="true">
+          <polyline fill="none" stroke="var(--diagrams-line-chart-chart-1)" stroke-width="2" points="0,110 90,70 180,90 270,40 360,55 460,20" />
+          <polyline fill="none" stroke="var(--diagrams-line-chart-chart-2)" stroke-width="2" points="0,120 90,100 180,80 270,95 360,60 460,70" />
+        </svg>
+      </div>
+      <ul class="sds-line-chart__legend">
+        <li class="sds-line-chart__legend-item"><span class="sds-line-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-line-chart-chart-1);"></span><span class="sds-line-chart__legend-label">Opens</span><span class="sds-line-chart__legend-value">+12%</span></li>
+        <li class="sds-line-chart__legend-item"><span class="sds-line-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-line-chart-chart-2);"></span><span class="sds-line-chart__legend-label">Clicks</span><span class="sds-line-chart__legend-value">+4%</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Pie Chart (legend + plot slot)</h3>
+  <div class="row row--top">
+    <div class="sds-pie-chart" role="group" aria-label="Traffic sources" style="width: 480px;">
+      <div class="sds-pie-chart__header">
+        <span class="sds-pie-chart__header-icon" aria-hidden="true">🥧</span>
+        <span class="sds-pie-chart__header-text">Traffic sources</span>
+      </div>
+      <div class="sds-pie-chart__plot" style="height: 160px; display:flex; align-items:center; justify-content:center;">
+        <div style="width:140px; height:140px; border-radius:50%; background: conic-gradient(var(--diagrams-pie-chart-chart-1) 0 40%, var(--diagrams-pie-chart-chart-2) 40% 70%, var(--diagrams-pie-chart-chart-3) 70% 88%, var(--diagrams-pie-chart-chart-4) 88% 100%);"></div>
+      </div>
+      <ul class="sds-pie-chart__legend">
+        <li class="sds-pie-chart__legend-item"><span class="sds-pie-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-pie-chart-chart-1);"></span><span class="sds-pie-chart__legend-label">Direct</span><span class="sds-pie-chart__legend-value">40%</span></li>
+        <li class="sds-pie-chart__legend-item"><span class="sds-pie-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-pie-chart-chart-2);"></span><span class="sds-pie-chart__legend-label">Email</span><span class="sds-pie-chart__legend-value">30%</span></li>
+        <li class="sds-pie-chart__legend-item"><span class="sds-pie-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-pie-chart-chart-3);"></span><span class="sds-pie-chart__legend-label">Social</span><span class="sds-pie-chart__legend-value">18%</span></li>
+        <li class="sds-pie-chart__legend-item"><span class="sds-pie-chart__legend-swatch" aria-hidden="true" style="background-color: var(--diagrams-pie-chart-chart-4);"></span><span class="sds-pie-chart__legend-label">Referral</span><span class="sds-pie-chart__legend-value">12%</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

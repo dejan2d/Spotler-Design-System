@@ -1,0 +1,120 @@
+/* Alert — Spotler Design System
+   Spec: references/components/alert.md
+   Row, padding 8px 16px, gap 12px, radius large (8px), min-width 500px. */
+
+.sds-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-s-12);
+  min-width: 500px;
+  padding: var(--spacing-s-8) var(--spacing-s-16);
+  border-radius: var(--border-large);
+  font-family: var(--font-family);
+}
+
+.sds-alert__icon-start {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.sds-alert__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.sds-alert__header {
+  margin: 0;
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
+}
+
+.sds-alert__body {
+  margin: 0;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+}
+
+.sds-alert__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--border-small);
+  transition: opacity 150ms ease-in-out;
+}
+
+.sds-alert__dismiss:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+.sds-alert__icon-end {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== Primary (Info) ===== */
+.sds-alert--primary {
+  background: var(--alert-primary-background);
+}
+.sds-alert--primary .sds-alert__header { color: var(--alert-primary-header); }
+.sds-alert--primary .sds-alert__body { color: var(--alert-primary-body); }
+.sds-alert--primary .sds-alert__icon-start { color: var(--alert-primary-icon-start); }
+.sds-alert--primary .sds-alert__icon-end { color: var(--alert-primary-icon-end); }
+
+/* ===== Regular (Neutral) ===== */
+.sds-alert--regular {
+  background: var(--alert-regular-background);
+}
+.sds-alert--regular .sds-alert__header { color: var(--alert-regular-header); }
+.sds-alert--regular .sds-alert__body { color: var(--alert-regular-body); }
+.sds-alert--regular .sds-alert__icon-start { color: var(--alert-regular-icon-start); }
+.sds-alert--regular .sds-alert__icon-end { color: var(--alert-regular-icon-end); }
+
+/* ===== Success ===== */
+.sds-alert--success {
+  background: var(--alert-success-background);
+}
+.sds-alert--success .sds-alert__header { color: var(--alert-success-header); }
+.sds-alert--success .sds-alert__body { color: var(--alert-success-body); }
+.sds-alert--success .sds-alert__icon-start { color: var(--alert-success-icon-start); }
+.sds-alert--success .sds-alert__icon-end { color: var(--alert-success-icon-end); }
+
+/* ===== Warrning (typo preserved to match Figma tokens) ===== */
+.sds-alert--warrning {
+  background: var(--alert-warrning-background);
+}
+.sds-alert--warrning .sds-alert__header { color: var(--alert-warrning-header); }
+.sds-alert--warrning .sds-alert__body { color: var(--alert-warrning-body); }
+.sds-alert--warrning .sds-alert__icon-start { color: var(--alert-warrning-icon-start); }
+.sds-alert--warrning .sds-alert__icon-end { color: var(--alert-warrning-icon-end); }
+
+/* ===== Error ===== */
+.sds-alert--error {
+  background: var(--alert-error-background);
+}
+.sds-alert--error .sds-alert__header { color: var(--alert-error-header); }
+.sds-alert--error .sds-alert__body { color: var(--alert-error-body); }
+.sds-alert--error .sds-alert__icon-start { color: var(--alert-error-icon-start); }
+.sds-alert--error .sds-alert__icon-end { color: var(--alert-error-icon-end); }

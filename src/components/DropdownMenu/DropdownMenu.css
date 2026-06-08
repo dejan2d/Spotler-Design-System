@@ -1,0 +1,228 @@
+/* Dropdown Menu — Spotler Design System
+   Spec: references/components/dropdown-menu.md
+   Composes the Inputs trigger (Dropdown Menu tokens) with a List Item menu on the overlay surface. */
+
+.sds-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  position: relative;
+  font-family: var(--font-family);
+}
+
+.sds-dropdown-menu__label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-dropdown-menu-default-label);
+}
+
+.sds-dropdown-menu__optional {
+  color: var(--inputs-dropdown-menu-default-label-optional-text);
+}
+
+/* ===== Trigger (Inputs field) ===== */
+.sds-dropdown-menu__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-s-8);
+  width: 100%;
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  background: var(--inputs-dropdown-menu-default-background);
+  border: 1px solid var(--inputs-dropdown-menu-default-stroke);
+  border-radius: var(--border-small);
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-dropdown-menu-default-text);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
+    color 150ms ease-in-out;
+}
+
+.sds-dropdown-menu__trigger:hover {
+  background: var(--inputs-dropdown-menu-hover-background);
+  border-color: var(--inputs-dropdown-menu-hover-stroke);
+}
+
+.sds-dropdown-menu__trigger:focus-visible {
+  outline: none;
+  background: var(--inputs-dropdown-menu-focused-background);
+  border-color: var(--inputs-dropdown-menu-focused-stroke);
+}
+
+.sds-dropdown-menu--open .sds-dropdown-menu__trigger {
+  background: var(--inputs-dropdown-menu-focused-background);
+  border-color: var(--inputs-dropdown-menu-focused-stroke);
+}
+
+.sds-dropdown-menu__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--inputs-dropdown-menu-selected-text);
+}
+
+.sds-dropdown-menu__value--placeholder {
+  color: var(--inputs-dropdown-menu-default-text);
+}
+
+.sds-dropdown-menu__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--inputs-dropdown-menu-default-icon);
+  transition: transform 150ms ease-in-out;
+}
+
+.sds-dropdown-menu--open .sds-dropdown-menu__chevron {
+  transform: rotate(180deg);
+}
+
+/* ===== Popover (overlay surface) ===== */
+.sds-dropdown-menu__popover {
+  position: absolute;
+  top: calc(100% + var(--spacing-s-4));
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-s-4);
+  background: var(--inputs-dropdown-menu-default-background);
+  border: 1px solid var(--inputs-dropdown-menu-default-stroke);
+  border-radius: var(--border-medium);
+  box-shadow: var(--elevation-overlay);
+}
+
+.sds-dropdown-menu__search {
+  padding: var(--spacing-s-4);
+}
+
+.sds-dropdown-menu__search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  background: var(--inputs-dropdown-menu-default-background);
+  border: 1px solid var(--inputs-dropdown-menu-default-stroke);
+  border-radius: var(--border-small);
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-dropdown-menu-focused-text);
+  outline: none;
+  transition: border-color 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+
+.sds-dropdown-menu__search-input:focus {
+  background: var(--inputs-dropdown-menu-focused-background);
+  border-color: var(--inputs-dropdown-menu-focused-stroke);
+}
+
+.sds-dropdown-menu__search-input::placeholder {
+  color: var(--inputs-dropdown-menu-default-text);
+}
+
+/* ===== List (List Item tokens) ===== */
+.sds-dropdown-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.sds-dropdown-menu__empty {
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-dropdown-menu-default-text);
+}
+
+.sds-dropdown-menu__option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  border-radius: var(--border-small);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-list-item-default-text);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.sds-dropdown-menu__option-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--inputs-list-item-default-icon);
+}
+
+.sds-dropdown-menu__option-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.sds-dropdown-menu__option--active,
+.sds-dropdown-menu__option:hover {
+  background: var(--inputs-list-item-hover-background);
+  color: var(--inputs-list-item-hover-text);
+}
+
+.sds-dropdown-menu__option--active .sds-dropdown-menu__option-icon,
+.sds-dropdown-menu__option:hover .sds-dropdown-menu__option-icon {
+  color: var(--inputs-list-item-hover-icon);
+}
+
+.sds-dropdown-menu__option--selected {
+  background: var(--inputs-list-item-selected-background);
+  color: var(--inputs-list-item-selected-text);
+}
+
+.sds-dropdown-menu__option--selected .sds-dropdown-menu__option-icon {
+  color: var(--inputs-list-item-selected-icon);
+}
+
+.sds-dropdown-menu__option--disabled {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+/* ===== Hint ===== */
+.sds-dropdown-menu__hint {
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  color: var(--inputs-dropdown-menu-default-hint-message);
+}
+
+/* ===== Error ===== */
+.sds-dropdown-menu--error .sds-dropdown-menu__trigger,
+.sds-dropdown-menu--error .sds-dropdown-menu__trigger:hover,
+.sds-dropdown-menu--error.sds-dropdown-menu--open .sds-dropdown-menu__trigger {
+  background: var(--inputs-dropdown-menu-error-background);
+  border-color: var(--inputs-dropdown-menu-error-stroke);
+}
+
+.sds-dropdown-menu--error .sds-dropdown-menu__hint {
+  color: var(--inputs-dropdown-menu-error-hint-message);
+}
+
+/* ===== Disabled ===== */
+.sds-dropdown-menu--disabled .sds-dropdown-menu__trigger {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-dropdown-menu--disabled .sds-dropdown-menu__chevron {
+  color: var(--disabled-text);
+}

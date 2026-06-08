@@ -1,0 +1,139 @@
+/* Slider — Spotler Design System
+   No spec file; built from --slider-* tokens.
+   Anatomy: label, value display, track, fill, circular thumb. */
+
+.sds-slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+  font-family: var(--font-family);
+  background: var(--slider-rest-range-background);
+}
+
+.sds-slider__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-s-8);
+}
+
+.sds-slider__label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--slider-rest-text);
+}
+
+.sds-slider__value {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--slider-rest-range-text);
+}
+
+/* Track + fill drawn via a gradient using the per-instance --sds-slider-fill var */
+.sds-slider__input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  margin: 8px 0;
+  border-radius: var(--border-circular);
+  background: linear-gradient(
+    to right,
+    var(--slider-rest-range-slider-fill) 0%,
+    var(--slider-rest-range-slider-fill) var(--sds-slider-fill, 0%),
+    var(--slider-rest-range-slider-background) var(--sds-slider-fill, 0%),
+    var(--slider-rest-range-slider-background) 100%
+  );
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+/* Thumb — WebKit */
+.sds-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: var(--border-circular);
+  background: var(--slider-rest-range-slider-circle);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+/* Thumb — Firefox */
+.sds-slider__input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: var(--border-circular);
+  background: var(--slider-rest-range-slider-circle);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.sds-slider__input::-moz-range-track {
+  height: 4px;
+  border-radius: var(--border-circular);
+  background: transparent;
+}
+
+/* ===== Hover ===== */
+.sds-slider__input:hover:not(:disabled) {
+  background: linear-gradient(
+    to right,
+    var(--slider-hover-range-slider-fill) 0%,
+    var(--slider-hover-range-slider-fill) var(--sds-slider-fill, 0%),
+    var(--slider-hover-range-slider-background) var(--sds-slider-fill, 0%),
+    var(--slider-hover-range-slider-background) 100%
+  );
+}
+
+.sds-slider__input:hover:not(:disabled)::-webkit-slider-thumb {
+  background: var(--slider-hover-range-slider-circle);
+}
+
+.sds-slider__input:hover:not(:disabled)::-moz-range-thumb {
+  background: var(--slider-hover-range-slider-circle);
+}
+
+.sds-slider:hover .sds-slider__label {
+  color: var(--slider-hover-text);
+}
+
+.sds-slider:hover .sds-slider__value {
+  color: var(--slider-hover-range-text);
+}
+
+/* ===== Focus ===== */
+.sds-slider__input:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 4px;
+}
+
+/* ===== Disabled ===== */
+.sds-slider--disabled .sds-slider__input {
+  cursor: not-allowed;
+  background: linear-gradient(
+    to right,
+    var(--disabled-icon) 0%,
+    var(--disabled-icon) var(--sds-slider-fill, 0%),
+    var(--disabled-stroke) var(--sds-slider-fill, 0%),
+    var(--disabled-stroke) 100%
+  );
+}
+
+.sds-slider--disabled .sds-slider__input::-webkit-slider-thumb {
+  background: var(--disabled-icon);
+  cursor: not-allowed;
+}
+
+.sds-slider--disabled .sds-slider__input::-moz-range-thumb {
+  background: var(--disabled-icon);
+  cursor: not-allowed;
+}
+
+.sds-slider--disabled .sds-slider__label,
+.sds-slider--disabled .sds-slider__value {
+  color: var(--disabled-text);
+}

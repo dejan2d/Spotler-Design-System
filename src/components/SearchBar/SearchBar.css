@@ -1,0 +1,155 @@
+/* Search Bar — Spotler Design System
+   Spec: references/components/search-bar.md (Inputs system, Search Bar tokens) */
+
+.sds-search-bar {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+}
+
+.sds-search-bar__visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sds-search-bar__field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  background: var(--inputs-search-bar-default-background);
+  border: 1px solid var(--inputs-search-bar-default-stroke);
+  border-radius: var(--border-small);
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.sds-search-bar__field:hover {
+  background: var(--inputs-search-bar-hover-background);
+  border-color: var(--inputs-search-bar-hover-stroke);
+}
+
+.sds-search-bar__field:focus-within {
+  background: var(--inputs-search-bar-focused-background);
+  border-color: var(--inputs-search-bar-focused-stroke);
+}
+
+.sds-search-bar__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-default-icon-start);
+}
+
+.sds-search-bar__field:focus-within .sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-focused-icon-start);
+}
+
+.sds-search-bar__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-search-bar-focused-text);
+}
+
+.sds-search-bar__input::placeholder {
+  color: var(--inputs-search-bar-default-text);
+}
+
+/* Hide native search clear/decoration — we render our own clear control. */
+.sds-search-bar__input::-webkit-search-decoration,
+.sds-search-bar__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sds-search-bar__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--border-circular);
+  transition: color 150ms ease-in-out;
+}
+
+.sds-search-bar__icon--end {
+  color: var(--inputs-search-bar-focused-icon-end);
+  font-size: 14px;
+}
+
+.sds-search-bar__clear:focus-visible {
+  outline: 2px solid var(--inputs-search-bar-focused-stroke);
+  outline-offset: 2px;
+}
+
+/* ===== Empty (active, no results) ===== */
+.sds-search-bar--empty .sds-search-bar__field,
+.sds-search-bar--empty .sds-search-bar__field:hover {
+  background: var(--inputs-search-bar-empty-background);
+  border-color: var(--inputs-search-bar-empty-stroke);
+}
+
+.sds-search-bar--empty .sds-search-bar__input {
+  color: var(--inputs-search-bar-empty-text);
+}
+
+.sds-search-bar--empty .sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-empty-icon-start);
+}
+
+.sds-search-bar--empty .sds-search-bar__icon--end {
+  color: var(--inputs-search-bar-empty-icon-end);
+}
+
+/* ===== Error ===== */
+.sds-search-bar--error .sds-search-bar__field,
+.sds-search-bar--error .sds-search-bar__field:hover,
+.sds-search-bar--error .sds-search-bar__field:focus-within {
+  background: var(--inputs-search-bar-error-background);
+  border-color: var(--inputs-search-bar-error-stroke);
+}
+
+.sds-search-bar--error .sds-search-bar__input {
+  color: var(--inputs-search-bar-error-text);
+}
+
+.sds-search-bar--error .sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-error-icon-start);
+}
+
+.sds-search-bar--error .sds-search-bar__icon--end {
+  color: var(--inputs-search-bar-error-icon-end);
+}
+
+/* ===== Disabled ===== */
+.sds-search-bar--disabled .sds-search-bar__field {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
+}
+
+.sds-search-bar--disabled .sds-search-bar__input {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-search-bar--disabled .sds-search-bar__icon--start {
+  color: var(--disabled-text);
+}

@@ -1,0 +1,127 @@
+/* Action Card — Spotler Design System
+   Spec: kit/guidelines/components/action-card.md.
+   Outer: padding 24px 32px, gap 8px, radius Border/Large (8px), 1px stroke, resting Drop Shadow/50.
+   Internal item: padding 12px 16px, gap 8px, radius 8px, 1px stroke; hover lifts to Product Specific tint.
+   Tokens: --diagrams-action-card-* + --cards-action-*. */
+
+.sds-action-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-24) var(--spacing-s-32);
+  border-radius: var(--border-large);
+  border: 1px solid var(--diagrams-action-card-stroke);
+  background: var(--diagrams-action-card-background);
+  box-shadow: var(--elevation-resting);
+  font-family: var(--font-family);
+}
+
+.sds-action-card__heading {
+  margin: 0;
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
+  color: var(--diagrams-action-card-heading);
+}
+
+/* Internal action item — the whole row is the target */
+.sds-action-card__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  width: 100%;
+  padding: var(--spacing-s-12) var(--spacing-s-16);
+  border-radius: var(--border-large);
+  border: 1px solid var(--diagrams-action-card-internal-area-stroke);
+  background: var(--diagrams-action-card-internal-area-background);
+  box-shadow: var(--elevation-resting);
+  font-family: var(--font-family);
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+a.sds-action-card__item,
+button.sds-action-card__item {
+  appearance: none;
+}
+
+.sds-action-card__item:hover {
+  background: var(--cards-product-specific-hover-background);
+}
+
+.sds-action-card__item:focus-visible {
+  outline: none;
+  border-color: var(--cards-product-specific-focus-stroke);
+  box-shadow: 0 0 0 2px var(--cards-product-specific-focus-stroke);
+}
+
+/* Static (non-interactive) row — when the trailing affordance is a real Button */
+.sds-action-card__item--static {
+  cursor: default;
+}
+.sds-action-card__item--static:hover {
+  background: var(--diagrams-action-card-internal-area-background);
+}
+
+/* Leading icon tile — 40x40, 4px radius */
+.sds-action-card__item-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: var(--spacing-s-8);
+  border-radius: var(--border-small);
+  background: var(--diagrams-action-card-internal-area-icon-start-background);
+  color: var(--diagrams-action-card-internal-area-icon-start);
+  font-size: 20px;
+}
+
+.sds-action-card__item-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  min-width: 0;
+}
+
+.sds-action-card__item-label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: 600;
+  color: var(--diagrams-action-card-internal-area-body-text);
+}
+
+.sds-action-card__item--compact .sds-action-card__item-label {
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+}
+
+.sds-action-card__item-description {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--diagrams-action-card-internal-area-body-text);
+}
+
+.sds-action-card__item-trailing {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.sds-action-card__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--diagrams-action-card-internal-area-icon-end);
+}
