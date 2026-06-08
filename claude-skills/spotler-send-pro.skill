@@ -1,0 +1,1382 @@
+---
+name: spotler-send-pro
+description: Product context for Spotler SendPro
+---
+
+# Spotler SendPro Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler SendPro.
+
+This Skill gives Figma Make product context for Spotler SendPro so it can make better UX and product decisions without starting from generic email marketing, notification, SMS, developer tool, or SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler SendPro is a secure, high-performance transactional messaging platform for organisations that need reliable delivery of critical email and SMS messages.
+
+It is used for system-triggered communications such as:
+
+- Order confirmations
+- Shipping updates
+- Password resets
+- Account alerts
+- Authentication codes
+- Service notifications
+- Appointment reminders
+- Security alerts
+- Status updates
+- Return updates
+
+SendPro separates transactional communication from marketing campaigns and internal mail systems. It provides dedicated infrastructure, API and SMTP connectivity, source-based sending, central template management, transactional flows, delivery reporting, webhooks, and enterprise-grade reliability.
+
+The product helps organisations move from fragmented, unreliable, hard-to-monitor transactional messaging to one controlled platform for sending, managing, monitoring, and optimising critical emails and SMS messages.
+
+---
+
+## Core Problem Spotler SendPro Solves
+
+Transactional emails and SMS messages are essential to customer trust, service quality, security, and business continuity.
+
+Many organisations send these messages through marketing platforms, webshop defaults, internal mail servers, outdated systems, or separate tools. This creates problems such as:
+
+- Poor inbox placement for essential messages
+- Delayed delivery
+- Failed delivery
+- Important alerts landing in spam
+- No clear insight into delivery status
+- No easy way to troubleshoot errors
+- Technical bottlenecks for developers
+- Compliance risks
+- Inconsistent templates
+- Fragmented sending systems
+- No central oversight across applications
+- No clear separation between marketing and transactional messages
+
+Spotler SendPro solves this with a dedicated platform designed for transactional communication: fast, reliable, scalable, integrated, monitorable, and compliant.
+
+The product is especially important when messages must arrive quickly and predictably, such as password resets, order confirmations, authentication codes, or service alerts.
+
+---
+
+## Transactional Messaging Mental Model
+
+Figma Make should understand SendPro as a transactional messaging hub where systems trigger messages, SendPro applies the right source, flow, template, channel, and delivery infrastructure, and teams monitor what happened.
+
+The core mental model is:
+
+1. Connect a system
+   - A webshop, platform, CRM, application, or internal system connects to SendPro via API or SMTP.
+
+2. Define a source
+   - Each sending system is configured as a source so messages can be separated, monitored, and managed.
+
+3. Trigger a message
+   - A system event occurs, such as an order, login, password reset, status change, appointment, delivery update, or account alert.
+
+4. Apply a flow
+   - The transactional flow determines how the message should be handled, which channel is used, and which template or content structure applies.
+
+5. Render content
+   - Email templates may use HTML and Freemarker to generate dynamic content from system data.
+   - Less complex templates can be edited with the visual Quick editor.
+   - SMS content is managed per use case and per source.
+
+6. Send
+   - SendPro sends the email or SMS through optimised transactional infrastructure.
+
+7. Track
+   - Delivery, performance, errors, source, message type, and timing are reported.
+
+8. Update systems
+   - Webhooks can send real-time status feedback back to internal systems for monitoring and troubleshooting.
+
+Do not treat SendPro as an email marketing platform. It is designed for critical transactional email and SMS triggered by systems, not promotional newsletters or marketing campaigns.
+
+---
+
+## Target Users and User Roles
+
+Spotler SendPro is used by technical, operational, service, and marketing-adjacent teams that need reliable transactional messaging.
+
+### Primary users
+
+#### Developer
+
+A developer integrates applications, platforms, webshops, CRM systems, or internal tools with SendPro.
+
+Goals:
+
+- Send transactional emails or SMS via API or SMTP
+- Trigger messages from system events
+- Configure or test sources
+- Receive delivery status via webhooks
+- Troubleshoot failed or delayed messages
+- Avoid maintaining custom mail infrastructure
+
+Typical needs:
+
+- API access
+- SMTP credentials
+- Webhook configuration
+- Source setup
+- Test messages
+- Error logs
+- Delivery status
+- Documentation-friendly flows
+
+---
+
+#### Technical operations user
+
+A technical operations user monitors reliability, delivery, errors, and source performance.
+
+Goals:
+
+- Ensure critical messages are delivered
+- Monitor delivery performance
+- Identify issues quickly
+- Separate reporting by source or message type
+- Maintain uptime and business continuity
+
+Typical needs:
+
+- Delivery dashboard
+- Error reporting
+- Source-level monitoring
+- Message logs
+- Webhook status
+- SLA visibility
+- Peak-load insight
+
+---
+
+#### E-commerce operations user
+
+An e-commerce operations user manages transactional messages related to orders, shipping, returns, and customer accounts.
+
+Goals:
+
+- Ensure order confirmations and updates arrive
+- Reduce customer service enquiries about missing messages
+- Maintain consistent transactional templates
+- Track delivery issues
+- Keep webshop communications reliable
+
+Typical needs:
+
+- Source for webshop
+- Order-related templates
+- Delivery reporting
+- Template management
+- Flow overview
+- Troubleshooting tools
+
+---
+
+#### Customer service or operations manager
+
+A service or operations manager needs insight into whether important service messages are being sent and delivered correctly.
+
+Goals:
+
+- Reduce delivery-related customer questions
+- Confirm whether a message was sent or delivered
+- Understand failures or delays
+- Improve service reliability
+- Maintain customer trust
+
+Typical needs:
+
+- Message lookup
+- Delivery status
+- Performance reports
+- Source and message type filters
+- Clear error explanations
+
+---
+
+#### Marketing or content user
+
+A marketing or content user may manage transactional email templates, tone of voice, branding, headers, footers, and reusable content.
+
+Goals:
+
+- Keep transactional emails consistent and branded
+- Update content centrally without developer work
+- Use the Quick editor for simple changes
+- Manage multilingual or multi-brand template variants
+- Ensure content is accurate and compliant
+
+Typical needs:
+
+- Template editor
+- Quick editor
+- Variables
+- Preview
+- Header and footer reuse
+- Brand and language variants
+- Approval or review context where relevant
+
+---
+
+### Secondary users
+
+#### Security or product team
+
+A security or product team uses SendPro for account alerts, authentication codes, login notifications, and password resets.
+
+Goals:
+
+- Deliver security messages immediately
+- Monitor delivery success
+- Use SMS when email is not enough
+- Improve account security and user experience
+
+Typical needs:
+
+- Authentication code flows
+- Password reset flows
+- Account alert templates
+- SMS delivery monitoring
+- Real-time status feedback
+
+---
+
+#### Enterprise or platform administrator
+
+An administrator manages enterprise setup, sources, access, SLA options, deliverability settings, and platform configuration.
+
+Goals:
+
+- Maintain a scalable transactional messaging setup
+- Manage multiple sources
+- Support high sending volumes
+- Use SLA and enterprise features where needed
+- Coordinate critical communication processes
+
+Typical needs:
+
+- Source management
+- Access control
+- SLA information
+- Deliverability monitoring
+- API and webhook configuration
+- Emergency support context
+
+---
+
+## Main Product Areas and Capabilities
+
+### Transactional Sending: Email and SMS
+
+SendPro sends transactional emails and SMS messages triggered by system events.
+
+Supported sending methods:
+
+- API
+- SMTP
+
+Supported channels:
+
+- Email
+- SMS
+
+Typical system events:
+
+- Orders
+- Logins
+- Password resets
+- Account changes
+- Status changes
+- Delivery updates
+- Appointment reminders
+- Authentication codes
+- Security alerts
+- Service notifications
+
+Design implication:
+
+- Sending is system-triggered, not audience-broadcast marketing.
+- Speed, reliability, monitoring, and troubleshooting matter more than campaign design.
+- Email and SMS may be used in different flows depending on urgency and use case.
+
+---
+
+### Sources
+
+A source represents a sending system connected to SendPro.
+
+Examples of sources:
+
+- Webshop
+- CRM system
+- SaaS application
+- Internal platform
+- Customer portal
+- Service system
+- Authentication system
+
+Sources help organisations:
+
+- Separate systems
+- Monitor delivery per system
+- Troubleshoot issues
+- Manage flows centrally
+- Understand which application sent which message
+
+Design implication:
+
+- Source is a core SendPro concept.
+- Multi-system environments should be organised around sources.
+- Reports and troubleshooting should allow filtering by source.
+- Avoid treating all transactional messages as coming from one generic sender.
+
+---
+
+### Transactional Flows
+
+Transactional flows define how system-triggered messages are managed.
+
+Flows may determine:
+
+- Which channel is used
+- Which template is applied
+- Which source triggers the message
+- Which language or brand applies
+- Which message type is being sent
+- How the message is structured
+- How reporting is separated
+
+Flow examples:
+
+- Order confirmation email
+- Shipping update email
+- Password reset email
+- Login code SMS
+- Service notification
+- Appointment reminder
+- Return update
+- Security alert
+
+Design implication:
+
+- Flows are structured around system events and message purpose.
+- Users need clarity about source, trigger, channel, template, and status.
+- Do not design flows as marketing journeys or nurture campaigns.
+
+---
+
+### Templates and Message Content
+
+SendPro supports central template management for transactional messages.
+
+Email template capabilities:
+
+- HTML templates
+- Freemarker template engine
+- Dynamic content
+- Personalisation from system data
+- Conditional content
+- Nested loops
+- Reuse of system-supplied message content
+- Reusable headers
+- Reusable footers
+- Content blocks
+- Multilingual scenarios
+- Multi-brand scenarios
+- Visual Quick editor for simpler templates
+
+SMS content capabilities:
+
+- SMS content per use case
+- SMS content per source
+- Short, time-critical message structure
+
+Design implication:
+
+- Templates can range from simple to highly complex.
+- Some users may edit text and variables in the Quick editor; others may manage HTML and Freemarker.
+- Template logic is technical but should be understandable enough for content and operations users.
+- Avoid assuming templates are edited only by developers.
+
+---
+
+### Freemarker Template Engine
+
+SendPro templates can use Freemarker for dynamic and personalised transactional content.
+
+Freemarker supports:
+
+- Variables
+- Customer data
+- Order data
+- Conditional content
+- Different content per situation
+- Nested loops
+- Dynamic content structures
+- Reuse of data from source systems
+
+Design implication:
+
+- Advanced templates may need code-like logic.
+- Designs should help users understand variables, conditions, loops, previews, and test data.
+- Errors in template logic can affect critical messages, so validation and preview are important.
+
+---
+
+### Quick Editor
+
+The visual Quick editor supports less complex template changes.
+
+Users can adjust:
+
+- Text
+- Images
+- Variables
+- Simple content fields
+
+Design implication:
+
+- Quick editor is useful for non-technical users.
+- It should not expose unnecessary HTML complexity.
+- The design should make clear when a user is editing simple content versus advanced template logic.
+
+---
+
+### Reporting and Insight
+
+SendPro provides delivery and performance reporting for transactional email and SMS.
+
+Reporting may show:
+
+- Which messages were sent
+- When messages were sent
+- Which source sent the message
+- Which message type was used
+- Delivery status
+- Delivery errors
+- Performance data
+- Open information where available
+- Reporting by source
+- Reporting by message type
+
+Design implication:
+
+- Reporting should support monitoring and troubleshooting.
+- Users often need to answer: “Was this critical message sent and delivered?”
+- Reports should separate source and message type.
+- Avoid marketing-style campaign analytics as the default mental model.
+
+---
+
+### Connectivity and Webhooks
+
+SendPro integrates with systems through API, SMTP, and webhooks.
+
+Connectivity capabilities:
+
+- API for direct application or platform connection
+- SMTP for existing systems that already send email through SMTP
+- Webhooks for real-time updates
+- Status feedback to internal platforms
+- Monitoring and troubleshooting integration
+
+Design implication:
+
+- Developers need clear configuration and status feedback.
+- Webhooks are used to push message events back to internal systems.
+- Designs should distinguish sending methods from event feedback methods.
+
+---
+
+### Deliverability and Infrastructure
+
+SendPro is built for reliable transactional delivery.
+
+Capabilities include:
+
+- Advanced deliverability controls
+- Deliverability monitoring
+- High-performance infrastructure
+- Scalable infrastructure for high sending volumes
+- Predictable delivery during peak loads
+- Enterprise-grade availability
+- Separate transactional sending from marketing mail
+
+Design implication:
+
+- Deliverability is core product value.
+- Users need confidence that critical messages are fast, reliable, and monitored.
+- Avoid hiding deliverability or treating it as a secondary analytics feature.
+
+---
+
+### SLA and Enterprise Capabilities
+
+SendPro supports SLA and enterprise-grade requirements.
+
+SLA and enterprise concepts:
+
+- Standard SLA
+- Premium SLA
+- Platform availability
+- Performance
+- Support agreements
+- Scalable infrastructure
+- High sending volumes
+- Advanced deliverability monitoring
+- Multiple sources
+- Central control
+- API and webhook flexibility
+- 24/7 emergency line for core feature outages
+
+Design implication:
+
+- Enterprise features should support business-critical reliability.
+- SLA information should be understandable and tied to availability, performance, and support.
+- Avoid treating emergency support or SLA as generic account settings only.
+
+---
+
+## Important Product Objects and Concepts
+
+### Transactional message
+
+A system-triggered email or SMS sent to one specific person because of an action, event, status, or security need.
+
+### Transactional email
+
+A critical email such as an order confirmation, password reset, appointment reminder, shipping update, or account alert.
+
+### Transactional SMS
+
+A critical SMS such as an authentication code, login code, security alert, reminder, or urgent service update.
+
+### Source
+
+A connected sending system such as a webshop, application, CRM, platform, or internal tool.
+
+### Flow
+
+A structured transactional scenario that determines how a message is triggered, which channel is used, and which template applies.
+
+### Trigger
+
+A system event that initiates a transactional message, such as an order, login, password reset, status change, or delivery update.
+
+### API
+
+A connection method used by applications and platforms to trigger transactional emails or SMS directly.
+
+### SMTP
+
+A connection method used by existing systems to send email through SendPro.
+
+### Webhook
+
+A real-time event update sent from SendPro back to another system, often for delivery status, monitoring, or troubleshooting.
+
+### Template
+
+A reusable structure for transactional email content.
+
+### HTML template
+
+A template built with HTML, often used for structured and branded transactional emails.
+
+### Freemarker
+
+The template engine used to generate dynamic and personalised email content based on data from source systems.
+
+### Variable
+
+A placeholder in a template that is filled with data from the source system.
+
+### Conditional content
+
+Template logic that changes content depending on data or situation.
+
+### Nested loop
+
+Template logic that repeats content structures, such as order lines or item lists.
+
+### Quick editor
+
+A visual editor for adjusting simpler templates, text, images, and variables without editing HTML or code.
+
+### Message type
+
+The category of transactional message, such as order confirmation, password reset, security alert, or shipping update.
+
+### Delivery status
+
+The current state of a sent message, such as sent, delivered, failed, bounced, delayed, or opened where available.
+
+### Delivery report
+
+A report showing delivery and performance data for transactional messages.
+
+### SLA
+
+A Service Level Agreement describing platform availability, performance, and support commitments.
+
+### Premium SLA
+
+An enhanced SLA option for organisations with higher reliability and support requirements.
+
+### Emergency line
+
+A 24/7 support line for core feature outages in enterprise scenarios.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Transactional messaging
+- Transactional email
+- Transactional SMS
+- Critical message
+- System-triggered message
+- Order confirmation
+- Shipping update
+- Password reset
+- Account alert
+- Authentication code
+- Security alert
+- Service notification
+- Appointment reminder
+- Source
+- Sending source
+- Flow
+- Transactional flow
+- Trigger
+- System event
+- API
+- SMTP
+- Webhook
+- Real-time update
+- Status feedback
+- Delivery status
+- Delivery reporting
+- Delivery performance
+- Message type
+- Template
+- HTML template
+- Freemarker
+- Variable
+- Conditional content
+- Nested loop
+- Quick editor
+- Multi-brand
+- Multilingual
+- Deliverability
+- Inbox placement
+- Scalable infrastructure
+- High sending volume
+- SLA
+- Standard SLA
+- Premium SLA
+- Enterprise capabilities
+- 24/7 emergency line
+
+Avoid replacing these with generic SaaS language such as “items”, “records”, “tasks”, “campaigns”, or “assets” when a more specific SendPro term exists.
+
+---
+
+## Key Integrations
+
+Spotler SendPro integrates with existing systems to send, monitor, and manage transactional email and SMS.
+
+### API
+
+Used for direct connection with applications and platforms.
+
+Important integration logic:
+
+- Applications trigger transactional email or SMS directly.
+- Developers can send structured data to populate templates.
+- API is suited for modern systems requiring stable, scalable sending.
+
+---
+
+### SMTP
+
+Used for existing systems that send email via SMTP.
+
+Important integration logic:
+
+- SMTP is useful when replacing or improving existing mail sending without fully rebuilding system logic.
+- Existing applications can send email through SendPro’s infrastructure.
+
+---
+
+### Webhooks
+
+Used for real-time updates on email events and status feedback.
+
+Important integration logic:
+
+- SendPro can send delivery and status events back to internal systems.
+- Webhooks support monitoring, troubleshooting, and operational visibility.
+- Webhooks are feedback mechanisms, not sending methods.
+
+---
+
+### Internal Systems and Applications
+
+SendPro may connect to:
+
+- Webshops
+- Platforms
+- CRM systems
+- SaaS applications
+- Customer portals
+- Internal tools
+- Authentication systems
+- Service systems
+
+Important integration logic:
+
+- Each sending system can be configured as a separate source.
+- Sources allow central oversight across multiple systems.
+- Different systems may trigger different flows and message types.
+
+---
+
+## Important Workflows
+
+### Workflow: Send an order confirmation from a webshop
+
+1. A customer places an order.
+2. The webshop triggers an order confirmation through API or SMTP.
+3. The webshop is configured as a source in SendPro.
+4. SendPro applies the correct transactional flow and template.
+5. Order data is inserted into the template using variables and Freemarker logic.
+6. The email is sent through SendPro’s transactional infrastructure.
+7. Delivery status is reported.
+8. The team can monitor whether the message was delivered.
+
+Design implications:
+
+- Show source, message type, template, and delivery status.
+- Template management may be handled outside webshop code.
+- Order emails are critical trust moments.
+- Avoid presenting this like a marketing campaign send.
+
+---
+
+### Workflow: Send a password reset email
+
+1. A user requests a password reset.
+2. The application triggers a password reset message via API.
+3. SendPro applies the password reset flow.
+4. The message is sent immediately using the correct template.
+5. Delivery is monitored.
+6. Webhooks may send status feedback to internal systems.
+
+Design implications:
+
+- Speed and reliability are central.
+- Monitoring and troubleshooting need to be easy.
+- Password reset is a security and user experience flow.
+- Avoid adding unnecessary marketing-style steps.
+
+---
+
+### Workflow: Send an authentication code by SMS
+
+1. A login, verification, or security event occurs.
+2. The system triggers a transactional SMS.
+3. SendPro sends the SMS using the appropriate source and flow.
+4. The user receives the code quickly.
+5. Delivery status is monitored.
+
+Design implications:
+
+- SMS is often used when time sensitivity is high.
+- The message content should be short and direct.
+- Reliability and speed matter more than rich content.
+
+---
+
+### Workflow: Manage multiple sending systems centrally
+
+1. An organisation connects several systems, such as a webshop, CRM, application, and internal tool.
+2. Each system is configured as a separate source.
+3. Each source has its own transactional flows and message types.
+4. SendPro centralises reporting and troubleshooting.
+5. Teams can see which system sends which messages and how they perform.
+
+Design implications:
+
+- Source separation is central.
+- Dashboards should support filtering by source and message type.
+- Users need a single overview without losing system-specific detail.
+
+---
+
+### Workflow: Edit a transactional template
+
+1. A content or technical user opens a template.
+2. For simple templates, the user may use the Quick editor.
+3. For advanced templates, the user may edit HTML and Freemarker logic.
+4. The user previews the message with sample data.
+5. The user validates variables, conditions, and dynamic content.
+6. The updated template is used by the relevant flow.
+
+Design implications:
+
+- Template editing can be simple or technical.
+- Preview and validation are important because messages are critical.
+- Show which flows and sources use the template where relevant.
+- Avoid changes that make users edit application code for simple content updates.
+
+---
+
+### Workflow: Use webhooks for real-time status feedback
+
+1. SendPro sends a transactional message.
+2. The message status changes, for example delivered, failed, bounced, or opened.
+3. SendPro triggers a webhook event.
+4. The internal system receives the event.
+5. The internal system updates monitoring, customer records, or troubleshooting tools.
+
+Design implications:
+
+- Webhook status should be visible and testable.
+- Users should understand which events are being sent.
+- Webhooks support operational feedback loops.
+
+---
+
+### Workflow: Monitor delivery and troubleshoot failures
+
+1. A team reviews delivery reports.
+2. They filter by source, message type, time period, or status.
+3. They identify failed, delayed, or problematic messages.
+4. They inspect error details.
+5. They take corrective action, such as fixing a template, source, data issue, or integration.
+6. They confirm delivery performance improves.
+
+Design implications:
+
+- Troubleshooting should be practical and fast.
+- Delivery reports should not be purely decorative.
+- Error states should be understandable to technical and operational users.
+
+---
+
+## Common Use Cases
+
+### Order confirmations
+
+Use when a webshop needs reliable and branded order confirmation emails.
+
+Important context:
+
+- Order confirmations are critical customer trust moments.
+- Templates should be managed centrally.
+- Messages may be triggered via API or SMTP.
+
+Outcome:
+
+- Reliable confirmations
+- Consistent branding
+- Fewer customer questions
+
+---
+
+### Password resets and account alerts
+
+Use when an application needs immediate delivery of security-related emails.
+
+Important context:
+
+- Speed is critical.
+- Users need to know whether the message was sent or failed.
+- Webhooks may update internal systems.
+
+Outcome:
+
+- Faster delivery
+- Better user experience
+- Clearer oversight of critical messages
+
+---
+
+### Multi-system transactional messaging
+
+Use when several systems send transactional email or SMS independently.
+
+Important context:
+
+- Each system can be configured as a source.
+- Reporting can be separated by source and message type.
+- Central oversight reduces troubleshooting complexity.
+
+Outcome:
+
+- Better insight
+- Simpler troubleshooting
+- Consistent delivery
+
+---
+
+### Authentication codes and security alerts by SMS
+
+Use when messages are too time-critical to rely on email alone.
+
+Important context:
+
+- SMS may be used for login codes, verification, or urgent security alerts.
+- Message content should be concise.
+- Speed and deliverability are key.
+
+Outcome:
+
+- Faster delivery of time-critical security messages
+- Better account security and user experience
+
+---
+
+### Monitoring delivery and engagement
+
+Use when teams need to know whether transactional messages are performing as expected.
+
+Important context:
+
+- Reports show delivery and performance.
+- Teams may need to investigate failures, delays, or source-specific issues.
+- Delivery insight supports operational reliability.
+
+Outcome:
+
+- Better understanding of system message performance
+- Faster troubleshooting
+- Reduced risk
+
+---
+
+## Sector Context
+
+### E-commerce and service-driven organisations
+
+Common needs:
+
+- Order confirmations
+- Shipping updates
+- Return updates
+- Delivery delay notifications
+- Account emails
+- Service notifications
+- Peak-load reliability
+
+Design emphasis:
+
+- Customer trust and operational reliability matter.
+- Webshop source and order templates are important.
+- Template management may involve marketers, operations, and developers.
+
+---
+
+### SaaS and software companies
+
+Common needs:
+
+- Password resets
+- Login codes
+- Account alerts
+- Security notifications
+- System notifications
+- Multiple application sources
+- Webhooks for status feedback
+
+Design emphasis:
+
+- Developer experience, API integration, and security message reliability matter.
+- Troubleshooting failed messages is critical.
+
+---
+
+### Operational and customer service teams
+
+Common needs:
+
+- Appointment reminders
+- Status updates
+- Service alerts
+- Message lookup
+- Delivery confirmation
+- Reduced customer enquiries
+
+Design emphasis:
+
+- Operational users need visibility into whether a message was sent and delivered.
+- Reporting should answer support questions quickly.
+
+---
+
+### Organisations with complex sending structures
+
+Common needs:
+
+- Multiple sources
+- Multiple systems
+- Central reporting
+- High sending volumes
+- SLA requirements
+- Enterprise support
+- Webhooks and APIs
+
+Design emphasis:
+
+- Source management, monitoring, deliverability, and SLA visibility matter.
+- Avoid assuming a single simple application sends all messages.
+
+---
+
+## Feature Design Guidance
+
+### Design for critical system communication, not marketing campaigns
+
+SendPro is for transactional messages triggered by systems.
+
+Good designs should support:
+
+- Message type
+- Source
+- Trigger
+- Flow
+- Template
+- Delivery status
+- Error state
+- Webhook feedback
+- SLA and reliability context
+
+Avoid:
+
+- Marketing campaign language
+- Newsletter assumptions
+- Audience-building flows
+- Promotional campaign analytics as the primary pattern
+
+---
+
+### Make source separation clear
+
+Multiple systems may send messages through one SendPro environment.
+
+Good designs should show:
+
+- Which source sent a message
+- Which flows belong to a source
+- Which message types are active
+- Delivery performance per source
+- Integration status per source
+
+Avoid merging all sending systems into one indistinct message stream.
+
+---
+
+### Make delivery status and troubleshooting actionable
+
+Users often need to know whether a critical message arrived.
+
+Good designs should support:
+
+- Delivery status lookup
+- Error details
+- Message timeline
+- Source filter
+- Message type filter
+- Retry or corrective actions where applicable
+- Webhook feedback state
+
+Avoid reports that do not help users troubleshoot.
+
+---
+
+### Support both technical and non-technical users
+
+Developers configure APIs, SMTP, webhooks, and complex templates. Content or operations users may manage templates and reports.
+
+Good designs should separate:
+
+- Developer setup
+- Source configuration
+- Template editing
+- Quick editor
+- Delivery reporting
+- Operational troubleshooting
+
+Avoid exposing unnecessary code complexity to users who only need content edits or delivery insight.
+
+---
+
+### Treat templates as operationally important
+
+Transactional templates affect critical customer communications.
+
+Good designs should support:
+
+- Preview with sample data
+- Variable validation
+- Freemarker validation
+- Template usage visibility
+- Version awareness where relevant
+- Quick editor for simple changes
+- Advanced editing for complex templates
+
+Avoid allowing blind template edits without preview or validation.
+
+---
+
+### Make flows channel-aware
+
+SendPro supports both email and SMS.
+
+Good designs should show:
+
+- Which channel a flow uses
+- When SMS is selected instead of email
+- Which message type belongs to which channel
+- Channel-specific content limits or expectations
+
+Avoid assuming every transactional message is email.
+
+---
+
+### Make SLA and enterprise context practical
+
+Enterprise customers care about availability, performance, support, and emergency processes.
+
+Good designs should show:
+
+- SLA level
+- Availability or performance context
+- Support options
+- Emergency line information where relevant
+- High-volume or source configuration context
+
+Avoid hiding SLA information in generic account settings when the feature concerns reliability.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler SendPro is a transactional messaging platform, not an email marketing platform.
+- Transactional messages are system-triggered and sent to specific individuals.
+- Email and SMS are both supported.
+- API and SMTP are sending methods.
+- Webhooks provide real-time event feedback.
+- Sources represent connected sending systems.
+- Flows represent structured transactional scenarios.
+- Templates are centrally managed and can be simple or advanced.
+- HTML and Freemarker are important for dynamic email templates.
+- Quick editor supports simpler template changes.
+- Delivery status, reporting, and troubleshooting are core product value.
+- SendPro separates transactional sending from marketing mail.
+- Deliverability, reliability, speed, and scalability are central.
+- SLA and enterprise capabilities matter for business-critical use cases.
+- Multiple systems can send through one SendPro environment.
+- Critical messages such as password resets, order confirmations, and authentication codes must be fast and reliable.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler SendPro features:
+
+- Do not treat SendPro as a newsletter or marketing campaign platform.
+- Do not design audience segmentation or promotional campaign flows unless explicitly requested.
+- Do not ignore sources; they are central to multi-system sending.
+- Do not ignore flows; they structure transactional scenarios.
+- Do not treat webhooks as a sending method.
+- Do not assume all messages are email; SMS is also supported.
+- Do not hide delivery status, errors, or troubleshooting details.
+- Do not treat templates as simple static content only.
+- Do not ignore Freemarker, variables, conditions, or dynamic content where relevant.
+- Do not force all users into code editing when the Quick editor is appropriate.
+- Do not ignore SLA, infrastructure, or deliverability when designing enterprise or reliability features.
+- Do not replace product terminology with vague terms like “items”, “records”, or “campaigns”.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Message triggered but not delivered
+
+A system may successfully trigger a message, but delivery may fail. Designs should distinguish trigger success from delivery success.
+
+### Webhook failed
+
+A message may be delivered, but the webhook update back to the internal system may fail. Designs should show webhook status separately.
+
+### Source misconfiguration
+
+A source may be connected incorrectly, causing delivery or authentication issues.
+
+### Template variable missing
+
+A template may reference data that the source system did not provide. Designs should show validation or fallback behaviour.
+
+### Freemarker logic error
+
+Advanced template logic can fail because of incorrect conditions, loops, or variables. Preview and validation are important.
+
+### SMS selected for time-critical flow
+
+An authentication or security flow may use SMS because email is slower or less visible. Designs should account for channel-specific behaviour.
+
+### Multiple sources send similar message types
+
+Several systems may send password resets or notifications. Reporting should separate by source.
+
+### Peak sending volume
+
+A webshop or platform may generate many messages during peak periods. Designs should show performance and delivery reliability.
+
+### Multilingual or multi-brand template selection
+
+Flows may apply different templates based on language or brand. Designs should make this logic understandable.
+
+### Source-supplied message content reused
+
+A source system may provide existing content that SendPro enriches with headers, footers, or content blocks. Designs should support this without forcing source-system changes.
+
+### User without technical knowledge edits content
+
+Quick editor should let non-technical users safely edit simpler template content without touching HTML or Freemarker.
+
+### Business-critical outage
+
+Enterprise users may need emergency support or SLA-related information during a core feature outage.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- Transactional messaging terminology
+- User roles
+- Source logic
+- Flow logic
+- API, SMTP, and webhook context
+- Template and Freemarker logic
+- Quick editor context
+- Delivery reporting and troubleshooting
+- SLA and enterprise reliability context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler SendPro feature, check:
+
+- Does the design use SendPro terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in transactional email, transactional SMS, sources, flows, templates, API, SMTP, webhooks, delivery reporting, deliverability, troubleshooting, or SLA?
+- Does the design avoid marketing campaign or newsletter assumptions?
+- Does it distinguish source, flow, trigger, template, channel, and delivery status?
+- Does it make delivery status and errors actionable?
+- Does it account for both email and SMS where relevant?
+- Does it distinguish API and SMTP from webhooks?
+- Does it support both developers and non-technical content or operations users?
+- Does template editing include preview, variables, and validation where relevant?
+- Does it preserve Freemarker and dynamic content logic where relevant?
+- Does it account for enterprise reliability and SLA when relevant?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Spotler SendPro Product Context Skill, redesign the source management screen for organisations connecting multiple systems such as webshops, CRMs, applications, and internal tools.”
+
+“Using the Spotler SendPro Product Context Skill, redesign the transactional flow overview so users can understand source, trigger, channel, template, delivery status, and message type.”
+
+“Using the Spotler SendPro Product Context Skill, redesign the delivery reporting screen for troubleshooting failed, delayed, or bounced transactional messages.”
+
+“Using the Spotler SendPro Product Context Skill, redesign the template editor for HTML and Freemarker templates with variables, conditions, preview, and validation.”
+
+“Using the Spotler SendPro Product Context Skill, redesign the Quick editor for non-technical users updating simple transactional email content.”
+
+---
+
+### New feature prompts
+
+“Using the Spotler SendPro Product Context Skill, design a message lookup feature that helps customer service confirm whether an order confirmation or password reset was delivered.”
+
+“Using the Spotler SendPro Product Context Skill, design a webhook event log showing real-time status feedback to internal systems.”
+
+“Using the Spotler SendPro Product Context Skill, design an authentication code SMS flow for time-critical login and security events.”
+
+“Using the Spotler SendPro Product Context Skill, design a source-level delivery health dashboard for technical operations users.”
+
+“Using the Spotler SendPro Product Context Skill, design an SLA and enterprise reliability overview for customers with Premium SLA requirements.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Spotler SendPro Product Context Skill, explain the difference between API, SMTP, and webhooks in SendPro.”
+
+“Using the Spotler SendPro Product Context Skill, map the workflow from webshop order event to order confirmation delivery and reporting.”
+
+“Using the Spotler SendPro Product Context Skill, identify edge cases for a Freemarker transactional email template using order data and nested loops.”
+
+“Using the Spotler SendPro Product Context Skill, explain why SendPro separates sources and how that affects reporting.”
+
+“Using the Spotler SendPro Product Context Skill, compare transactional email flows with marketing campaign flows and identify what the UI should avoid.”
+
+---
+
+### Design review prompts
+
+“Using the Spotler SendPro Product Context Skill, review this screen for incorrect terminology, missing product logic, or marketing-email assumptions.”
+
+“Using the Spotler SendPro Product Context Skill, check whether this reporting screen helps users troubleshoot delivery failures by source and message type.”
+
+“Using the Spotler SendPro Product Context Skill, review whether this template editor supports variables, Freemarker logic, preview, and validation.”
+
+“Using the Spotler SendPro Product Context Skill, identify where this design should distinguish trigger success from delivery success.”
+
+“Using the Spotler SendPro Product Context Skill, check whether this integration concept correctly separates API, SMTP, and webhook responsibilities.”

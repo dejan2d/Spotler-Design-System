@@ -1,0 +1,1378 @@
+---
+name: spotler-up-visit
+description: Product context for Spotler UpVisit
+---
+
+# UpVisit Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for UpVisit.
+
+This Skill gives Figma Make product context for UpVisit so it can make better UX and product decisions without starting from generic event-app, ticketing, CMS, networking, or SaaS assumptions.
+
+This is not a Design System Skill. Use a separate Design System Skill for components, styling, typography, spacing, colours, icons, and visual patterns.
+
+---
+
+## Product Summary
+
+UpVisit is a smart app platform for successful B2B events and offline experiences.
+
+It helps event organisers create and publish digital event experiences with less effort, while giving visitors, exhibitors, sponsors, and speakers a more engaging and measurable experience.
+
+UpVisit combines:
+
+- A self-service CMS platform
+- Event apps
+- AI-supported content creation
+- Interactive 3D maps and navigation
+- Event agendas and personalised programmes
+- Exhibitor, sponsor, and speaker profiles
+- Matchmaking
+- Gamification and challenges
+- Push notifications
+- Participant surveys
+- LinkedIn integration
+- CRM and ticketing integrations
+- Live analytics and engagement data
+- White-label and API options
+
+The product is designed to bridge offline and online experiences. It turns physical events, venues, exhibitions, fairs, cultural spaces, city events, and tourism experiences into mobile-first, data-rich, interactive digital experiences.
+
+---
+
+## Core Product Idea
+
+UpVisit helps organisations make offline experiences more successful by adding a digital engagement layer.
+
+The product is not just an event app. It is a platform that connects:
+
+- Event organisers
+- Visitors or participants
+- Exhibitors
+- Sponsors
+- Speakers
+- Ticketing systems
+- CRM systems
+- Local places
+- Content
+- Navigation
+- Engagement data
+- Commercial opportunities
+
+The main promise is:
+
+More event success with less effort.
+
+UpVisit should feel fast to set up, easy to maintain, and valuable for every stakeholder.
+
+---
+
+## Target Users and Stakeholders
+
+### Event organisers
+
+Event organisers create and manage the digital experience.
+
+Goals:
+
+- Set up an event app quickly
+- Reduce manual event work
+- Improve visitor experience
+- Increase exhibitor and sponsor satisfaction
+- Manage complex on-site navigation
+- Create digital revenue opportunities
+- Track performance in real time
+
+Typical needs:
+
+- Self-service setup
+- CMS
+- AI-supported content creation
+- Agenda management
+- Map and navigation setup
+- Exhibitor and sponsor management
+- Push notifications
+- Analytics
+- Ticketing and CRM connections
+
+---
+
+### Visitors / participants
+
+Visitors use the app before, during, and after the event.
+
+Goals:
+
+- Find relevant content, sessions, exhibitors, and people
+- Navigate the event space
+- Build a personal programme
+- Discover offers and activities
+- Connect with exhibitors or other participants
+- Access useful information quickly
+
+Typical needs:
+
+- Interactive map
+- 3D navigation
+- Search
+- Event programme
+- Personal agenda
+- Push notifications
+- Matchmaking
+- Exhibitor profiles
+- Sponsor content
+- Surveys
+- Gamification
+
+---
+
+### Exhibitors
+
+Exhibitors use UpVisit to increase visibility and generate leads.
+
+Goals:
+
+- Present their company attractively
+- Be discoverable in the app
+- Generate leads
+- Connect with visitors
+- Promote products, offers, or services
+- Understand engagement
+
+Typical needs:
+
+- Exhibitor profile
+- Multimedia content
+- Lead capture
+- LinkedIn integration
+- Contact options
+- Analytics
+- Self-service content management
+
+---
+
+### Sponsors
+
+Sponsors use UpVisit to gain digital visibility and measurable value.
+
+Goals:
+
+- Reach event audiences
+- Increase brand awareness
+- Promote offers or content
+- Generate measurable engagement
+- Justify sponsorship investment
+
+Typical needs:
+
+- Sponsor profiles
+- Digital sponsor packages
+- Sponsored placements
+- Push notifications
+- Content blocks
+- Analytics
+- Lead generation
+
+---
+
+### Speakers
+
+Speakers are part of the event content experience.
+
+Goals:
+
+- Be visible in the programme
+- Share session information
+- Connect with attendees
+- Support event credibility
+
+Typical needs:
+
+- Speaker profile
+- Session links
+- Agenda placement
+- Contact or social links
+
+---
+
+### Event tech, ticketing, and platform partners
+
+UpVisit can work as an engagement layer for existing ticketing, CRM, or event platforms.
+
+Goals:
+
+- Add visitor engagement beyond ticket transactions
+- Avoid building complex app features from scratch
+- Offer 3D maps, matchmaking, analytics, and sponsor tools
+- Integrate with existing systems
+- Expand product suites
+
+Typical needs:
+
+- API integration
+- White-label options
+- App connection to ticketing or CRM
+- Modular features
+- Analytics
+- Low-friction deployment
+
+---
+
+### Tourism, city marketing, museums, and public spaces
+
+UpVisit can also support cultural, tourism, public-space, and city-based experiences.
+
+Goals:
+
+- Digitise city events, tours, exhibitions, and cultural programmes
+- Guide visitors through physical spaces
+- Tell location-based stories
+- Offer mobile-first local experiences
+- Preserve local branding
+
+Typical needs:
+
+- App-based navigation
+- Guided routes
+- Themed paths
+- Location-based content
+- Event calendar
+- White-label branding
+- CMS
+- Outdoor and indoor experience support
+
+---
+
+### Agencies and system integrators
+
+Agencies and integrators can use UpVisit as a ready-to-use white-label platform.
+
+Goals:
+
+- Offer event-tech solutions without building from scratch
+- Launch quickly for clients
+- Use own branding, domain, and user control
+- Support public-sector or enterprise innovation projects
+
+Typical needs:
+
+- White-label platform
+- API access
+- Admin control
+- Analytics
+- Modular architecture
+- Fast setup
+
+---
+
+## Product Mental Model
+
+Figma Make should understand UpVisit as a platform with two connected sides:
+
+### 1. CMS / Admin side
+
+Used by organisers, partners, exhibitors, sponsors, and internal teams to create, manage, publish, and analyse event experiences.
+
+Core concepts:
+
+- Event setup
+- Experience setup
+- Content management
+- Exhibitor and sponsor profiles
+- Speaker profiles
+- Agenda
+- Map and navigation
+- Push notifications
+- Surveys
+- Matchmaking setup
+- Analytics
+- Integrations
+- White-label configuration
+
+### 2. Visitor app side
+
+Used by participants before, during, and after the event.
+
+Core concepts:
+
+- Event guide
+- Interactive map
+- Navigation
+- Personal agenda
+- Exhibitor and sponsor discovery
+- Speaker and session discovery
+- Matchmaking
+- Lead/contact exchange
+- Push notifications
+- Surveys
+- Gamification
+- Saved items
+- QR codes
+- Engagement with content and people
+
+The platform value comes from connecting these two sides: organisers create a structured digital experience, and visitors generate engagement data, leads, interactions, and measurable value.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Self-Service CMS Platform
+
+The CMS is the control centre for creating, managing, and publishing events and digital experiences.
+
+Capabilities:
+
+- Create an event or experience
+- Publish app content
+- Manage event information
+- Manage agenda
+- Manage exhibitors
+- Manage sponsors
+- Manage speakers
+- Manage maps
+- Manage push notifications
+- Manage surveys
+- Review analytics
+- Configure integrations
+- Support white-label setups
+
+Design guidance:
+
+- The CMS should feel fast, guided, and self-service.
+- Avoid making setup feel like a long IT project.
+- Event organisers should be able to launch useful experiences quickly.
+
+---
+
+### Event Apps
+
+UpVisit creates individual event apps or app experiences for visitors, sponsors, speakers, and exhibitors.
+
+Capabilities:
+
+- Mobile event guide
+- Event overview
+- Personal programme
+- Interactive map
+- Exhibitor and sponsor discovery
+- Speaker and session browsing
+- Push notifications
+- Matchmaking
+- Surveys
+- Gamification
+- Contact and lead features
+
+Design guidance:
+
+- App experiences should prioritise event-day usefulness.
+- Visitors need fast access to what is happening now, where to go, who to meet, and what to save.
+
+---
+
+### AI-Supported Content Creation
+
+UpVisit uses AI support to help organisers create content faster.
+
+Use cases:
+
+- Generate event descriptions
+- Improve writing
+- Shorten text
+- Lengthen text
+- Change tone
+- Change point of view
+- Create app content from limited input
+- Speed up event setup
+
+Design guidance:
+
+- AI should reduce setup effort.
+- Always keep organiser control visible.
+- Do not present AI as replacing the event organiser’s judgement.
+
+---
+
+### Interactive 3D Map and Navigation
+
+Interactive maps are a core differentiator.
+
+Capabilities:
+
+- 3D venue or floor maps
+- Indoor and outdoor navigation
+- Booth or location markers
+- Guided routes
+- Themed paths
+- Tour navigation
+- Points of interest
+- Spatial orientation
+
+Design guidance:
+
+- Map features should solve on-site complexity.
+- Visitors should be able to find exhibitors, stages, rooms, amenities, routes, and points of interest quickly.
+- Do not reduce the map to a static floor plan.
+
+---
+
+### Agenda and Personalised Event Programme
+
+Visitors can use the app to understand what is happening and build their own programme.
+
+Capabilities:
+
+- Event programme
+- Sessions
+- Stages
+- Time slots
+- Speaker links
+- Personal calendar
+- Live “currently running” information
+- Saved sessions
+
+Design guidance:
+
+- The agenda should support both discovery and planning.
+- Personal agenda features should connect to reminders, navigation, and live context.
+
+---
+
+### Exhibitor, Sponsor, and Speaker Profiles
+
+UpVisit gives stakeholders digital presence inside the event experience.
+
+Profile types:
+
+- Exhibitor profile
+- Sponsor profile
+- Speaker profile
+- Partner profile
+
+Possible profile content:
+
+- Description
+- Logo
+- Images
+- Videos
+- Links
+- Offers
+- Contact options
+- LinkedIn connection
+- Booth location
+- Sessions
+- Lead capture actions
+
+Design guidance:
+
+- Profiles should support discovery, engagement, and conversion.
+- Exhibitor and sponsor visibility is part of monetisation.
+
+---
+
+### Matchmaking and Networking
+
+UpVisit supports intelligent matchmaking between exhibitors and participants.
+
+Capabilities:
+
+- Visitor profiles
+- Exhibitor matching
+- Participant recommendations
+- Lead generation
+- Direct contact
+- Networking before, during, and after the event
+- LinkedIn-supported connection flows
+
+Design guidance:
+
+- Matchmaking should feel relevant and consent-aware.
+- Do not assume all visitors want to be identifiable by default.
+- Participants may remain anonymous unless they voluntarily release data or create a profile.
+
+---
+
+### Lead Capture and LinkedIn Integration
+
+UpVisit uses LinkedIn integration to support lead capture and contact import.
+
+Capabilities:
+
+- Lead generation for exhibitors
+- Contact exchange
+- LinkedIn profile connection
+- Importing leads to LinkedIn or connected systems
+- Visitor-to-exhibitor conversion
+
+Design guidance:
+
+- Lead features must preserve user control and consent.
+- The value is not just collecting contacts, but connecting qualified event interest to exhibitors and sponsors.
+
+---
+
+### Push Notifications
+
+Push notifications help organisers reach visitors before, during, and after the event.
+
+Use cases:
+
+- Agenda reminders
+- Live updates
+- Important announcements
+- Sponsor messages
+- Location-based prompts
+- Event changes
+- Real-time engagement
+
+Design guidance:
+
+- Notifications should be timely and targeted.
+- Avoid generic spam-like notification flows.
+- Consider frequency, relevance, consent, and event context.
+
+---
+
+### Surveys and Feedback
+
+UpVisit supports participant surveys.
+
+Capabilities:
+
+- Create visitor surveys
+- Collect feedback
+- Measure satisfaction
+- Capture event insights
+- Link survey data to event performance
+
+Design guidance:
+
+- Surveys should be quick to create and easy for visitors to complete.
+- Feedback should feed into analytics and future event optimisation.
+
+---
+
+### Gamification and Challenges
+
+Gamification can increase engagement during the event.
+
+Capabilities:
+
+- Challenges
+- QR scans
+- Participation incentives
+- Visitor journeys
+- Sponsored interactions
+- Unlockable content or steps
+
+Design guidance:
+
+- Gamification should support event goals, not distract from them.
+- It should encourage movement, discovery, networking, and sponsor/exhibitor engagement.
+
+---
+
+### Live Analytics and Engagement Data
+
+Analytics provide insight into event performance.
+
+Possible analytics:
+
+- Active users
+- App impressions
+- Content views
+- Sponsor engagement
+- Exhibitor engagement
+- Map interactions
+- Survey completion
+- Matchmaking activity
+- Lead generation
+- Push notification performance
+- Visitor behaviour
+- Real-time event performance
+
+Design guidance:
+
+- Analytics should be useful to organisers, exhibitors, and sponsors.
+- Reporting should show what worked, where, when, and with which audience.
+- Avoid generic dashboards that do not connect to event success.
+
+---
+
+### Integrations and APIs
+
+UpVisit can connect with existing systems.
+
+Integration types:
+
+- LinkedIn
+- CRM systems such as HubSpot
+- Ticketing systems
+- App connections to ticket or CRM systems
+- White-label API structures
+- Custom integrations
+
+Design guidance:
+
+- Integration direction should be clear.
+- Do not assume UpVisit replaces ticketing. It often complements ticketing as an engagement layer.
+- Ticketing systems handle transactions; UpVisit unlocks engagement, insights, and revenue beyond the ticket.
+
+---
+
+### White-Label and API Platform
+
+UpVisit can be used as a white-label platform for partners, agencies, system integrators, or existing event-tech providers.
+
+Capabilities:
+
+- Own branding
+- Domain control
+- User control
+- Modular architecture
+- APIs
+- Admin
+- Analytics
+- Ready-to-customise platform
+
+Design guidance:
+
+- White-label flows should make brand ownership, client context, and platform boundaries clear.
+- Avoid designing everything as UpVisit-branded if the feature is for white-label use.
+
+---
+
+## Important Product Objects and Concepts
+
+### Event
+
+A specific B2B event, fair, conference, summit, exhibition, cultural event, city event, or tourism experience.
+
+### Experience
+
+The digital app-based representation of an event, place, tour, or programme.
+
+### Event organiser
+
+The organisation or person responsible for setting up and managing the event experience.
+
+### Visitor / participant
+
+A person attending or using the app experience.
+
+### Exhibitor
+
+A company or organisation presenting itself at the event.
+
+### Sponsor
+
+A commercial stakeholder paying for visibility, promotion, or engagement.
+
+### Speaker
+
+A person presenting in the event programme.
+
+### CMS
+
+The platform area where organisers create, manage, and publish the digital experience.
+
+### Event app
+
+The visitor-facing mobile experience.
+
+### App guide
+
+The app-based guide that helps visitors navigate and engage with the event.
+
+### Interactive map
+
+A map that helps visitors understand and navigate the venue or place.
+
+### 3D map
+
+A spatial map used for immersive navigation and orientation.
+
+### Guided tour / themed path
+
+A route through locations, content, or points of interest.
+
+### Agenda
+
+The structured event programme.
+
+### Personal programme
+
+The visitor’s selected or saved schedule.
+
+### Matchmaking
+
+Logic that connects participants and exhibitors or other participants based on interests, profiles, or event context.
+
+### Lead
+
+A visitor or participant who voluntarily shares contact information or shows relevant interest.
+
+### LinkedIn integration
+
+A connection used for lead capture, profile connection, or contact import.
+
+### Push notification
+
+A real-time message sent to visitors before, during, or after the event.
+
+### Challenge
+
+A gamified task or interaction within the event app.
+
+### Survey
+
+A feedback form used to collect participant input.
+
+### Analytics
+
+Data about visitor engagement, content performance, sponsor/exhibitor results, and event performance.
+
+### Engagement data
+
+Behavioural data generated by app use, interactions, content views, navigation, surveys, matchmaking, and lead actions.
+
+### White-label
+
+A deployment where the platform or app experience appears under another brand.
+
+### API integration
+
+A technical connection to other systems such as CRM, ticketing, or partner platforms.
+
+---
+
+## Product Terminology
+
+Use the following terminology consistently:
+
+- UpVisit
+- Event app
+- App guide
+- Event experience
+- Digital experience
+- Offline experience
+- Experience economy
+- Self-service CMS
+- CMS platform
+- Event organiser
+- Visitor
+- Participant
+- Exhibitor
+- Sponsor
+- Speaker
+- Partner
+- Interactive map
+- 3D map
+- Navigation
+- Guided tour
+- Themed path
+- Agenda
+- Event programme
+- Personal programme
+- Matchmaking
+- Networking
+- Lead generation
+- LinkedIn integration
+- CRM integration
+- Ticketing integration
+- Push notification
+- Survey
+- Gamification
+- Challenge
+- Exhibitor profile
+- Sponsor profile
+- Speaker profile
+- Engagement data
+- Live analytics
+- Real-time analytics
+- White-label
+- API
+- Digital sponsorship
+- Digital revenue
+- App connection to ticketing / CRM systems
+
+Avoid replacing these with generic SaaS words such as “items”, “records”, “cards”, “tasks”, or “objects” when a more specific UpVisit term exists.
+
+---
+
+## Important Workflows
+
+### Workflow: Create and publish an event experience
+
+1. The organiser starts a new event or experience.
+2. The organiser enters basic event information.
+3. AI-supported setup helps generate descriptions and content.
+4. The organiser uploads or configures map material.
+5. The organiser adds agenda, sessions, exhibitors, sponsors, speakers, and content.
+6. The organiser configures app features such as navigation, matchmaking, notifications, surveys, or challenges.
+7. The organiser publishes the event app experience.
+8. Visitors access and use the app before, during, and after the event.
+
+Design implications:
+
+- Setup should feel fast and guided.
+- The product promise is low effort, not a heavy IT project.
+- The CMS and app output should be visibly connected.
+
+---
+
+### Workflow: Visitor uses the app during an event
+
+1. The visitor opens the event app.
+2. The visitor browses the overview, agenda, map, exhibitors, sponsors, or speakers.
+3. The visitor saves sessions or creates a personal programme.
+4. The visitor uses the interactive map to navigate.
+5. The visitor receives relevant push notifications.
+6. The visitor interacts with exhibitors, sponsors, challenges, surveys, or matchmaking.
+7. Engagement data is captured for organisers and stakeholders.
+
+Design implications:
+
+- Event-day UX should be fast and practical.
+- Navigation, agenda, and discovery are central.
+- The app should help visitors act in the physical space.
+
+---
+
+### Workflow: Exhibitor generates leads
+
+1. The exhibitor has a profile in the app.
+2. Visitors discover the exhibitor through search, map, agenda, sponsor placement, recommendation, or challenge.
+3. Visitors view multimedia exhibitor information.
+4. The visitor can contact, save, interact, or share details.
+5. Lead capture happens with voluntary data sharing or LinkedIn-supported connection.
+6. Exhibitor or organiser reviews engagement and leads.
+
+Design implications:
+
+- Lead capture should not feel hidden or forced.
+- Exhibitor value depends on visibility, interaction, and measurable outcomes.
+
+---
+
+### Workflow: Organiser sends live updates
+
+1. The organiser identifies a need to reach attendees.
+2. The organiser creates a push notification.
+3. The notification is targeted to relevant visitors, timing, or context.
+4. Visitors receive the update in real time.
+5. Engagement is tracked.
+
+Design implications:
+
+- Push notifications should support event success and visitor orientation.
+- Avoid designing notifications as generic broadcast spam.
+
+---
+
+### Workflow: Matchmaking between participants and exhibitors
+
+1. Participants create or complete profiles where relevant.
+2. Exhibitors and participants are matched based on interests, event context, or available data.
+3. Participants receive recommendations or networking options.
+4. Participants connect before, during, or after the event.
+5. Leads and engagement can be measured.
+
+Design implications:
+
+- Matchmaking needs clear consent and profile logic.
+- Users should understand why a match is relevant.
+- Anonymous participation must still be respected.
+
+---
+
+### Workflow: Use UpVisit as an engagement layer for ticketing
+
+1. A ticketing system handles registration or ticket transactions.
+2. UpVisit connects to the ticketing or CRM system.
+3. UpVisit provides the app-based visitor engagement experience.
+4. Visitors use maps, agenda, notifications, matchmaking, sponsor content, and surveys.
+5. Engagement data gives organisers and ticketing partners insight beyond the transaction.
+
+Design implications:
+
+- Do not treat UpVisit as the ticketing system.
+- UpVisit complements ticketing by adding engagement, data, and monetisation.
+
+---
+
+### Workflow: White-label rollout for a partner or agency
+
+1. A partner or agency configures UpVisit under its own brand.
+2. Branding, domain, app context, and user control are set.
+3. Event or experience modules are configured.
+4. API or system integrations are connected where needed.
+5. The partner launches a client-ready event-tech solution quickly.
+
+Design implications:
+
+- White-label identity and ownership must be clear.
+- Avoid assuming every deployment uses the UpVisit brand.
+
+---
+
+## Common Use Cases
+
+### B2B event app
+
+Use when organisers need a digital guide for visitors and exhibitors.
+
+Important context:
+
+- Events are complex on-site experiences.
+- Visitors need navigation, agenda, exhibitor discovery, and updates.
+- Organisers need engagement data.
+
+Outcome:
+
+- Better visitor experience
+- Better event performance
+- Less manual effort
+
+---
+
+### Trade fair and exhibition engagement
+
+Use when fairs need better visitor and exhibitor engagement.
+
+Important context:
+
+- Exhibitors expect self-service and measurable digital value.
+- Visitors need orientation and relevant contacts.
+- Sponsors need digital visibility.
+
+Outcome:
+
+- More exhibitor satisfaction
+- Better lead generation
+- New digital revenue channels
+
+---
+
+### Ticketing platform extension
+
+Use when ticketing providers want to add value beyond transactions.
+
+Important context:
+
+- Ticketing captures attendance and purchases.
+- UpVisit adds engagement, insights, upselling, navigation, and interaction.
+
+Outcome:
+
+- More value beyond the ticket
+- Stronger product offering
+- Better visitor and organiser insight
+
+---
+
+### Event tech platform enhancement
+
+Use when existing event platforms want modern modules without building them.
+
+Important context:
+
+- UpVisit offers ready modules such as agenda, maps, matchmaking, content, analytics, and white-label API integration.
+
+Outcome:
+
+- Faster time to market
+- Lower development risk
+- Stronger event-tech product suite
+
+---
+
+### Tourism, museums, and city experiences
+
+Use when places want to digitise tours, cultural programmes, or public events.
+
+Important context:
+
+- Experiences may be location-based.
+- Navigation and storytelling matter.
+- Local identity and branding matter.
+
+Outcome:
+
+- Better visitor guidance
+- Mobile-first city or cultural interaction
+- Stronger local digital experience
+
+---
+
+### Agency and system integrator white-label platform
+
+Use when agencies want to offer event-tech without building from scratch.
+
+Important context:
+
+- Clients may need apps, navigation, content, and interaction quickly.
+- White-label branding and APIs are important.
+
+Outcome:
+
+- Faster delivery
+- New service offering
+- Lower development effort
+
+---
+
+## Feature Design Guidance
+
+### Design for offline-to-online connection
+
+UpVisit exists to bridge physical experiences and digital interaction.
+
+Good designs should connect:
+
+- Physical place
+- Digital app
+- Map and navigation
+- Agenda and content
+- People and networking
+- Sponsors and exhibitors
+- Analytics and ROI
+
+Avoid designing features as purely digital screens disconnected from the event venue or visitor journey.
+
+---
+
+### Design for self-service speed
+
+UpVisit should feel fast to set up.
+
+Good designs should support:
+
+- Guided setup
+- AI-assisted content creation
+- Clear progress
+- Reusable event structures
+- Low technical effort
+- Preview of app output
+
+Avoid making organisers feel they need a large IT project.
+
+---
+
+### Preserve stakeholder value
+
+Every major feature should consider at least one stakeholder:
+
+- Organiser
+- Visitor
+- Exhibitor
+- Sponsor
+- Speaker
+- Partner
+
+Avoid features that only optimise the organiser backend while ignoring visitor or exhibitor value.
+
+---
+
+### Make physical navigation central
+
+For event, tourism, city, and museum use cases, navigation is core.
+
+Good designs should support:
+
+- Maps
+- Routes
+- 3D spaces
+- Locations
+- Booths
+- Stages
+- Points of interest
+- Indoor and outdoor contexts
+
+Avoid treating maps as optional decorative content when the feature concerns on-site complexity.
+
+---
+
+### Treat engagement data as a product outcome
+
+UpVisit is not only about publishing information. It generates event intelligence.
+
+Good designs should show:
+
+- Active users
+- Interactions
+- Impressions
+- Lead actions
+- Content engagement
+- Sponsor results
+- Exhibitor results
+- Survey responses
+- Map and navigation usage
+
+Avoid analytics that do not connect to event ROI or stakeholder outcomes.
+
+---
+
+### Respect privacy and voluntary identification
+
+Participants may remain anonymous unless they voluntarily release data or create a profile.
+
+Good designs should:
+
+- Make consent clear
+- Avoid forced identification where not needed
+- Distinguish anonymous engagement from identified leads
+- Preserve trust
+
+Avoid assuming all visitor behaviour is personally identifiable.
+
+---
+
+### Make integrations contextual
+
+UpVisit integrates with LinkedIn, CRM, ticketing systems, and APIs.
+
+Good designs should clarify:
+
+- What system is connected
+- What data flows where
+- Whether the integration supports leads, registration, CRM sync, or app access
+- Whether the setup is standard or custom
+
+Avoid vague “connected” states without purpose.
+
+---
+
+### Support white-label and partner contexts
+
+UpVisit may be sold or used under another brand.
+
+Good designs should account for:
+
+- Brand ownership
+- Domain control
+- User control
+- Client context
+- API integration
+- Platform embedding
+- Partner-managed experiences
+
+Avoid assuming the visible brand is always UpVisit.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- UpVisit is a smart app platform for B2B events and offline experiences.
+- It combines CMS/admin tools with visitor-facing app experiences.
+- It is not only an event app and not only a CMS.
+- It focuses on making offline experiences more engaging, measurable, and monetisable.
+- Event organisers should be able to create useful experiences with low effort.
+- AI supports content creation and setup.
+- Interactive maps and 3D navigation are core differentiators.
+- Visitors use the app before, during, and after events.
+- Exhibitors and sponsors need visibility, leads, and measurable value.
+- Matchmaking and networking matter.
+- LinkedIn integration supports lead capture and connection.
+- CRM and ticketing integrations matter.
+- UpVisit complements ticketing systems rather than replacing them by default.
+- Live analytics and engagement data are central.
+- White-label and API use cases matter.
+- Tourism, museums, city events, agencies, and system integrators are valid product contexts.
+- Visitors may stay anonymous unless they voluntarily share data.
+- The product should feel mobile-first, fast, practical, and event-day useful.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing UpVisit features:
+
+- Do not treat UpVisit as only a generic event app.
+- Do not treat UpVisit as only a CMS.
+- Do not treat UpVisit as a ticketing system unless the feature specifically involves ticketing integration.
+- Do not ignore exhibitors, sponsors, speakers, and partners.
+- Do not ignore visitor experience in favour of admin screens only.
+- Do not make setup feel like a heavy IT implementation.
+- Do not ignore maps, navigation, and spatial context.
+- Do not treat engagement analytics as generic reporting.
+- Do not assume all visitors are personally identifiable.
+- Do not design lead capture without consent or voluntary release of data.
+- Do not ignore LinkedIn, CRM, ticketing, or API integrations where relevant.
+- Do not assume the product is always UpVisit-branded; white-label use cases matter.
+- Do not replace product terminology with generic SaaS terms like “items”, “records”, “objects”, or “tasks”.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Visitor does not create a profile
+
+The visitor may still use navigation, agenda, and event content but may not be available for identified lead capture or matchmaking.
+
+### Visitor voluntarily shares data
+
+A visitor may release data through profile creation, LinkedIn connection, lead action, or contact request.
+
+### Exhibitor has not completed profile
+
+The event app may contain incomplete exhibitor information. Designs should show profile completeness and content gaps.
+
+### Event launches quickly
+
+The platform promise includes fast setup, so designs should support incomplete-but-publishable states and guided improvement.
+
+### Map data is missing or incomplete
+
+Interactive navigation depends on map quality. Designs should show upload, processing, or missing-map states.
+
+### Ticketing system is connected but not replaced
+
+Registration or ticket purchase may happen outside UpVisit. UpVisit should still deliver the app experience.
+
+### White-label client needs own branding
+
+The same platform may be used under another brand, domain, or partner identity.
+
+### Sponsor content should be visible but not intrusive
+
+Sponsor visibility should create value without harming visitor experience.
+
+### Push notification overload
+
+Too many notifications can reduce trust. Designs should support targeted and relevant messaging.
+
+### Matchmaking without enough profile data
+
+The system may need fallback recommendations or prompt users to add interests.
+
+### Offline venue complexity
+
+Large fairs, city events, museums, and hybrid venues may need different navigation, maps, and content structures.
+
+### Analytics differ by stakeholder
+
+Organisers, sponsors, exhibitors, and platform partners may need different views of performance.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- UpVisit terminology
+- User roles and stakeholders
+- CMS and app logic
+- Event setup logic
+- Visitor app behaviour
+- Map and navigation context
+- Exhibitor and sponsor logic
+- Lead capture and LinkedIn logic
+- Matchmaking logic
+- Engagement analytics
+- White-label and API context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning an UpVisit feature, check:
+
+- Does the design use UpVisit terminology?
+- Is the relevant stakeholder clear?
+- Does the feature support the connection between offline event experience and digital app experience?
+- Does it distinguish CMS/admin workflows from visitor app workflows?
+- Does it account for organisers, visitors, exhibitors, sponsors, and speakers where relevant?
+- Does it preserve self-service and low-effort setup?
+- Does it support AI-assisted content creation where relevant?
+- Does it account for maps, navigation, agenda, matchmaking, notifications, surveys, or analytics where relevant?
+- Does it treat lead capture as consent-aware?
+- Does it distinguish anonymous visitors from identified leads?
+- Does it account for LinkedIn, CRM, ticketing, API, or white-label use cases where relevant?
+- Does it avoid generic event-app or ticketing-system assumptions?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the UpVisit Product Context Skill, redesign the CMS event setup flow for organisers creating and publishing an event app in under an hour.”
+
+“Using the UpVisit Product Context Skill, redesign the visitor app home screen for a B2B event with agenda, map, exhibitors, sponsors, notifications, and matchmaking.”
+
+“Using the UpVisit Product Context Skill, redesign the exhibitor profile management flow so exhibitors can add multimedia content, LinkedIn contact options, and lead capture.”
+
+“Using the UpVisit Product Context Skill, redesign the interactive 3D map experience for visitors navigating a large trade fair.”
+
+“Using the UpVisit Product Context Skill, redesign the analytics dashboard for organisers, exhibitors, and sponsors tracking engagement and ROI.”
+
+---
+
+### New feature prompts
+
+“Using the UpVisit Product Context Skill, design an AI-assisted content creation flow for turning basic event information into app-ready content.”
+
+“Using the UpVisit Product Context Skill, design a matchmaking feature that connects visitors and exhibitors while respecting voluntary profile creation and data sharing.”
+
+“Using the UpVisit Product Context Skill, design a white-label configuration flow for agencies or platform partners using their own brand and domain.”
+
+“Using the UpVisit Product Context Skill, design a push notification setup flow for targeted real-time event updates before, during, and after a visit.”
+
+“Using the UpVisit Product Context Skill, design a sponsor package management feature that connects digital visibility, app placement, lead generation, and analytics.”
+
+---
+
+### Product reasoning prompts
+
+“Using the UpVisit Product Context Skill, explain which product objects are involved when a visitor discovers an exhibitor and becomes a lead.”
+
+“Using the UpVisit Product Context Skill, map the workflow from event setup in the CMS to visitor engagement in the app and analytics for the organiser.”
+
+“Using the UpVisit Product Context Skill, identify edge cases for a LinkedIn-based lead capture flow.”
+
+“Using the UpVisit Product Context Skill, explain how UpVisit complements ticketing systems rather than replacing them.”
+
+“Using the UpVisit Product Context Skill, suggest realistic app modules for a tourism or city event use case.”
+
+---
+
+### Design review prompts
+
+“Using the UpVisit Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic event-app assumptions.”
+
+“Using the UpVisit Product Context Skill, check whether this CMS flow supports fast self-service setup and AI-assisted content creation.”
+
+“Using the UpVisit Product Context Skill, review whether this visitor app concept properly supports navigation, agenda, matchmaking, exhibitor discovery, and event-day context.”
+
+“Using the UpVisit Product Context Skill, identify where this design should show privacy, voluntary profile creation, or consent-aware lead capture.”
+
+“Using the UpVisit Product Context Skill, check whether this analytics concept gives organisers, exhibitors, and sponsors meaningful engagement insight.”

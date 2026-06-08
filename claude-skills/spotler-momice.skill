@@ -1,0 +1,1343 @@
+---
+name: spotler-momice
+description: Product context for Momice by Spotler
+---
+
+# Momice by Spotler Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Momice by Spotler.
+
+This Skill gives Figma Make product context for Momice so it can make better UX and product decisions without starting from generic event, form, ticketing, or SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Momice by Spotler is event registration software for marketing and event teams that need to manage event websites, registrations, communications, ticketing, and check-in from one central platform.
+
+Momice focuses specifically on the registration and communication process of events. It helps teams organise physical, online, and hybrid events with structured registration flows, event websites, automated event emails, paid ticketing, attendee management, on-site check-in, real-time attendance insight, and post-event data for follow-up.
+
+The product helps organisations move away from fragmented tools, manual spreadsheets, separate email systems, and disconnected check-in processes. Instead, registrations, communications, attendance, and event data are managed centrally.
+
+Momice is most valuable for teams that organise multiple events, need repeatable event processes, want professional attendee communication, and need reliable insight into who registered, attended, and should receive follow-up.
+
+---
+
+## Core Problem Momice Solves
+
+Many organisations organise events with separate tools for:
+
+- Event websites
+- Registration forms
+- Email invitations
+- Confirmation emails
+- Reminder emails
+- Paid ticketing
+- Attendee lists
+- Check-in
+- Online event access
+- Post-event follow-up
+- CRM or marketing data updates
+
+This creates several problems:
+
+- Manual administration
+- Fragmented attendee data
+- Registration errors
+- Unclear attendee status
+- Inconsistent event communications
+- Last-minute stress before the event
+- Queues or confusion during check-in
+- Limited insight into who actually attended
+- Poor follow-up data
+- No complete event record
+- Too many disconnected tools
+
+Momice solves this by centralising the complete event registration and communication process in one system.
+
+The goal is to make every phase of the event process manageable and transparent: before, during, and after the event.
+
+---
+
+## Target Users and User Roles
+
+Momice is primarily used by marketing, communications, and event professionals.
+
+### Primary users
+
+#### Event manager
+
+An event manager is responsible for planning, organising, and executing events.
+
+Goals:
+
+- Set up events efficiently
+- Manage registrations
+- Communicate clearly with attendees
+- Avoid last-minute errors
+- Check in attendees quickly
+- Track attendance
+- Evaluate event results
+
+Typical needs:
+
+- Event setup
+- Event website
+- Registration form
+- Ticketing
+- Attendee list
+- Email communications
+- Check-in app
+- Attendance reporting
+
+---
+
+#### Marketing team member
+
+A marketer uses Momice when events are part of demand generation, lead nurturing, customer engagement, or campaign strategy.
+
+Goals:
+
+- Invite the right audience
+- Track registrations and attendance
+- Use event data for follow-up
+- Connect event engagement to CRM or email marketing
+- Support repeatable event formats
+
+Typical needs:
+
+- Invitation emails
+- Registration status
+- Segmented event communications
+- CRM or Mail+ integration
+- Post-event attendee data
+- Event performance insight
+
+---
+
+#### Communications professional
+
+A communications professional uses Momice for public events, information evenings, stakeholder meetings, or resident communications.
+
+Goals:
+
+- Provide one clear source of event information
+- Keep attendees informed
+- Manage confirmations and reminders
+- Support transparency and reliability
+- Report attendance accurately
+
+Typical needs:
+
+- Event website
+- Registration form
+- Automated confirmations
+- Reminder emails
+- Attendee overview
+- Check-in data
+- Post-event reports
+
+---
+
+#### Check-in staff
+
+Check-in staff use Momice on the event day to scan or register attendees upon arrival.
+
+Goals:
+
+- Check in attendees quickly
+- Avoid queues
+- Verify registrations
+- See real-time attendance
+- Support badge or access workflows
+
+Typical needs:
+
+- Check-in app
+- Attendee lookup
+- QR or scan functionality
+- Real-time attendance status
+- Badge solution
+- Plus-one visibility
+
+---
+
+#### Event operations user
+
+An operations user manages event logistics, capacity, attendance lists, waiting lists, plus-ones, ticket types, and access.
+
+Goals:
+
+- Keep registrations organised
+- Manage capacity and waiting lists
+- Track different attendee types
+- Support paid, online, hybrid, or physical attendance
+- Ensure event execution runs smoothly
+
+Typical needs:
+
+- Registration status
+- Waiting list
+- Plus-one management
+- Ticket types
+- Payment status
+- Online access settings
+- Attendance dashboards
+
+---
+
+### Secondary users
+
+#### CRM or marketing operations user
+
+A CRM or marketing operations user connects event data to CRM and email marketing platforms.
+
+Goals:
+
+- Synchronise registrations and attendance
+- Use event data for follow-up
+- Link attendees to contacts and companies
+- Improve campaign and lead insight
+
+Typical needs:
+
+- Spotler CRM integration
+- Spotler Mail+ integration
+- External CRM integration
+- Registration and attendance sync
+- Contact matching
+- Event engagement data
+
+---
+
+#### Online event producer
+
+An online event producer manages access and communications for online or hybrid event attendees.
+
+Goals:
+
+- Give online attendees correct access information
+- Separate online and physical attendance flows
+- Connect streaming platforms
+- Support smooth hybrid execution
+
+Typical needs:
+
+- Online access links
+- Attendee type segmentation
+- YouTube, Microsoft Teams, or Vimeo integration
+- Online attendee communication
+- Hybrid attendance reporting
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Momice as a platform where event setup, registration, communication, ticketing, attendance, and follow-up data come together.
+
+The core mental model is:
+
+1. Create the event
+   - Define the event type, date, format, website, registration flow, capacity, tickets, and communication setup.
+
+2. Publish event information
+   - Build a dedicated event website with practical information, programme details, location, online access information, or post-event content.
+
+3. Register attendees
+   - Attendees complete a configurable registration form.
+   - Their registration status is tracked centrally.
+
+4. Communicate
+   - Invitations, confirmations, reminders, access instructions, and follow-up emails are sent from Momice.
+   - Communications can be triggered or segmented by registration status.
+
+5. Manage attendance
+   - Attendee lists, plus-ones, waiting lists, ticket types, payment status, and online or physical attendance are managed centrally.
+
+6. Execute the event
+   - Physical attendees are checked in with the Momice check-in app.
+   - Online attendees receive access information.
+   - Hybrid events handle both groups in one system.
+
+7. Measure
+   - Teams monitor registrations, attendance, no-shows, and event performance.
+
+8. Follow up
+   - Registration and attendance data can be used for CRM, Mail+, post-event communication, and future event optimisation.
+
+Do not treat Momice as only a form builder, only a ticketing platform, or only an event website builder. It is a structured event registration and communication platform.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Event Setup and Websites
+
+Momice allows teams to create a dedicated event website linked to registration and event content.
+
+Event website capabilities:
+
+- Dedicated event website
+- Event information management
+- Programme or agenda content
+- Practical information
+- Registration link
+- Event format details
+- Online access information
+- Content linked directly to registration
+- Support for multiple event types
+
+Design implication:
+
+- The event website is the central source of event information.
+- It should be connected to registration and attendee communication.
+- Avoid treating event pages as disconnected landing pages or PDFs.
+
+---
+
+### Registration Forms
+
+Momice supports configurable registration forms that are directly linked to event data.
+
+Registration form capabilities:
+
+- Custom registration forms
+- Attendee data collection
+- Registration status tracking
+- Plus-one management
+- Waiting list support
+- Ticket type selection
+- Online or physical attendance selection
+- Payment-related fields where relevant
+
+Design implication:
+
+- Registration is the backbone of the event process.
+- Form responses should update attendee records and statuses.
+- Avoid treating registrations as generic form submissions with no event lifecycle.
+
+---
+
+### Registration and Attendee Management
+
+Momice manages attendees centrally.
+
+Attendee management includes:
+
+- Registered attendees
+- Attendance status
+- Registration status
+- Plus-ones
+- Waiting lists
+- Ticket types
+- Paid event status
+- No-shows
+- Online attendees
+- Physical attendees
+- Hybrid attendee groups
+
+Design implication:
+
+- Attendee status is a core object.
+- Users need clear insight into who registered, who attended, who did not attend, and who is waiting.
+- Capacity and status logic matter.
+
+---
+
+### Ticketing and Paid Events
+
+Momice supports paid events and ticket types as part of the registration process.
+
+Ticketing capabilities:
+
+- Paid events
+- Ticket types
+- Payment provider integration
+- Registration linked to payment
+- Payment status
+- Access logic based on ticket or payment status
+
+Design implication:
+
+- Ticketing is part of the registration flow, not a separate unrelated checkout.
+- Payment status may affect confirmation, access, and check-in.
+- Designs should support different ticket types and attendee statuses.
+
+---
+
+### Emails and Event Communications
+
+Momice sends event-related emails from the platform.
+
+Event communication types:
+
+- Invitations
+- Registration confirmations
+- Reminder emails
+- Access information
+- Updates
+- Post-event follow-up
+- Segment-based emails
+- Status-based emails
+
+Communication logic:
+
+- Emails can be triggered by registration status.
+- Emails can be segmented based on attendee type, status, or event format.
+- Communications should align with the event website and registration process.
+
+Design implication:
+
+- Event emails are part of the event lifecycle.
+- Avoid treating emails as generic campaigns disconnected from registration status.
+- Timing and status-based communication are important.
+
+---
+
+### Online, Hybrid, and On-Site Execution
+
+Momice supports different event formats.
+
+Event formats:
+
+- Physical events
+- Online events
+- Hybrid events
+
+Execution capabilities:
+
+- Online access management
+- Streaming platform connections
+- Check-in app for physical events
+- Real-time attendance tracking
+- Separate communication for online and physical attendees
+- Hybrid attendee management
+
+Design implication:
+
+- Event format affects registration, communication, access, and check-in.
+- Hybrid events require different flows for online and physical attendees.
+- Designs should not assume every event has on-site check-in only.
+
+---
+
+### Check-In App and Badge Solution
+
+Momice includes a check-in app for physical events.
+
+Check-in capabilities:
+
+- Scan attendees upon arrival
+- Search attendee list
+- Register attendance
+- Track attendance in real time
+- Support badge or check-in solution
+- Reduce queues
+- Provide accurate attendance list
+
+Design implication:
+
+- Check-in is time-sensitive and operational.
+- Speed and accuracy are crucial on the event day.
+- Real-time attendance insight is a key outcome.
+
+---
+
+### Interactive Module
+
+Momice can encourage attendee interaction through an interactive module.
+
+Possible interaction contexts:
+
+- Event engagement
+- Questions
+- Feedback
+- Polling or participation
+- Interaction during or around the event
+
+Design implication:
+
+- Interaction should be connected to event participation.
+- Avoid treating attendee interaction as a generic survey unless the feature context specifies it.
+
+---
+
+### Insight and Optimisation
+
+Momice provides insight into registrations and attendance.
+
+Insight areas include:
+
+- Registration count
+- Attendance count
+- No-shows
+- Registration status
+- Attendance status
+- Event performance
+- Event record
+- Future event optimisation
+
+Design implication:
+
+- Reporting should help teams understand event execution and follow-up.
+- Attendance insight is more valuable than registration count alone.
+- Event records should support future improvement.
+
+---
+
+## Important Product Objects and Concepts
+
+### Event
+
+A planned physical, online, or hybrid gathering managed in Momice.
+
+### Event website
+
+A dedicated website for event information, registration, access details, and attendee communication.
+
+### Registration form
+
+A configurable form used by attendees to register for an event.
+
+### Attendee
+
+A person who registers for or attends an event.
+
+### Registration
+
+The act or record of signing up for an event.
+
+### Registration status
+
+The current state of an attendee registration, such as invited, registered, confirmed, waiting list, cancelled, or declined where relevant.
+
+### Attendance status
+
+Whether a registered attendee attended, checked in, did not attend, or participated online.
+
+### Check-in
+
+The process of registering an attendee’s arrival at a physical event.
+
+### Check-in app
+
+The mobile app used to scan or register attendees on-site.
+
+### Badge solution
+
+A feature or process used to support attendee identification during physical events.
+
+### Plus-one
+
+An additional guest registered together with a main attendee.
+
+### Waiting list
+
+A list of people waiting for a place when event capacity is limited.
+
+### Ticket
+
+A registration-based access item for paid or controlled events.
+
+### Ticket type
+
+A category of ticket, such as standard, VIP, member, online, physical, early bird, or another event-specific type.
+
+### Payment status
+
+The payment state linked to a paid event registration or ticket.
+
+### Invitation
+
+An event email inviting someone to register or attend.
+
+### Confirmation email
+
+An email confirming a registration.
+
+### Reminder email
+
+An email reminding attendees of event details before the event.
+
+### Access information
+
+Information needed to attend an online or hybrid event, such as streaming link or joining instructions.
+
+### Online attendee
+
+An attendee participating remotely.
+
+### Physical attendee
+
+An attendee attending on-site.
+
+### Hybrid event
+
+An event with both physical and online attendees.
+
+### Event record
+
+The complete data record of the event, including setup, registrations, communications, attendance, and insights.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Event registration software
+- Event
+- Event website
+- Event setup
+- Registration
+- Registration form
+- Registration status
+- Attendee
+- Attendee data
+- Attendance
+- Attendance status
+- Check-in
+- Check-in app
+- Badge solution
+- Ticketing
+- Paid event
+- Ticket type
+- Payment status
+- Plus-one
+- Waiting list
+- Invitation
+- Confirmation email
+- Reminder email
+- Event communication
+- Online event
+- Physical event
+- Hybrid event
+- Online access
+- On-site check-in
+- Interactive module
+- Event performance
+- No-show
+- Event record
+- Post-event follow-up
+- CRM integration
+- Mail+ integration
+
+Avoid replacing these with generic SaaS language such as “items”, “records”, “tasks”, “objects”, or “forms” when a more specific Momice term exists.
+
+---
+
+## Key Integrations
+
+Momice integrates with Spotler products, CRM systems, payment providers, and online event tools.
+
+### Spotler CRM
+
+Spotler CRM connects registrations and attendance to contacts and companies.
+
+Important integration logic:
+
+- Event data can enrich CRM records.
+- Attendance can support follow-up and relationship management.
+- Contacts and companies can be linked to event participation.
+
+---
+
+### Spotler Mail+
+
+Spotler Mail+ can use event data for targeted email communications and follow-up.
+
+Important integration logic:
+
+- Event registrations and attendance can support segmentation.
+- Post-event follow-up can be targeted based on attendance or status.
+- Mail+ may be used for broader marketing communication beyond event lifecycle emails.
+
+---
+
+### External CRM Systems
+
+Momice can synchronise contact lists and registration or attendance data with CRM systems.
+
+Known CRM integrations:
+
+- HubSpot
+- Microsoft Dynamics 365
+- Salesforce
+
+Important integration logic:
+
+- Contact data can support invitations.
+- Registration and attendance data can return to CRM.
+- CRM integration supports follow-up and reporting.
+
+---
+
+### Payment Providers
+
+Momice can connect payment providers for paid events.
+
+Important integration logic:
+
+- Payment is part of the registration and ticketing flow.
+- Payment status can affect confirmation, access, and attendance eligibility.
+
+---
+
+### Online Event Tools
+
+Momice connects with online event tools for online and hybrid events.
+
+Known online event tools:
+
+- YouTube
+- Microsoft Teams
+- Vimeo
+
+Important integration logic:
+
+- Online access information should be connected to registration status.
+- Online attendees need timely access communications.
+- Hybrid events require handling online and physical attendees separately but within one event.
+
+---
+
+## Important Workflows
+
+### Workflow: Set up an event
+
+1. A user creates a new event.
+2. The user defines event format: physical, online, or hybrid.
+3. The user creates or configures the event website.
+4. The user sets up registration forms.
+5. The user configures attendee statuses, ticketing, plus-ones, waiting list, or capacity where relevant.
+6. The user sets up event emails such as invitations, confirmations, and reminders.
+7. The event is published and opened for registration.
+
+Design implications:
+
+- Event format should influence setup options.
+- Website, registration, and communication setup should feel connected.
+- Avoid forcing users to configure unrelated event features when not needed.
+
+---
+
+### Workflow: Manage event registrations
+
+1. An invitee or visitor opens the event website.
+2. The person completes the registration form.
+3. Momice creates or updates the attendee record.
+4. Registration status is updated.
+5. Confirmation email is sent.
+6. The event team monitors registrations in real time.
+7. If capacity is reached, waiting list logic may apply.
+
+Design implications:
+
+- Registration form and attendee data are connected.
+- Status changes should trigger communication where configured.
+- Capacity, plus-one, and waiting list logic matter.
+- Users need live registration insight.
+
+---
+
+### Workflow: Send event communications
+
+1. A user creates invitations, confirmations, reminders, updates, or follow-up emails.
+2. Emails are sent from Momice.
+3. Email logic may depend on registration status, attendee type, event format, or attendance status.
+4. Attendees receive consistent and timely communication.
+5. Communication history remains part of the event record.
+
+Design implications:
+
+- Email communication should be status-aware.
+- Event emails should be tied to event lifecycle moments.
+- Avoid generic email campaign assumptions when designing event communication.
+
+---
+
+### Workflow: Check in attendees at a physical event
+
+1. Attendees arrive at the venue.
+2. Check-in staff use the Momice check-in app.
+3. Staff scan or search for the attendee.
+4. The attendee is marked as checked in.
+5. Real-time attendance data updates.
+6. The team can see who attended and who did not.
+
+Design implications:
+
+- Check-in must be fast and reliable.
+- Mobile scanning and attendee lookup are key.
+- Real-time attendance status matters.
+- Queue prevention is an important design goal.
+
+---
+
+### Workflow: Manage an online or hybrid event
+
+1. Attendees register as online, physical, or another relevant type.
+2. Online attendees receive access information.
+3. Physical attendees may receive venue and check-in details.
+4. Hybrid event communications are segmented by attendee type.
+5. Online participation and physical attendance are tracked where possible.
+6. Post-event follow-up is tailored based on attendance and format.
+
+Design implications:
+
+- Online and physical attendees need different information.
+- Access communication should depend on registration status.
+- Hybrid event reporting should distinguish attendee types.
+
+---
+
+### Workflow: Manage paid event registration
+
+1. An attendee selects a ticket type.
+2. The attendee completes the registration form.
+3. The attendee completes payment through a payment provider.
+4. Payment status updates the registration.
+5. Confirmation and ticket information are sent.
+6. Payment or ticket status may affect check-in or access.
+
+Design implications:
+
+- Payment status is part of attendee status.
+- Ticket type and payment status may affect communication and access.
+- Avoid treating payment as disconnected from registration.
+
+---
+
+### Workflow: Use event data for follow-up
+
+1. The event takes place.
+2. Momice records attendance and no-shows.
+3. Registration and attendance data are reviewed.
+4. Data is synced to Spotler CRM, Spotler Mail+, or external CRM systems.
+5. Follow-up communication is segmented based on attendance, registration status, or attendee type.
+6. Insights are used to improve future events.
+
+Design implications:
+
+- Attendance is central to follow-up.
+- No-shows and attendees may receive different communication.
+- CRM and Mail+ integration supports data-driven follow-up.
+
+---
+
+## Common Use Cases
+
+### Managing event registrations
+
+Use when teams need reliable insight into who has registered and what their status is.
+
+Important context:
+
+- Manual registrations via emails and spreadsheets cause errors.
+- Registration forms are linked directly to event data.
+- Registration status drives communication and planning.
+
+Outcome:
+
+- Up-to-date registration insight
+- Fewer errors
+- Better operational control
+
+---
+
+### Event websites
+
+Use when attendees need one clear place for event information.
+
+Important context:
+
+- Event information should not be spread across PDFs and disconnected landing pages.
+- The event website should be linked to registration and content.
+
+Outcome:
+
+- One consistent source of information
+- Better attendee experience
+
+---
+
+### Event email communications
+
+Use when teams need invitations, confirmations, reminders, and follow-up to be consistent and timely.
+
+Important context:
+
+- Communications often depend on registration status.
+- Emails should be sent from the event platform to keep the event record complete.
+
+Outcome:
+
+- More consistent communication
+- Less manual work
+- Fewer missed updates
+
+---
+
+### On-site check-in
+
+Use when physical event attendees need to be checked in quickly and accurately.
+
+Important context:
+
+- Manual check-in creates queues and uncertainty.
+- Check-in app provides real-time attendance.
+
+Outcome:
+
+- Faster access
+- Accurate attendance list
+- Smoother event-day execution
+
+---
+
+### Online and hybrid events
+
+Use when online access and physical attendance need to be managed together.
+
+Important context:
+
+- Online and physical attendees may need different registration fields and communications.
+- Online tools can be connected for access.
+
+Outcome:
+
+- Smoother experience for online and physical attendees
+- Better attendee segmentation and follow-up
+
+---
+
+### Paid events and ticketing
+
+Use when events require payment or ticket types.
+
+Important context:
+
+- Ticketing is part of registration.
+- Payment status can affect confirmation and access.
+
+Outcome:
+
+- Controlled paid registration flow
+- Clear payment and attendance insight
+
+---
+
+## Sector Context
+
+### B2B seminar series
+
+Common needs:
+
+- Repeatable event setup
+- Standard event website
+- Standard registration form
+- Automated confirmations and reminders
+- Check-in app
+- Attendance list for follow-up
+
+Design emphasis:
+
+- Reuse and repeatability matter.
+- Follow-up depends on actual attendance.
+
+---
+
+### Hybrid product launches
+
+Common needs:
+
+- Physical and online attendee management
+- Online access communication
+- On-site check-in
+- Attendee type segmentation
+- Post-event follow-up
+
+Design emphasis:
+
+- Attendee format should affect communication and access.
+- Hybrid logic should remain clear.
+
+---
+
+### Municipalities and public organisations
+
+Common needs:
+
+- Residents’ meetings
+- Information evenings
+- Clear public information
+- Structured registration
+- Accurate attendance reporting
+- Transparent communication
+
+Design emphasis:
+
+- Accessibility, clarity, and reliable reporting matter.
+- Event communication should feel trustworthy and organised.
+
+---
+
+### Marketing and demand generation teams
+
+Common needs:
+
+- Invite prospects or customers
+- Track registrations
+- Monitor attendance
+- Sync data to CRM
+- Follow up based on attendance
+
+Design emphasis:
+
+- Event data should connect to lead and customer follow-up.
+- Attendance is an engagement signal.
+
+---
+
+### High event volume organisations
+
+Common needs:
+
+- Multiple events per year
+- Reusable formats
+- Less manual administration
+- Consistent communications
+- Reliable check-in
+- Complete event records
+
+Design emphasis:
+
+- Efficiency, templates, repeatability, and central oversight matter.
+
+---
+
+## Feature Design Guidance
+
+### Design around the event lifecycle
+
+Momice covers before, during, and after the event.
+
+Good designs should support:
+
+- Event setup
+- Event website
+- Registration
+- Ticketing
+- Communications
+- Check-in
+- Attendance insight
+- Follow-up
+
+Avoid:
+
+- Designing features as isolated forms, emails, or attendee lists
+- Ignoring how status changes affect communication and attendance
+
+---
+
+### Make registration status central
+
+Registration status drives planning, communications, access, and reporting.
+
+Good designs should show:
+
+- Registered
+- Confirmed
+- Waiting list
+- Cancelled
+- Paid or unpaid where relevant
+- Checked in
+- No-show
+- Online or physical attendee type
+
+Avoid using generic “submitted” states when event-specific status matters.
+
+---
+
+### Connect event emails to attendee status
+
+Event communication should be lifecycle-aware.
+
+Good designs should support:
+
+- Invitations
+- Confirmation emails
+- Reminder emails
+- Access emails
+- Updates
+- Follow-up emails
+- Status-based segments
+
+Avoid treating event emails as unrelated marketing campaigns.
+
+---
+
+### Design check-in for speed and accuracy
+
+Check-in happens under time pressure.
+
+Good designs should support:
+
+- Fast scanning
+- Search fallback
+- Clear attendee status
+- Plus-one visibility
+- Badge or access support
+- Real-time attendance updates
+
+Avoid complex workflows that slow down on-site staff.
+
+---
+
+### Support multiple event formats
+
+Momice supports physical, online, and hybrid events.
+
+Good designs should show:
+
+- Event format
+- Attendee type
+- Online access
+- On-site check-in
+- Format-specific communication
+- Attendance tracking
+
+Avoid assuming every event is physical.
+
+---
+
+### Treat event data as follow-up data
+
+Event data should be useful after the event.
+
+Good designs should support:
+
+- Attended vs no-show segmentation
+- CRM sync
+- Mail+ follow-up
+- Event performance insight
+- Complete event record
+
+Avoid ending the product workflow at check-in.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Momice is event registration software by Spotler.
+- It focuses on registration, communication, ticketing, and check-in.
+- Event websites, registration forms, emails, attendee data, and check-in are connected.
+- Registration status is central.
+- Attendance insight is a key product outcome.
+- Momice supports physical, online, and hybrid events.
+- Paid events and ticketing are supported.
+- Plus-ones and waiting lists are supported.
+- The check-in app is important for physical event execution.
+- Event communications can be triggered or segmented by registration status.
+- Online access can be managed for online and hybrid attendees.
+- Event data can support CRM and marketing follow-up.
+- Spotler CRM and Spotler Mail+ integrations matter.
+- External CRM, payment provider, and online event tool integrations may matter.
+- The product should reduce manual administration and last-minute stress.
+- The product should support repeatable event processes.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Momice features:
+
+- Do not treat Momice as only a form builder.
+- Do not treat Momice as only an event website builder.
+- Do not treat Momice as only a ticketing tool.
+- Do not treat event emails as generic newsletter campaigns.
+- Do not ignore registration status.
+- Do not ignore attendance status.
+- Do not ignore check-in workflows for physical events.
+- Do not assume every event is physical.
+- Do not assume every event is free.
+- Do not ignore online and hybrid event access logic.
+- Do not treat payment as disconnected from registration.
+- Do not ignore plus-ones or waiting lists where relevant.
+- Do not end the workflow before post-event follow-up.
+- Do not replace Momice terminology with generic SaaS terms like “items”, “records”, “objects”, or “submissions”.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Attendee registers but does not attend
+
+No-show status matters for reporting and follow-up.
+
+### Attendee attends without prior registration
+
+On-site teams may need to handle walk-ins or manual additions where supported by the event setup.
+
+### Event reaches capacity
+
+Waiting list logic may apply. Designs should support transitions from waiting list to registered.
+
+### Plus-one changes
+
+A main attendee may add, remove, or change a plus-one. Designs should keep related registrations clear.
+
+### Payment incomplete
+
+A paid registration may be started but not completed. Payment status may affect confirmation and access.
+
+### Hybrid attendee changes format
+
+An attendee may switch from physical to online or vice versa. Communications and access may need to update.
+
+### Online access must only go to eligible attendees
+
+Online links should depend on registration status or attendee type.
+
+### Check-in app offline or under pressure
+
+Event-day workflows should be fast and resilient. Search fallback and clear status are important.
+
+### Duplicate registration
+
+An attendee may register more than once. Designs should account for duplicate detection or management where relevant.
+
+### Post-event follow-up differs by status
+
+Attendees, no-shows, online attendees, physical attendees, and waiting-list contacts may require different follow-up.
+
+### CRM sync issue
+
+Registration or attendance data may fail to sync to CRM or Mail+. Designs should show sync status where relevant.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- Event terminology
+- User roles
+- Event setup logic
+- Registration logic
+- Ticketing and payment logic
+- Event communication logic
+- Check-in and attendance logic
+- Online and hybrid event context
+- CRM and Mail+ integration context
+- Reporting and follow-up context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Momice feature, check:
+
+- Does the design use Momice terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in event setup, event websites, registration, ticketing, communications, check-in, attendance, reporting, or follow-up?
+- Does the design avoid generic SaaS assumptions?
+- Does it make registration status clear?
+- Does it make attendance status clear where relevant?
+- Does it connect registration forms to attendee data?
+- Does it connect event emails to registration or attendance status?
+- Does it account for physical, online, or hybrid formats?
+- Does it support check-in speed and accuracy for physical events?
+- Does it account for ticket types, payment status, plus-ones, or waiting lists where relevant?
+- Does it support post-event follow-up and CRM or Mail+ data use?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Momice by Spotler Product Context Skill, redesign the event setup flow for creating a physical, online, or hybrid event with website, registration, ticketing, emails, and check-in.”
+
+“Using the Momice by Spotler Product Context Skill, redesign the attendee overview so event managers can see registration status, attendance status, ticket type, payment status, plus-ones, and waiting list entries.”
+
+“Using the Momice by Spotler Product Context Skill, redesign the event email setup flow for invitations, confirmations, reminders, access emails, and post-event follow-up based on registration status.”
+
+“Using the Momice by Spotler Product Context Skill, redesign the check-in app flow for fast attendee scanning, search fallback, badge support, and real-time attendance insight.”
+
+“Using the Momice by Spotler Product Context Skill, redesign the hybrid event management screen for online and physical attendees with different access and communication needs.”
+
+---
+
+### New feature prompts
+
+“Using the Momice by Spotler Product Context Skill, design a feature for managing waiting lists when event capacity is reached.”
+
+“Using the Momice by Spotler Product Context Skill, design a plus-one management flow that keeps main attendees and guests linked.”
+
+“Using the Momice by Spotler Product Context Skill, design a paid event registration flow with ticket type selection, payment status, confirmation, and check-in eligibility.”
+
+“Using the Momice by Spotler Product Context Skill, design a CRM sync status screen showing whether registrations and attendance were sent to Spotler CRM or an external CRM.”
+
+“Using the Momice by Spotler Product Context Skill, design a post-event follow-up flow that segments attendees, no-shows, online participants, and physical attendees.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Momice by Spotler Product Context Skill, explain which product objects are involved from event registration to on-site check-in.”
+
+“Using the Momice by Spotler Product Context Skill, map the workflow from event website visit to registration, confirmation email, reminder email, check-in, and post-event follow-up.”
+
+“Using the Momice by Spotler Product Context Skill, identify edge cases for hybrid event access communication.”
+
+“Using the Momice by Spotler Product Context Skill, explain how registration status and attendance status differ and how they affect communication.”
+
+“Using the Momice by Spotler Product Context Skill, suggest realistic dashboard sections for a team managing several events per year.”
+
+---
+
+### Design review prompts
+
+“Using the Momice by Spotler Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic event-tool assumptions.”
+
+“Using the Momice by Spotler Product Context Skill, check whether this registration flow properly connects forms, attendee status, ticketing, payments, and communication.”
+
+“Using the Momice by Spotler Product Context Skill, review whether this check-in flow supports speed, accuracy, plus-ones, and real-time attendance.”
+
+“Using the Momice by Spotler Product Context Skill, identify where this design should distinguish physical, online, and hybrid attendee needs.”
+
+“Using the Momice by Spotler Product Context Skill, check whether this reporting concept supports attendance insight and post-event follow-up.”

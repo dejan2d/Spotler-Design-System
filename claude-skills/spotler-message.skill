@@ -1,0 +1,1377 @@
+---
+name: spotler-message
+description: Product context for Spotler Message
+---
+
+# Spotler Message Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler Message.
+
+This Skill gives Figma Make product context for Spotler Message so it can make better UX and product decisions without starting from generic messaging, helpdesk, chatbot, or SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler Message is a messaging platform for managing one-to-one customer conversations and proactive messaging campaigns through WhatsApp for Business and other messaging channels.
+
+It helps organisations manage customer conversations from one central inbox, automate routine interactions, route conversations to the right people, send proactive updates or campaigns, and maintain compliance when using channels such as WhatsApp.
+
+Spotler Message supports both:
+
+- Human one-to-one conversations
+- Automated chatbot or guided flow conversations
+- Proactive messaging campaigns and notifications
+
+The product is especially useful for customer service, marketing, sales, HR, recruitment, retail, travel, automotive, public sector, and other teams that want to scale direct customer communication while keeping it personal, fast, compliant, and manageable.
+
+---
+
+## Core Problem Spotler Message Solves
+
+Customers increasingly expect fast, personal communication through channels they use every day, especially WhatsApp.
+
+Traditional channels such as email and phone often struggle with:
+
+- Long response times
+- High service volumes
+- Repetitive questions
+- Missed or unanswered messages
+- Poor overview across channels
+- Limited conversation history
+- Lack of routing or ownership
+- Difficulty using WhatsApp compliantly
+- Limited automation
+- Poor collaboration between team members
+- Low visibility for urgent notifications or time-sensitive campaigns
+
+Spotler Message solves this by bringing messaging channels into one central, compliant platform where teams can manage conversations, automate repetitive flows, send approved messages, and measure response and conversation performance.
+
+The product makes WhatsApp and other messaging channels manageable as strategic service, engagement, and conversion channels.
+
+---
+
+## Why Conversational Messaging Matters
+
+Conversational messaging is important because customers increasingly prefer direct, accessible, mobile-first communication.
+
+WhatsApp and similar messaging channels are used daily and often receive much higher engagement than traditional channels such as email. WhatsApp messages can have very high open rates, often above 90%, making them valuable for urgent updates, service communication, reminders, promotions, and conversion-focused follow-up.
+
+For organisations, messaging is not only a support channel. It can also be used for:
+
+- Customer service
+- Notifications
+- Campaigns
+- Promotions
+- Lead follow-up
+- Conversion
+- Recruitment
+- Reminders
+- Order or booking updates
+- Event communication
+
+Designs should treat messaging as fast, direct, personal, permission-based, and operationally sensitive.
+
+---
+
+## Target Users and User Roles
+
+Spotler Message is used by teams that manage direct customer communication through messaging channels.
+
+### Primary users
+
+#### Customer service agent
+
+A customer service agent handles incoming conversations from WhatsApp, SMS, webchat, social messaging, or other channels.
+
+Goals:
+
+- Respond quickly
+- Keep conversations organised
+- Avoid missed messages
+- See conversation history
+- Use templates where appropriate
+- Hand over or escalate conversations when needed
+
+Typical needs:
+
+- Shared inbox
+- Conversation status
+- Assignment
+- Labels
+- Notes
+- Routing
+- Contact history
+- Channel context
+
+---
+
+#### Customer service team lead
+
+A team lead manages workload, assignments, response times, and team performance.
+
+Goals:
+
+- Distribute conversations across team members
+- Reduce response times
+- Monitor workload
+- Ensure consistent handling
+- Prevent duplicate work
+- Improve service quality
+
+Typical needs:
+
+- Team inbox overview
+- Assignment controls
+- Routing rules
+- Response-time reporting
+- Conversation volume insights
+- Team performance dashboards
+
+---
+
+#### Marketing campaign manager
+
+A marketing campaign manager uses messaging channels for campaigns, promotions, announcements, and time-sensitive communication.
+
+Goals:
+
+- Send approved WhatsApp campaigns
+- Reach customers with high-visibility messages
+- Use consent-based messaging
+- Personalise campaign content
+- Measure engagement and response
+
+Typical needs:
+
+- Approved WhatsApp templates
+- Broadcast messaging
+- Audience or contact selection
+- Rich media support
+- Campaign performance reports
+- Compliance guidance
+
+---
+
+#### Sales or lead follow-up user
+
+A sales or lead follow-up user uses messaging to respond quickly to interest from forms, events, or campaigns.
+
+Goals:
+
+- Follow up leads faster
+- Start direct conversations
+- Improve conversion
+- Use WhatsApp after form submissions or event interactions
+- Maintain context across touchpoints
+
+Typical needs:
+
+- Triggered conversations
+- Contact history
+- CRM integration
+- Conversation assignment
+- Templates
+- Handover from automation to human
+
+---
+
+#### HR or recruitment user
+
+An HR or recruitment user uses messaging to communicate quickly with candidates, applicants, or employees.
+
+Goals:
+
+- Reach people faster than email
+- Coordinate interviews or reminders
+- Answer common questions
+- Improve response rates
+- Keep communication accessible
+
+Typical needs:
+
+- Messaging templates
+- Contact-level history
+- Shared inbox
+- Automation for common questions
+- Notifications and reminders
+
+---
+
+### Secondary users
+
+#### Automation or chatbot manager
+
+An automation user configures chatbots, guided flows, FAQs, routing, and human handover.
+
+Goals:
+
+- Reduce repetitive workload
+- Automate common questions
+- Route conversations correctly
+- Ensure smooth handover to agents
+- Maintain a personal customer experience
+
+Typical needs:
+
+- Flow builder
+- Knowledge base
+- FAQ automation
+- AI-powered chatbot configuration
+- Trigger-based routing
+- Handover logic
+
+---
+
+#### Compliance or operations user
+
+A compliance or operations user ensures that messaging is used securely and within permission and channel rules.
+
+Goals:
+
+- Maintain GDPR-friendly processes
+- Use WhatsApp Business officially
+- Respect consent and permissions
+- Maintain audit trail
+- Control user access
+
+Typical needs:
+
+- Permission-based messaging
+- Audit trail
+- User roles
+- WhatsApp Business API approval status
+- Template approval status
+- European hosting context
+
+---
+
+#### Integration specialist
+
+An integration specialist connects Spotler Message with CRM systems, APIs, webhooks, connector platforms, or other Spotler products.
+
+Goals:
+
+- Synchronise contacts
+- Record conversations at contact level
+- Trigger messages from external events
+- Connect service, marketing, and sales workflows
+- Automate data exchange
+
+Typical needs:
+
+- API and webhook configuration
+- CRM integration
+- Zapier or Make integration
+- Spotler ecosystem connections
+- Sync status
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Spotler Message as a platform where direct messaging, shared inboxes, automation, campaigns, compliance, and integrations come together.
+
+The core mental model is:
+
+1. Connect channels
+   - WhatsApp Business, SMS, webchat, Facebook Messenger, Instagram Direct, Apple Messages for Business, custom channels, and other messaging channels are connected.
+
+2. Centralise conversations
+   - Incoming customer messages arrive in one shared inbox.
+
+3. Organise
+   - Conversations are labelled, assigned, routed, given statuses, and handled by teams.
+
+4. Respond
+   - Team members reply through the same environment while using conversation history and contact context.
+
+5. Automate
+   - Chatbots, knowledge bases, guided flows, trigger-based responses, and routing handle repetitive questions or first-line interactions.
+
+6. Handover
+   - Automation passes conversations to human team members when needed.
+
+7. Proactively message
+   - Teams send approved WhatsApp templates, SMS messages, notifications, reminders, alerts, or campaigns based on consent and channel rules.
+
+8. Integrate
+   - CRM, marketing, sales, service, and Spotler ecosystem data can trigger messages or record conversations at contact level.
+
+9. Measure
+   - Teams track delivery, reads, response rates, conversation volume, workload, and team performance.
+
+Do not treat Spotler Message as only a chatbot, only a WhatsApp inbox, or only a campaign broadcasting tool. It combines one-to-one messaging, automation, proactive campaigns, compliance, collaboration, and integrations.
+
+---
+
+## Main Product Areas and Capabilities
+
+### WhatsApp and Messaging Channels
+
+Spotler Message is WhatsApp-first, but supports multiple messaging channels.
+
+Supported channels include:
+
+- WhatsApp Business
+- SMS
+- Webchat
+- Facebook Messenger
+- Instagram Direct
+- Apple Messages for Business
+- Custom channels
+
+Design implication:
+
+- WhatsApp is central to the product identity.
+- Different channels may have different rules, formats, permissions, and expectations.
+- Designs should preserve channel context rather than flattening all conversations into anonymous messages.
+
+---
+
+### Shared Inbox and Collaboration
+
+Spotler Message gives teams one shared inbox for managing customer conversations.
+
+Inbox and collaboration capabilities include:
+
+- Shared inbox for all channels
+- Assignment to teams
+- Assignment to team members
+- Labels
+- Notes
+- Conversation status
+- User roles
+- Permissions
+- Conversation history
+- Handover between automation and humans
+
+Design implication:
+
+- The inbox is an operational workspace, not just a message list.
+- Users need to know who owns a conversation, what status it has, what channel it came from, and whether action is needed.
+- Internal notes must be clearly separated from customer-facing replies.
+
+---
+
+### Conversation Management
+
+Spotler Message supports one-to-one customer conversations.
+
+Conversation management includes:
+
+- Receiving messages
+- Replying to customers
+- Viewing complete conversation history
+- Applying labels
+- Adding notes
+- Assigning conversations
+- Updating status
+- Routing to teams
+- Escalating to humans from automation
+
+Design implication:
+
+- Conversation continuity matters.
+- Contact-level history is important.
+- The experience should feel personal and fast, not like anonymous ticket processing.
+
+---
+
+### Automation and Chatbots
+
+Spotler Message supports automated conversation flows and chatbots.
+
+Automation capabilities include:
+
+- Automated conversation flows
+- AI-powered chatbots
+- Knowledge bases
+- FAQ automation
+- Trigger-based responses
+- Trigger-based routing
+- Automated handling of repetitive questions
+- Seamless handover to team members
+
+Design implication:
+
+- Automation should reduce workload without removing human control.
+- Handover to a team member should be clear and smooth.
+- Chatbots are optional; users can start with human-only conversations and add automation later.
+- Avoid making chatbot setup feel mandatory.
+
+---
+
+### Campaign Messaging
+
+Spotler Message supports proactive campaigns and notifications through messaging channels.
+
+Campaign capabilities include:
+
+- Approved WhatsApp templates
+- Notifications
+- Marketing messages
+- Broadcast messages
+- Rich media
+- Images
+- Files
+- Buttons
+- Campaigns separate from live conversations
+- Consent-based messaging
+
+Design implication:
+
+- Campaign messaging is different from active one-to-one conversations.
+- Approved WhatsApp templates and permission-based messaging are important.
+- Users need to understand when a message is a campaign, notification, or service conversation.
+
+---
+
+### Compliance and Security
+
+Spotler Message supports secure and compliant messaging.
+
+Compliance and security capabilities include:
+
+- GDPR-friendly hosting in Europe
+- WhatsApp Business API approval
+- Permission-based messaging
+- Approved WhatsApp templates
+- Complete audit trail of conversations
+- User roles
+- Permissions
+
+Design implication:
+
+- Compliance is part of the product logic, especially for WhatsApp.
+- Designs should not allow unrestricted promotional messaging without consent or template rules.
+- Audit trail and permission controls matter for trust.
+
+---
+
+### Reporting and Insights
+
+Spotler Message provides insight into service, campaign, and conversation performance.
+
+Reporting may include:
+
+- Delivery rates
+- Read rates
+- Response rates
+- First response time
+- Conversation volume
+- Workload
+- Team performance
+- Campaign engagement
+- Automation performance
+
+Design implication:
+
+- Reports should support operational improvement and campaign optimisation.
+- Team leads need workload and response insights.
+- Marketers need delivery, read, and campaign response insights.
+
+---
+
+### Integrations and Ecosystem
+
+Spotler Message integrates with CRM systems, APIs, connector platforms, and other Spotler products.
+
+Integration capabilities include:
+
+- CRM contact synchronisation
+- Recording conversations at contact level
+- API and webhooks
+- Zapier and Make integrations
+- Triggering messages from customer behaviour or campaign actions
+- Connecting messaging to email, webcare, CRM, and CDP workflows
+
+Design implication:
+
+- Integrations often determine what data is available and what actions can be triggered.
+- Designs should clarify whether data is being imported, recorded, triggered, or synchronised.
+
+---
+
+## Important Product Objects and Concepts
+
+### Contact
+
+A person or customer who can have one-to-one messaging conversations and receive approved messages or campaigns.
+
+### Conversation
+
+A sequence of messages between an organisation and a contact through WhatsApp or another messaging channel.
+
+### Message
+
+An individual incoming or outgoing communication within a conversation or campaign.
+
+### Channel
+
+The medium used for communication, such as WhatsApp, SMS, webchat, Messenger, Instagram Direct, Apple Messages for Business, or a custom channel.
+
+### Shared inbox
+
+The central workspace where conversations from all connected channels are handled.
+
+### Assignment
+
+The process of assigning a conversation to a team or team member.
+
+### Team
+
+A group responsible for handling certain conversations, topics, channels, or workflows.
+
+### Label
+
+A marker used to categorise conversations by topic, issue, campaign, urgency, or type.
+
+### Note
+
+An internal comment added to a conversation for team collaboration. It should not be visible to the customer.
+
+### Conversation status
+
+The state of a conversation, such as new, open, assigned, waiting, resolved, or closed.
+
+### Routing
+
+The process of directing conversations to the correct team, team member, or automation flow.
+
+### Handover
+
+The transition from chatbot or automation to a human team member.
+
+### Chatbot
+
+An automated conversation agent that answers questions or guides users through flows.
+
+### Knowledge base
+
+A structured source of information used by AI-powered chatbots to answer questions.
+
+### Automated conversation flow
+
+A predefined guided conversation that can answer questions, collect input, route a contact, or trigger an action.
+
+### Trigger
+
+An event or condition that starts a response, flow, route, notification, or campaign.
+
+### WhatsApp Business
+
+The official business channel for communicating with customers via WhatsApp.
+
+### WhatsApp Business API approval
+
+The approval process needed to use WhatsApp Business API officially.
+
+### Approved WhatsApp template
+
+A pre-approved message template used for notifications or marketing messages within WhatsApp rules.
+
+### Broadcast message
+
+A proactive message sent to multiple recipients, separate from individual live conversations.
+
+### Campaign
+
+A planned proactive messaging activity, often using WhatsApp templates, SMS, or other channels.
+
+### Rich media
+
+Message content such as images, files, or buttons.
+
+### Permission-based messaging
+
+Messaging based on recipient consent and applicable channel rules.
+
+### Audit trail
+
+A complete history of conversations and actions for compliance, traceability, and accountability.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Messaging platform
+- Conversational messaging
+- WhatsApp Business
+- WhatsApp for Business
+- WhatsApp Business API
+- SMS
+- Webchat
+- Facebook Messenger
+- Instagram Direct
+- Apple Messages for Business
+- Custom channel
+- One-to-one conversation
+- Customer conversation
+- Shared inbox
+- Conversation history
+- Assignment
+- Team assignment
+- Labels
+- Notes
+- Conversation status
+- User roles
+- Permissions
+- Routing
+- Trigger-based routing
+- Automated conversation flow
+- Chatbot
+- AI-powered chatbot
+- Knowledge base
+- FAQ automation
+- Handover
+- Human handover
+- Campaign messaging
+- Broadcast message
+- Approved WhatsApp template
+- Notification
+- Marketing template
+- Rich media
+- Buttons
+- Delivery rate
+- Read rate
+- Response rate
+- First response time
+- Conversation volume
+- Workload
+- Team performance
+- GDPR-friendly hosting
+- Permission-based messaging
+- Audit trail
+- API
+- Webhook
+- Zapier
+- Make
+
+Avoid replacing these with generic SaaS language such as “items”, “records”, “tickets”, “tasks”, or “objects” when a more specific Spotler Message term exists. Use “conversation” rather than “ticket” unless the feature explicitly needs a ticket-like concept.
+
+---
+
+## Key Integrations
+
+Spotler Message integrates with CRM systems, APIs, connector platforms, and the Spotler ecosystem.
+
+### CRM Systems
+
+Spotler Message can synchronise contact data and record conversations at contact level.
+
+Known CRM integrations include:
+
+- Microsoft Dynamics 365
+- Salesforce
+- HubSpot
+
+Important integration logic:
+
+- CRM contact data can enrich conversation context.
+- Conversation history can be recorded at contact level.
+- Sales and service teams can work with better customer context.
+- CRM integrations may support lead follow-up and service continuity.
+
+---
+
+### APIs and Connector Platforms
+
+Spotler Message supports custom integrations and automated data flows.
+
+Known options include:
+
+- API
+- Webhooks
+- Zapier
+- Make
+
+Important integration logic:
+
+- External systems can trigger messages or flows.
+- Conversation data can be synchronised with other tools.
+- Advanced integrations may require developers, but basic inbox setup does not.
+
+---
+
+### Spotler Mail+
+
+Mail+ can combine email and messaging in multichannel communications.
+
+Important integration logic:
+
+- Email campaigns can be complemented by messaging.
+- Messaging may be used for higher-visibility follow-up.
+- Multichannel communication should respect channel rules and consent.
+
+---
+
+### Spotler MailPro
+
+MailPro can manage complex email campaigns and synchronise data with messaging.
+
+Important integration logic:
+
+- MailPro lists or campaign actions can trigger messaging.
+- Messaging can extend complex campaign journeys beyond email.
+- Data synchronisation depends on setup and campaign logic.
+
+---
+
+### Spotler Activate
+
+Spotler Activate can trigger messaging based on on-site behaviour.
+
+Important integration logic:
+
+- Website behaviour can trigger relevant WhatsApp or messaging follow-up.
+- Behavioural data can support more timely and personalised messaging.
+- Messaging can be part of lifecycle or conversion journeys.
+
+---
+
+### Spotler Engage
+
+Engage can connect messaging with webcare and engagement workflows.
+
+Important integration logic:
+
+- Messaging conversations may connect to broader webcare operations.
+- Teams managing social webcare can coordinate with messaging channels.
+- Engage and Message should not be treated as identical products: Message is WhatsApp-first conversational messaging, while Engage covers broader webcare, social publishing, and monitoring.
+
+---
+
+## Important Workflows
+
+### Workflow: Handle a WhatsApp customer service conversation
+
+1. A customer sends a WhatsApp message.
+2. The message appears in the shared inbox.
+3. The conversation is assigned to a team or team member.
+4. The agent reviews conversation history, labels, notes, and contact context.
+5. The agent replies directly through WhatsApp.
+6. The conversation status is updated.
+7. Response time and conversation performance are measured.
+
+Design implications:
+
+- WhatsApp channel context should be visible.
+- Assignment, status, labels, and notes should support team collaboration.
+- Conversation history matters for personal service.
+- Avoid treating the interaction as a generic email thread.
+
+---
+
+### Workflow: Automate frequently asked questions
+
+1. A customer starts a conversation.
+2. An automated flow or AI chatbot handles common questions.
+3. The chatbot uses a knowledge base or predefined flow.
+4. If the question is too complex, the conversation is handed over to a human team member.
+5. The human agent continues with full context.
+6. The team measures automation and response performance.
+
+Design implications:
+
+- Automation should clearly support, not replace, human service.
+- Handover context must be preserved.
+- Chatbots should be optional and extensible.
+- Avoid dead ends in automated flows.
+
+---
+
+### Workflow: Send proactive notifications
+
+1. A system event occurs, such as an order update, delay, reminder, alert, appointment, booking update, or return update.
+2. Spotler Message sends a WhatsApp or SMS notification to the contact.
+3. The message uses an approved template where required.
+4. The customer can respond if the workflow allows.
+5. Responses are handled in the shared inbox.
+6. Delivery, read, and response rates are measured.
+
+Design implications:
+
+- Notifications should be clearly separate from live service conversations.
+- Approved templates and consent rules matter.
+- Responses to notifications may become conversations.
+
+---
+
+### Workflow: Run a WhatsApp campaign
+
+1. A marketer selects an audience with valid consent.
+2. The marketer chooses an approved WhatsApp template.
+3. The campaign may include rich media, buttons, or personalisation.
+4. The broadcast message is sent separately from live conversations.
+5. Recipients may respond.
+6. Responses are routed into the shared inbox.
+7. Campaign performance is measured.
+
+Design implications:
+
+- Campaign messaging must respect consent and template approval.
+- Broadcast messages should not be confused with one-to-one live replies.
+- Replies to campaigns need clear routing and ownership.
+
+---
+
+### Workflow: Trigger lead follow-up after a form or event
+
+1. A prospect submits a form, attends an event, or shows interest.
+2. An integration or trigger starts a WhatsApp conversation or message.
+3. The message is sent quickly while interest is high.
+4. The prospect responds through messaging.
+5. A sales or service team member continues the conversation.
+6. Conversion or follow-up performance is measured.
+
+Design implications:
+
+- Speed is central to lead follow-up.
+- Trigger source should be clear.
+- Handover to sales should preserve context.
+- Messaging should complement CRM or marketing workflows.
+
+---
+
+### Workflow: Route conversations to the right team
+
+1. A customer sends a message through a connected channel.
+2. Routing logic checks channel, topic, label, keyword, customer type, or workflow.
+3. The conversation is assigned to the correct team or automation.
+4. If automation cannot resolve the issue, the conversation is handed over.
+5. The assigned team resolves the conversation.
+
+Design implications:
+
+- Routing should make ownership clear.
+- Users should understand why a conversation is in their queue.
+- Avoid black-box routing with no visible accountability.
+
+---
+
+## Common Use Cases
+
+### WhatsApp customer service
+
+Use when customers expect quick, direct service through WhatsApp.
+
+Important context:
+
+- Customers may prefer messaging over email or phone.
+- Shared inboxes, routing, templates, and conversation history support faster service.
+- WhatsApp should be handled officially and compliantly.
+
+Outcome:
+
+- Faster responses
+- Fewer phone calls
+- Higher customer satisfaction
+
+---
+
+### Automated FAQ and chatbots
+
+Use when teams repeatedly answer the same questions.
+
+Important context:
+
+- Chatbots and guided flows can reduce repetitive workload.
+- Human handover must be available when automation is not enough.
+- Knowledge bases can support AI-powered answers.
+
+Outcome:
+
+- Lower workload
+- Faster handling
+- More scalable service
+
+---
+
+### Proactive updates and notifications
+
+Use when important messages should not disappear in email inboxes.
+
+Important context:
+
+- Updates may include orders, returns, delays, appointments, reminders, alerts, or service information.
+- WhatsApp or SMS can be more visible than email.
+- Templates and consent matter.
+
+Outcome:
+
+- Higher visibility
+- Fewer incoming enquiries
+- Better customer experience
+
+---
+
+### Campaigns and promotions via WhatsApp
+
+Use when marketing teams want high-engagement direct messaging.
+
+Important context:
+
+- Approved WhatsApp templates are required for many proactive messages.
+- Broadcast messages are separate from live conversations.
+- Recipient consent is required.
+- Rich media and buttons may support response.
+
+Outcome:
+
+- Higher engagement
+- Stronger response
+- More direct customer interaction
+
+---
+
+### Lead follow-up and conversion
+
+Use when speed after a form submission, event, or campaign interaction matters.
+
+Important context:
+
+- Messaging can start faster than email.
+- Triggers can create timely conversations.
+- Sales or service teams may continue the conversation after automation.
+
+Outcome:
+
+- Faster interaction
+- Higher conversion
+- Better follow-up quality
+
+---
+
+## Sector Context
+
+### Retail and e-commerce
+
+Common needs:
+
+- Order updates
+- Delivery delays
+- Return information
+- Product questions
+- Promotional WhatsApp campaigns
+- New collection announcements
+- Automated FAQs
+
+Design emphasis:
+
+- Service and campaign messaging often coexist.
+- Order and delivery notifications can reduce inbound tickets.
+- Campaign replies may become service conversations.
+
+---
+
+### Travel and leisure
+
+Common needs:
+
+- Booking updates
+- Travel reminders
+- Service information
+- Programme changes
+- Time-sensitive alerts
+- Customer questions
+
+Design emphasis:
+
+- Timeliness and visibility matter.
+- Messaging can support both pre-trip and post-booking communication.
+
+---
+
+### Automotive
+
+Common needs:
+
+- Appointment reminders
+- Service updates
+- Lead follow-up
+- Customer support
+- Sales conversations
+
+Design emphasis:
+
+- Conversations may move between service, sales, and reminders.
+- Contact history and assignment are important.
+
+---
+
+### Public sector and education
+
+Common needs:
+
+- Centralised questions from large groups
+- Service updates
+- Accessibility
+- Live chat
+- WhatsApp communication
+- High-volume enquiries
+
+Design emphasis:
+
+- Response speed, accessibility, and workload reduction matter.
+- Automation can handle repetitive questions while human teams manage exceptions.
+
+---
+
+### HR and recruitment
+
+Common needs:
+
+- Candidate communication
+- Interview reminders
+- Applicant questions
+- Fast follow-up
+- Internal or external notifications
+
+Design emphasis:
+
+- Messaging is useful for timely communication and higher response rates.
+- Contact history and templates help maintain consistency.
+
+---
+
+## Feature Design Guidance
+
+### Design for WhatsApp-first conversational messaging
+
+Spotler Message is WhatsApp-first and should feel optimised for direct, fast, personal conversations.
+
+Good designs should support:
+
+- WhatsApp channel context
+- Conversation history
+- Quick replies
+- Approved templates
+- Rich media
+- Human handover
+- Consent-aware messaging
+
+Avoid:
+
+- Treating WhatsApp as generic email
+- Hiding channel-specific rules
+- Designing conversations as static records only
+
+---
+
+### Separate service conversations from campaign messaging
+
+Spotler Message supports both one-to-one service and proactive campaigns.
+
+Good designs should distinguish:
+
+- Live conversation
+- Broadcast message
+- Notification
+- Campaign
+- Approved template
+- Customer reply
+- Routed follow-up
+
+Avoid mixing campaign setup and active conversation handling in a way that confuses users.
+
+---
+
+### Make compliance visible but practical
+
+Compliance matters, especially for WhatsApp and proactive messaging.
+
+Good designs should show:
+
+- Consent status
+- Template approval status
+- Permission-based messaging
+- WhatsApp Business API approval
+- Audit trail
+- User permissions
+
+Avoid:
+
+- Allowing unrestricted marketing messages without consent
+- Making compliance feel like hidden technical configuration
+- Blocking users without explaining why
+
+---
+
+### Make automation and human handover work together
+
+Automation should reduce workload while preserving a personal experience.
+
+Good designs should show:
+
+- Whether a conversation is handled by bot or human
+- What the bot already asked or answered
+- Why handover happened
+- Who owns the conversation after handover
+- What context the human receives
+
+Avoid:
+
+- Dead-end chatbot flows
+- Handover without history
+- Automation that hides customer intent
+
+---
+
+### Make routing and ownership clear
+
+Routing determines who should respond.
+
+Good designs should show:
+
+- Assigned team
+- Assigned team member
+- Routing reason
+- Conversation status
+- Labels
+- Priority where relevant
+
+Avoid conversations sitting in unclear ownership states.
+
+---
+
+### Make reporting operational and campaign-relevant
+
+Reporting should support both service and marketing.
+
+Service reporting should help with:
+
+- First response time
+- Workload
+- Conversation volume
+- Team performance
+- Automation impact
+
+Campaign reporting should help with:
+
+- Delivery rates
+- Read rates
+- Response rates
+- Engagement
+- Follow-up volume
+
+Avoid one-size-fits-all reports that ignore the difference between service and campaign messaging.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler Message is a WhatsApp-first messaging platform.
+- It supports both one-to-one conversations and proactive messaging campaigns.
+- It supports WhatsApp Business officially and compliantly.
+- Shared inboxes are central.
+- Conversations can be handled by humans, automation, or both.
+- Chatbots are optional, not mandatory.
+- Human handover must preserve conversation context.
+- Campaign messaging uses approved WhatsApp templates and consent-based rules.
+- Broadcast messages are separate from live conversations.
+- Conversation history per contact matters.
+- Routing, assignment, labels, notes, and status support team collaboration.
+- Reporting should cover service, workload, delivery, reads, response, and campaign performance.
+- GDPR-friendly hosting in Europe and audit trails are important.
+- Integrations with CRM systems, APIs, webhooks, Zapier, Make, and Spotler products are important.
+- Spotler Message is not the same as Spotler Engage; Engage focuses more broadly on webcare, publishing, and monitoring.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler Message features:
+
+- Do not treat Spotler Message as only a chatbot tool.
+- Do not treat Spotler Message as only a WhatsApp inbox.
+- Do not treat Spotler Message as only a campaign broadcaster.
+- Do not ignore WhatsApp Business compliance and template approval.
+- Do not ignore consent and permission-based messaging.
+- Do not mix broadcast campaigns and live conversations without clear distinction.
+- Do not hide conversation ownership, assignment, status, or routing.
+- Do not design automation without human handover.
+- Do not make chatbots mandatory for all workflows.
+- Do not lose context when automation hands over to a human.
+- Do not treat all channels as identical.
+- Do not call everything a “ticket” unless the feature explicitly needs ticket-like handling.
+- Do not invent unrelated SaaS objects such as projects, boards, or generic tasks unless specifically needed.
+- Do not replace product terminology with vague terms like “items” or “records”.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Customer replies to a broadcast campaign
+
+A campaign message may trigger a one-to-one conversation. Designs should route replies into the shared inbox with campaign context.
+
+### Contact lacks consent
+
+A contact may exist but cannot receive proactive campaign messages. Designs should show why sending is blocked or limited.
+
+### WhatsApp template not approved
+
+A proactive WhatsApp message may require an approved template. Designs should show approval state and alternatives.
+
+### Automation cannot answer
+
+A chatbot may fail to answer or detect intent. Designs should support smooth human handover.
+
+### Human handover without context
+
+Agents need to see what the bot already asked, answered, and collected. Avoid losing automation history.
+
+### Multiple agents viewing the same conversation
+
+Ownership and assignment should prevent duplicate responses.
+
+### Conversation spans channels
+
+A customer may interact via WhatsApp and later through webchat or another channel. Designs should preserve contact-level history where possible.
+
+### High conversation volume
+
+Large service volumes require routing, labels, assignment, automation, and workload insight.
+
+### Channel-specific formatting
+
+WhatsApp, SMS, webchat, and social messaging support different content types. Designs should not assume every channel supports images, files, buttons, or long messages equally.
+
+### Campaign replies create service workload
+
+Marketing campaigns can increase incoming service conversations. Designs should connect campaign planning with inbox capacity where relevant.
+
+### Audit trail needed
+
+Compliance or operations teams may need traceability of who sent, replied, routed, or changed a conversation.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- Messaging terminology
+- User roles
+- Conversation logic
+- Shared inbox logic
+- WhatsApp Business logic
+- Campaign messaging logic
+- Automation and chatbot logic
+- Human handover logic
+- Compliance and permission logic
+- Reporting and operational insight
+- Integration context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler Message feature, check:
+
+- Does the design use Spotler Message terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in WhatsApp, messaging channels, shared inboxes, conversations, automation, campaigns, routing, compliance, reporting, or integrations?
+- Does the design distinguish one-to-one conversations from broadcast campaigns?
+- Does it make channel context visible?
+- Does it make assignment, ownership, labels, notes, and status clear where relevant?
+- Does it support automation and human handover without losing context?
+- Does it account for WhatsApp template approval and consent?
+- Does it treat chatbots as optional rather than mandatory?
+- Does it support CRM, API, webhook, connector, or Spotler ecosystem integrations where relevant?
+- Does reporting support both service performance and campaign performance?
+- Does it avoid generic SaaS assumptions?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Spotler Message Product Context Skill, redesign the shared inbox for WhatsApp, SMS, webchat, Messenger, Instagram Direct, and custom channels.”
+
+“Using the Spotler Message Product Context Skill, redesign the conversation detail view so agents can see channel context, conversation history, labels, notes, assignment, status, and handover context.”
+
+“Using the Spotler Message Product Context Skill, redesign the WhatsApp campaign setup flow for approved templates, consent-based audiences, rich media, and broadcast messaging.”
+
+“Using the Spotler Message Product Context Skill, redesign the chatbot handover flow so human agents receive full context from automated conversations.”
+
+“Using the Spotler Message Product Context Skill, redesign the reporting dashboard for delivery, read, response rates, conversation volume, workload, and team performance.”
+
+---
+
+### New feature prompts
+
+“Using the Spotler Message Product Context Skill, design a feature that routes WhatsApp conversations to the right team based on labels, keywords, or customer type.”
+
+“Using the Spotler Message Product Context Skill, design a consent-aware WhatsApp template sending flow.”
+
+“Using the Spotler Message Product Context Skill, design an AI-powered FAQ chatbot setup flow using a knowledge base and human handover.”
+
+“Using the Spotler Message Product Context Skill, design a lead follow-up flow triggered after a form submission or event registration.”
+
+“Using the Spotler Message Product Context Skill, design a CRM integration status screen showing contact sync and conversation write-back.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Spotler Message Product Context Skill, explain which product objects are involved when a customer replies to a WhatsApp broadcast campaign.”
+
+“Using the Spotler Message Product Context Skill, map the workflow from proactive notification to customer reply to shared inbox handling.”
+
+“Using the Spotler Message Product Context Skill, identify edge cases for WhatsApp template approval and consent-based messaging.”
+
+“Using the Spotler Message Product Context Skill, explain how automation and human handover should work together.”
+
+“Using the Spotler Message Product Context Skill, compare how Spotler Message differs from Spotler Engage in product logic.”
+
+---
+
+### Design review prompts
+
+“Using the Spotler Message Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic messaging assumptions.”
+
+“Using the Spotler Message Product Context Skill, check whether this inbox design clearly supports assignment, labels, notes, status, routing, and channel context.”
+
+“Using the Spotler Message Product Context Skill, review whether this WhatsApp campaign flow properly distinguishes broadcast messages from live conversations.”
+
+“Using the Spotler Message Product Context Skill, identify where this design should show consent, template approval, or permission-based messaging.”
+
+“Using the Spotler Message Product Context Skill, check whether this chatbot design preserves context during human handover.”

@@ -1,0 +1,1367 @@
+---
+name: spotler-crm
+description: Product context for Spotler CRM
+---
+
+# Spotler CRM Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler CRM.
+
+This Skill gives Figma Make product context for Spotler CRM so it can make better UX and product decisions without starting from generic CRM or generic SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler CRM is a CRM solution for small to medium-sized B2B organisations and non-profits that need a structured way to manage leads, contacts, companies, opportunities, interactions, and follow-up.
+
+It helps sales, account management, marketing, and relationship teams work from one central database instead of fragmented spreadsheets, separate tools, and disconnected activity histories.
+
+Spotler CRM can be used as a standalone CRM, but it becomes especially powerful when combined with Spotler Mail+ and Spotler Leads. Together, these products create a shared marketing and sales database where email engagement, website behaviour, lead scores, campaign activity, event interactions, contacts, companies, and opportunities come together.
+
+The product helps teams move from fragmented data and inconsistent follow-up to structured pipeline management, shared customer insight, behaviour-based lead prioritisation, and better marketing-to-sales handover.
+
+---
+
+## Core Problem Spotler CRM Solves
+
+Spotler CRM solves the problem of fragmented lead, customer, marketing, sales, and event data.
+
+Many organisations manage customer relationships across disconnected tools:
+
+- Sales notes in one place
+- Marketing leads in another system
+- Event data in separate tools
+- Campaign engagement in email software
+- Website behaviour in another platform
+- Pipeline information in spreadsheets
+- Follow-up tasks managed manually
+
+This creates several problems:
+
+- No complete picture of contacts or companies
+- Missed follow-up after campaigns, events, or website visits
+- Manual segmentation
+- Duplicate data entry
+- Inconsistent communication
+- Poor visibility into pipeline progress
+- Difficulty knowing which leads are ready for sales
+- Weak collaboration between marketing and sales
+
+Spotler CRM brings contacts, companies, opportunities, interactions, activities, lead scores, and marketing engagement together in one central environment.
+
+In combination with Spotler Mail+ and Spotler Leads, Spotler CRM creates a shared database where marketing and sales can work with the same data, see behaviour, prioritise leads, and hand over prospects at the right moment.
+
+---
+
+## Target Users and User Roles
+
+Spotler CRM is primarily used by sales, account management, marketing, and relationship teams in small to medium-sized B2B organisations and non-profits.
+
+### Primary users
+
+#### Sales representative
+
+A sales representative uses Spotler CRM to manage leads, contacts, companies, conversations, tasks, and opportunities.
+
+Goals:
+
+- Track conversations and notes
+- Follow up on leads consistently
+- Move opportunities through the pipeline
+- See which leads are ready for contact
+- Avoid losing information
+- Prioritise work based on intent and activity
+
+Typical needs:
+
+- Contact and company records
+- Interaction history
+- Notes
+- Tasks
+- Opportunity tracking
+- Pipeline stage visibility
+- Lead score visibility
+- Marketing engagement context
+
+---
+
+#### Account manager
+
+An account manager uses Spotler CRM to manage customer relationships, accounts, ongoing conversations, and follow-up.
+
+Goals:
+
+- Maintain a complete view of customer relationships
+- Record activities and conversations
+- Track opportunities or processes
+- Coordinate follow-up
+- Understand customer engagement
+
+Typical needs:
+
+- Company-level overview
+- Contact-level overview
+- Activity history
+- Ownership and status management
+- Notes and follow-up tasks
+- Opportunity overview
+
+---
+
+#### Sales manager
+
+A sales manager uses Spotler CRM to monitor pipeline health, deal progress, sales activities, and stalled opportunities.
+
+Goals:
+
+- Understand pipeline progress
+- Monitor expected revenue
+- Identify stalled deals
+- Track team activity
+- Improve sales follow-up
+- Forecast opportunities
+
+Typical needs:
+
+- Pipeline reports
+- Opportunity stages
+- Expected revenue
+- Activity reporting
+- Dashboards
+- Team ownership visibility
+
+---
+
+#### Marketing team member
+
+A marketer uses Spotler CRM to connect campaigns, events, website behaviour, and lead follow-up.
+
+Goals:
+
+- Understand which campaigns generate engagement
+- Segment leads and contacts
+- Use behaviour for targeting
+- Support lead nurturing
+- Prepare qualified leads for sales
+- Improve marketing-to-sales handover
+
+Typical needs:
+
+- Shared contact database
+- Segmentation based on behaviour and profile data
+- Campaign engagement visibility
+- Lead scores
+- Website visit insight through Spotler Leads
+- Email engagement through Spotler Mail+
+- Reports on marketing contribution
+
+---
+
+#### Relationship manager
+
+A relationship manager, especially in non-profits or membership organisations, uses Spotler CRM to manage members, prospects, stakeholders, and interactions.
+
+Goals:
+
+- Maintain strong member or stakeholder relationships
+- Track communication history
+- Manage membership or relationship status
+- Follow up after events or campaigns
+- Improve retention and activation
+
+Typical needs:
+
+- Member or stakeholder records
+- Event attendance context
+- Communication history
+- Tasks and follow-up
+- Segmentation and status management
+
+---
+
+### Secondary users
+
+#### Event or campaign manager
+
+An event or campaign manager may use Spotler CRM to track event participation, campaign response, and follow-up needs.
+
+Goals:
+
+- See who attended or engaged
+- Follow up consistently after events or webinars
+- Link events and campaigns to leads or opportunities
+- Support marketing and sales collaboration
+
+Typical needs:
+
+- Event interaction history
+- Campaign engagement
+- Segments
+- Lead scoring
+- Follow-up tasks
+
+---
+
+#### CRM administrator or operations user
+
+An administrator supports CRM setup, fields, dashboards, integrations, automations, APIs, and webhooks.
+
+Goals:
+
+- Keep data structured
+- Reduce duplicate work
+- Manage fields and workflows
+- Support integrations
+- Maintain reliable reporting
+
+Typical needs:
+
+- Data model clarity
+- Integration status
+- Automation setup
+- Field management
+- API and webhook configuration
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Spotler CRM as a central relationship and pipeline environment where marketing, sales, and engagement data come together around contacts, companies, and opportunities.
+
+The core mental model is:
+
+1. Capture
+   - Leads, contacts, companies, sales activities, notes, marketing interactions, event data, and website behaviour are collected.
+
+2. Centralise
+   - Data is organised around contact and company records so teams share one view of the relationship.
+
+3. Understand
+   - Teams see history, activities, engagement, lead scores, conversations, opportunities, and intent signals.
+
+4. Segment
+   - Marketing and sales can segment based on company details, contact details, behaviour, email engagement, website visits, event attendance, status, or lead score.
+
+5. Prioritise
+   - Lead scoring and behaviour help sales focus on leads with stronger intent or higher likelihood of conversion.
+
+6. Follow up
+   - Sales and marketing coordinate tasks, conversations, campaigns, nurturing, and handover.
+
+7. Manage pipeline
+   - Opportunities are linked to companies and move through customisable pipeline stages.
+
+8. Report
+   - Teams monitor leads, opportunities, activities, pipeline progress, campaign contribution, and performance.
+
+Do not treat Spotler CRM as only a sales database. It is a connected CRM for relationship management, pipeline management, marketing engagement, lead scoring, and sales-marketing collaboration.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Contact and Company Management
+
+Spotler CRM provides a central database for leads, contacts, customers, companies, members, and prospects.
+
+Key capabilities:
+
+- Contact records
+- Company records
+- Lead and customer management
+- Company-level data
+- Contact-level data
+- Ownership
+- Status management
+- Activity history
+- Interaction history
+- Notes
+- Conversations
+- Tasks
+- Relationship context
+
+Design implication:
+
+- Contacts and companies are core objects.
+- Users need to move easily between a person and the organisation they belong to.
+- A complete record should show both static data and interaction history.
+- Avoid treating contact records as simple address book entries.
+
+---
+
+### Activities, Notes, and Interactions
+
+Spotler CRM helps teams record and review the history of relationship activity.
+
+Activities may include:
+
+- Calls
+- Emails
+- Meetings
+- Notes
+- Conversations
+- Tasks
+- Follow-up actions
+- Campaign interactions
+- Website visits
+- Event attendance
+- Form submissions
+
+Design implication:
+
+- Activity history should support context and follow-up.
+- Sales and marketing activity should be visible together when relevant.
+- Notes and interactions help prevent information loss.
+
+---
+
+### Opportunities and Pipeline
+
+Spotler CRM supports opportunity tracking and pipeline management.
+
+Key capabilities:
+
+- Opportunities linked to companies
+- Customisable pipeline stages
+- Deal progress overview
+- Expected revenue insight
+- Stalled opportunity visibility
+- Sales progress reporting
+
+Design implication:
+
+- Opportunities should be tied to companies and relationship context.
+- Pipeline stages should be clear and customisable.
+- Managers need overview, while sales users need next actions.
+- Avoid generic task-board concepts unless tied to opportunity progress.
+
+---
+
+### Lead Scoring and Prioritisation
+
+Spotler CRM can make lead scores visible and update them based on behaviour, especially when combined with Spotler Mail+ and Spotler Leads.
+
+Lead score inputs may include:
+
+- Website visits
+- Email opens
+- Email clicks
+- Campaign engagement
+- Form submissions
+- Event attendance
+- Behavioural intent
+- Sales activity
+- Contact or company attributes
+
+Design implication:
+
+- Lead scoring should help sales prioritise follow-up.
+- Scores should be connected to visible behaviour, not shown as unexplained numbers only.
+- Users should be able to understand why a lead is considered more ready for sales.
+
+---
+
+### Marketing Integration
+
+Spotler CRM integrates with marketing activity through Spotler Mail+ and Spotler Leads.
+
+Important marketing data includes:
+
+- Email campaign engagement
+- Opens
+- Clicks
+- Website visits
+- Company visits
+- Form submissions
+- Lead sources
+- Campaign interactions
+- Lead scores
+- Event or webinar interactions
+
+Design implication:
+
+- Marketing activity should appear within CRM context.
+- Sales users should see engagement without needing to open separate tools.
+- Marketing users should understand which campaigns contribute to opportunities.
+
+---
+
+### Automation and Workflows
+
+Spotler CRM supports automations based on behaviour and activity.
+
+Automation examples:
+
+- Update lead score based on behaviour
+- Create follow-up tasks
+- Trigger handover to sales
+- Apply status changes
+- Use templates for lead scoring
+- Use templates for follow-up
+- Reduce manual handovers between teams
+
+Design implication:
+
+- Automation should support collaboration and reduce manual work.
+- Workflows should be understandable to small teams.
+- Avoid making automations feel like enterprise-only configuration.
+
+---
+
+### Segmentation
+
+Spotler CRM supports segmentation when combined with marketing and behavioural data.
+
+Segmentation inputs may include:
+
+- Contact details
+- Company details
+- Industry
+- Organisation type
+- Customer status
+- Lead status
+- Pipeline stage
+- Email interactions
+- Website visits
+- Event attendance
+- Lead score
+- Campaign engagement
+- Sales activity
+- Membership status
+
+Design implication:
+
+- Segmentation should reflect both profile data and behaviour.
+- Marketing users often need segments for campaigns and nurturing.
+- Sales users may need segments for prioritised follow-up.
+
+---
+
+### Reporting and Dashboards
+
+Spotler CRM provides reporting for sales and marketing performance.
+
+Reports may include:
+
+- Leads
+- Opportunities
+- Activities
+- Pipeline progress
+- Expected revenue
+- Stalled opportunities
+- Lead scoring
+- Campaign contribution
+- Event follow-up
+- Sales activity
+- Marketing engagement
+
+Design implication:
+
+- Reports should support decisions and follow-up.
+- Dashboards may differ for sales and marketing users.
+- Avoid generic analytics dashboards that do not connect to pipeline or relationship management.
+
+---
+
+### Standalone CRM and Connected Marketing Database
+
+Spotler CRM can work as a standalone CRM for leads, customers, and opportunities.
+
+It can also function alongside an existing CRM as a central marketing database, allowing marketing teams to independently manage fields, segments, and automations without depending on sales structures or IT.
+
+Design implication:
+
+- Do not assume Spotler CRM always replaces another CRM.
+- It may be the primary CRM or a connected marketing database.
+- The role of CRM in the organisation may affect integration and data ownership flows.
+
+---
+
+## Important Product Objects and Concepts
+
+### Contact
+
+A person stored in Spotler CRM. A contact may be a lead, customer, prospect, member, stakeholder, or sales contact.
+
+### Company
+
+An organisation linked to contacts and opportunities. Company records help teams manage account-level context.
+
+### Lead
+
+A potential customer or relationship opportunity that may need nurturing or sales follow-up.
+
+### Customer
+
+A known organisation or person with an active or previous relationship.
+
+### Member
+
+A person or organisation relevant in trade associations, membership organisations, or non-profits.
+
+### Opportunity
+
+A potential deal, sales process, membership opportunity, or commercial relationship linked to a company.
+
+### Pipeline
+
+The structured set of stages through which opportunities move.
+
+### Pipeline stage
+
+A step in the sales or opportunity process. Stages are customisable and indicate deal progress.
+
+### Activity
+
+A recorded action or interaction, such as a call, meeting, email, note, task, campaign interaction, website visit, or event attendance.
+
+### Note
+
+A manually recorded piece of information about a contact, company, conversation, or opportunity.
+
+### Task
+
+A follow-up action assigned to a user or team.
+
+### Ownership
+
+The responsible person or team for a contact, company, lead, opportunity, or follow-up.
+
+### Status
+
+A field that indicates the current state of a contact, lead, company, member, or opportunity.
+
+### Lead score
+
+A score that indicates engagement, intent, or readiness for sales follow-up.
+
+### Engagement
+
+Interactions such as email opens, clicks, website visits, campaign responses, form submissions, or event attendance.
+
+### Website visit
+
+A behavioural signal from Spotler Leads showing that a person or company visited the website.
+
+### Company visit
+
+A company-level website visit insight from Spotler Leads.
+
+### Campaign engagement
+
+Interaction with marketing campaigns, especially from Spotler Mail+, such as opens and clicks.
+
+### Event attendance
+
+Participation in an event, webinar, or other organised activity that may influence follow-up or segmentation.
+
+### Handover to sales
+
+The moment when marketing passes a lead to sales because behaviour, score, or context indicates readiness.
+
+### Central database
+
+The shared environment where contacts, companies, opportunities, engagement, and activities are organised.
+
+### Shared data model
+
+A consistent data structure across Spotler products that helps marketing and sales work with the same information.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- CRM
+- Contact
+- Company
+- Lead
+- Customer
+- Member
+- Prospect
+- Account
+- Opportunity
+- Pipeline
+- Pipeline stage
+- Deal progress
+- Expected revenue
+- Activity
+- Interaction
+- Note
+- Conversation
+- Task
+- Follow-up
+- Ownership
+- Status
+- Lead score
+- Lead scoring
+- Prioritisation
+- Engagement
+- Behaviour
+- Intent
+- Website visit
+- Company visit
+- Campaign engagement
+- Email interaction
+- Open
+- Click
+- Event attendance
+- Webinar
+- Form submission
+- Segmentation
+- Marketing integration
+- Sales handover
+- Marketing-to-sales handover
+- Shared database
+- Central database
+- Contact-level data
+- Company-level data
+- Pipeline report
+- Activity report
+- Customisable dashboard
+- API
+- Webhook
+
+Avoid replacing these with generic SaaS language such as “items”, “records”, “cards”, “tasks”, or “objects” when a more specific CRM term exists.
+
+---
+
+## Key Integrations
+
+Spotler CRM integrates with other Spotler products and technical systems to bring marketing, sales, and event data together.
+
+### Spotler Mail+
+
+Spotler Mail+ synchronises email campaign and engagement data with CRM records.
+
+Important integration logic:
+
+- Email opens and clicks can become visible in CRM.
+- Campaign engagement can support lead scoring.
+- Marketing can see which campaigns contribute to opportunities.
+- Sales can use email engagement to prioritise follow-up.
+
+---
+
+### Spotler Leads
+
+Spotler Leads provides insight into website behaviour and company visits.
+
+Important integration logic:
+
+- Website visits can indicate buying intent.
+- Company visits can help identify interested organisations.
+- Behaviour can update lead scores.
+- Website activity can support segmentation and sales prioritisation.
+
+---
+
+### Marketing and sales data
+
+Spotler CRM combines marketing and sales activity.
+
+Marketing data may include:
+
+- Email interactions
+- Campaign engagement
+- Form submissions
+- Event interactions
+- Website visits
+
+Sales data may include:
+
+- Notes
+- Conversations
+- Calls
+- Meetings
+- Tasks
+- Pipeline updates
+- Opportunity status
+
+Important integration logic:
+
+- Marketing and sales data should be visible in one shared context.
+- The product value comes from connecting behaviour, engagement, and follow-up.
+
+---
+
+### Technical integrations
+
+Spotler CRM can connect with other systems and automate data exchange.
+
+Known technical integration types:
+
+- APIs
+- Webhooks
+
+Important integration logic:
+
+- APIs and webhooks can support data exchange, automation, and synchronisation.
+- Avoid exposing technical integration complexity to non-technical users unless the feature is specifically for administrators.
+
+---
+
+## Important Workflows
+
+### Workflow: Manage leads and customers centrally
+
+1. A lead, contact, customer, member, or company is added to Spotler CRM.
+2. The record contains contact or company details.
+3. Sales and marketing activity is added over time.
+4. Notes, tasks, interactions, campaign engagement, website visits, and opportunities are linked to the record.
+5. Teams use the shared record to understand context and coordinate follow-up.
+
+Design implications:
+
+- Make the relationship between contact and company clear.
+- Show both static details and activity history.
+- Support shared context across marketing and sales.
+- Avoid splitting important relationship context across unrelated screens.
+
+---
+
+### Workflow: Track an opportunity through the pipeline
+
+1. A sales user creates an opportunity linked to a company.
+2. The opportunity is assigned to a pipeline stage.
+3. Notes, conversations, tasks, and expected revenue are updated.
+4. The opportunity moves through customisable stages.
+5. Managers use reports to monitor progress and identify stalled opportunities.
+
+Design implications:
+
+- Opportunities should remain connected to company and contact context.
+- Pipeline stages should be visible and easy to update.
+- Stalled opportunities should be easy to identify.
+- Expected revenue should be tied to opportunity progress.
+
+---
+
+### Workflow: Connect campaigns and sales follow-up
+
+1. Marketing sends a campaign through Spotler Mail+.
+2. Contacts engage by opening or clicking.
+3. Engagement is recorded in Spotler CRM at contact level.
+4. Website visits or form submissions may also be recorded through Spotler Leads.
+5. Lead scores are updated based on behaviour.
+6. Sales sees which leads are engaged and prioritises follow-up.
+7. Marketing analyses which campaigns contributed to new opportunities.
+
+Design implications:
+
+- Show campaign engagement in the contact timeline.
+- Make lead score and intent signals visible to sales.
+- Preserve the feedback loop between marketing campaign and sales follow-up.
+- Avoid treating campaign reports and CRM records as disconnected.
+
+---
+
+### Workflow: Segment leads based on behaviour and intent
+
+1. Marketing defines a segment using contact data, company data, campaign engagement, website visits, event attendance, or lead score.
+2. Spotler CRM combines data from CRM, Spotler Mail+, and Spotler Leads.
+3. The segment is used for targeting, nurturing, reporting, or sales prioritisation.
+4. Follow-up is based on actual behaviour and intent, not only static profile fields.
+
+Design implications:
+
+- Segmentation should include behaviour, not only demographics.
+- Make data sources understandable.
+- Support both marketing campaign segments and sales follow-up segments.
+
+---
+
+### Workflow: Lead scoring and handover to sales
+
+1. A lead interacts with campaigns, visits the website, submits a form, or attends an event.
+2. Behaviour updates the lead score.
+3. The lead reaches a score or status that indicates readiness.
+4. A task or handover is created for sales.
+5. Sales reviews the lead history and follows up.
+6. Outcome is tracked through pipeline or opportunity updates.
+
+Design implications:
+
+- Lead score should be explainable.
+- Handover should include context, not just a notification.
+- Sales needs to see why the lead is worth following up.
+- Avoid black-box scoring.
+
+---
+
+### Workflow: Follow up after events or webinars
+
+1. Marketing or events team runs an event or webinar.
+2. Attendance or engagement is recorded.
+3. Contacts or companies are updated in Spotler CRM.
+4. Leads are segmented based on attendance, interest, or engagement.
+5. Sales or marketing creates follow-up tasks or campaigns.
+6. Engagement and opportunities are tracked.
+
+Design implications:
+
+- Event attendance should be part of relationship history.
+- Follow-up should be structured and visible.
+- Marketing and sales should share the same event context.
+
+---
+
+### Workflow: Use CRM as a standalone sales tool
+
+1. A small sales team enters contacts, companies, notes, and opportunities.
+2. Conversations and activities are logged.
+3. Opportunities are moved through the pipeline.
+4. Managers use reports to monitor progress.
+5. The team replaces spreadsheets with one shared overview.
+
+Design implications:
+
+- Standalone CRM use should still feel complete.
+- Do not require Mail+ or Leads context for every feature.
+- Core sales workflows should remain simple and accessible.
+
+---
+
+### Workflow: Use CRM alongside an existing CRM as a marketing database
+
+1. An organisation already has a sales CRM.
+2. Marketing uses Spotler CRM as a central marketing database.
+3. Marketing manages fields, segments, and automations independently.
+4. Campaign engagement and behaviour are centralised.
+5. Sales alignment is maintained through shared data and insight.
+
+Design implications:
+
+- Do not assume Spotler CRM always replaces another CRM.
+- Some features may need to clarify data ownership and sync direction.
+- Marketing independence and sales alignment both matter.
+
+---
+
+## Common Use Cases
+
+### Central lead and customer database
+
+Use when lead and customer data are spread across systems and teams.
+
+Important context:
+
+- Contacts, companies, activities, opportunities, and interactions should come together.
+- Sales and marketing need shared information.
+
+Outcome:
+
+- Complete and consistent picture of every lead and customer
+- Better collaboration
+- Better follow-up
+
+---
+
+### Segmentation based on behaviour and intent
+
+Use when marketing needs more relevant segments than basic contact data allows.
+
+Important context:
+
+- Behaviour can include website visits, email interactions, and event attendance.
+- Contact and company details supplement behavioural signals.
+
+Outcome:
+
+- More targeted campaigns
+- Segments that better reflect purchase intent
+
+---
+
+### Lead scoring and prioritisation
+
+Use when sales needs to know which leads are worth following up.
+
+Important context:
+
+- Not every lead is sales-ready.
+- Behaviour and engagement should update lead score.
+- Sales needs context behind the score.
+
+Outcome:
+
+- Better sales prioritisation
+- Less time spent on low-intent leads
+
+---
+
+### Reporting and insight
+
+Use when teams need visibility into leads, opportunities, activities, pipeline progress, and marketing contribution.
+
+Important context:
+
+- Sales managers need pipeline insight.
+- Marketing needs to understand campaign and event contribution.
+- Reports should support action.
+
+Outcome:
+
+- Better performance visibility
+- Better pipeline and campaign optimisation
+
+---
+
+### Sales relationship management
+
+Use when sales teams need a shared place to log conversations, notes, tasks, and opportunities.
+
+Important context:
+
+- CRM replaces scattered spreadsheets and disconnected notes.
+- Follow-up consistency is a key value.
+
+Outcome:
+
+- Better structure
+- Less lost information
+- More consistent customer experience
+
+---
+
+### Marketing-to-sales handover
+
+Use when marketing-generated leads need to be prepared for sales.
+
+Important context:
+
+- Handover should be based on behaviour, engagement, and score.
+- Sales should receive context, not just a lead name.
+
+Outcome:
+
+- More targeted follow-up
+- Better alignment between marketing and sales
+
+---
+
+## Sector Context
+
+### IT and software companies
+
+Common needs:
+
+- Lead generation
+- Lead nurturing
+- Complex sales cycles
+- ICP-based targeting
+- Website behaviour insight
+- Campaign engagement
+- Pipeline tracking
+
+Design emphasis:
+
+- Connect first website visit, campaign engagement, lead scoring, and opportunity creation.
+- Sales needs clear intent signals before follow-up.
+
+---
+
+### Legal and professional services
+
+Common needs:
+
+- Relationship management
+- Conversation history
+- Follow-up
+- Ongoing processes
+- Lead generation through campaigns and events
+
+Design emphasis:
+
+- Notes, conversations, tasks, and relationship context matter.
+- Avoid overemphasising transactional sales flows.
+
+---
+
+### Consultants, agencies, and training providers
+
+Common needs:
+
+- Prospect and customer tracking
+- Event and training follow-up
+- Lead nurturing
+- Relationship-based selling
+- Pipeline management
+
+Design emphasis:
+
+- Follow-up and relationship context are central.
+- Event attendance and campaign interactions may strongly influence prioritisation.
+
+---
+
+### Trade associations and membership organisations
+
+Common needs:
+
+- Member management
+- Prospect management
+- Event attendance
+- Communication history
+- Member activation
+- Member retention
+
+Design emphasis:
+
+- Member and stakeholder relationships matter.
+- CRM should not assume all relationships are commercial deals.
+- Event participation and communication history are important.
+
+---
+
+## Feature Design Guidance
+
+### Design for small and medium-sized teams
+
+Spotler CRM should feel structured but not overly complex.
+
+Prefer:
+
+- Clear contact and company records
+- Simple pipeline management
+- Understandable dashboards
+- Easy note and task creation
+- Practical lead scoring
+- Clear marketing engagement context
+
+Avoid:
+
+- Enterprise CRM complexity as the default
+- Heavy configuration flows for basic tasks
+- Overly technical language in everyday sales and marketing workflows
+
+---
+
+### Make marketing and sales context visible together
+
+The value of Spotler CRM is strongest when marketing and sales share data.
+
+Good designs should connect:
+
+- Contact data
+- Company data
+- Email engagement
+- Website visits
+- Event attendance
+- Lead scores
+- Notes
+- Tasks
+- Opportunities
+- Pipeline stages
+
+Avoid creating separate silos for marketing activity and sales activity.
+
+---
+
+### Make lead score explainable
+
+Lead score should not be a mysterious number.
+
+Good designs should show:
+
+- Which behaviours influenced the score
+- Recent engagement
+- Website visits
+- Email clicks
+- Event attendance
+- Score changes over time
+- Why sales should follow up now
+
+Avoid black-box scoring or score-only prioritisation.
+
+---
+
+### Preserve contact-company relationships
+
+Spotler CRM relies on both contact-level and company-level context.
+
+Good designs should show:
+
+- Which company a contact belongs to
+- Which contacts belong to a company
+- Which opportunities are linked to a company
+- Which activities are contact-level versus company-level
+- Company-wide engagement or visits where relevant
+
+Avoid treating every contact as isolated.
+
+---
+
+### Design pipeline management around action
+
+Pipeline screens should help users understand progress and next steps.
+
+Good designs should show:
+
+- Current stage
+- Next action
+- Owner
+- Expected revenue
+- Last activity
+- Stalled opportunities
+- Related contacts
+- Related company
+
+Avoid pipeline views that are purely visual without actionable follow-up.
+
+---
+
+### Support both standalone and connected CRM use
+
+Spotler CRM can be used alone or with Mail+ and Leads.
+
+Good designs should work when:
+
+- CRM is used as a standalone sales tool
+- CRM is connected to Mail+
+- CRM is connected to Leads
+- CRM is used as a marketing database alongside another CRM
+
+Avoid assuming every organisation uses every Spotler product.
+
+---
+
+### Make reporting useful for both sales and marketing
+
+Sales and marketing users need different insights.
+
+Sales reporting may focus on:
+
+- Opportunities
+- Pipeline stages
+- Expected revenue
+- Activities
+- Stalled deals
+- Follow-up
+
+Marketing reporting may focus on:
+
+- Leads
+- Campaign contribution
+- Event engagement
+- Website visits
+- Lead scores
+- Handover quality
+
+Avoid one-size-fits-all dashboards that do not support role-specific decisions.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler CRM is designed for small to medium-sized B2B organisations and non-profits.
+- It manages leads, contacts, companies, customers, members, opportunities, and activities.
+- It should reduce fragmented data and manual follow-up.
+- Contact and company records are central.
+- Opportunities are linked to companies.
+- Pipeline stages are customisable.
+- Sales and marketing should work from shared data.
+- Spotler Mail+ can provide email campaign engagement.
+- Spotler Leads can provide website behaviour and company visits.
+- Lead scoring helps prioritise sales follow-up.
+- Lead score should be based on visible behaviour and engagement.
+- Marketing-to-sales handover should happen with context.
+- CRM can be used standalone.
+- CRM can also work alongside another CRM as a central marketing database.
+- Reports should support pipeline, activities, leads, opportunities, and marketing contribution.
+- The product should avoid unnecessary enterprise CRM complexity.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler CRM features:
+
+- Do not treat Spotler CRM as a generic enterprise CRM.
+- Do not assume Spotler CRM always replaces an existing CRM.
+- Do not ignore its role as a shared marketing and sales database.
+- Do not separate marketing engagement from CRM records when the feature depends on integration.
+- Do not show lead scores without behavioural context.
+- Do not treat contacts as isolated from companies.
+- Do not design opportunities without company context.
+- Do not ignore pipeline stages and deal progress.
+- Do not ignore activities, notes, conversations, and follow-up.
+- Do not assume every organisation is a commercial sales team; non-profits and membership organisations matter.
+- Do not overcomplicate workflows for small teams.
+- Do not invent unrelated SaaS objects such as boards, tickets, or projects unless specifically needed.
+- Do not replace CRM terminology with generic words like “items” or “records”.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Contact without company
+
+A contact may exist before being linked to a company. Designs should allow incomplete but useful lead data.
+
+### Company with multiple contacts
+
+A company may have several contacts with different roles, engagement levels, and activities.
+
+### Contact belongs to multiple contexts
+
+A person may be a lead, customer, member, event attendee, or stakeholder depending on the organisation.
+
+### Opportunity without recent activity
+
+An opportunity may be stuck because no recent follow-up happened. Designs should surface stalled opportunities.
+
+### High lead score but no sales owner
+
+A lead may be ready for follow-up but not assigned. Designs should support ownership and handover.
+
+### Marketing engagement without sales follow-up
+
+A contact may engage with campaigns but not yet have a task or opportunity. Designs should help turn engagement into follow-up.
+
+### Sales notes without marketing context
+
+Sales may log conversations, but marketing context may be missing unless integrations are active.
+
+### CRM used without Mail+ or Leads
+
+The CRM should still work as a standalone tool, even when marketing engagement or website behaviour is unavailable.
+
+### CRM used alongside another CRM
+
+Spotler CRM may function as a marketing database rather than the primary sales CRM. Designs may need sync direction, ownership, and field management clarity.
+
+### Duplicate contacts or companies
+
+Fragmented data may create duplicates. Designs should account for data quality or merge workflows where relevant.
+
+### Event follow-up not completed
+
+Event or webinar attendees may need structured follow-up. Designs should make missed follow-up visible.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- CRM terminology
+- User roles
+- Contact and company logic
+- Opportunity and pipeline logic
+- Lead scoring logic
+- Marketing and sales collaboration
+- CRM integration context
+- Reporting and dashboard context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler CRM feature, check:
+
+- Does the design use Spotler CRM terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in contacts, companies, opportunities, activities, pipeline, lead scoring, segmentation, reporting, or integrations?
+- Does the design avoid generic enterprise CRM assumptions?
+- Does it preserve the relationship between contacts and companies?
+- Does it make sales and marketing context visible together where relevant?
+- Does it explain lead score through behaviour and engagement?
+- Does it support marketing-to-sales handover?
+- Does it account for Spotler Mail+ and Spotler Leads integrations where relevant?
+- Does it still work for standalone CRM use?
+- Does it account for organisations that use CRM as a marketing database alongside another CRM?
+- Does reporting support sales and marketing decisions?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Spotler CRM Product Context Skill, redesign the contact detail page so sales can see contact data, company context, notes, activities, email engagement, website visits, lead score, and opportunities.”
+
+“Using the Spotler CRM Product Context Skill, redesign the company detail page for a B2B sales team managing multiple contacts and opportunities.”
+
+“Using the Spotler CRM Product Context Skill, redesign the pipeline overview so managers can identify stalled opportunities, expected revenue, owners, and next actions.”
+
+“Using the Spotler CRM Product Context Skill, redesign the lead scoring view so users can understand which behaviours contributed to the score.”
+
+“Using the Spotler CRM Product Context Skill, redesign the marketing-to-sales handover flow for leads generated through campaigns, website visits, and events.”
+
+---
+
+### New feature prompts
+
+“Using the Spotler CRM Product Context Skill, design a feature that creates a sales follow-up task when a lead reaches a scoring threshold.”
+
+“Using the Spotler CRM Product Context Skill, design a dashboard showing campaign engagement, website visits, lead scores, and new opportunities.”
+
+“Using the Spotler CRM Product Context Skill, design a segmentation flow for marketers using company data, contact data, email engagement, website visits, and event attendance.”
+
+“Using the Spotler CRM Product Context Skill, design an event follow-up workflow for a membership organisation.”
+
+“Using the Spotler CRM Product Context Skill, design a CRM integration status screen for Spotler Mail+ and Spotler Leads.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Spotler CRM Product Context Skill, explain which product objects are involved in a marketing-to-sales handover.”
+
+“Using the Spotler CRM Product Context Skill, map the workflow from website visit to lead score update to sales follow-up task.”
+
+“Using the Spotler CRM Product Context Skill, identify edge cases for a contact that belongs to a company with multiple opportunities.”
+
+“Using the Spotler CRM Product Context Skill, explain how Spotler CRM can be used as a standalone CRM and as a marketing database alongside another CRM.”
+
+“Using the Spotler CRM Product Context Skill, suggest realistic dashboard sections for a sales manager and a marketing manager.”
+
+---
+
+### Design review prompts
+
+“Using the Spotler CRM Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic CRM assumptions.”
+
+“Using the Spotler CRM Product Context Skill, check whether this contact page clearly connects sales activity, marketing engagement, and lead scoring.”
+
+“Using the Spotler CRM Product Context Skill, review whether this pipeline design supports opportunity progress and next actions.”
+
+“Using the Spotler CRM Product Context Skill, identify where this design should show Spotler Mail+ or Spotler Leads integration data.”
+
+“Using the Spotler CRM Product Context Skill, check whether this reporting concept supports both sales and marketing decisions.”
