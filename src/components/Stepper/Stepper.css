@@ -53,7 +53,7 @@
   width: 32px;
   height: 32px;
   border-radius: var(--border-circular);
-  border: var(--border-small) solid transparent;
+  border: 1px solid transparent;
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
 }
 
@@ -128,7 +128,8 @@
 }
 
 .sds-stepper--vertical .sds-stepper__content {
-  padding-left: var(--spacing-s-16);
+  /* 32px icon + 16px gap = align description under the title, not the icon */
+  padding-left: calc(32px + var(--spacing-s-16));
 }
 
 .sds-stepper--horizontal .sds-stepper__content {
@@ -179,18 +180,18 @@
   background: transparent;
 }
 
-/* Vertical connector: short vertical segment beside the icon column. */
+/* Vertical connector: sits centered below the 32px icon (margin-left = 15px = (32px - 1px border) / 2). */
 .sds-stepper--vertical .sds-stepper__connector {
   display: flex;
   justify-content: flex-start;
-  padding: var(--spacing-s-4) 0;
-  margin-left: 16px;
+  padding: 4px 0;
+  margin-left: 15px;
 }
 
 .sds-stepper--vertical .sds-stepper__line {
   width: 0;
   height: 16px;
-  border-left: var(--border-small) solid var(--stepper-vertical-line-waiting);
+  border-left: 1px solid var(--stepper-vertical-line-waiting);
 }
 
 .sds-stepper--vertical .sds-stepper__step--finished .sds-stepper__line {
@@ -218,7 +219,7 @@
 .sds-stepper--horizontal .sds-stepper__line {
   width: 100%;
   height: 0;
-  border-top: var(--border-small) solid var(--stepper-horizontal-line-waiting);
+  border-top: 1px solid var(--stepper-horizontal-line-waiting);
 }
 
 .sds-stepper--horizontal .sds-stepper__step--finished .sds-stepper__line {
