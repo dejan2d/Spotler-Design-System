@@ -1,6 +1,7 @@
 /* Pagination — Spotler Design System
    Spec: references/components/pagination.md
-   Token names preserve Figma typos: `nagivation` and `elipsis`. */
+   Token names preserve Figma typos: `nagivation` and `elipsis`.
+   All page number and nav buttons are circular (border-radius: var(--border-circular)). */
 
 .sds-pagination {
   display: inline-flex;
@@ -27,12 +28,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
+  width: 36px;
   height: 36px;
-  padding: 0 var(--spacing-s-8);
+  padding: 0;
   background: var(--pagination-number-default-background);
-  border: var(--border-small) solid transparent;
-  border-radius: var(--border-small);
+  border: 1px solid transparent;
+  border-radius: var(--border-circular);
   color: var(--pagination-number-default-text);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
@@ -69,8 +70,8 @@
   width: 36px;
   height: 36px;
   background: var(--pagination-nagivation-item-default-background);
-  border: var(--border-small) solid transparent;
-  border-radius: var(--border-small);
+  border: 1px solid transparent;
+  border-radius: var(--border-circular);
   cursor: pointer;
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
 }
