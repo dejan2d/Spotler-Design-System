@@ -1,0 +1,1302 @@
+---
+name: spotler-mail-pro
+description: Product context for Spotler MailPro
+---
+
+# Spotler MailPro Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler MailPro.
+
+This Skill gives Figma Make product context for Spotler MailPro so it can make better UX and product decisions without starting from generic email marketing, automation, or SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler MailPro is an advanced email marketing platform for organisations with complex email programmes, large contact databases, multiple brands, multiple business units, approval needs, or advanced data structures.
+
+It helps marketing teams manage email content, data, automation, permissions, approvals, reporting, and campaign operations centrally.
+
+MailPro is designed for teams that need more structure, control, and scalability than basic email tools provide. It supports reusable content, central template and asset management, relational data, advanced personalisation, visual automation flows, role-based access, approval workflows, campaign reporting, exportable reports, and integrations with the broader Spotler ecosystem.
+
+The product helps organisations move from fragmented email processes, duplicated templates, flat contact lists, and manual workflows to a structured, governed, data-driven email marketing operation.
+
+---
+
+## Core Problem Spotler MailPro Solves
+
+Spotler MailPro solves the problems that appear when email marketing becomes complex and needs to scale.
+
+Common problems include:
+
+- Fragmented data
+- Duplicate templates
+- Recreated content across teams or brands
+- Manual campaign processes
+- Content updates that take too long
+- Approvals happening outside the system
+- Inconsistent messaging across brands or departments
+- Compliance risks
+- Flat contact lists that cannot represent complex relationships
+- Difficult-to-share reports
+- Insights spread across different systems
+- Too much operational effort
+- Reliance on external tools or technical workflows
+
+Spotler MailPro addresses these challenges by centralising content, structuring data through relational databases, supporting reusable modules, enabling visual automation flows, and providing built-in governance through roles, permissions, and approval workflows.
+
+The result is faster campaign creation, better control, clearer insight, more consistent communication, and more scalable email operations.
+
+---
+
+## Target Users and User Roles
+
+Spotler MailPro is primarily used by marketing teams that manage complex email programmes.
+
+### Primary users
+
+#### Email marketer
+
+An email marketer uses MailPro to create campaigns, manage content, personalise messages, automate journeys, and analyse results.
+
+Goals:
+
+- Build emails efficiently
+- Reuse proven content and modules
+- Personalise campaigns with data
+- Automate recurring or triggered emails
+- Analyse campaign performance
+- Reduce manual work
+
+Typical needs:
+
+- Drag-and-drop email editor
+- Templates
+- Reusable modules
+- Personalisation filters
+- Visual automation flow builder
+- Reports
+- A/B testing
+
+---
+
+#### Marketing operations user
+
+A marketing operations user manages structured campaign processes, data, permissions, reporting, and operational consistency.
+
+Goals:
+
+- Keep campaign operations scalable
+- Reduce manual technical workflows
+- Manage relational data structures
+- Maintain content governance
+- Support multiple brands or teams
+- Keep reporting shareable and reliable
+
+Typical needs:
+
+- Relational databases
+- Collections
+- Data filters
+- Account configuration
+- Permission setup
+- Approval workflow configuration
+- Exportable reports
+
+---
+
+#### Central marketing team
+
+A central marketing team supports multiple brands, departments, local teams, or business units.
+
+Goals:
+
+- Maintain central control
+- Provide reusable templates and assets
+- Safeguard brand consistency
+- Support local execution
+- Ensure approvals before sending
+- Reduce duplicated work
+
+Typical needs:
+
+- Brand-specific templates
+- Central asset libraries
+- Reusable modules
+- Role-based access
+- Approval workflows
+- Shared campaign reporting
+
+---
+
+#### Local or brand marketer
+
+A local or brand marketer creates campaigns within the boundaries set by the central team.
+
+Goals:
+
+- Create brand-specific campaigns quickly
+- Use approved templates and modules
+- Adapt content for a specific audience or brand
+- Follow approval processes
+- Send compliant communications
+
+Typical needs:
+
+- Access to correct brand templates
+- Reusable content modules
+- Clear approval status
+- Campaign editing
+- Personalisation options
+- Simple reporting
+
+---
+
+#### Campaign manager
+
+A campaign manager manages one-off campaigns, recurring campaigns, automated journeys, and optimisation.
+
+Goals:
+
+- Plan and execute campaigns
+- Set up automation flows
+- Use data for targeting
+- Test subject lines and content
+- Share results with stakeholders
+
+Typical needs:
+
+- Campaign overview
+- Visual flow builder
+- Trigger-based sending
+- A/B testing
+- Campaign summaries
+- Exportable reports
+
+---
+
+### Secondary users
+
+#### Data specialist or integration specialist
+
+A data specialist supports MailPro data structures, integrations, collections, APIs, and synchronisation.
+
+Goals:
+
+- Connect data sources
+- Structure relational data
+- Maintain accurate collections
+- Support targeting and personalisation
+- Enable custom integrations
+
+Typical needs:
+
+- Collections
+- Linked datasets
+- API configuration
+- Data synchronisation
+- Data model visibility
+- Integration status
+
+---
+
+#### Compliance or approval stakeholder
+
+A compliance or approval stakeholder reviews content before sending, especially in regulated or brand-sensitive environments.
+
+Goals:
+
+- Ensure content accuracy
+- Reduce compliance risk
+- Maintain brand and legal standards
+- Control campaign release
+
+Typical needs:
+
+- Approval workflows
+- Review status
+- Role-based access
+- Clear content preview
+- Audit-friendly process visibility
+
+---
+
+#### Marketing manager or stakeholder
+
+A marketing manager reviews campaign performance, operational efficiency, and programme consistency.
+
+Goals:
+
+- Understand campaign results
+- Share insights with stakeholders
+- Monitor trends
+- Improve efficiency
+- Ensure brand consistency across teams
+
+Typical needs:
+
+- Campaign summaries
+- Trend reports
+- Exportable reports
+- Performance dashboards
+- Brand or business-unit visibility
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Spotler MailPro as a platform for structured, scalable, governed email marketing operations.
+
+The core mental model is:
+
+1. Structure
+   - Organise brands, teams, templates, assets, users, roles, permissions, data, and approval rules.
+
+2. Create
+   - Build emails using drag-and-drop editing, structured templates, reusable modules, and multiple content types.
+
+3. Connect data
+   - Use relational databases and collections to connect profiles, behaviour, preferences, and other datasets.
+
+4. Target and personalise
+   - Use filters, attributes, behaviour, preferences, and linked datasets to create relevant email content and audiences.
+
+5. Automate
+   - Build simple or advanced journeys with a visual automation flow builder, triggers, conditions, and live flow updates.
+
+6. Govern
+   - Use role-based access and approval workflows to control who can create, edit, approve, and send.
+
+7. Optimise
+   - Use reports, summaries, exports, trends, and A/B testing to improve performance and share insights.
+
+Do not treat Spotler MailPro as a basic newsletter tool. It is built for advanced email programmes that need content management, relational data, automation, governance, reporting, and scalability.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Creation and Content Management
+
+Spotler MailPro helps teams create structured email content at scale.
+
+Key capabilities:
+
+- Drag-and-drop email editor
+- Central template management
+- Central asset management
+- Multiple content types
+- Reusable modules
+- Brand-specific templates
+- Reusable designs across campaigns
+- Central content updates
+
+Design implication:
+
+- Content creation should not feel like starting from scratch.
+- Templates, modules, and assets are central to scalability.
+- Central updates and reuse are important product behaviours.
+- Designs should support consistency across brands, departments, and teams.
+
+---
+
+### Template and Asset Management
+
+MailPro supports central management of templates and assets, especially for multi-brand or multi-business-unit organisations.
+
+Important concepts:
+
+- Brand-specific template sets
+- Central asset libraries
+- Approved content
+- Reusable campaign structures
+- Shared modules
+- Local adaptation within central rules
+
+Design implication:
+
+- Template and asset management should support both central governance and local flexibility.
+- Avoid designing templates as isolated files with no governance or reuse logic.
+- Show which brand, team, or campaign context a template belongs to where relevant.
+
+---
+
+### Automation and Journeys
+
+Spotler MailPro includes a visual automation flow builder for simple and advanced email journeys.
+
+Automation capabilities:
+
+- Visual flow builder
+- Trigger-based email sending
+- Simple journeys
+- Advanced journeys
+- Conditions
+- Flow steps
+- Updates to live automation flows
+- Behaviour-based or data-based automation
+
+Design implication:
+
+- Automation should be visual and understandable.
+- Users need to understand triggers, steps, conditions, timing, and flow status.
+- Live flow updates should feel controlled and safe.
+- Avoid making automation feel like external technical workflow programming.
+
+---
+
+### Personalisation and Data
+
+Spotler MailPro supports advanced personalisation through filters and relational data.
+
+Personalisation can use:
+
+- Contact profiles
+- Behaviour
+- Preferences
+- Attributes
+- Relational data
+- Collections
+- Linked datasets
+- Multiple datasets per contact
+
+Design implication:
+
+- Personalisation should be grounded in structured data.
+- Relational data is a key differentiator from basic email tools.
+- Designs should help users understand what data is being used and how it relates to the contact.
+- Avoid assuming targeting is based only on flat contact lists.
+
+---
+
+### Relational Databases and Collections
+
+MailPro uses relational databases to represent complex customer relationships and data structures.
+
+Important concepts:
+
+- Collections
+- Linked datasets
+- Profiles
+- Behaviour
+- Preferences
+- Multiple linked datasets per contact
+- Structured data relationships
+
+Design implication:
+
+- Data may not be stored as one flat contact record.
+- A contact can be connected to multiple related datasets.
+- Campaign targeting can depend on relationships between data objects.
+- Designs should make relational logic understandable without overwhelming marketers.
+
+---
+
+### Reporting and Optimisation
+
+Spotler MailPro provides campaign and performance insight.
+
+Reporting capabilities:
+
+- Campaign summaries
+- Performance summaries
+- Exportable reports
+- Contact trends
+- Campaign trends
+- A/B testing
+- Subject line testing
+- Content testing
+- Shareable insights for stakeholders
+
+Design implication:
+
+- Reports should be easy to interpret and share.
+- Exportability matters because insights may need to be communicated across teams.
+- Reporting should support optimisation, not just observation.
+
+---
+
+### Management and Governance
+
+MailPro supports control for larger teams and organisations.
+
+Governance capabilities:
+
+- Role-based access
+- User permissions
+- Approval workflows
+- Structured account configuration
+- Permission configuration
+- Central control for large teams
+- Content review before sending
+
+Design implication:
+
+- Governance is a core product feature, not an admin afterthought.
+- Designs should clarify who can create, edit, approve, and send.
+- Approval status should be visible where it affects campaign progress.
+- Avoid workflows where sending bypasses approval logic.
+
+---
+
+### Multi-Brand and Business Unit Support
+
+MailPro is particularly suitable for organisations with multiple brands or business units.
+
+Important needs:
+
+- Brand-specific templates
+- Brand-specific asset libraries
+- Central governance
+- Local execution
+- Consistent branding
+- Approval control
+- Different tones of voice or compliance requirements
+
+Design implication:
+
+- Multi-brand context should be preserved in relevant features.
+- Designs may need brand selectors, ownership, permissions, or template grouping.
+- Avoid assuming there is only one brand, one team, or one template set.
+
+---
+
+### A/B Testing
+
+MailPro supports A/B testing for subject lines and content.
+
+Testing concepts:
+
+- Variant
+- Subject line test
+- Content test
+- Audience split
+- Performance comparison
+- Winner
+- Optimisation
+
+Design implication:
+
+- Make the tested element clear.
+- Show variants and success criteria.
+- Results should inform future campaign decisions.
+- Avoid hiding the relationship between test setup and campaign performance.
+
+---
+
+## Important Product Objects and Concepts
+
+### Email
+
+A message created and sent through MailPro. It may be part of a campaign or automated journey.
+
+### Campaign
+
+A planned email communication sent to a target audience. Campaigns may be one-off, recurring, automated, or part of a journey.
+
+### Journey
+
+An automated sequence of emails and logic based on triggers, conditions, timing, and data.
+
+### Automation flow
+
+A visual workflow used to send emails based on triggers, conditions, and steps.
+
+### Trigger
+
+An event or condition that starts an automated email or journey step.
+
+### Condition
+
+A rule inside an automation flow that determines what happens next.
+
+### Template
+
+A reusable email structure used to create consistent campaigns faster.
+
+### Asset
+
+A reusable file or content resource used in campaigns, such as imagery, documents, or brand content.
+
+### Module
+
+A reusable content section used across campaigns or templates.
+
+### Content type
+
+A structured type of content used to compose flexible emails.
+
+### Brand
+
+A distinct identity, business unit, label, or communication context with its own templates, assets, tone, or approval requirements.
+
+### Business unit
+
+A division, department, region, or organisational unit that may manage campaigns within central governance.
+
+### Approval workflow
+
+A process that requires review or sign-off before content or campaigns can be sent.
+
+### Role-based access
+
+A permission model that controls what users can view, edit, approve, configure, or send.
+
+### User permission
+
+A specific access right assigned to a user or role.
+
+### Account configuration
+
+The structured setup of users, roles, permissions, brands, data, and workflows.
+
+### Collection
+
+A structured relational data collection used to connect profiles, behaviour, preferences, or other datasets.
+
+### Relational data
+
+Data organised through relationships between datasets rather than one flat list.
+
+### Linked dataset
+
+A dataset connected to a contact, profile, behaviour, preference, or other data object.
+
+### Profile
+
+A contact-related record that may be connected to behaviour, preferences, and other relational data.
+
+### Filter
+
+A targeting or personalisation rule based on data, attributes, behaviour, preferences, or linked datasets.
+
+### Personalisation
+
+The process of tailoring email content based on filters, profile data, behaviour, preferences, or relational data.
+
+### Campaign report
+
+A report showing performance for a campaign.
+
+### Exportable report
+
+A report that can be exported and shared with stakeholders.
+
+### A/B test
+
+A test comparing subject line or content variants to optimise campaign performance.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Advanced email marketing platform
+- Campaign
+- Email campaign
+- Journey
+- Automation
+- Automation flow
+- Visual flow builder
+- Trigger-based sending
+- Flow step
+- Condition
+- Live automation flow
+- Drag-and-drop editor
+- Template
+- Central template management
+- Asset management
+- Reusable module
+- Content type
+- Brand-specific template
+- Multi-brand
+- Business unit
+- Approval workflow
+- Role-based access
+- User permission
+- Account configuration
+- Governance
+- Relational database
+- Relational data
+- Collection
+- Linked dataset
+- Profile
+- Behaviour
+- Preference
+- Attribute
+- Filter
+- Advanced personalisation
+- Campaign summary
+- Performance summary
+- Exportable report
+- Contact trend
+- Campaign trend
+- A/B testing
+- Subject line testing
+- Content testing
+- Spotler Message
+- Spotler Activate
+- API
+- Data synchronisation
+
+Avoid replacing these with generic SaaS language such as “items”, “records”, “boards”, “tasks”, or “objects” when a more specific MailPro term exists.
+
+---
+
+## Key Integrations
+
+Spotler MailPro is designed to work within a broader marketing, data, and communications ecosystem.
+
+### Spotler Message
+
+Spotler Message can extend MailPro campaigns beyond email.
+
+Important integration logic:
+
+- WhatsApp messages can be triggered from MailPro campaigns and lists.
+- Campaigns do not have to remain email-only when Spotler Message is connected.
+- WhatsApp should be treated as an extension of campaign activation, not as a replacement for email.
+
+---
+
+### Spotler Activate
+
+Spotler Activate can enrich campaigns with behavioural data and audience segmentation.
+
+Important integration logic:
+
+- Behavioural data can improve targeting and personalisation.
+- Audience segmentation can support more relevant campaigns.
+- Activate data should be treated as a structured targeting input.
+
+---
+
+### APIs and Custom Integrations
+
+MailPro supports APIs for custom integrations and data synchronisation.
+
+Important integration logic:
+
+- Integration options depend on the organisation’s setup and data model.
+- APIs may be used to synchronise data, connect external systems, or support custom campaign processes.
+- Avoid assuming a fixed CRM or e-commerce integration unless provided by the feature context.
+
+---
+
+### Data Model and Setup-Dependent Integrations
+
+MailPro integrations depend on data model and setup.
+
+Important integration logic:
+
+- Organisations may connect different systems depending on their relational data structure.
+- Collections may be configured differently across customers.
+- Designs should allow for flexible data relationships and not assume one universal data schema.
+
+---
+
+## Important Workflows
+
+### Workflow: Manage content across multiple brands
+
+1. A central marketing team defines brand-specific templates, assets, modules, and rules.
+2. Local or brand teams use approved templates and reusable modules.
+3. Content is adapted for the campaign or audience.
+4. Approval workflows ensure content is reviewed before sending.
+5. Approved campaigns are sent or scheduled.
+6. Central teams maintain consistency and reduce duplicated work.
+
+Design implications:
+
+- Brand context should be visible.
+- Templates and assets should support reuse.
+- Approval status should be clear.
+- Local flexibility should remain within central governance.
+
+---
+
+### Workflow: Create a campaign with reusable content
+
+1. A marketer starts a new campaign.
+2. The marketer selects a template.
+3. The marketer adds reusable modules or content types.
+4. The marketer personalises content using filters or data.
+5. The campaign goes through approval if required.
+6. The campaign is sent, scheduled, or added to a journey.
+7. Results are reviewed in campaign reports.
+
+Design implications:
+
+- Reusable modules should be easy to find and apply.
+- Personalisation should show its data basis.
+- Approval requirements should appear before send actions.
+- Reporting should connect back to campaign optimisation.
+
+---
+
+### Workflow: Build a campaign using relational data
+
+1. A team connects or structures data in collections.
+2. Profiles, behaviour, preferences, and linked datasets are related.
+3. A marketer creates filters based on these relationships.
+4. Targeting or personalisation uses those filters.
+5. The campaign sends more relevant content based on connected data.
+6. Performance is analysed and optimised.
+
+Design implications:
+
+- Relational data should be understandable in marketer-facing flows.
+- Show which collection or linked dataset powers a filter.
+- Avoid reducing targeting to a flat contact list.
+- Make data relationships visible without making the UI overly technical.
+
+---
+
+### Workflow: Create an automated journey
+
+1. A marketer opens the visual flow builder.
+2. The marketer defines a trigger.
+3. The marketer adds email steps, waits, conditions, or branches.
+4. The journey is reviewed and activated.
+5. Contacts enter the flow when they match the trigger or conditions.
+6. The team can make simple updates to live automation flows.
+7. Journey performance is reviewed.
+
+Design implications:
+
+- The flow should clearly show trigger, steps, conditions, timing, and status.
+- Updating live flows should feel controlled.
+- Simple and advanced journeys should both be supported.
+- Avoid requiring technical workflow knowledge.
+
+---
+
+### Workflow: Review and approve content
+
+1. A campaign or content item is prepared.
+2. The system identifies whether approval is required.
+3. A reviewer checks content, compliance, or brand fit.
+4. The reviewer approves, rejects, or requests changes.
+5. The campaign can only move forward when approval requirements are met.
+
+Design implications:
+
+- Approval status should be visible.
+- Reviewer role and permissions should be clear.
+- Feedback or required changes should be easy to understand.
+- Sending should respect approval workflow logic.
+
+---
+
+### Workflow: Analyse and share campaign insights
+
+1. A campaign or journey runs.
+2. MailPro collects performance data.
+3. Users review campaign summaries, performance summaries, contact trends, or campaign trends.
+4. Reports are exported when stakeholders need to review or share results.
+5. Teams use insight to improve future campaigns.
+
+Design implications:
+
+- Reports should be easy to interpret and share.
+- Export actions matter.
+- Reporting should support optimisation decisions.
+- Avoid creating reports that only show raw metrics without context.
+
+---
+
+### Workflow: Extend campaign activation with WhatsApp
+
+1. A MailPro campaign or list is used as the basis for activation.
+2. Spotler Message is connected.
+3. A WhatsApp message is triggered based on campaign logic or list membership.
+4. The campaign reaches contacts beyond email.
+5. Results or follow-up are managed according to the connected setup.
+
+Design implications:
+
+- WhatsApp should be shown as an extension of campaign activation.
+- Make the relationship between MailPro list, campaign, and Spotler Message clear.
+- Avoid implying MailPro itself is primarily a WhatsApp platform.
+
+---
+
+## Common Use Cases
+
+### Advanced content management
+
+Use when teams need to manage email content across brands, departments, or business units.
+
+Important context:
+
+- Reuse and consistency are central.
+- Approval workflows reduce compliance risk.
+- Central updates reduce manual correction.
+
+Outcome:
+
+- Faster campaign creation
+- More consistent messaging
+- Lower compliance risk
+
+---
+
+### Campaigns based on relational data
+
+Use when targeting depends on complex relationships between profiles, behaviour, preferences, or other datasets.
+
+Important context:
+
+- Flat contact lists are not sufficient.
+- Collections and linked datasets allow more accurate targeting.
+- Filters can use connected data.
+
+Outcome:
+
+- More relevant campaigns
+- Better personalisation
+- More complete view of contacts
+
+---
+
+### Making insights visible
+
+Use when campaign performance needs to be interpreted and shared with teams or stakeholders.
+
+Important context:
+
+- Reports should be clear and exportable.
+- Insights may need to travel outside the platform.
+- Trends and summaries are important.
+
+Outcome:
+
+- Better stakeholder communication
+- Clearer optimisation opportunities
+
+---
+
+### Fast automation with visual flows
+
+Use when teams need to automate simple or advanced email journeys without technical complexity.
+
+Important context:
+
+- Flow builder should be visual.
+- Triggers and conditions should be clear.
+- Live flow updates should be manageable.
+
+Outcome:
+
+- Less manual sending
+- More flexible automated journeys
+- Faster adaptation to process changes
+
+---
+
+### Multi-brand campaign governance
+
+Use when a central team supports multiple brands or local teams.
+
+Important context:
+
+- Each brand may have its own templates, assets, tone, and compliance requirements.
+- Central governance and local execution need to coexist.
+
+Outcome:
+
+- Consistent communications
+- Controlled campaign quality
+- Less duplicated effort
+
+---
+
+## Sector and Organisation Context
+
+### Multi-brand organisations
+
+Common needs:
+
+- Brand-specific templates
+- Central governance
+- Approval workflows
+- Shared assets
+- Consistent brand execution
+- Local campaign creation
+
+Design emphasis:
+
+- Brand context, template grouping, permissions, and approval status are important.
+
+---
+
+### Organisations with multiple business units
+
+Common needs:
+
+- Different teams using the same platform
+- Structured account and permission setup
+- Shared content with controlled access
+- Business-unit-specific reporting
+
+Design emphasis:
+
+- Permissions, ownership, and visibility rules matter.
+
+---
+
+### Organisations with large databases
+
+Common needs:
+
+- Relational data
+- Multiple linked datasets per contact
+- Advanced filters
+- Personalisation based on behaviour and preferences
+- Scalable campaign targeting
+
+Design emphasis:
+
+- Data structure and filters should be powerful but understandable.
+
+---
+
+### Organisations with governance and compliance requirements
+
+Common needs:
+
+- Approval workflows
+- Role-based access
+- Audit-friendly process structure
+- Consistent messaging
+- Reduced risk before sending
+
+Design emphasis:
+
+- Approval status, permissions, and review flows are central.
+
+---
+
+## Feature Design Guidance
+
+### Design for scale and governance
+
+MailPro is for advanced email operations, not lightweight newsletter sending only.
+
+Good designs should support:
+
+- Multiple brands
+- Multiple teams
+- Large databases
+- Approval workflows
+- Role-based permissions
+- Central control
+- Reusable content
+- Advanced data structures
+
+Avoid:
+
+- Assuming one small team manages everything
+- Hiding governance logic
+- Treating approvals as optional comments outside the system
+
+---
+
+### Make reusable content central
+
+Reusable templates, modules, content types, and assets are key to MailPro’s value.
+
+Good designs should make it easy to:
+
+- Find reusable content
+- Understand where content is used
+- Update content centrally
+- Reuse modules across campaigns
+- Maintain brand consistency
+
+Avoid making every email feel like a one-off design.
+
+---
+
+### Preserve relational data logic
+
+MailPro’s data model is more advanced than flat lists.
+
+Good designs should show:
+
+- Collections
+- Linked datasets
+- Contact relationships
+- Behaviour and preferences
+- Filters based on connected data
+- Data sources used in personalisation
+
+Avoid simplifying all targeting to static contact lists.
+
+---
+
+### Keep automation visual and editable
+
+The visual flow builder should make automation accessible.
+
+Good designs should show:
+
+- Trigger
+- Steps
+- Conditions
+- Branches
+- Timing
+- Status
+- Live flow update state
+
+Avoid technical workflow language unless the feature is specifically for technical users.
+
+---
+
+### Make approvals and permissions visible
+
+Governance should be clear at the moment it matters.
+
+Good designs should show:
+
+- Who can edit
+- Who can approve
+- Who can send
+- What approval is required
+- Current approval status
+- Required changes
+- Permission limitations
+
+Avoid allowing users to progress without understanding approval requirements.
+
+---
+
+### Make reports shareable and actionable
+
+MailPro reporting should help teams communicate results and improve campaigns.
+
+Good designs should support:
+
+- Campaign summaries
+- Performance summaries
+- Exportable reports
+- Contact trends
+- Campaign trends
+- A/B test outcomes
+- Stakeholder sharing
+
+Avoid dashboards that only show metrics without interpretation or exportability.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler MailPro is an advanced email marketing platform.
+- It is built for complex structures, large databases, multiple brands, business units, approval needs, and advanced data.
+- It is not just a basic newsletter tool.
+- Reusable templates, assets, modules, and content types are central.
+- Relational databases and collections are key product concepts.
+- Targeting and personalisation can use multiple linked datasets per contact.
+- Visual automation flows support simple and advanced journeys.
+- Live automation flows can be updated, but this should feel controlled.
+- Governance is a core product value.
+- Role-based access and approval workflows matter.
+- Reporting should be clear, shareable, and exportable.
+- A/B testing supports subject line and content optimisation.
+- Integrations depend on the organisation’s data model and setup.
+- Spotler Message can extend campaigns with WhatsApp.
+- Spotler Activate can enrich targeting with behavioural data and audience segmentation.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler MailPro features:
+
+- Do not treat MailPro as a basic newsletter tool.
+- Do not treat MailPro as the same product as Mail+.
+- Do not assume one brand, one team, or one template set.
+- Do not ignore role-based access, approvals, and governance.
+- Do not design sending flows that bypass approval logic.
+- Do not reduce targeting to flat lists when relational data is relevant.
+- Do not hide collections or linked datasets in data-driven features.
+- Do not make automation feel like developer-only workflow programming.
+- Do not ignore exportable reporting and stakeholder sharing.
+- Do not invent fixed integrations that depend on setup unless the feature context provides them.
+- Do not treat WhatsApp as native MailPro functionality without the Spotler Message integration.
+- Do not replace product terminology with vague terms like “items”, “records”, or “objects”.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### User lacks permission
+
+A user may not be allowed to edit, approve, configure, or send. Designs should show permission limitations clearly.
+
+### Campaign requires approval
+
+A campaign may be complete but cannot be sent until approval is granted.
+
+### Approval rejected
+
+A reviewer may request changes. Designs should support feedback, revision, and resubmission.
+
+### Multiple brands share a platform
+
+Templates, assets, permissions, and campaigns may need brand-specific filtering or access.
+
+### Reusable module updated centrally
+
+A content module may be used in multiple campaigns. Updating it may affect several places, so designs should show impact where relevant.
+
+### Relational data incomplete
+
+A campaign may use linked datasets that are missing for some contacts. Designs should support fallback content or clear warnings.
+
+### Filter returns too few contacts
+
+Advanced filters may create very small or empty target groups. Designs should help users understand why.
+
+### Live automation flow update
+
+A flow may already be active. Changes should be clear, controlled, and safe.
+
+### Integration depends on setup
+
+Data integrations may differ per customer. Designs should not assume one fixed schema or connector.
+
+### Report needs to be shared externally
+
+Stakeholders may need exported reports. Designs should support export and clear summaries.
+
+### A/B test volume too low
+
+A test may not have enough volume to produce a meaningful result. Designs should avoid overstating certainty.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- MailPro terminology
+- User roles
+- Content management logic
+- Template and asset management logic
+- Relational data and collection logic
+- Personalisation and filter logic
+- Automation flow logic
+- Approval and permission logic
+- Reporting and optimisation context
+- Integration context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler MailPro feature, check:
+
+- Does the design use MailPro terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in advanced email marketing, templates, modules, relational data, automation, governance, reporting, or integrations?
+- Does the design avoid basic newsletter-tool assumptions?
+- Does it account for multi-brand or multi-business-unit complexity where relevant?
+- Does it preserve role-based access and approval workflow logic?
+- Does it make reusable content central?
+- Does it show relational data, collections, linked datasets, or filters where relevant?
+- Does it make automation triggers, steps, conditions, timing, and live status clear?
+- Does reporting support sharing and optimisation?
+- Does it avoid inventing setup-dependent integrations?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Spotler MailPro Product Context Skill, redesign the template and asset management area for a multi-brand marketing organisation.”
+
+“Using the Spotler MailPro Product Context Skill, redesign the campaign creation flow so users can select templates, add reusable modules, personalise with filters, request approval, and send.”
+
+“Using the Spotler MailPro Product Context Skill, redesign the visual automation flow builder for trigger-based email journeys with conditions and live flow updates.”
+
+“Using the Spotler MailPro Product Context Skill, redesign the relational data filter builder so marketers can target contacts using collections and linked datasets.”
+
+“Using the Spotler MailPro Product Context Skill, redesign the approval workflow screen for reviewers and marketers working across multiple business units.”
+
+---
+
+### New feature prompts
+
+“Using the Spotler MailPro Product Context Skill, design a feature that shows where a reusable module is used before it is updated centrally.”
+
+“Using the Spotler MailPro Product Context Skill, design a permission-aware campaign send flow where some users can edit but not approve or send.”
+
+“Using the Spotler MailPro Product Context Skill, design a campaign report export flow for sharing summaries with stakeholders.”
+
+“Using the Spotler MailPro Product Context Skill, design a Spotler Message integration flow for triggering WhatsApp messages from MailPro lists and campaigns.”
+
+“Using the Spotler MailPro Product Context Skill, design an A/B testing setup flow for subject line and content variants.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Spotler MailPro Product Context Skill, explain which product objects are involved in creating a personalised campaign based on relational data.”
+
+“Using the Spotler MailPro Product Context Skill, map the workflow from brand-specific template selection to approval and campaign sending.”
+
+“Using the Spotler MailPro Product Context Skill, identify edge cases for updating a live automation flow.”
+
+“Using the Spotler MailPro Product Context Skill, explain how collections and linked datasets differ from flat contact lists.”
+
+“Using the Spotler MailPro Product Context Skill, suggest realistic dashboard sections for a marketing operations user managing multi-brand campaigns.”
+
+---
+
+### Design review prompts
+
+“Using the Spotler MailPro Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic email-tool assumptions.”
+
+“Using the Spotler MailPro Product Context Skill, check whether this campaign flow properly supports approval workflows and role-based access.”
+
+“Using the Spotler MailPro Product Context Skill, review whether this data targeting concept preserves relational data and collections.”
+
+“Using the Spotler MailPro Product Context Skill, identify where this automation design should show trigger, conditions, timing, and live flow status.”
+
+“Using the Spotler MailPro Product Context Skill, check whether this reporting concept supports exportable insights and stakeholder sharing.”

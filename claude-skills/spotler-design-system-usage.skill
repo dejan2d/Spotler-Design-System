@@ -1,0 +1,44 @@
+---
+name: spotler-design-system-usage-skill
+description: Usage guidance for the Spotler Design System Kit in Figma Make. Use when designing or redesigning Spotler product interfaces with the official Kit as the visual source of truth. This skill instructs Figma Make to use existing Kit components, variants, variables, tokens, spacing, typography, colour, radius, states, accessibility rules, and reusable UI patterns before inventing new interface elements. It is for design-system usage guidance, not product-specific business logic.
+---
+
+# Spotler Design System Usage Skill
+
+## Purpose
+Use this Skill when designing Spotler interfaces in Figma Make.
+
+The attached **Spotler Design System Kit** is the visual source of truth. Use the Kit components, variants, variables, and tokens first. Do not invent new UI unless the Kit has no suitable component.
+
+## Core rule
+Product Skill decides **what the feature does**.  
+Design System Kit decides **how it looks**.  
+This Skill decides **how to use the Kit correctly**.
+
+## Always do
+- Use existing Kit components first
+- Use component tokens before foundation tokens
+- Keep spacing, typography, radius, and colour from the Kit
+- Include hover, focus, selected, disabled, error, empty, and loading states where relevant
+- Use accessible labels and visible focus states
+- Use real Spotler patterns for forms, tables, dashboards, modals, cards, and setup flows
+
+## Avoid
+- Inventing new components
+- Hardcoded colours or spacing
+- Generic SaaS styling
+- Ignoring states
+- Using colour alone for status
+- Replacing tables with cards when data is tabular
+- Using modals for complex full-page workflows
+
+## When designing
+First check the Kit for:
+- Layout pattern
+- Existing component
+- Component variant
+- Token/state rules
+- Accessibility expectations
+
+## Example prompt
+Using the Spotler Design System Usage Skill and the Spotler CRM Product Context Skill, design a contact detail page using only components and patterns from the Spotler Design System Kit.

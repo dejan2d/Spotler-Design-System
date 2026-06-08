@@ -1,0 +1,1402 @@
+---
+name: spotler-engage
+description: Product context for Spotler Engage
+---
+
+# Spotler Engage Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler Engage.
+
+This Skill gives Figma Make product context for Spotler Engage so it can make better UX and product decisions without starting from generic social media, customer service, or SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler Engage is an integrated webcare and social messaging platform for managing customer conversations, social publishing, media monitoring, WhatsApp messaging, live chat, and team collaboration from one central environment.
+
+It helps teams handle social media comments, private messages, reviews, WhatsApp conversations, live chat messages, and online mentions without switching between channels or missing important messages.
+
+Spotler Engage is designed for organisations that receive large volumes of customer communication across multiple channels and need speed, overview, routing, ownership, collaboration, and consistency.
+
+The product helps teams move from fragmented channel management to one structured webcare operation where conversations can be assigned, tagged, prioritised, monitored, answered, published, and reported on.
+
+---
+
+## Core Problem Spotler Engage Solves
+
+Modern customer communication happens across many public and private channels:
+
+- Social media comments
+- Private messages
+- Reviews
+- WhatsApp
+- Live chat
+- Chatbots
+- News and blogs
+- Public online mentions
+
+Without a central platform, organisations face several problems:
+
+- Messages go unanswered
+- Teams duplicate work
+- It is unclear who should respond
+- Sensitive or urgent issues get lost
+- Customer response times increase
+- Reporting becomes slow or unreliable
+- Customers feel ignored
+- Crisis communication becomes difficult to coordinate
+- Brand reputation signals are missed
+- Teams constantly switch between tools and channels
+
+Spotler Engage solves this by bringing webcare, social messaging, publishing, monitoring, and WhatsApp into one collaborative platform.
+
+The goal is to help teams respond faster, maintain a clear overview, assign ownership, coordinate communication, reduce manual work, and stay in control during both day-to-day operations and crisis situations.
+
+---
+
+## Target Users and User Roles
+
+Spotler Engage is primarily used by webcare, communications, marketing, customer service, and reputation management teams.
+
+### Primary users
+
+#### Webcare agent
+
+A webcare agent handles incoming customer conversations across social media, messaging channels, WhatsApp, live chat, reviews, and comments.
+
+Goals:
+
+- Respond quickly and accurately
+- Avoid missing messages
+- Know which conversations are assigned to them
+- See customer or conversation history
+- Use internal notes and tags
+- Escalate sensitive or complex issues
+
+Typical needs:
+
+- Central inbox
+- Configurable inbox views
+- Conversation status
+- Assignment
+- Tags
+- Internal notes
+- Conversation history
+- Channel context
+
+---
+
+#### Webcare team lead
+
+A team lead manages workload, assignments, response quality, and team performance.
+
+Goals:
+
+- Maintain overview of incoming volume
+- Assign conversations to the right team members
+- Prioritise urgent or sensitive messages
+- Monitor response times
+- Prevent duplicate work
+- Ensure consistent responses
+
+Typical needs:
+
+- Workload insight
+- Queue or inbox overview
+- Assignment controls
+- Status tracking
+- Performance reporting
+- Team permissions
+- Escalation visibility
+
+---
+
+#### Communications manager
+
+A communications manager manages public communication, reputation, crisis response, and coordinated messaging.
+
+Goals:
+
+- Keep communication consistent
+- Coordinate public updates
+- Monitor online mentions
+- Respond to sensitive issues
+- Support crisis communication
+- Align publishing and webcare
+
+Typical needs:
+
+- Monitoring queries
+- Publishing overview
+- Conversation prioritisation
+- Crisis visibility
+- Shared response coordination
+- Approval or oversight where needed
+
+---
+
+#### Social media manager
+
+A social media manager creates, schedules, publishes, and manages social media content.
+
+Goals:
+
+- Publish posts across connected social channels
+- Coordinate content planning
+- Maintain brand and message consistency
+- Respond to interactions after publishing
+- Use AI assistance for post optimisation
+
+Typical needs:
+
+- Publishing calendar or overview
+- Post creation
+- Scheduling
+- Channel selection
+- Post editing
+- AI assistant support
+- Engagement visibility
+
+---
+
+#### Customer service agent
+
+A customer service agent uses Engage to answer service questions across WhatsApp, social messaging, live chat, and other channels.
+
+Goals:
+
+- Handle enquiries efficiently
+- Keep service quality consistent
+- Work from one inbox
+- See previous conversation history
+- Escalate when needed
+
+Typical needs:
+
+- Centralised conversation view
+- Contact or conversation history
+- Status and ownership
+- Quick replies or structured handling
+- Team collaboration tools
+
+---
+
+### Secondary users
+
+#### Reputation or crisis manager
+
+A reputation or crisis manager uses monitoring, publishing, and webcare together during sensitive situations.
+
+Goals:
+
+- Detect early signals
+- Monitor public discussion
+- Prioritise urgent messages
+- Coordinate responses
+- Maintain control during peak loads
+
+Typical needs:
+
+- Media monitoring
+- Query management
+- Urgency indicators
+- Team coordination
+- Publishing and webcare alignment
+- Real-time overview
+
+---
+
+#### WhatsApp campaign manager
+
+A WhatsApp campaign manager uses Engage to manage WhatsApp conversations and campaigns.
+
+Goals:
+
+- Run WhatsApp messages or campaigns
+- Respond to WhatsApp enquiries
+- Keep WhatsApp history in the same environment as other conversations
+- Maintain a consistent service experience
+
+Typical needs:
+
+- WhatsApp inbox
+- Campaign setup
+- Contact-level conversation history
+- Status and assignment
+- Channel-specific context
+
+---
+
+#### Administrator
+
+An administrator configures channels, permissions, inbox views, workflows, and integrations.
+
+Goals:
+
+- Connect channels
+- Manage user access
+- Configure inbox views
+- Support workflows
+- Ensure teams can collaborate safely
+
+Typical needs:
+
+- Channel settings
+- Role-based access
+- Permission structures
+- Routing rules
+- Workflow configuration
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Spotler Engage as a platform where incoming conversations, outgoing publishing, media monitoring, and team workflows come together.
+
+The core mental model is:
+
+1. Connect channels
+   - Social platforms, messaging channels, WhatsApp, live chat, and chatbots are connected.
+
+2. Centralise conversations
+   - Comments, direct messages, reviews, WhatsApp messages, and live chat enquiries arrive in one central inbox.
+
+3. Organise
+   - Conversations are grouped into configurable inbox views, tagged, prioritised, assigned, and given statuses.
+
+4. Collaborate
+   - Team members use ownership, assignments, notes, permissions, and workflows to avoid duplicate work and ensure the right person responds.
+
+5. Respond
+   - Agents answer messages from the same environment, with conversation history and channel context.
+
+6. Publish
+   - Teams create, schedule, publish, edit, and manage social posts from one shared overview.
+
+7. Monitor
+   - Structured queries track online mentions across news, blogs, and social platforms.
+
+8. Coordinate during peaks or crises
+   - Monitoring, publishing, and webcare work together to identify urgent issues, prioritise messages, and maintain consistent communication.
+
+9. Report
+   - Teams use workload, response, conversation, and performance insights to improve efficiency and service quality.
+
+Do not treat Spotler Engage as only a social media scheduler, only a helpdesk inbox, or only a monitoring tool. It combines webcare, social messaging, publishing, monitoring, WhatsApp, mobile access, and collaboration.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Central Inbox and Webcare
+
+Spotler Engage brings incoming messages from multiple channels into one central inbox.
+
+Incoming conversation types may include:
+
+- Social media comments
+- Private messages
+- Reviews
+- WhatsApp messages
+- Live chat conversations
+- Chatbot handovers
+- Direct messages
+- Public interactions
+
+Core inbox capabilities:
+
+- Configurable inbox views
+- Assignment
+- Tags
+- Conversation status
+- Ownership
+- Internal notes
+- Conversation history
+- Prioritisation
+- Team collaboration
+
+Design implication:
+
+- The inbox is not just a message list. It is an operational workspace for high-volume webcare.
+- Users need to know what is new, what is assigned, what is urgent, what is waiting, and who owns each conversation.
+- Avoid designing messages as isolated objects without status, channel, ownership, or workflow context.
+
+---
+
+### Conversation Management
+
+Spotler Engage helps teams process conversations efficiently and consistently.
+
+Conversation management includes:
+
+- Opening and replying to messages
+- Assigning conversations to team members
+- Adding internal notes
+- Adding tags
+- Updating status
+- Tracking ownership
+- Seeing channel context
+- Reviewing conversation history
+- Escalating sensitive issues
+- Avoiding duplicate responses
+
+Design implication:
+
+- Conversation state and ownership must be clear.
+- Internal collaboration should be separated from public replies.
+- Teams need confidence that no one else is already handling the same conversation.
+
+---
+
+### Automatic Routing and Smart Workflows
+
+Spotler Engage supports smart workflows and automatic routing to reduce manual work.
+
+Workflow concepts may include:
+
+- Routing conversations to the right team
+- Prioritising urgent messages
+- Assigning based on channel, topic, tag, or workload
+- Supporting peak moments
+- Reducing duplicate handling
+- Tracking message status through the process
+
+Design implication:
+
+- Routing should support accountability and speed.
+- Users should understand why a conversation appears in a specific inbox or assignment queue.
+- Avoid black-box routing where ownership is unclear.
+
+---
+
+### Social Publishing and Scheduling
+
+Spotler Engage supports creating, scheduling, publishing, editing, and managing posts for connected social channels.
+
+Supported publishing channels include:
+
+- Facebook
+- Instagram
+- Threads
+- X / Twitter
+- LinkedIn
+- TikTok
+
+Publishing capabilities:
+
+- Create posts
+- Schedule posts
+- Manage posts centrally
+- Edit posts
+- Use a shared overview
+- Optimise posts with an AI assistant
+- Coordinate communication during campaigns or crises
+
+Design implication:
+
+- Publishing should be connected to webcare and monitoring.
+- Social content may create follow-up interactions that need to be handled in the inbox.
+- Shared overview and governance matter, especially for teams.
+
+---
+
+### Monitoring and Listening
+
+Spotler Engage supports monitoring online mentions through structured search queries.
+
+Monitoring sources may include:
+
+- News
+- Blogs
+- Social platforms
+
+Monitoring capabilities:
+
+- Build search queries
+- Manage queries
+- Refine queries with filters and keywords
+- Use AI-assisted query building
+- Track brand mentions
+- Identify trend signals
+- Support crisis communication
+- Support reputation management
+
+Design implication:
+
+- Monitoring is about early signals and reputation insight, not only analytics.
+- Query building should be understandable and refinable.
+- Monitoring should connect to webcare and publishing during sensitive situations.
+
+---
+
+### Crisis and Reputation Management
+
+Spotler Engage supports teams during incidents, peak loads, policy changes, public disruptions, or reputationally sensitive moments.
+
+Crisis and reputation workflows may include:
+
+- Detecting increased message volume
+- Monitoring mentions
+- Identifying urgent or sensitive messages
+- Prioritising conversations
+- Assigning work across teams
+- Coordinating public responses
+- Publishing updates
+- Maintaining consistency
+- Reporting on response performance
+
+Design implication:
+
+- Crisis workflows need speed, overview, priority, and governance.
+- Monitoring, publishing, and webcare should not feel disconnected.
+- Designs should support pressure, volume, urgency, and risk.
+
+---
+
+### WhatsApp Messaging
+
+Spotler Engage supports WhatsApp as part of the same webcare and communication environment.
+
+WhatsApp capabilities:
+
+- Receive WhatsApp messages
+- Reply to WhatsApp conversations
+- Set up WhatsApp campaigns
+- Manage WhatsApp alongside social channels
+- Retain conversation history per contact
+
+Design implication:
+
+- WhatsApp should not feel like a separate standalone tool.
+- Conversation history and channel context matter.
+- WhatsApp may be used for one-to-one service and campaign messaging.
+
+---
+
+### Live Chat and Chatbots
+
+Spotler Engage can connect other communication channels such as live chat and chatbots.
+
+Capabilities may include:
+
+- Website live chat via widget
+- Automated chatbot conversations
+- Chatbot handover to human agents
+- Central handling alongside other channels
+
+Design implication:
+
+- Chat and chatbot conversations should fit into the same assignment, status, and ownership model as other conversations.
+- Avoid treating chat as disconnected from webcare workflows.
+
+---
+
+### Mobile Access and Progressive Web App
+
+Spotler Engage offers mobile access through a progressive web app.
+
+Mobile use cases:
+
+- Publish messages on the go
+- Answer webcare enquiries from any location
+- Handle urgent messages outside the office
+- Support teams during events or incidents
+
+Design implication:
+
+- Mobile access supports continuous availability.
+- Mobile workflows should prioritise speed, clarity, and safe action.
+- Avoid assuming webcare always happens from a desktop office environment.
+
+---
+
+### Reporting and Performance Insight
+
+Spotler Engage provides insight into webcare workload, response speed, conversations, and service performance.
+
+Reporting may include:
+
+- Response times
+- Conversation volume
+- Workload
+- Team performance
+- Channel performance
+- Message status
+- Assignment status
+- Service performance
+- Peak moments
+- Monitoring signals
+- Publishing activity
+
+Design implication:
+
+- Reporting should help teams improve efficiency, collaboration, and customer satisfaction.
+- Workload insight matters for team leads.
+- Response-time reporting matters for service quality.
+
+---
+
+## Important Product Objects and Concepts
+
+### Conversation
+
+A customer or audience interaction handled in Engage. A conversation may come from a social comment, direct message, WhatsApp, live chat, review, or chatbot handover.
+
+### Message
+
+An individual incoming or outgoing communication within a conversation.
+
+### Channel
+
+The source or destination of a conversation or post, such as Facebook, Instagram, WhatsApp, LinkedIn, X, TikTok, Threads, live chat, or chatbot.
+
+### Central inbox
+
+The shared environment where conversations from multiple channels are collected and handled.
+
+### Inbox view
+
+A configurable view of conversations based on channel, team, status, assignment, tag, priority, or other criteria.
+
+### Assignment
+
+The process of assigning a conversation to a team member or team.
+
+### Ownership
+
+The person or team responsible for handling a conversation.
+
+### Status
+
+The current handling state of a conversation, such as new, open, assigned, waiting, resolved, or closed.
+
+### Tag
+
+A label used to categorise conversations by topic, urgency, sentiment, department, campaign, or issue type.
+
+### Internal note
+
+A private team note added to a conversation. It is not visible to the customer.
+
+### Public reply
+
+A response sent to the customer or audience through the original channel.
+
+### Routing
+
+The automatic or manual process of directing a conversation to the right inbox, team, or user.
+
+### Priority
+
+An indication of urgency or importance, often used during high-volume or sensitive situations.
+
+### Monitoring query
+
+A structured search query used to track mentions across news, blogs, or social platforms.
+
+### Mention
+
+An online reference to the organisation, brand, campaign, issue, topic, or keyword.
+
+### Publishing
+
+The creation, scheduling, and posting of content to social channels.
+
+### Scheduled post
+
+A post prepared to be published at a specific time.
+
+### Campaign
+
+A coordinated communication effort across one or more channels.
+
+### Crisis situation
+
+A high-pressure or reputationally sensitive moment where message volume, urgency, and risk increase.
+
+### WhatsApp campaign
+
+A structured WhatsApp communication sent or managed through Engage.
+
+### Progressive web app
+
+The mobile-accessible version of Engage used for publishing and webcare on the go.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Webcare
+- Social messaging
+- Customer conversation
+- Conversation
+- Message
+- Comment
+- Private message
+- Direct message
+- Review
+- WhatsApp
+- Live chat
+- Chatbot
+- Central inbox
+- Integrated inbox
+- Configurable inbox view
+- Stream
+- Assignment
+- Ownership
+- Status
+- Tag
+- Internal note
+- Routing
+- Automatic routing
+- Smart workflow
+- Priority
+- Response time
+- Workload
+- Publishing
+- Scheduling
+- Social post
+- Shared overview
+- AI assistant
+- Monitoring
+- Listening
+- Media monitoring
+- Search query
+- AI-assisted query
+- Mention
+- Reputation management
+- Crisis communication
+- Peak load
+- Progressive web app
+- Permission structure
+- Role-based access
+
+Avoid replacing these with generic SaaS language such as “items”, “tickets”, “records”, “tasks”, or “objects” when a more specific Engage term exists. Use “conversation” rather than “ticket” unless the product context specifically calls for ticket-like handling.
+
+---
+
+## Key Integrations and Channels
+
+Spotler Engage connects communication channels and conversations into one environment.
+
+### Social media platforms and messaging channels
+
+Supported channels include:
+
+- WhatsApp
+- Facebook
+- Instagram
+- LinkedIn
+- X / Twitter
+- TikTok
+- Threads
+
+Important channel logic:
+
+- Facebook supports publishing and managing Messenger messages.
+- Instagram supports managing messages and responding to interactions.
+- LinkedIn supports scheduling and publishing posts.
+- X / Twitter supports scheduling posts and one-to-one contact via DM.
+- TikTok supports publishing content and responding to comments.
+- Threads supports sharing messages and interacting with the audience.
+- WhatsApp supports one-to-one messaging and campaigns.
+
+---
+
+### Other communication channels
+
+Other connected communication channels include:
+
+- Live chat
+- Chatbots
+
+Important channel logic:
+
+- Live chat can bring website conversations into the same handling environment.
+- Chatbots can support automated conversations and may hand over to human agents.
+- These conversations should still follow inbox, assignment, status, and ownership logic.
+
+---
+
+### Monitoring sources
+
+Monitoring can cover:
+
+- News
+- Blogs
+- Social platforms
+
+Important monitoring logic:
+
+- Monitoring is available for organisations in the Netherlands.
+- Monitoring supports reputation management, crisis communication, brand tracking, and trend detection.
+- AI-assisted query building helps teams create and refine queries.
+
+---
+
+## Important Workflows
+
+### Workflow: Handle a centralised webcare conversation
+
+1. A customer sends a message through a social channel, WhatsApp, live chat, review, or another connected channel.
+2. The message appears in the central inbox.
+3. The conversation is shown in a configurable inbox view.
+4. The conversation is assigned to a team member or team.
+5. The agent reviews history, tags, notes, and context.
+6. The agent replies or adds an internal note.
+7. The conversation status is updated.
+8. Team leads monitor workload and response time.
+
+Design implications:
+
+- Channel, status, assignment, and ownership must be visible.
+- Internal notes must be clearly distinct from public replies.
+- The workflow should prevent duplicate work and missed messages.
+
+---
+
+### Workflow: Prioritise and route conversations
+
+1. Messages arrive from multiple channels.
+2. Routing rules, tags, inbox views, or team workflows organise the conversations.
+3. Urgent, sensitive, or high-priority messages are surfaced.
+4. Conversations are assigned to the right person or team.
+5. The team responds in the correct order and tracks status.
+
+Design implications:
+
+- Prioritisation should reduce noise.
+- Routing should make ownership clear.
+- Users should be able to understand what needs action first.
+
+---
+
+### Workflow: Manage a crisis or peak-load situation
+
+1. A disruption, incident, policy change, campaign, or public issue causes message volume to increase.
+2. Monitoring detects mentions, trends, or sensitive topics.
+3. Conversations in the inbox are prioritised and assigned.
+4. Teams coordinate internal notes, response strategy, and publishing.
+5. Official updates are published through social channels.
+6. Webcare agents respond consistently across channels.
+7. Managers monitor response speed, workload, and issue development.
+
+Design implications:
+
+- Monitoring, publishing, and webcare should connect clearly.
+- Urgency, volume, and risk need visual and workflow support.
+- Consistency and coordination are more important than individual speed alone.
+
+---
+
+### Workflow: Create and schedule a social post
+
+1. A social media manager creates a post.
+2. The user selects one or more connected channels.
+3. The user optimises the post, potentially using the AI assistant.
+4. The post is scheduled or published.
+5. The post appears in a shared overview.
+6. Incoming reactions are handled through webcare.
+
+Design implications:
+
+- Publishing should connect to the conversation workflow.
+- Channel selection and scheduling should be clear.
+- Shared overview helps governance and coordination.
+
+---
+
+### Workflow: Build a monitoring query
+
+1. A communications or reputation user defines a topic, brand, campaign, or risk area to monitor.
+2. The user creates a structured search query.
+3. Filters and keywords refine the query.
+4. AI-assisted query building may help improve coverage and precision.
+5. Mentions from news, blogs, or social platforms are monitored.
+6. Insights are used for reputation management, crisis response, or trend detection.
+
+Design implications:
+
+- Query building should not feel overly technical.
+- Users need to understand what the query captures.
+- Monitoring results should connect to communication action where possible.
+
+---
+
+### Workflow: Manage WhatsApp conversations and campaigns
+
+1. A customer contacts the organisation through WhatsApp or receives a WhatsApp campaign.
+2. The WhatsApp conversation appears in Engage.
+3. The conversation is handled alongside social messages and other channels.
+4. Agents use assignment, status, and history to manage the interaction.
+5. The conversation history is retained per contact.
+
+Design implications:
+
+- WhatsApp should be part of the same operational view.
+- Channel-specific context should still be visible.
+- Conversation history matters for continuity.
+
+---
+
+### Workflow: Work on the go with the progressive web app
+
+1. A user opens Engage from a mobile device.
+2. The user reviews assigned conversations or publishing needs.
+3. The user replies to webcare enquiries or publishes messages.
+4. The user updates status or coordinates with the team.
+
+Design implications:
+
+- Mobile workflows should support quick, safe actions.
+- The experience should prioritise urgent information and clear ownership.
+- Avoid desktop-only assumptions.
+
+---
+
+## Common Use Cases
+
+### Centralised webcare
+
+Use when messages arrive through many channels and teams need one shared inbox.
+
+Important context:
+
+- Messages may come from social comments, private messages, reviews, WhatsApp, live chat, or chatbot handovers.
+- Teams need assignment, tags, notes, statuses, and ownership.
+- The main value is faster response and fewer missed enquiries.
+
+Outcome:
+
+- Faster responses
+- Fewer missed messages
+- Better collaboration
+- Clear accountability
+
+---
+
+### Crisis and reputation management
+
+Use when public attention, incidents, or sensitive topics increase message volume and risk.
+
+Important context:
+
+- Monitoring, publishing, and webcare work together.
+- Urgent messages need prioritisation.
+- Teams need consistent responses under pressure.
+
+Outcome:
+
+- Better control
+- Faster response
+- More consistent communication
+
+---
+
+### Social publishing with governance
+
+Use when teams create, schedule, and publish social posts across channels.
+
+Important context:
+
+- Shared overview matters.
+- Publishing can create incoming interactions.
+- AI assistant may support optimisation.
+- Coordination is important during campaigns and crises.
+
+Outcome:
+
+- More consistent social communications
+- Better coordination
+- Reduced fragmentation
+
+---
+
+### Media monitoring
+
+Use when organisations need insight into how they are discussed online.
+
+Important context:
+
+- Monitoring uses structured queries.
+- Sources can include news, blogs, and social platforms.
+- AI-assisted queries can help build better monitoring coverage.
+- Monitoring is available for organisations in the Netherlands.
+
+Outcome:
+
+- Earlier signals
+- Better reputation insight
+- Stronger crisis preparedness
+
+---
+
+### WhatsApp engagement
+
+Use when WhatsApp conversations or campaigns need to be managed alongside other webcare channels.
+
+Important context:
+
+- WhatsApp should not be separated from the broader service workflow.
+- Conversation history per contact matters.
+- WhatsApp may support one-to-one service and campaigns.
+
+Outcome:
+
+- Consistent service experience across channels
+- Better continuity
+- Less tool switching
+
+---
+
+### Mobile webcare and publishing
+
+Use when teams need to respond or publish outside the office.
+
+Important context:
+
+- Progressive web app supports mobile use.
+- Useful during events, incidents, campaigns, or on-call situations.
+
+Outcome:
+
+- Continuous availability
+- Faster action
+- Better operational flexibility
+
+---
+
+## Sector Context
+
+### Municipalities, ministries, and public bodies
+
+Common needs:
+
+- Daily enquiries via social media
+- Service requests
+- Policy-related questions
+- Incident communication
+- Election or disruption communication
+- Public trust and transparency
+
+Design emphasis:
+
+- Overview, assignment, monitoring, publishing, and consistency are critical.
+- Peak moments can sharply increase volume.
+- Sensitive issues need prioritisation and coordination.
+
+---
+
+### NGOs, membership organisations, and housing associations
+
+Common needs:
+
+- Public campaign responses
+- Member or resident enquiries
+- Fundraising communication
+- Service disruption communication
+- Trust and transparency
+
+Design emphasis:
+
+- Accessibility and consistent responses matter.
+- Teams may handle both campaigns and service enquiries.
+- Collaboration helps maintain quality during pressure.
+
+---
+
+### Banks and insurers
+
+Common needs:
+
+- High volumes of social and WhatsApp enquiries
+- Sensitive customer communication
+- Incident or policy-change response
+- Early issue detection
+
+Design emphasis:
+
+- Prioritisation, ownership, monitoring, and risk control matter.
+- Teams need structure during peak moments.
+- Compliance and consistent handling may be important.
+
+---
+
+### Education, healthcare, and non-profit organisations
+
+Common needs:
+
+- Public questions
+- Stakeholder communication
+- Sensitive topics
+- Campaigns
+- High-trust communication
+
+Design emphasis:
+
+- Message clarity, empathy, and consistency matter.
+- Monitoring helps detect reputational or service issues early.
+
+---
+
+## Feature Design Guidance
+
+### Design for high-volume conversation handling
+
+Spotler Engage is built for teams handling many conversations across many channels.
+
+Good designs should support:
+
+- Fast triage
+- Clear ownership
+- Assignment
+- Status tracking
+- Tags
+- Priority
+- Channel visibility
+- Internal notes
+- Workload overview
+
+Avoid:
+
+- Treating messages as simple unread notifications
+- Hiding who owns a conversation
+- Making users switch context to understand channel or status
+
+---
+
+### Keep public replies and internal collaboration separate
+
+Agents need to collaborate privately while responding publicly.
+
+Good designs should clearly distinguish:
+
+- Public replies
+- Internal notes
+- Assignments
+- Status changes
+- Tags
+- System actions
+
+Avoid any ambiguity that could lead to an internal note being sent as a public response.
+
+---
+
+### Connect monitoring, publishing, and webcare
+
+Spotler Engage is strongest when monitoring, publishing, and webcare support each other.
+
+Good designs should show relationships between:
+
+- Mentions
+- Incoming conversations
+- Published posts
+- Campaigns
+- Crisis topics
+- Response coordination
+
+Avoid designing these areas as completely unrelated tools.
+
+---
+
+### Design for crisis and peak moments
+
+During crisis or peak loads, teams need overview and control.
+
+Good designs should support:
+
+- Urgency
+- Volume changes
+- Priority messages
+- Assignment at scale
+- Consistent responses
+- Monitoring signals
+- Publishing updates
+- Team workload
+
+Avoid workflows that only work in calm, low-volume situations.
+
+---
+
+### Make channel context visible
+
+Each channel has different expectations and constraints.
+
+Good designs should show:
+
+- Source channel
+- Message type
+- Public or private context
+- Conversation history
+- Channel-specific actions
+- Customer-facing vs internal actions
+
+Avoid flattening all channels so much that important context is lost.
+
+---
+
+### Make mobile use practical
+
+The progressive web app supports publishing and webcare on the go.
+
+Good mobile designs should prioritise:
+
+- Assigned conversations
+- Urgent messages
+- Quick replies
+- Safe publishing
+- Status updates
+- Clear ownership
+
+Avoid forcing complex desktop workflows into mobile screens without prioritisation.
+
+---
+
+### Make reporting operational
+
+Reports should help teams improve webcare performance and collaboration.
+
+Useful reporting angles:
+
+- Response time
+- Workload
+- Channel volume
+- Conversation status
+- Assignment distribution
+- Peak periods
+- Team performance
+- Monitoring trends
+
+Avoid dashboards that do not help teams decide where to improve.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler Engage is an integrated webcare and social messaging platform.
+- Conversations from multiple channels are handled in one central inbox.
+- Users need configurable inbox views, assignment, tags, notes, ownership, and statuses.
+- Webcare, publishing, and monitoring are connected parts of the same operation.
+- The product supports social publishing and scheduling.
+- The product supports monitoring and listening through structured queries.
+- The product supports WhatsApp conversations and campaigns.
+- The product supports live chat and chatbots.
+- The product supports mobile use through a progressive web app.
+- High-volume and peak-load situations are important.
+- Crisis and reputation management are important use cases.
+- Teams need speed, overview, consistency, and accountability.
+- Reporting should support operational improvement.
+- Multiple team members can work simultaneously.
+- Role-based access and permission structures matter.
+- Media monitoring is available for organisations in the Netherlands.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler Engage features:
+
+- Do not treat Engage as only a social media scheduler.
+- Do not treat Engage as only a helpdesk ticketing tool.
+- Do not treat Engage as only a monitoring dashboard.
+- Do not replace “conversation” with “ticket” unless specifically appropriate.
+- Do not ignore assignment, ownership, status, tags, or internal notes.
+- Do not hide the channel a message came from.
+- Do not mix internal notes and public replies.
+- Do not design webcare without team collaboration.
+- Do not design publishing without considering follow-up interactions.
+- Do not design monitoring without connecting it to reputation or crisis action.
+- Do not assume all usage happens during normal low-volume operations.
+- Do not ignore crisis, peak load, or sensitive situations.
+- Do not assume WhatsApp is separate from the main inbox.
+- Do not ignore mobile access through the progressive web app.
+- Do not invent unrelated SaaS objects such as projects, boards, or generic tasks unless specifically needed.
+- Do not replace product terminology with vague terms like “items” or “records”.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Duplicate handling risk
+
+Multiple team members may see the same conversation. Designs should make ownership and assignment clear to prevent duplicate replies.
+
+### Internal note accidentally sent publicly
+
+Internal collaboration must be visually and functionally separated from public replies.
+
+### Message volume spike
+
+During incidents, campaigns, outages, policy changes, or crises, message volume can increase quickly. Designs should support triage, routing, and priority.
+
+### Sensitive or urgent issue
+
+A message may require escalation, careful wording, or coordination with communications leadership.
+
+### Conversation spans multiple messages
+
+A customer may send several messages in a row or across channels. Conversation history helps maintain continuity.
+
+### Channel-specific constraints
+
+Different channels may support different actions, formats, or expectations. Designs should not assume every channel behaves the same.
+
+### WhatsApp conversation history
+
+WhatsApp interactions should retain conversation history per contact and should be manageable alongside social webcare.
+
+### Chatbot handover
+
+A chatbot may handle part of a conversation before handing over to a human agent. Designs should preserve handover context.
+
+### Monitoring query too broad
+
+A query may capture too many irrelevant mentions. Users need filters, keywords, and refinement.
+
+### Monitoring query too narrow
+
+A query may miss important mentions. AI-assisted query building can help improve coverage.
+
+### Publishing during a crisis
+
+Posts may need coordination, approval, or careful timing during sensitive situations.
+
+### Mobile response risk
+
+Mobile users may act quickly under pressure. Designs should make reply, note, status, and publish actions clear and safe.
+
+### Permission differences
+
+Not every user can publish, assign, monitor, or configure settings. Role-based access should be considered.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- Webcare terminology
+- User roles
+- Conversation logic
+- Inbox and assignment logic
+- Publishing logic
+- Monitoring logic
+- WhatsApp and messaging context
+- Crisis and reputation management context
+- Mobile and progressive web app context
+- Reporting and operational insight
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler Engage feature, check:
+
+- Does the design use Spotler Engage terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in webcare, social messaging, publishing, monitoring, WhatsApp, live chat, chatbots, mobile access, or reporting?
+- Does the design avoid generic SaaS assumptions?
+- Does it make channel context visible?
+- Does it clearly show assignment, ownership, status, tags, and internal notes where relevant?
+- Does it separate internal collaboration from public replies?
+- Does it support team collaboration and simultaneous work?
+- Does it account for high-volume and peak-load situations?
+- Does it support crisis and reputation management where relevant?
+- Does it connect monitoring, publishing, and webcare where appropriate?
+- Does it make WhatsApp part of the same operational environment?
+- Does it account for mobile use through the progressive web app?
+- Does reporting help teams improve response speed, workload, and service quality?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Spotler Engage Product Context Skill, redesign the central inbox for webcare agents handling social comments, private messages, WhatsApp, live chat, and reviews.”
+
+“Using the Spotler Engage Product Context Skill, redesign the conversation detail view so agents can clearly see channel context, conversation history, public replies, internal notes, tags, assignment, and status.”
+
+“Using the Spotler Engage Product Context Skill, redesign the publishing overview for teams scheduling posts across Facebook, Instagram, Threads, X, LinkedIn, and TikTok.”
+
+“Using the Spotler Engage Product Context Skill, redesign the monitoring query builder for communications teams tracking brand mentions, crisis topics, and reputation signals.”
+
+“Using the Spotler Engage Product Context Skill, redesign the team workload dashboard for webcare team leads managing response times and assignment queues.”
+
+---
+
+### New feature prompts
+
+“Using the Spotler Engage Product Context Skill, design a feature for automatically routing urgent conversations to the right team during peak loads.”
+
+“Using the Spotler Engage Product Context Skill, design a crisis communication workspace that combines monitoring, publishing, priority conversations, assignments, and response coordination.”
+
+“Using the Spotler Engage Product Context Skill, design a WhatsApp campaign and conversation management flow inside the same webcare environment.”
+
+“Using the Spotler Engage Product Context Skill, design a mobile-first flow for replying to assigned conversations using the progressive web app.”
+
+“Using the Spotler Engage Product Context Skill, design an AI-assisted monitoring query builder that helps users refine keywords and filters.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Spotler Engage Product Context Skill, explain which product objects are involved in handling a webcare conversation from arrival to resolution.”
+
+“Using the Spotler Engage Product Context Skill, map the workflow from online mention detection to crisis response coordination.”
+
+“Using the Spotler Engage Product Context Skill, identify edge cases for separating internal notes from public replies.”
+
+“Using the Spotler Engage Product Context Skill, explain how publishing and webcare should connect after a scheduled social post receives comments.”
+
+“Using the Spotler Engage Product Context Skill, suggest realistic inbox views for a public sector organisation managing peak message volumes.”
+
+---
+
+### Design review prompts
+
+“Using the Spotler Engage Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic SaaS assumptions.”
+
+“Using the Spotler Engage Product Context Skill, check whether this inbox design clearly supports assignment, ownership, status, tags, and channel context.”
+
+“Using the Spotler Engage Product Context Skill, review whether this crisis workflow connects monitoring, publishing, and webcare effectively.”
+
+“Using the Spotler Engage Product Context Skill, identify where this design should distinguish public replies from internal notes.”
+
+“Using the Spotler Engage Product Context Skill, check whether this mobile workflow supports safe and fast webcare actions on the go.”

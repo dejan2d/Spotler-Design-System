@@ -1,0 +1,1584 @@
+---
+name: spotler-mail-plus
+description: Product context for Spotler Mail+
+---
+
+# Spotler Mail+ Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler Mail+.
+
+This Skill gives Figma Make product context for Spotler Mail+ so it can make better UX and product decisions without starting from generic SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler Mail+ is an email marketing solution for organisations that use email as an important communication channel.
+
+It helps marketing and communications teams create professional newsletters, automate follow-ups, personalise email content, manage audiences, monitor deliverability, and understand campaign performance from one structured environment.
+
+Spotler Mail+ is built for teams that want both speed and control. It supports reusable templates, brand settings, dynamic content, segmentation, automated campaigns, CRM and CDP synchronisation, engagement tracking, A/B testing, and reporting.
+
+The product helps teams move from manual, inconsistent, and generic email production to a more structured, data-driven, and scalable email workflow.
+
+---
+
+## Core Problem Spotler Mail+ Solves
+
+Spotler Mail+ solves several connected problems for marketing and communications teams.
+
+### 1. Email production takes too much manual work
+
+Many teams spend too much time building emails, recreating content blocks, applying brand styling manually, reviewing versions, and making last-minute changes.
+
+Spotler Mail+ reduces this work through:
+
+- Drag-and-drop email creation
+- Reusable templates
+- Reusable content blocks
+- Brand settings
+- Pre-send checks
+- Previews
+- AI support for content and subject lines
+
+The goal is to help teams create branded emails faster while reducing errors and inconsistencies.
+
+### 2. Email campaigns are often too generic
+
+Many organisations send the same message to broad lists, even when they have customer, behavioural, CRM, or CDP data available.
+
+Spotler Mail+ supports more relevant email communication through:
+
+- Static and dynamic lists
+- Tags
+- Scoring
+- Profile data
+- Behavioural data
+- CRM-based segmentation
+- CDP-driven segmentation
+- Dynamic content blocks
+- Personalised campaign flows
+
+The goal is to send more relevant messages to the right audience at the right time.
+
+### 3. Follow-up is difficult to scale manually
+
+After downloads, sign-ups, abandoned carts, booking interest, or other interactions, timely follow-up matters. Manual follow-up is inconsistent and hard to scale.
+
+Spotler Mail+ supports automated email sequences based on:
+
+- Behaviour
+- Dates
+- List changes
+- Customer data
+- Product data
+- CRM or CDP signals
+
+The goal is to automate timely follow-up while keeping campaigns manageable for marketers.
+
+### 4. Deliverability and list quality limit campaign results
+
+Even well-designed emails fail if they do not reach the inbox or if lists are poorly maintained.
+
+Spotler Mail+ supports deliverability and list management through:
+
+- Domain authentication support
+- SPF
+- DKIM
+- DMARC
+- Engagement filtering
+- List management
+- Suppression tools
+- Privacy and compliance support
+
+The goal is to improve sustainable inbox placement and long-term engagement.
+
+### 5. Marketing and sales data are often disconnected
+
+For B2B organisations, campaign engagement is more valuable when it is visible in the CRM and usable by sales.
+
+Spotler Mail+ supports CRM synchronisation and can write engagement such as opens and clicks back to contact level.
+
+The goal is to align marketing and sales around the same contact data and engagement signals.
+
+---
+
+## Target Users and User Roles
+
+Spotler Mail+ is primarily used by marketing and communications teams in SME and mid-market organisations.
+
+### Primary users
+
+#### Email marketer
+
+An email marketer creates, sends, automates, measures, and optimises email campaigns.
+
+Goals:
+
+- Build branded emails quickly
+- Segment audiences
+- Personalise content
+- Automate follow-up
+- Improve engagement and conversion
+- Understand campaign performance
+
+Typical needs:
+
+- Drag-and-drop editing
+- Reusable templates
+- Dynamic content
+- List and segment management
+- Campaign scheduling
+- Reporting and A/B testing
+
+---
+
+#### Marketing manager
+
+A marketing manager oversees campaign planning, brand consistency, audience strategy, and performance.
+
+Goals:
+
+- Maintain quality and brand control
+- Improve campaign efficiency
+- Increase conversion and customer value
+- Reduce manual work
+- Align campaigns with customer lifecycle stages
+
+Typical needs:
+
+- Campaign overview
+- Active and draft campaign visibility
+- Performance trends
+- Clear approval or pre-send confidence
+- Reusable templates and brand settings
+
+---
+
+#### Communications professional
+
+A communications professional uses Mail+ for newsletters, stakeholder updates, public communications, and regular announcements.
+
+Goals:
+
+- Send professional newsletters
+- Maintain consistent messaging
+- Segment stakeholders or audiences
+- Automate date-based reminders
+- Monitor engagement
+
+Typical needs:
+
+- Easy email creation
+- Templates
+- Audience lists
+- Scheduling
+- Reports
+- Reliable deliverability
+
+---
+
+#### CRM or B2B campaign marketer
+
+A CRM or B2B marketer uses Mail+ with CRM data to target prospects, leads, and customers.
+
+Goals:
+
+- Use CRM segments in campaigns
+- Write engagement back to the CRM
+- Support lead nurturing
+- Align marketing and sales
+- Help sales prioritise follow-up
+
+Typical needs:
+
+- CRM-synchronised lists
+- Contact-level engagement data
+- Lead nurturing flows
+- Segmentation by sector, stage, or customer status
+- Campaign reporting connected to sales follow-up
+
+---
+
+#### E-commerce marketer
+
+An e-commerce marketer uses Mail+ to combine newsletters, product data, customer behaviour, and automated lifecycle campaigns.
+
+Goals:
+
+- Increase conversion
+- Recover abandoned carts or browsing sessions
+- Send product-related campaigns
+- Reactivate customers
+- Personalise content with CDP or webshop data
+
+Typical needs:
+
+- Product data integration
+- CDP connection
+- Dynamic content
+- Abandoned cart and browse flows
+- Back-in-stock and price-drop campaigns
+- Post-purchase follow-up
+
+---
+
+### Secondary users
+
+#### Deliverability or technical specialist
+
+A deliverability or technical specialist may support domain setup, authentication, data flows, and integrations.
+
+Goals:
+
+- Ensure reliable inbox placement
+- Configure authentication
+- Support list hygiene
+- Connect CRM, CDP, webshop, or API integrations
+
+Typical needs:
+
+- SPF, DKIM, and DMARC setup visibility
+- Deliverability guidance
+- Sync status
+- Integration monitoring
+- Suppression and engagement filtering tools
+
+---
+
+#### Sales user or sales manager
+
+A sales user may not work directly in Mail+ every day, but benefits from campaign engagement being written back to the CRM.
+
+Goals:
+
+- See which contacts opened or clicked campaigns
+- Prioritise follow-up
+- Understand lead interest
+- Align sales activity with marketing engagement
+
+Typical needs:
+
+- Contact-level engagement history
+- CRM feedback
+- Clear campaign interaction signals
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Spotler Mail+ as a structured workflow from email creation to audience targeting to campaign sending or automation to reporting and optimisation.
+
+The core mental model is:
+
+1. Create
+   - Build branded emails, newsletters, landing pages, or SMS campaigns using templates, reusable blocks, brand settings, and drag-and-drop editing.
+
+2. Target
+   - Select audiences using lists, tags, profile data, CRM segments, CDP data, preferences, scoring, or behaviour.
+
+3. Personalise
+   - Adjust content with dynamic blocks, profile data, tags, behaviour, product data, or customer preferences.
+
+4. Send or automate
+   - Send one-off campaigns or trigger automated email sequences based on behaviour, dates, list changes, CRM data, CDP data, or e-commerce signals.
+
+5. Deliver
+   - Support inbox placement through authentication, list hygiene, engagement filtering, and suppression management.
+
+6. Measure
+   - Track engagement, campaign results, trends, A/B test outcomes, and contact-level interactions.
+
+7. Feed back
+   - Synchronise lists and write engagement data back to systems such as CRM, CDP, or other marketing tools.
+
+Do not treat Spotler Mail+ as only a drag-and-drop email editor. It is an email marketing platform that combines content creation, brand control, segmentation, automation, deliverability, reporting, and integrations.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Email Creation and Branding
+
+Spotler Mail+ helps users create professional emails quickly while preserving brand consistency.
+
+Key capabilities:
+
+- Drag-and-drop email editor
+- Landing page editor
+- Reusable templates
+- Reusable content blocks
+- Brand manager
+- Brand colours
+- Typography settings
+- Button settings
+- Pre-send checks
+- Email previews
+- AI support for content
+- AI support for subject lines
+
+Design implication:
+
+- Email creation should feel structured and efficient, not like starting from a blank canvas every time.
+- Templates and reusable blocks are central to reducing manual work.
+- Brand consistency is a product outcome, not only a visual design concern.
+
+---
+
+### Campaign Management
+
+Spotler Mail+ supports both one-off campaigns and automated flows.
+
+Campaign types include:
+
+- Newsletters
+- Promotions
+- Stakeholder updates
+- Lead nurturing campaigns
+- Lifecycle campaigns
+- Welcome campaigns
+- Reactivation campaigns
+- Abandoned cart campaigns
+- Browse abandonment campaigns
+- Back-in-stock notifications
+- Price-drop campaigns
+- Post-purchase follow-ups
+- Date-based reminders
+
+Campaign states may include:
+
+- Draft
+- Scheduled
+- Active
+- Sent
+- Paused
+- Completed
+
+Design implication:
+
+- Users need overview and control across active and draft campaigns.
+- Campaign setup should make audience, content, timing, trigger, and reporting visible.
+
+---
+
+### Automation and Workflows
+
+Spotler Mail+ allows users to create automated email sequences with triggers and steps.
+
+Automation triggers may be based on:
+
+- Behaviour
+- Dates
+- List changes
+- Sign-ups
+- Downloads
+- CRM updates
+- CDP segments
+- Product data
+- Purchase activity
+- Abandoned cart
+- Browse abandonment
+- Booking intent
+- Customer lifecycle events
+
+Automation steps may include:
+
+- Send email
+- Wait
+- Check condition
+- Split audience
+- Apply tag
+- Update score
+- Trigger follow-up
+- End flow
+
+Design implication:
+
+- Automation should be understandable to marketers.
+- Use clear “when this happens, do this next” logic.
+- Avoid making automation feel like developer workflow programming.
+
+---
+
+### Personalisation and Segmentation
+
+Spotler Mail+ supports personalised communication based on profile, behaviour, and system data.
+
+Segmentation sources include:
+
+- Static lists
+- Dynamic lists
+- Tags
+- Scores
+- Profile data
+- Preferences
+- Behaviour
+- CRM segments
+- CDP data
+- Product data
+- Purchase data
+- Engagement data
+
+Personalisation mechanisms include:
+
+- Dynamic content blocks
+- Personalised subject lines
+- Personalised offers
+- Product recommendations
+- Segment-specific content
+- Lifecycle-based content
+
+Design implication:
+
+- Segmentation should be easy to understand and visibly connected to content and campaign logic.
+- Personalisation should be based on real data signals, not vague “smart” assumptions.
+
+---
+
+### CRM and CDP Synchronisation
+
+Spotler Mail+ connects to CRM and CDP systems to synchronise audiences, lists, profile data, and engagement signals.
+
+CRM use cases:
+
+- Synchronise contact data
+- Use CRM segments as mailing lists
+- Segment by sector or customer stage
+- Write opens and clicks back to contact level
+- Help sales prioritise follow-up
+
+CDP use cases:
+
+- Use behavioural data in email campaigns
+- Use profile and purchase data for segmentation
+- Activate lifecycle messaging
+- Send product recommendations
+- Trigger real-time or near-real-time personalised journeys
+
+Design implication:
+
+- Integrations are not optional extras; they are part of the product’s value.
+- Make sync direction clear: importing data, exporting engagement, or both.
+- Show contact-level engagement where relevant.
+
+---
+
+### Deliverability and List Management
+
+Spotler Mail+ helps users improve deliverability and maintain list quality.
+
+Capabilities include:
+
+- SPF support
+- DKIM support
+- DMARC support
+- Domain setup guidance
+- Engagement filtering
+- List management
+- Suppression tools
+- List hygiene
+- Privacy and compliance support
+
+Design implication:
+
+- Deliverability should feel actionable and structural, not just a technical warning.
+- List quality, engagement, authentication, and suppression should be treated as connected.
+- Avoid reducing deliverability to a single “score” without explaining what users can do.
+
+---
+
+### Reporting and Optimisation
+
+Spotler Mail+ provides insight into campaign and engagement performance.
+
+Reporting areas include:
+
+- Mailing reports
+- Trend reports
+- Opens
+- Clicks
+- Engagement
+- Campaign results
+- A/B testing results
+- Subject line performance
+- Content performance
+- Contact-level engagement
+- Ongoing optimisation insights
+
+Design implication:
+
+- Reports should help users improve future campaigns.
+- Contact-level engagement is especially important for B2B CRM alignment.
+- Reporting should connect results to audiences, content, timing, and campaign type.
+
+---
+
+### A/B Testing
+
+Spotler Mail+ supports A/B testing for subject lines and content.
+
+Testing concepts:
+
+- Variant
+- Subject line test
+- Content test
+- Audience split
+- Winning version
+- Engagement metric
+- Campaign performance
+- Optimisation decision
+
+Design implication:
+
+- Make it clear what is being tested.
+- Show which audience receives each version.
+- Explain the result in terms of campaign improvement.
+- Avoid hiding the winning criteria.
+
+---
+
+### SMS Campaigns
+
+Spotler Mail+ can support email and SMS campaigns.
+
+Design implication:
+
+- Email is the core channel, but SMS may appear as part of campaign creation or automation.
+- Do not assume every campaign is email-only if the feature context includes SMS.
+
+---
+
+### Forms, Surveys, and Data Collection
+
+Spotler Mail+ can collect and enrich customer data through native forms and surveys.
+
+Uses include:
+
+- Sign-ups
+- Preferences
+- Interest collection
+- Data enrichment
+- Segmentation
+- Follow-up triggers
+
+Design implication:
+
+- Forms and surveys should connect to lists, tags, profile data, preferences, and automation triggers.
+- Avoid treating forms as standalone web forms disconnected from campaign logic.
+
+---
+
+## Important Product Objects and Concepts
+
+### Email
+
+A message created and sent through Mail+. It may be part of a one-off campaign or an automated sequence.
+
+### Newsletter
+
+A recurring or regular email communication, often used for updates, promotions, content, or stakeholder communication.
+
+### Campaign
+
+A planned email or SMS communication sent to a selected audience. A campaign may be one-off or part of a wider workflow.
+
+### Automated campaign
+
+A campaign that runs based on triggers, dates, list changes, behaviour, or data signals.
+
+### Flow or workflow
+
+An automated sequence of steps, usually involving triggers, waits, conditions, and follow-up emails.
+
+### Template
+
+A reusable email structure that helps users create branded emails faster and more consistently.
+
+### Content block
+
+A reusable piece of email content that can be inserted into emails, such as a header, product block, CTA section, article section, or footer.
+
+### Brand manager
+
+A product area for managing brand settings such as colours, typography, and buttons. This helps maintain consistent branding across campaigns.
+
+### List
+
+A group of contacts used for targeting email campaigns. Lists may be static or dynamic.
+
+### Static list
+
+A list that contains a fixed or manually managed set of contacts.
+
+### Dynamic list
+
+A list that updates based on rules, data, behaviour, tags, CRM data, or CDP data.
+
+### Tag
+
+A label applied to contacts based on interest, behaviour, engagement, survey answers, or other criteria.
+
+### Score
+
+A value that indicates interest, engagement, or lead quality.
+
+### Contact
+
+A person who can receive email or SMS communication. Contacts may contain profile data, preferences, engagement history, tags, scores, and CRM/CDP attributes.
+
+### Contact-level engagement
+
+Engagement data such as opens and clicks stored at the individual contact level. This is important for CRM feedback and sales follow-up.
+
+### Segment
+
+A targeted group of contacts selected by list membership, tags, profile data, behaviour, CRM data, CDP data, or preferences.
+
+### Dynamic content block
+
+A content block that changes depending on contact data, segment, preference, behaviour, or profile attributes.
+
+### Trigger
+
+An event or condition that starts an automated campaign or workflow step.
+
+### Suppression
+
+A mechanism to prevent specific contacts from receiving messages, often for unsubscribe, compliance, list hygiene, or deliverability reasons.
+
+### Engagement filtering
+
+Filtering based on whether contacts are active, inactive, engaged, or unengaged.
+
+### Deliverability
+
+The ability of emails to reach recipients’ inboxes reliably.
+
+### Domain authentication
+
+Technical setup that supports sender trust and deliverability, including SPF, DKIM, and DMARC.
+
+### A/B test
+
+A test comparing two or more versions of subject lines or content to determine which performs better.
+
+### Mailing report
+
+A report showing results for a specific mailing or campaign.
+
+### Trend report
+
+A report showing performance patterns over time.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Email marketing
+- Newsletter
+- Email campaign
+- SMS campaign
+- One-off campaign
+- Automated flow
+- Automated email sequence
+- Trigger
+- Step
+- Behaviour-based campaign
+- Date-based campaign
+- List change
+- Drag-and-drop editor
+- Template
+- Reusable template
+- Content block
+- Reusable content block
+- Brand manager
+- Brand settings
+- Pre-send check
+- Preview
+- GenAI
+- Subject line
+- Dynamic content
+- Static list
+- Dynamic list
+- Tag
+- Scoring
+- Profile data
+- Preference
+- Segment
+- CRM-based segmentation
+- CDP-driven segmentation
+- Contact
+- Contact-level engagement
+- Open
+- Click
+- Engagement
+- Deliverability
+- Inbox placement
+- SPF
+- DKIM
+- DMARC
+- Engagement filtering
+- List hygiene
+- Suppression
+- Mailing report
+- Trend report
+- A/B testing
+- CRM synchronisation
+- CDP synchronisation
+- Write-back
+- Abandoned cart
+- Browse abandonment
+- Back-in-stock
+- Price-drop campaign
+- Post-purchase follow-up
+- Lead nurturing
+- Reactivation
+
+Avoid replacing these with generic SaaS language such as “items”, “records”, “tasks”, or “assets” when a more specific Mail+ term exists.
+
+---
+
+## Key Integrations
+
+Spotler Mail+ integrates with CRM systems, e-commerce platforms, data collection tools, Spotler products, and technical systems.
+
+### CRM systems
+
+Used to synchronise contacts, segmented lists, and engagement data.
+
+Known CRM integrations include:
+
+- Microsoft Dynamics 365 CRM
+- AFAS
+- Spotler CRM
+- Salesforce
+- Other CRM systems
+
+Important integration logic:
+
+- CRM data can be used for segmentation.
+- Mail+ can write engagement such as opens and clicks back to the CRM at contact level.
+- CRM alignment is especially important for B2B marketing and sales follow-up.
+
+---
+
+### E-commerce platforms
+
+Used to personalise email campaigns and trigger lifecycle flows using customer, product, purchase, and behavioural data.
+
+Known e-commerce integrations include:
+
+- Magento
+- WooCommerce
+- Related connectors
+
+Important integration logic:
+
+- E-commerce data can power abandoned cart, browse abandonment, back-in-stock, price-drop, product recommendation, and post-purchase flows.
+- Product and purchase data should be treated as campaign inputs.
+
+---
+
+### Forms and data collection
+
+Used to collect and enrich customer data within Mail+.
+
+Supported tools include:
+
+- Native forms
+- Surveys
+
+Important integration logic:
+
+- Form and survey data can affect tags, preferences, lists, segments, and automated follow-up.
+
+---
+
+### Spotler ecosystem products
+
+Mail+ connects with other Spotler products.
+
+Known Spotler product connections include:
+
+- Spotler Activate
+- Spotler ActivatePro
+- Spotler CRM
+- Spotler Message
+
+Important integration logic:
+
+- Spotler Activate and ActivatePro can provide behavioural, profile, purchase, and CDP data for email personalisation and lifecycle campaigns.
+- Spotler CRM can provide CRM segmentation and receive engagement feedback.
+- Spotler Message may support messaging beyond email, such as WhatsApp in broader journeys.
+
+---
+
+### Technical integrations
+
+Used to connect Mail+ to custom systems and automate data flows.
+
+Known technical integration:
+
+- REST API
+
+Important integration logic:
+
+- Custom integrations may import contacts, update lists, trigger campaigns, or synchronise engagement data.
+
+---
+
+## Important Workflows
+
+### Workflow: Create a branded newsletter
+
+1. A marketer starts a new newsletter or campaign.
+2. The marketer selects a reusable template.
+3. The marketer adds or edits reusable content blocks.
+4. Brand settings control colours, typography, and buttons.
+5. The marketer previews the email.
+6. Pre-send checks help catch issues before sending.
+7. The marketer selects an audience and schedules or sends the mailing.
+8. Results are reviewed in mailing reports.
+
+Design implications:
+
+- Make template selection and reusable blocks prominent.
+- Preserve the idea of brand control.
+- Include preview and pre-send confidence.
+- Do not make users rebuild repeated newsletter structures from scratch.
+
+---
+
+### Workflow: Build and send a targeted campaign
+
+1. A marketer defines the campaign goal.
+2. The marketer chooses or creates an email.
+3. The marketer selects a segment using lists, tags, profile data, CRM data, CDP data, behaviour, or preferences.
+4. The marketer personalises content with dynamic blocks if needed.
+5. The marketer previews and checks the campaign.
+6. The campaign is scheduled or sent.
+7. Performance is measured.
+
+Design implications:
+
+- Audience logic should be visible and understandable.
+- Personalisation should be connected to real contact or behavioural data.
+- Campaign setup should show content, audience, timing, and checks.
+
+---
+
+### Workflow: Create an automated follow-up sequence
+
+1. A user defines the trigger, such as a download, sign-up, date, list change, behaviour, or CRM/CDP signal.
+2. The user creates one or more email steps.
+3. The user adds waits, conditions, or segmentation logic.
+4. The user activates the automated flow.
+5. Contacts enter the flow when they match the trigger.
+6. Engagement and outcomes are measured.
+
+Design implications:
+
+- Automation should read like a marketer-friendly sequence.
+- Make trigger, steps, timing, and audience clear.
+- Avoid overly technical workflow-builder language where possible.
+
+---
+
+### Workflow: Align B2B marketing and sales through CRM
+
+1. A B2B team segments contacts in the CRM by sector, stage, status, or account context.
+2. Segmented lists are synchronised with Mail+.
+3. Marketing sends a targeted campaign.
+4. Opens and clicks are written back to the CRM at contact level.
+5. Sales sees which contacts interacted with the campaign.
+6. Sales prioritises follow-up based on engagement.
+7. Marketing uses reports and A/B test results to improve the next campaign.
+
+Design implications:
+
+- Show CRM synchronisation clearly.
+- Make contact-level engagement visible.
+- Preserve the marketing-to-sales feedback loop.
+- Avoid designing reports that only help marketers and ignore sales context.
+
+---
+
+### Workflow: Improve deliverability and list quality
+
+1. A user or specialist checks domain authentication status.
+2. SPF, DKIM, and DMARC setup guidance is used where needed.
+3. The team applies list hygiene and suppression rules.
+4. Engagement filtering helps avoid sending to unengaged contacts.
+5. Campaign performance and inbox placement improve over time.
+
+Design implications:
+
+- Deliverability should be actionable.
+- Show what is configured and what needs attention.
+- Connect list hygiene to campaign performance.
+- Avoid presenting authentication as unrelated technical setup.
+
+---
+
+### Workflow: Run an A/B test
+
+1. A marketer chooses what to test, such as subject line or content.
+2. The marketer creates variants.
+3. The marketer selects an audience.
+4. The system sends variants according to the test setup.
+5. Engagement results are compared.
+6. The marketer uses the result to optimise future campaigns.
+
+Design implications:
+
+- Make the tested element explicit.
+- Show variants clearly.
+- Show success criteria or performance comparison.
+- Make the outcome useful for future decisions.
+
+---
+
+### Workflow: Connect Mail+ to a CDP for personalised lifecycle messaging
+
+1. Customer, behavioural, profile, and purchase data are available in the CDP.
+2. CDP audiences or segments are synchronised with Mail+.
+3. A marketer uses these audiences to target email campaigns or automated flows.
+4. Email content is personalised using profile, product, purchase, or behavioural data.
+5. Campaigns trigger lifecycle messages such as reactivation, product recommendations, or post-purchase follow-ups.
+6. Results are measured and used for optimisation.
+
+Design implications:
+
+- Make the CDP data source clear.
+- Preserve the relationship between CDP segment and email activation.
+- Avoid treating CDP data as just another manual list upload.
+- Make lifecycle use cases visible.
+
+---
+
+### Workflow: E-commerce automation
+
+1. A customer browses products, adds to cart, purchases, or shows product interest.
+2. Product, behaviour, or purchase data becomes available to Mail+ through a CDP, webshop, or connector.
+3. An automated campaign is triggered.
+4. The customer receives a relevant email, such as abandoned cart, browse abandonment, back-in-stock, price-drop, or post-purchase follow-up.
+5. Performance is measured.
+
+Design implications:
+
+- E-commerce flows depend on behaviour and product data.
+- Abandoned cart and browse abandonment are distinct use cases.
+- Back-in-stock and price-drop flows depend on product availability or pricing changes.
+- Post-purchase follow-up depends on purchase data.
+
+---
+
+## Common Use Cases
+
+### Professional newsletters in minutes
+
+Use when teams need to send regular newsletters with consistent branding.
+
+Important context:
+
+- Newsletter production often takes too much time.
+- Brand consistency may vary between teams.
+- Reusable templates and blocks reduce manual work.
+
+Outcome:
+
+- Faster production
+- Fewer errors
+- Consistent, on-brand communication
+
+---
+
+### Automated follow-up and lead nurturing
+
+Use when interactions such as downloads, sign-ups, dates, or list changes require timely follow-up.
+
+Important context:
+
+- Manual follow-up is difficult to scale.
+- Triggers and automated sequences make follow-up more consistent.
+- This is important for B2B lead nurturing and general customer communication.
+
+Outcome:
+
+- Timely follow-up
+- More relevant communication
+- Less manual work
+
+---
+
+### CRM-driven B2B email campaigns
+
+Use when marketing and sales need to work with the same contact and engagement data.
+
+Important context:
+
+- CRM segments can be synchronised with Mail+.
+- Opens and clicks can be written back to the CRM.
+- Sales can prioritise follow-up based on engagement.
+
+Outcome:
+
+- Better marketing and sales alignment
+- More targeted follow-up
+- Contact-level engagement insight
+
+---
+
+### Deliverability and list management
+
+Use when teams need to improve inbox placement and long-term campaign performance.
+
+Important context:
+
+- Authentication matters.
+- Engagement filtering helps protect list quality.
+- Suppression and list hygiene support compliance and deliverability.
+
+Outcome:
+
+- Better deliverability
+- More sustainable engagement
+- Reduced risk of poor inbox placement
+
+---
+
+### Commerce newsletters and lifecycle emails
+
+Use when commerce teams combine weekly newsletters with automated flows.
+
+Important context:
+
+- Newsletters and automations often run side by side.
+- Dynamic content can tailor offers per segment.
+- Product and customer data can drive lifecycle flows.
+
+Outcome:
+
+- Better customer journey control
+- Higher conversion
+- More relevant customer communication
+
+---
+
+### Cultural or public stakeholder communication
+
+Use when organisations need structured, branded updates for different audience groups.
+
+Important context:
+
+- Tags and surveys can identify interests.
+- Date-based reminders may be important.
+- A/B testing can optimise subject lines.
+
+Outcome:
+
+- More relevant communications
+- Better engagement
+- Less manual coordination
+
+---
+
+### Travel and leisure booking journeys
+
+Use when travel or leisure organisations want to drive bookings and repeat bookings.
+
+Important context:
+
+- Segments may be based on destination interest or booking intent.
+- Automated campaigns can trigger personalised offers.
+- Pre-departure information and abandoned booking reminders are common.
+
+Outcome:
+
+- Higher booking conversion
+- More relevant customer journeys
+- Better repeat booking potential
+
+---
+
+## Sector Context
+
+### Commerce organisations
+
+Common needs:
+
+- Newsletters
+- Promotions
+- Product-based campaigns
+- Lifecycle emails
+- Abandoned cart
+- Browse abandonment
+- Back-in-stock
+- Price-drop campaigns
+- Post-purchase follow-up
+- Product recommendations
+
+Design emphasis:
+
+- Product data, purchase data, customer behaviour, and conversion impact are important.
+- Weekly campaigns and automation often coexist.
+
+---
+
+### B2B organisations
+
+Common needs:
+
+- Lead nurturing
+- CRM-driven segmentation
+- Sales follow-up
+- Prospect and customer communication
+- Contact-level engagement tracking
+
+Design emphasis:
+
+- CRM synchronisation and write-back are central.
+- Sales needs visibility into engagement.
+- Campaign logic often depends on sector, stage, lead status, or customer status.
+
+---
+
+### Non-profit and public organisations
+
+Common needs:
+
+- Newsletters
+- Stakeholder updates
+- Public communication
+- Event or date-based reminders
+- Segmented communication
+
+Design emphasis:
+
+- Ease of use, reliability, brand consistency, and audience segmentation matter.
+- Workflows should not assume commercial purchase conversion in every case.
+
+---
+
+### Culture, recreation, and entertainment
+
+Common needs:
+
+- Programme promotion
+- Seasonal campaigns
+- Interest-based segmentation
+- Survey-based targeting
+- Date-based reminders
+
+Design emphasis:
+
+- Interests, events, reminders, and recurring communications are important.
+
+---
+
+### Travel and leisure
+
+Common needs:
+
+- Destination interest campaigns
+- Booking-intent segmentation
+- Abandoned booking reminders
+- Personalised offers
+- Pre-departure communication
+- Repeat booking campaigns
+
+Design emphasis:
+
+- Journeys may involve longer consideration periods and multiple follow-up moments.
+
+---
+
+## Feature Design Guidance
+
+### Design for speed and control
+
+Spotler Mail+ should help teams create campaigns faster without losing control over quality, branding, compliance, or deliverability.
+
+Good design patterns:
+
+- Reusable templates
+- Reusable content blocks
+- Clear campaign overview
+- Guided pre-send checks
+- Preview states
+- Easy audience selection
+- Clear automation steps
+- Reporting connected to next actions
+
+Avoid:
+
+- Making every campaign feel like a blank start
+- Hiding brand settings
+- Overcomplicating setup for small teams
+- Treating speed and control as separate goals
+
+---
+
+### Design for marketers and communications professionals
+
+Most primary users are not developers.
+
+Prefer:
+
+- Plain-language segmentation rules
+- Clear trigger descriptions
+- Drag-and-drop interactions
+- Guided setup
+- Human-readable campaign states
+- Simple previews
+- Actionable reports
+
+Avoid:
+
+- Developer-first API language in marketer-facing flows
+- Database-like segmentation interfaces unless needed
+- Overly technical deliverability screens without explanation
+- Complex automation logic without clear labels
+
+---
+
+### Make campaign structure clear
+
+For campaign-related screens, make these elements visible:
+
+- Campaign type
+- Audience or segment
+- Content
+- Personalisation
+- Timing
+- Trigger, if automated
+- Status
+- Checks
+- Reporting result
+
+Avoid designing campaign screens that only show the email design while hiding targeting, timing, or automation context.
+
+---
+
+### Preserve the distinction between one-off campaigns and automated flows
+
+One-off campaigns are manually scheduled or sent.
+
+Automated flows run when a trigger or condition is met.
+
+Do not merge these concepts unless the feature explicitly does so. Users need to understand whether they are preparing a single mailing or configuring an ongoing automation.
+
+---
+
+### Treat deliverability as part of campaign success
+
+Deliverability is not a background technical concern. It affects whether campaigns are seen.
+
+Feature designs should connect deliverability to:
+
+- Domain authentication
+- List quality
+- Suppression
+- Engagement filtering
+- Inbox placement
+- Campaign performance
+
+Avoid treating deliverability as a disconnected settings page only.
+
+---
+
+### Make integration direction explicit
+
+When designing integrations, clarify whether Mail+ is:
+
+- Importing contacts
+- Importing segmented lists
+- Importing product data
+- Importing behavioural data
+- Importing CDP audiences
+- Writing engagement back to CRM
+- Triggering campaigns
+- Using an API for custom data flows
+
+Avoid vague “connected” states that do not explain what data moves where.
+
+---
+
+### Keep personalisation grounded in data
+
+Personalisation should be based on recognisable data inputs.
+
+Examples:
+
+- Profile data
+- Tags
+- Preferences
+- Behaviour
+- CDP segments
+- CRM fields
+- Product data
+- Purchase history
+- Engagement score
+
+Avoid presenting personalisation as generic AI-driven magic without showing what data it uses.
+
+---
+
+### Make reporting actionable
+
+Reports should help users decide what to do next.
+
+Useful reporting angles:
+
+- Which subject line performed better
+- Which content got more clicks
+- Which audience engaged more
+- Which campaign drove conversion
+- Which contacts interacted
+- Which trends are improving or declining
+- Which campaigns need optimisation
+
+Avoid purely decorative dashboards that do not support campaign improvement.
+
+---
+
+### Respect European, SME, and mid-market positioning
+
+Spotler Mail+ is a European platform suited for SME and mid-market teams professionalising beyond simpler tools such as Mailchimp, Laposta, or HubSpot.
+
+Design implications:
+
+- Keep workflows accessible.
+- Avoid enterprise-only complexity as the default.
+- Preserve control, privacy, reliability, and compliance.
+- Make the product feel structured and professional without being heavy.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler Mail+ is an email marketing solution, not just an email editor.
+- The product supports the complete email workflow from creation to reporting.
+- Speed and control are both core product values.
+- Reusable templates and content blocks are central.
+- Brand consistency is a major product outcome.
+- Users are usually marketers or communications professionals, not developers.
+- One-off campaigns and automated flows are both important.
+- Segmentation can come from lists, tags, scores, profile data, preferences, CRM data, CDP data, behaviour, and product data.
+- Personalisation uses dynamic content and data signals.
+- CRM synchronisation is important for B2B use cases.
+- Contact-level engagement can be written back to CRM.
+- CDP connections enable behavioural and lifecycle messaging.
+- Deliverability depends on authentication, list quality, suppression, and engagement.
+- Reporting should help teams optimise campaigns.
+- A/B testing supports subject line and content optimisation.
+- Mail+ supports email and may also support SMS campaign workflows.
+- The product is suitable for SME and mid-market organisations.
+- GDPR, ISO 27001, privacy rights, and reliable sending reputation matter to the product context.
+- Integrations are part of the product’s value, not secondary add-ons.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler Mail+ features:
+
+- Do not treat Mail+ as only a drag-and-drop email editor.
+- Do not treat Mail+ as only a newsletter sender.
+- Do not treat Mail+ as a generic CRM.
+- Do not treat Mail+ as a generic marketing automation platform without email-specific logic.
+- Do not ignore deliverability, authentication, suppression, and list hygiene.
+- Do not design personalisation without clear data inputs.
+- Do not design automation without trigger, steps, timing, and audience logic.
+- Do not assume every campaign is automated.
+- Do not assume every campaign is one-off.
+- Do not hide CRM or CDP synchronisation when it matters to the feature.
+- Do not ignore contact-level engagement in B2B workflows.
+- Do not invent unrelated objects such as projects, tickets, or boards unless specifically needed.
+- Do not replace Mail+ terminology with generic labels such as “items”, “records”, or “assets”.
+- Do not make marketer-facing flows overly technical.
+- Do not design deliverability as a vague score without actionable guidance.
+- Do not imply that all integrations are bidirectional unless specified.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+- Do not invent integrations outside the known product context unless explicitly requested.
+- Do not treat AI support as the core product; GenAI is supportive for content and subject lines.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Campaign has content but no valid audience
+
+A user may create an email before selecting a list or segment. Designs should make missing audience selection clear before sending.
+
+### Audience exists but sync is outdated
+
+CRM or CDP-synchronised lists may depend on recent syncs. Designs should show sync status or data freshness where relevant.
+
+### Contact is suppressed
+
+A contact may match a campaign audience but should not receive the email because of suppression, unsubscribe, compliance, or list hygiene rules.
+
+### Domain authentication is incomplete
+
+A campaign may be ready from a content perspective but deliverability setup may need attention.
+
+### Dynamic content has missing data
+
+A personalised block may depend on profile data, product data, tags, or preferences that some contacts do not have. Designs should support fallback content.
+
+### Automation trigger has no eligible contacts
+
+A flow may be active but no contacts currently match the trigger. Designs should distinguish setup success from current volume.
+
+### CRM write-back fails
+
+Engagement such as opens or clicks may fail to sync back to CRM. Designs should show errors or sync status where relevant.
+
+### Contact belongs to multiple lists or segments
+
+A contact may qualify for several audiences. Designs should avoid confusion about duplicate sends, exclusions, or priority.
+
+### A/B test does not reach enough volume
+
+A test may not have enough recipients or engagement to produce a meaningful winner. Avoid presenting weak results as definitive.
+
+### User sends to inactive contacts
+
+Sending to unengaged contacts may hurt deliverability. Engagement filtering or warnings may be relevant.
+
+### Automation overlaps with newsletters
+
+A contact may receive both a regular newsletter and an automated email. Designs may need to show frequency, suppression, or priority logic.
+
+### Product data changes after campaign setup
+
+For e-commerce flows such as back-in-stock or price-drop campaigns, product availability or price can change. Designs should account for freshness and fallback.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- Terminology
+- User roles
+- Data objects
+- Segmentation logic
+- Personalisation logic
+- Automation logic
+- Deliverability logic
+- CRM and CDP integration context
+- Reporting and optimisation context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler Mail+ feature, check:
+
+- Does the design use Mail+ terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in email creation, campaigns, segmentation, personalisation, automation, deliverability, reporting, or integrations?
+- Does the design avoid generic SaaS assumptions?
+- Does it distinguish between one-off campaigns and automated flows?
+- Does it make audience, content, timing, trigger, and status clear where relevant?
+- Does it preserve reusable templates and content blocks as important workflow accelerators?
+- Does it support marketers and communications professionals rather than only technical users?
+- Does it make CRM or CDP synchronisation clear where relevant?
+- Does it account for contact-level engagement where B2B workflows are involved?
+- Does it treat deliverability and list management as part of campaign success?
+- Does it make personalisation data sources clear?
+- Does reporting help users optimise future campaigns?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Spotler Mail+ Product Context Skill, redesign the campaign creation flow for a marketer creating a branded newsletter from a reusable template.”
+
+“Using the Spotler Mail+ Product Context Skill, redesign the audience selection step so users can choose static lists, dynamic lists, tags, CRM segments, and CDP-driven audiences.”
+
+“Using the Spotler Mail+ Product Context Skill, redesign the automation builder for behaviour-based and date-based email sequences.”
+
+“Using the Spotler Mail+ Product Context Skill, redesign the deliverability setup screen for SPF, DKIM, DMARC, engagement filtering, and list hygiene.”
+
+“Using the Spotler Mail+ Product Context Skill, redesign the mailing report so marketers can understand opens, clicks, engagement, A/B test results, and contact-level insights.”
+
+---
+
+### New feature prompts
+
+“Using the Spotler Mail+ Product Context Skill, design a feature for creating reusable content blocks that help marketers build newsletters faster.”
+
+“Using the Spotler Mail+ Product Context Skill, design a CRM write-back status screen showing whether opens and clicks were successfully written back to contact records.”
+
+“Using the Spotler Mail+ Product Context Skill, design a CDP-powered dynamic content setup flow for personalised e-commerce email campaigns.”
+
+“Using the Spotler Mail+ Product Context Skill, design an abandoned cart automation flow using product data, customer behaviour, timing, and follow-up emails.”
+
+“Using the Spotler Mail+ Product Context Skill, design an A/B testing setup flow for subject lines and email content.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Spotler Mail+ Product Context Skill, explain the product objects involved in sending a CRM-driven B2B campaign.”
+
+“Using the Spotler Mail+ Product Context Skill, map the workflow from CRM segment synchronisation to email campaign engagement write-back.”
+
+“Using the Spotler Mail+ Product Context Skill, identify edge cases for a dynamic content block that uses CDP profile data.”
+
+“Using the Spotler Mail+ Product Context Skill, suggest realistic automation triggers for a travel organisation using booking intent and destination interest.”
+
+“Using the Spotler Mail+ Product Context Skill, explain how deliverability, list hygiene, suppression, and engagement filtering relate to campaign success.”
+
+---
+
+### Design review prompts
+
+“Using the Spotler Mail+ Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic SaaS assumptions.”
+
+“Using the Spotler Mail+ Product Context Skill, check whether this campaign setup flow clearly shows content, audience, timing, checks, and reporting.”
+
+“Using the Spotler Mail+ Product Context Skill, review whether this automation concept makes trigger, steps, timing, and audience logic clear.”
+
+“Using the Spotler Mail+ Product Context Skill, identify where this design should show CRM or CDP sync status.”
+
+“Using the Spotler Mail+ Product Context Skill, check whether this deliverability feature is actionable for marketers and technical specialists.”

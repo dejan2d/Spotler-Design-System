@@ -1,0 +1,1332 @@
+---
+name: spotler-activate
+description: Product context for Spotler Activate
+---
+
+# Spotler Activate Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for **Spotler Activate**.
+
+This Skill gives Figma Make product context for Spotler Activate so it can make better UX and product decisions without starting from generic SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is **not** a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+**Spotler Activate** is a Customer Data Platform (CDP) for commerce organisations.
+
+It captures visitor behaviour from websites and webshops, combines that behavioural data with customer data from other systems, and creates a central customer profile for each visitor or customer.
+
+Marketing teams use these profiles to:
+
+- Build audiences and segments
+- Personalise website and webshop experiences
+- Trigger real-time interactions during visits
+- Launch follow-up campaigns through connected channels
+- Automate customer journeys
+- Run A/B and multivariate tests
+- Activate audiences for paid media
+- Use predictive insights for targeting, retention, and conversion optimisation
+
+Spotler Activate is especially relevant for organisations that rely on online transactions, repeat purchases, bookings, ticket sales, or digital lead conversion.
+
+The product helps marketers move from fragmented customer data and generic digital experiences to behaviour-based, personalised, and measurable customer journeys.
+
+---
+
+## Core Problem Spotler Activate Solves
+
+Spotler Activate solves two major problems for digital marketing and commerce teams.
+
+### 1. Fragmented customer data
+
+Customer and visitor data is often spread across:
+
+- Webshops
+- CRM systems
+- Marketing automation tools
+- Email marketing platforms
+- Analytics tools
+- Booking systems
+- Ticketing systems
+- PIM systems
+- Advertising platforms
+
+This fragmentation makes it difficult to understand customers, recognise intent, and coordinate marketing actions.
+
+Spotler Activate centralises this data into one customer profile, combining explicit data such as customer details and order history with implicit behavioural data such as browsing behaviour, clicks, engagement, and shopping cart activity.
+
+### 2. Generic digital experiences
+
+Many websites and webshops show the same content, banners, offers, CTAs, and recommendations to every visitor.
+
+Spotler Activate uses behavioural events and customer profile data to tailor experiences based on:
+
+- Visitor behaviour
+- Previous interactions
+- Interests
+- Engagement
+- Purchase intent
+- Customer lifecycle stage
+- Predicted value or churn risk
+
+The goal is to make digital experiences more relevant and to increase engagement, conversion, repeat purchase, and retention.
+
+---
+
+## Target Users and User Roles
+
+Spotler Activate is primarily used by marketing teams in commerce-driven organisations.
+
+### Primary users
+
+#### Marketer
+
+A marketer uses Spotler Activate to understand visitor behaviour, build audiences, create personalisations, and improve campaign performance.
+
+Goals:
+
+- Create relevant customer experiences
+- Increase conversions
+- Improve engagement
+- Reduce drop-off
+- Trigger follow-up campaigns
+- Use behavioural data without relying heavily on technical teams
+
+Typical needs:
+
+- Clear audience-building flows
+- Understandable behavioural conditions
+- Easy personalisation setup
+- Campaign and journey activation
+- Performance reporting
+
+#### E-commerce marketer
+
+An e-commerce marketer focuses on webshop behaviour, product interest, shopping cart activity, abandoned cart flows, cross-sell, upsell, and repeat purchases.
+
+Goals:
+
+- Increase conversion rate
+- Increase order value
+- Recover abandoned carts
+- Encourage repeat purchases
+- Personalise product recommendations
+
+Typical needs:
+
+- Product and category-based behavioural segmentation
+- Cart and purchase triggers
+- Product recommendation logic
+- Audience activation for email and ads
+
+#### Campaign manager
+
+A campaign manager uses Spotler Activate to coordinate customer journeys and channel activation.
+
+Goals:
+
+- Trigger lifecycle campaigns
+- Send relevant follow-up messages
+- Sync audiences to connected channels
+- Measure campaign impact
+
+Typical needs:
+
+- Journey triggers
+- Channel connections
+- Audience rules
+- Performance by segment or campaign
+
+#### Digital optimisation specialist
+
+A digital optimisation specialist uses Spotler Activate for testing and performance improvement.
+
+Goals:
+
+- Test content variants
+- Compare performance across audiences
+- Optimise conversion and engagement
+- Use data to validate changes
+
+Typical needs:
+
+- A/B tests
+- Multivariate tests
+- Conversion metrics
+- Segment-level reporting
+
+### Secondary users
+
+#### Data or technical specialist
+
+A technical specialist may support setup, integrations, event tracking, and data quality.
+
+Goals:
+
+- Ensure data is collected correctly
+- Connect source systems
+- Maintain reliable customer profiles
+- Make behavioural events available for activation
+
+Typical needs:
+
+- Integration clarity
+- Event definitions
+- Data object relationships
+- Error or sync visibility
+
+#### Business or marketing lead
+
+A business lead may review performance, campaign impact, audience strategy, and ROI.
+
+Goals:
+
+- Understand marketing performance
+- Improve budget efficiency
+- Increase retention
+- Prioritise high-value audiences
+
+Typical needs:
+
+- Clear reporting
+- Predictive insights
+- Conversion and retention impact
+- Audience value indicators
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Spotler Activate as a flow from **data collection** to **profile building** to **activation** to **optimisation**.
+
+The core mental model is:
+
+1. **Collect**
+   - Capture behavioural events from websites and webshops.
+   - Import customer, order, CRM, booking, ticketing, product, or marketing data from connected systems.
+
+2. **Unify**
+   - Combine anonymous visitor behaviour and known customer data.
+   - Link behaviour to a central customer profile once the visitor identifies themselves.
+
+3. **Understand**
+   - Use profiles, events, order history, interests, engagement signals, and predictive insights to understand customer intent.
+
+4. **Segment**
+   - Build dynamic audiences and segments based on behaviour, characteristics, lifecycle stage, interest, value, or predicted risk.
+
+5. **Activate**
+   - Use audiences and events to personalise website content, trigger messages, launch customer journeys, sync paid media audiences, or show recommendations.
+
+6. **Optimise**
+   - Measure performance, run tests, compare variants, and improve personalisations, campaigns, and journeys.
+
+Do not treat Spotler Activate as only an analytics product, only a personalisation tool, or only an email automation tool. It is a CDP that connects customer data, behavioural data, segmentation, real-time personalisation, journey automation, channel activation, testing, and reporting.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Customer Data Collection
+
+Spotler Activate collects data from visitors and customers.
+
+Important data sources include:
+
+- Website behaviour
+- Webshop behaviour
+- Click behaviour
+- Page views
+- Product views
+- Category views
+- Search behaviour
+- Shopping cart interactions
+- Forms
+- Engagement signals
+- Orders and purchases
+- CRM data
+- Booking data
+- Ticketing data
+- Marketing channel interactions
+
+The product should support both anonymous visitor behaviour and known customer data. Anonymous behaviour becomes more valuable once it can be linked to a known customer profile.
+
+---
+
+### Central Customer Profiles
+
+A central customer profile combines multiple types of data into one view of a visitor or customer.
+
+A profile may include:
+
+- Contact details
+- Customer attributes
+- Order history
+- Browsing behaviour
+- Viewed pages
+- Viewed products
+- Click behaviour
+- Engagement signals
+- Interests
+- Audience memberships
+- Journey participation
+- Predictive scores or segments
+- Previous interactions
+
+The profile is the foundation for segmentation, personalisation, triggers, and campaign activation.
+
+When designing features around profiles, preserve the idea that a profile is not just static contact data. It is a continuously enriched behavioural and transactional record.
+
+---
+
+### Audiences and Segmentation
+
+Audiences and segments are built from customer data and behavioural data.
+
+Segments may be based on:
+
+- Viewed pages
+- Viewed products
+- Viewed categories
+- Click behaviour
+- Engagement level
+- Purchase history
+- Cart behaviour
+- Search behaviour
+- Customer characteristics
+- Lifecycle stage
+- Predicted customer lifetime value
+- Churn risk
+- Similarity to high-value customers
+
+Audiences are used for:
+
+- Website personalisation
+- Product or content recommendations
+- Customer journeys
+- Email campaigns
+- WhatsApp messaging
+- Paid media activation
+- Reporting and performance comparison
+- Exclusion from campaigns
+
+Design segmentation flows around conditions, behaviours, audience membership, and activation destinations.
+
+---
+
+### Website and Webshop Personalisation
+
+Spotler Activate can dynamically adjust website or webshop content based on visitor behaviour and interests.
+
+Personalisation examples:
+
+- Banners
+- CTAs
+- Content blocks
+- Offers
+- Forms
+- Product recommendations
+- Content recommendations
+- Messages triggered by behaviour
+- Different experiences for new and returning visitors
+
+Personalisation should be based on real behavioural or profile signals, not arbitrary assumptions.
+
+Common signals include:
+
+- Returning visitor
+- Previously viewed product
+- Viewed category
+- Cart activity
+- Scroll behaviour
+- Exit intent
+- Engagement
+- Prior interactions
+- Audience membership
+
+---
+
+### Visual Editor for Personalisations
+
+Spotler Activate includes a visual editor to manage personalisations.
+
+When designing features involving the visual editor, assume users need to:
+
+- Select an element or content area
+- Define what should change
+- Choose the audience or condition
+- Configure variants
+- Preview the experience
+- Publish or activate the personalisation
+- Measure performance
+
+The visual editor should support marketers who may not be technical. Avoid assuming users want to edit code directly.
+
+---
+
+### Real-Time Triggers
+
+Spotler Activate responds to behavioural interactions and events in real time.
+
+Trigger examples:
+
+- Viewed page
+- Viewed product
+- Clicked element
+- Added item to cart
+- Abandoned cart
+- Abandoned browse
+- Exit intent
+- Scroll depth
+- Form interaction
+- Engagement signal
+- Search behaviour
+
+Real-time triggers can cause:
+
+- On-site messages
+- Personalised banners
+- Adjusted CTAs
+- Recommendations
+- Follow-up campaigns
+- Customer journey entry
+- Channel activation
+
+Design trigger features around clear event conditions and resulting actions.
+
+---
+
+### Customer Journeys and Marketing Automation
+
+Spotler Activate can automatically start customer journeys based on events, intent signals, audience membership, or behavioural conditions.
+
+Common journey examples:
+
+- Abandoned cart
+- Abandoned browse
+- Win-back campaign
+- Post-visit follow-up
+- Product interest follow-up
+- Booking orientation flow
+- Repeat purchase campaign
+- Lifecycle campaign
+
+Journeys can connect to external marketing channels such as email, WhatsApp, or other Spotler products.
+
+When designing journey-related features, make the relationship between trigger, audience, channel, timing, and goal clear.
+
+---
+
+### Cross-Channel Activation
+
+Spotler Activate activates behavioural data and audiences across marketing channels.
+
+Activation destinations include:
+
+- Email campaigns
+- WhatsApp messaging
+- Advertising platforms
+- Other marketing channels
+- Other Spotler products
+
+Examples:
+
+- Trigger an email in Spotler Mail+ after cart abandonment
+- Trigger lifecycle campaigns in Spotler MailPro
+- Activate WhatsApp messaging through Spotler Message
+- Sync audiences to Google Ads or Meta for retargeting
+
+Do not design activation as if everything happens only inside Spotler Activate. The product often connects data and triggers to other systems.
+
+---
+
+### A/B and Multivariate Testing
+
+Spotler Activate supports testing to optimise personalisations, content, offers, messaging, and campaigns.
+
+Testing concepts:
+
+- Variant
+- Control
+- Audience
+- Segment
+- Goal
+- Conversion
+- Engagement
+- Performance comparison
+- Winner or best-performing variant
+
+Design testing features so marketers can understand:
+
+- What is being tested
+- Which audience is included
+- Which variants are active
+- What the success metric is
+- How results compare
+- Whether results should influence future personalisations or campaigns
+
+---
+
+### Analytics, Reporting, and Optimisation
+
+Spotler Activate provides insight into the performance of:
+
+- Personalisations
+- Campaigns
+- Customer journeys
+- Tests
+- Audiences
+- Segments
+- Recommendations
+
+Important metrics and outcomes include:
+
+- Engagement
+- Conversion rate
+- Conversion value
+- Repeat purchases
+- Drop-off reduction
+- Audience performance
+- Campaign performance
+- Segment performance
+- Retention impact
+
+Reports should help marketers optimise actions, not just observe data.
+
+---
+
+### Predictive AI
+
+Spotler Activate can use Predictive AI to build dynamic customer segments and improve targeting.
+
+Predictive AI examples:
+
+- High predicted customer lifetime value
+- Churn risk
+- Next best offer
+- Audiences that resemble high-value customers
+- Less valuable segments to exclude from campaigns
+
+Predictive AI should be presented as a way to support better targeting, budget efficiency, retention, and personalisation. Avoid presenting it as magic or as replacing marketer control.
+
+---
+
+## Important Product Objects and Concepts
+
+### Visitor
+
+A person interacting with a website or webshop. A visitor may be anonymous or known.
+
+### Anonymous visitor
+
+A visitor whose identity is not yet known. Their behaviour can still be tracked and used for intent signals, but it becomes more valuable once linked to a known profile.
+
+### Customer
+
+A known person with identifiable data, such as contact details, order history, booking history, or CRM data.
+
+### Customer profile
+
+The central record that combines customer data, visitor behaviour, interactions, purchase history, interests, audience memberships, and predictive insights.
+
+### Behavioural event
+
+A recorded action or interaction, such as viewing a page, clicking, scrolling, searching, viewing a product, adding to cart, submitting a form, or showing exit intent.
+
+### Audience
+
+A group of visitors or customers selected based on behavioural data, profile attributes, interests, lifecycle stage, predictive scores, or other conditions.
+
+### Segment
+
+A defined group of users based on shared characteristics or behaviours. In many design contexts, segment and audience may be closely related, but avoid using them carelessly if the feature distinguishes between them.
+
+### Personalisation
+
+A website, webshop, content, CTA, banner, offer, message, or recommendation that changes based on visitor behaviour, audience membership, or profile data.
+
+### Trigger
+
+A condition or event that causes an action to happen, such as showing a message or starting a journey.
+
+### Customer journey
+
+An automated sequence of marketing actions based on behaviour, intent, lifecycle stage, or audience membership.
+
+### Recommendation
+
+A personalised product or content suggestion based on browsing behaviour, interests, previous interactions, or purchase history.
+
+### Campaign
+
+A marketing action or set of actions delivered through a channel such as email, WhatsApp, advertising, or on-site personalisation.
+
+### Variant
+
+A version of content, messaging, offer, CTA, or campaign used in a test.
+
+### Integration
+
+A connection with another platform used to import data, export audiences, or trigger campaigns.
+
+### Predictive segment
+
+A dynamic audience created using historical data and machine learning, such as high predicted CLV or churn risk.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Customer Data Platform
+- CDP
+- Customer profile
+- Central customer profile
+- 360° customer profile
+- Visitor
+- Anonymous visitor
+- Customer
+- Behavioural data
+- Behavioural event
+- Viewed page
+- Click behaviour
+- Browsing behaviour
+- Shopping cart interaction
+- Engagement signal
+- Audience
+- Segment
+- Audience building
+- Behavioural segmentation
+- Personalisation
+- Website personalisation
+- Webshop personalisation
+- Real-time trigger
+- Customer journey
+- Marketing automation
+- Cross-channel activation
+- Follow-up campaign
+- Abandoned cart
+- Abandoned browse
+- Win-back campaign
+- Product recommendation
+- Content recommendation
+- A/B test
+- Multivariate test
+- Variant
+- Predictive AI
+- Next best offer
+- Churn risk
+- Customer lifetime value
+- CLV
+- Paid media audience activation
+- Retargeting
+
+Avoid replacing these with generic SaaS language such as “users”, “items”, “tasks”, or “records” when a more specific Spotler Activate term exists.
+
+---
+
+## Key Integrations
+
+Spotler Activate connects with systems in the commerce and marketing landscape.
+
+### E-commerce platforms
+
+- ASPOS
+- CloudSuite
+- Lightspeed
+- Magento / Adobe Commerce
+- PrestaShop
+- Shopify
+- Shopware
+- VTEX
+- WooCommerce
+
+### Analytics and advertising
+
+- Google Analytics / GA4
+- Google Ads
+- Meta / Facebook / Instagram
+
+### Email marketing platforms
+
+- Spotler Mail+
+- Spotler MailPro
+- Copernica
+- Deployteq
+
+### Spotler ecosystem products
+
+- Spotler Activate Search
+- Spotler Mail+
+- Spotler MailPro
+- Spotler Message
+
+When designing integration-related features, make clear whether the integration is used for importing data, exporting audiences, triggering campaigns, syncing channels, or measuring results.
+
+---
+
+## Important Workflows
+
+### Workflow: Collect and enrich customer data
+
+1. A visitor browses a website or webshop.
+2. Spotler Activate records behavioural events such as page views, clicks, product views, scroll behaviour, form interactions, or cart actions.
+3. Data from connected systems such as CRM, webshop, booking, ticketing, or email platforms is combined with behavioural data.
+4. If the visitor identifies themselves, anonymous behaviour is linked to a central customer profile.
+5. The profile becomes available for segmentation, personalisation, journeys, and reporting.
+
+Design implications:
+
+- Make data sources and event types understandable.
+- Show whether data belongs to an anonymous visitor or known profile where relevant.
+- Avoid implying that all visitor behaviour is immediately tied to a known person.
+- Make enrichment feel continuous, not a one-time import.
+
+---
+
+### Workflow: Build an audience from behaviour
+
+1. A marketer chooses behavioural or profile-based conditions.
+2. Conditions may include viewed pages, viewed products, category interest, engagement, purchase history, cart behaviour, customer attributes, or predictive scores.
+3. Spotler Activate groups matching visitors or customers into an audience.
+4. The audience can be used for personalisation, campaigns, journeys, advertising, exclusion, or reporting.
+
+Design implications:
+
+- Make conditions readable for marketers.
+- Show what data source or behaviour powers the audience.
+- Clarify whether the audience updates dynamically.
+- Make activation options visible after audience creation.
+
+---
+
+### Workflow: Personalise website content
+
+1. A marketer selects a page, area, or content element.
+2. The marketer defines the target audience or behavioural condition.
+3. The marketer chooses what changes, such as a banner, content block, CTA, offer, form, or recommendation.
+4. The marketer previews the personalised experience.
+5. The personalisation is published.
+6. Performance is measured by engagement, conversion, or other goals.
+
+Design implications:
+
+- Keep the link between audience, content change, and goal clear.
+- Support previewing for different audiences or visitor states.
+- Avoid making personalisation feel like generic CMS editing.
+- Preserve the behavioural targeting logic.
+
+---
+
+### Workflow: Trigger a real-time interaction
+
+1. Spotler Activate detects a behavioural event during a visit.
+2. The event matches a trigger condition, such as exit intent, scroll depth, cart interaction, or product view.
+3. A relevant action is shown or started, such as a message, banner, recommendation, CTA, or journey.
+4. The result is measured.
+
+Design implications:
+
+- Triggers need clear “when this happens, do that” logic.
+- Timing and context matter.
+- Do not show triggers as static campaign rules only.
+- Make it possible to understand why a visitor qualifies.
+
+---
+
+### Workflow: Start a follow-up journey after a visit
+
+1. A visitor views products or categories, searches, adds an item to cart, or otherwise shows intent.
+2. The visitor leaves without converting.
+3. Spotler Activate links the behaviour to a visitor or customer profile.
+4. A customer journey is started.
+5. The visitor receives a follow-up through email, WhatsApp, or another connected channel.
+6. The campaign may include abandoned products, recommendations, offers, or reminders.
+7. Conversion and engagement are measured.
+
+Design implications:
+
+- Show the relationship between website behaviour and channel follow-up.
+- Preserve abandoned cart and abandoned browse as distinct use cases.
+- Include timing and eligibility conditions where relevant.
+- Avoid assuming follow-up happens only by email.
+
+---
+
+### Workflow: Run an A/B or multivariate test
+
+1. A marketer defines what is being tested.
+2. The marketer creates variants of content, offer, CTA, message, or campaign.
+3. The marketer selects an audience or segment.
+4. The marketer defines a success metric.
+5. Spotler Activate serves variants and records performance.
+6. The marketer compares results and optimises.
+
+Design implications:
+
+- Make variants, audience, and success metric visible together.
+- Show performance by audience or segment where useful.
+- Avoid hiding the control group or baseline.
+- Make it clear when a test is active, paused, completed, or ready for decision.
+
+---
+
+### Workflow: Activate audiences for paid media
+
+1. A marketer builds an audience using first-party behavioural data.
+2. The audience is synced to an advertising platform such as Google Ads or Meta.
+3. The audience is used for retargeting, exclusion, or lookalike-style targeting.
+4. Campaign efficiency and relevance improve.
+
+Design implications:
+
+- Make destination platform and sync status visible.
+- Distinguish activation from reporting.
+- Support both inclusion and exclusion use cases.
+- Avoid implying that ad campaigns themselves are fully managed inside Spotler Activate unless the feature specifically says so.
+
+---
+
+### Workflow: Use Predictive AI for targeting
+
+1. Spotler Activate uses historical data and machine learning to identify patterns.
+2. The platform creates predictive segments such as high CLV, churn risk, next best offer, or similar-to-high-value audiences.
+3. Marketers use these segments for personalisation, campaigns, exclusions, or budget optimisation.
+4. Results are measured and refined.
+
+Design implications:
+
+- Present predictive output as segments or insights that marketers can act on.
+- Keep marketer control visible.
+- Explain what the prediction is useful for.
+- Avoid overclaiming certainty.
+
+---
+
+## Common Use Cases
+
+### Data collection and enrichment via website
+
+Use when a visitor’s behaviour needs to be collected and later connected to a customer profile.
+
+Important context:
+
+- Many visitors are anonymous at first.
+- Behaviour becomes more valuable once linked to a known profile.
+- Behavioural data includes viewed pages, clicks, interactions, forms, and engagement.
+
+Outcome:
+
+- Better insight into customer behaviour
+- Stronger segmentation
+- Better personalisation and automation foundation
+
+---
+
+### Behavioural segmentation and audience building
+
+Use when marketers need to group visitors by behaviour, interests, or profile data.
+
+Important context:
+
+- Audiences are often dynamic.
+- Behavioural data is central.
+- Audience membership drives personalisation and campaigns.
+
+Outcome:
+
+- Better understanding of visitor intent
+- More relevant content and campaigns
+
+---
+
+### On-site content personalisation
+
+Use when the website or webshop should adapt to visitor behaviour or audience membership.
+
+Important context:
+
+- Personalisation can affect banners, content blocks, CTAs, forms, offers, and recommendations.
+- Personalisation should be linked to behavioural or profile signals.
+
+Outcome:
+
+- More relevant content
+- Higher engagement
+- Higher conversion
+
+---
+
+### CTA personalisation
+
+Use when forms or calls-to-action should change based on behaviour, previous interactions, or engagement.
+
+Important context:
+
+- Generic CTAs may not match visitor intent.
+- CTA relevance can depend on lifecycle stage or behavioural signals.
+
+Outcome:
+
+- More form completions
+- More leads, opt-ins, bookings, or conversions
+
+---
+
+### Real-time visit triggers
+
+Use when a visitor is about to drop off or shows relevant behaviour during a session.
+
+Important context:
+
+- Trigger examples include exit intent and scroll behaviour.
+- Timing matters.
+- The action should match the visitor’s current context.
+
+Outcome:
+
+- Reduced drop-off
+- Higher conversion
+
+---
+
+### Personalised recommendations
+
+Use when visitors should see products or content based on interests and previous behaviour.
+
+Important context:
+
+- Recommendations may support cross-sell and upsell.
+- Recommendations should be based on browsing behaviour, previous interactions, or profile data.
+
+Outcome:
+
+- More engagement
+- More conversions
+- Higher conversion value
+
+---
+
+### Follow-up actions via connected channels
+
+Use when visitors leave without converting.
+
+Important context:
+
+- Follow-up can happen through email, WhatsApp, advertising, or other channels.
+- Common flows include abandoned cart, abandoned browse, and win-back campaigns.
+- Behavioural intent should drive the follow-up.
+
+Outcome:
+
+- Better follow-up on purchase intent
+- Higher conversion among returning visitors
+
+---
+
+### A/B and multivariate testing
+
+Use when marketers want to validate which content, offer, message, or campaign performs best.
+
+Important context:
+
+- Testing should include variants, audience, and success metric.
+- Results should support optimisation.
+
+Outcome:
+
+- Faster insight
+- Better campaign and personalisation performance
+
+---
+
+### Paid media audience activation
+
+Use when first-party behavioural audiences should be used in advertising platforms.
+
+Important context:
+
+- Audiences can be synced to Google Ads or Meta.
+- Use cases include retargeting, exclusion, and more efficient targeting.
+
+Outcome:
+
+- More relevant retargeting
+- Better advertising efficiency
+
+---
+
+### Predictive targeting and retention
+
+Use when marketers want to predict value, churn, or likely next action.
+
+Important context:
+
+- Predictive AI can identify high CLV, churn risk, next best offer, or similar high-value audiences.
+- Predictions should support targeting and budget decisions.
+
+Outcome:
+
+- Smarter targeting
+- More efficient marketing budget
+- Better retention and conversion optimisation
+
+---
+
+## Sector Context
+
+### Retail and e-commerce
+
+Common data sources:
+
+- Webshop
+- CRM
+- PIM
+- Marketing tools
+- Order history
+- Product browsing behaviour
+
+Common use cases:
+
+- Abandoned cart
+- Product recommendations
+- Category interest personalisation
+- Repeat purchase campaigns
+- Cross-sell and upsell
+- Paid media retargeting
+
+Design emphasis:
+
+- Product, category, cart, order, and purchase intent should be prominent concepts.
+
+---
+
+### Travel and tourism
+
+Common data sources:
+
+- CRM
+- Booking systems
+- Marketing channels
+- Website behaviour
+
+Common use cases:
+
+- Orientation-to-booking journeys
+- Destination interest segments
+- Booking follow-up
+- Re-engagement campaigns
+
+Design emphasis:
+
+- Visitor journeys may be longer and more research-driven than typical retail purchase flows.
+
+---
+
+### Culture, recreation, and entertainment
+
+Common data sources:
+
+- Ticketing systems
+- CRM
+- Marketing channels
+- Website behaviour
+
+Common use cases:
+
+- Event interest audiences
+- Ticket purchase follow-up
+- Returning visitor loyalty
+- Personalised recommendations
+- Re-engagement
+
+Design emphasis:
+
+- Interests, events, visits, ticketing, loyalty, and returning visitors matter.
+
+---
+
+## Feature Design Guidance
+
+### Design for marketers, not data engineers
+
+Most primary users are marketers with small teams and many channels to manage.
+
+Prefer:
+
+- Clear rule builders
+- Plain-language conditions
+- Guided setup
+- Preview states
+- Clear activation destinations
+- Understandable reporting
+
+Avoid:
+
+- Overly technical event configuration as the default experience
+- Database-like interfaces for marketer-facing workflows
+- Generic admin-heavy flows without marketing context
+
+---
+
+### Make behaviour, audience, action, and result visible
+
+Many Spotler Activate features connect these four concepts:
+
+1. Behaviour or data signal
+2. Audience or profile condition
+3. Personalisation, journey, campaign, or trigger
+4. Performance result
+
+Good feature designs should help users understand this chain.
+
+Example:
+
+- “Visitors who viewed product X but did not purchase”
+- “Show a personalised offer”
+- “Trigger an abandoned browse email”
+- “Measure conversion uplift”
+
+---
+
+### Preserve real-time context
+
+Some Spotler Activate interactions happen during the current website visit.
+
+When designing real-time features, include concepts like:
+
+- Current session
+- Trigger moment
+- Behavioural event
+- Timing
+- Visitor state
+- Immediate action
+
+Avoid designing all workflows as delayed batch campaigns.
+
+---
+
+### Support anonymous-to-known profile logic
+
+Spotler Activate captures behaviour before a visitor is known.
+
+When relevant, design flows should account for:
+
+- Anonymous visitor behaviour
+- Identification
+- Behaviour linking
+- Profile enrichment
+- Later activation
+
+Avoid assuming every visitor starts as a known customer.
+
+---
+
+### Treat integrations as part of the product logic
+
+Integrations are not an afterthought. They are central to how Spotler Activate collects and activates data.
+
+When designing integration-related screens, clarify:
+
+- Source system
+- Destination system
+- Data type
+- Sync status
+- Trigger or activation purpose
+- Error or mismatch handling
+
+---
+
+### Show campaign impact in business terms
+
+Reporting should connect to outcomes marketers care about:
+
+- Engagement
+- Conversion
+- Conversion value
+- Repeat purchase
+- Retention
+- Drop-off reduction
+- Audience performance
+- Campaign efficiency
+
+Avoid showing only abstract charts without helping the marketer decide what to optimise.
+
+---
+
+### Keep Predictive AI actionable
+
+Predictive AI should result in actions users can understand.
+
+Good patterns:
+
+- “Use this segment in a campaign”
+- “Exclude this audience from paid media”
+- “Show a next best offer”
+- “Target customers with high predicted CLV”
+- “Start a retention journey for churn-risk customers”
+
+Avoid:
+
+- Treating AI as unexplained magic
+- Hiding the marketing action behind the prediction
+- Overstating certainty
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler Activate is a CDP for commerce-driven organisations.
+- The central customer profile is foundational.
+- Behavioural data is a core input, not an optional extra.
+- Visitors may be anonymous before they become known.
+- Behaviour can be linked to profiles once identity is established.
+- Audiences and segments are built from behavioural, transactional, profile, and predictive data.
+- Personalisation can happen on-site in real time.
+- Follow-up can happen through connected marketing channels.
+- Email is important, but not the only activation channel.
+- WhatsApp, paid media, and other Spotler products may be part of activation.
+- Integrations are essential to the product’s value.
+- Testing and optimisation are part of the workflow.
+- Predictive AI supports targeting, retention, and budget efficiency.
+- Marketers need practical, understandable workflows.
+- Smaller marketing teams need efficiency and clarity.
+- Reporting should support optimisation decisions.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler Activate features:
+
+- Do not treat Spotler Activate as a generic CRM.
+- Do not treat it as only an analytics dashboard.
+- Do not treat it as only an email marketing tool.
+- Do not treat it as only a website personalisation widget.
+- Do not assume all users are technical data specialists.
+- Do not assume every visitor is immediately known.
+- Do not ignore anonymous visitor behaviour.
+- Do not invent unrelated SaaS objects such as generic “projects”, “tasks”, or “tickets” unless the feature specifically needs them.
+- Do not replace product terminology with vague terms like “items” or “records”.
+- Do not design personalisation without audience or behavioural logic.
+- Do not design triggers without a clear event condition.
+- Do not design journeys without a trigger, audience, channel, and goal.
+- Do not imply that paid media campaigns are fully managed inside Spotler Activate unless specified.
+- Do not overfocus on visual styling; that belongs to the Design System Skill.
+- Do not invent integrations that are not part of the known product context.
+- Do not overclaim Predictive AI certainty.
+- Do not hide how data is collected, linked, or activated.
+- Do not make reporting purely decorative; it should support decisions.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Anonymous visitor with useful behaviour
+
+A visitor may have rich behavioural data but no known identity yet. Designs should support the idea that behaviour can still inform session-based personalisation or later profile enrichment.
+
+### Visitor becomes known after prior browsing
+
+A visitor may identify through a form, purchase, login, email click, or other interaction. Previously anonymous behaviour may then be connected to a profile.
+
+### Returning visitor with previous intent
+
+A returning visitor may have viewed products, categories, or content before. The experience can use this history for banners, offers, CTAs, and recommendations.
+
+### Cart abandonment
+
+A visitor adds a product to the shopping cart but leaves without purchasing. This can trigger abandoned cart journeys, email follow-up, recommendations, or limited-time offers.
+
+### Browse abandonment
+
+A visitor shows product or category interest but does not add to cart or purchase. This can trigger abandoned browse campaigns or on-site personalisation.
+
+### Segment exclusion
+
+Some audiences may be excluded from campaigns, especially less valuable segments, existing purchasers, or churn-risk groups depending on the campaign goal.
+
+### Cross-channel timing
+
+A behaviour on the website may trigger a follow-up through email, WhatsApp, or advertising later. Designs should make timing and channel visible where relevant.
+
+### Testing overlap
+
+A visitor or audience may be part of a personalisation and a test. Designs may need to clarify variant assignment, test eligibility, and performance attribution.
+
+### Integration dependency
+
+Some features rely on integrations. If the required system is not connected, the UI should not pretend that the data or activation is available.
+
+### Predictive segment interpretation
+
+Predictive segments are based on historical data and machine learning. They should be understandable and actionable, but not presented as guaranteed outcomes.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides **product context** only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- Terminology
+- User roles
+- Data objects
+- Audience and segmentation logic
+- Personalisation logic
+- Trigger logic
+- Journey logic
+- Integration context
+- Reporting and optimisation context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide **what the feature should do and how it should behave**.
+- Use the Design System Skill to decide **how the feature should look and be constructed visually**.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler Activate feature, check:
+
+- Does the design use Spotler Activate terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in customer profiles, behavioural data, audiences, journeys, triggers, personalisation, testing, activation, or reporting?
+- Does the design avoid generic SaaS assumptions?
+- Does it preserve anonymous-to-known visitor logic where relevant?
+- Does it make data sources or integrations clear when needed?
+- Does it show the relationship between behaviour, audience, action, and result?
+- Does it support marketers rather than only technical users?
+- Does it make real-time triggers understandable where relevant?
+- Does it treat cross-channel activation as part of the product?
+- Does reporting help users optimise marketing outcomes?
+- Does Predictive AI remain actionable and understandable?
+- Does the design avoid visual styling decisions that belong to the Design System Skill?

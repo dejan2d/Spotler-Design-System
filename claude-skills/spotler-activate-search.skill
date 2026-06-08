@@ -1,0 +1,1330 @@
+---
+name: spotler-activate-search
+description: Product context for Spotler Activate Search
+---
+
+# Spotler Activate Search Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler Activate Search.
+
+This Skill gives Figma Make product context for Spotler Activate Search so it can make better UX and product decisions without starting from generic SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler Activate Search is an on-site search solution that helps visitors find relevant products, categories, brands, documentation, or content more quickly.
+
+It improves the search experience through intelligent ranking, auto-complete, suggestions, merchandising, recommendations, multi-dataset search, and search analytics.
+
+Activate Search is designed for organisations where search behaviour has a direct impact on engagement, product discovery, content discovery, and conversion. It is especially valuable for websites, webshops, catalogues, platforms, and content environments with large or complex datasets.
+
+The product helps organisations move from basic keyword search to a guided discovery and conversion layer that responds to visitor intent, behaviour, relevance, and commercial priorities.
+
+---
+
+## Core Problem Spotler Activate Search Solves
+
+Spotler Activate Search solves the problem of weak, rigid, or commercially disconnected on-site search.
+
+Many websites rely on basic search functionality that does not match real visitor behaviour. Common problems include:
+
+- Irrelevant search results
+- Too many overwhelming results
+- Poor handling of typos
+- Poor handling of synonyms
+- Poor handling of broad or unclear search queries
+- Limited control over which products or content appear first
+- Promotions and campaigns not appearing in search results
+- Little insight into what visitors are searching for
+- Little insight into no-result searches
+- Poor alignment between search behaviour and commercial goals
+
+When search feels slow, rigid, or unhelpful, visitors lose confidence and leave the website.
+
+Spotler Activate Search addresses this by delivering fast, relevant search experiences from the first keystroke to the final click. It helps visitors find what they need quickly while giving organisations control over relevance, merchandising, campaigns, and optimisation.
+
+---
+
+## Target Users and User Roles
+
+Spotler Activate Search is primarily used by marketing, e-commerce, content, and merchandising teams in organisations where on-site search matters to discovery and conversion.
+
+### Primary users
+
+#### E-commerce marketer
+
+An e-commerce marketer uses Activate Search to improve product discovery and conversion from search sessions.
+
+Goals:
+
+- Help visitors find products faster
+- Increase conversion from high-intent search sessions
+- Promote relevant products and campaigns
+- Reduce no-result searches and drop-offs
+- Use analytics to optimise search performance
+
+Typical needs:
+
+- Search result configuration
+- Auto-complete and suggestions
+- Product ranking rules
+- Campaign visibility
+- Product recommendations
+- Search analytics
+
+---
+
+#### Merchandiser
+
+A merchandiser uses Activate Search to influence product visibility and ranking based on commercial goals.
+
+Goals:
+
+- Promote priority products
+- Support seasonal campaigns
+- Improve visibility of new collections
+- Prioritise high-margin products
+- Balance relevance with commercial strategy
+
+Typical needs:
+
+- Merchandising rules
+- Result boosting
+- Product visibility controls
+- Campaign-based ranking
+- Stock or commercial priority logic
+- Performance insight
+
+---
+
+#### Marketing manager
+
+A marketing manager uses Activate Search to align search results with campaign goals and customer intent.
+
+Goals:
+
+- Make campaigns visible in search
+- Improve engagement and conversion
+- Connect search behaviour to wider marketing strategy
+- Understand search demand and trends
+
+Typical needs:
+
+- Campaign rules
+- Search analytics
+- Popular searches
+- No-result searches
+- Search performance dashboards
+
+---
+
+#### Content manager
+
+A content manager uses Activate Search to make pages, articles, documentation, resources, or structured content findable.
+
+Goals:
+
+- Improve content discovery
+- Help visitors find relevant information
+- Reduce search frustration
+- Support multi-dataset search across products and content
+
+Typical needs:
+
+- Content indexing
+- Search result templates
+- Category or content suggestions
+- Multi-dataset result control
+- No-result query insight
+
+---
+
+#### B2B or wholesale commerce user
+
+A B2B or wholesale user manages search for large catalogues, customer-specific product collections, commercial priorities, and complex product ranges.
+
+Goals:
+
+- Help customers navigate extensive catalogues
+- Prioritise commercially important products
+- Support customer-specific relevance
+- Improve efficiency for returning buyers
+- Align search with margin or collection strategy
+
+Typical needs:
+
+- Product ranking control
+- Catalogue-specific search logic
+- Commercial prioritisation
+- Relevance rules
+- Customer or segment-based search experiences
+
+---
+
+### Secondary users
+
+#### Product data or technical specialist
+
+A technical specialist supports product data, content indexing, data feeds, integrations, and analytics setup.
+
+Goals:
+
+- Keep search indexes up to date
+- Connect product and content sources
+- Ensure accurate availability, category, brand, and metadata
+- Support tracking and analytics
+
+Typical needs:
+
+- Indexing status
+- Data source visibility
+- Error handling
+- Integration status
+- Search event tracking
+
+---
+
+#### Business or commercial lead
+
+A business lead reviews the impact of search on conversion, revenue, engagement, and campaign performance.
+
+Goals:
+
+- Understand the commercial value of search
+- Improve revenue from search sessions
+- Reduce friction in customer journeys
+- Prioritise optimisation opportunities
+
+Typical needs:
+
+- Search conversion metrics
+- Revenue impact
+- No-result trends
+- Campaign performance
+- Product visibility insights
+
+---
+
+## Product Mental Model
+
+Figma Make should understand Spotler Activate Search as a flow from visitor query to guided discovery to commercially relevant result selection to optimisation.
+
+The core mental model is:
+
+1. Index
+   - Products, categories, brands, content, documentation, or other datasets are made searchable.
+
+2. Understand intent
+   - The visitor types a search query.
+   - The system handles partial input, broad terms, spelling errors, synonyms, related terms, and intent signals.
+
+3. Guide
+   - Search suggestions, auto-complete, related terms, categories, brands, popular results, or recommended results help the visitor refine or complete their search.
+
+4. Rank
+   - Results are ordered based on relevance, behaviour, configurable rules, product priority, campaign logic, or commercial objectives.
+
+5. Merchandise
+   - Teams influence visibility and ordering to support campaigns, stock priorities, new collections, high-margin products, or business goals while preserving relevance.
+
+6. Discover
+   - Visitors find relevant products, content, categories, or brands, supported by filters and recommendations.
+
+7. Optimise
+   - Search analytics reveal queries, popular searches, no-result searches, result performance, and drop-off points so teams can improve search continuously.
+
+Do not treat Spotler Activate Search as only a search bar. It is a search, discovery, merchandising, and optimisation layer for websites and webshops.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Intelligent Relevance and Speed
+
+Activate Search delivers fast search results ranked by relevance, behavioural data, and configurable rules.
+
+Important relevance inputs may include:
+
+- Query match
+- Synonyms
+- Related terms
+- Spelling correction
+- Behavioural signals
+- Product priority
+- Campaign rules
+- Commercial rules
+- Popularity
+- Category or brand match
+- Availability or catalogue data
+
+Design implication:
+
+- Search should feel responsive from the first keystroke.
+- Ranking should be understandable and adjustable.
+- Relevance should not be reduced to keyword matching only.
+
+---
+
+### Auto-Complete and Suggestions
+
+As visitors type, Activate Search can show suggestions to help them find what they need faster.
+
+Suggestions may include:
+
+- Product suggestions
+- Category suggestions
+- Brand suggestions
+- Content suggestions
+- Related search terms
+- Popular searches
+- Corrected spelling
+- Query completions
+
+Design implication:
+
+- Search starts before the full query is submitted.
+- Suggestions should guide both high-intent and exploratory visitors.
+- Do not design search as only a static results page after pressing enter.
+
+---
+
+### Search Results
+
+Search results are the main discovery surface after a query.
+
+Results may include:
+
+- Products
+- Categories
+- Brands
+- Pages
+- Articles
+- Documentation
+- Resources
+- Other structured content
+
+Design implication:
+
+- Results may come from multiple datasets.
+- The result layout should support the type of result being shown.
+- Results should be filterable, scannable, and relevant to intent.
+- Avoid assuming all results are products unless the feature specifically targets product search.
+
+---
+
+### Filters and Refinement
+
+Filters help visitors narrow results when queries return many possibilities.
+
+Filter examples:
+
+- Category
+- Brand
+- Price
+- Availability
+- Product attributes
+- Content type
+- Date
+- Relevance
+- Popularity
+- Customer-specific catalogue filters
+
+Design implication:
+
+- Filters should reduce overwhelm.
+- Filters should match the dataset and sector.
+- In B2B or wholesale contexts, filters may need to support complex catalogues and product attributes.
+
+---
+
+### Merchandising and Commercial Control
+
+Marketing, e-commerce, and merchandising teams can influence search result visibility and ordering.
+
+Merchandising actions may include:
+
+- Boosting products
+- Prioritising new collections
+- Promoting high-margin items
+- Highlighting campaign products
+- Adjusting result order
+- Controlling product or content visibility
+- Supporting seasonal campaigns
+- Aligning results with stock levels or commercial objectives
+
+Design implication:
+
+- Commercial control should be visible and manageable.
+- Relevance and commercial priorities need to work together.
+- Avoid making merchandising feel like hidden technical configuration.
+
+---
+
+### Recommendations for Better Discovery
+
+Recommendations help visitors discover relevant products or content beyond direct query matching.
+
+Recommendation use cases:
+
+- Related products
+- Popular products
+- Cross-sell
+- Upsell
+- Related content
+- Similar items
+- Category recommendations
+- Products based on previous behaviour, where connected to Spotler Activate
+
+Design implication:
+
+- Recommendations should support discovery, not distract from search results.
+- In commerce contexts, recommendations can support conversion value.
+- In content contexts, recommendations can support engagement and orientation.
+
+---
+
+### Multi-Dataset Search
+
+Activate Search can combine different searchable datasets into one search experience.
+
+Datasets may include:
+
+- Products
+- Categories
+- Brands
+- Content pages
+- Articles
+- Documentation
+- Knowledge base content
+- Gated resources
+- Training materials
+
+Design implication:
+
+- Search should not always be product-only.
+- Designs may need grouped results or result type labels.
+- Users may need control over which datasets are searched and how they are weighted.
+
+---
+
+### Flexible Templates and UX Control
+
+Search experiences can be tailored to the brand identity, layout, and structure of the website.
+
+This may involve:
+
+- Search result templates
+- Suggestion templates
+- Product card layout
+- Content result layout
+- Search overlay structure
+- Result grouping
+- Filter placement
+- Merchandising slots
+
+Design implication:
+
+- Keep visual styling guidance minimal in this Skill.
+- Product logic should focus on what search elements exist and how they behave.
+- Use the separate Design System Skill for visual details.
+
+---
+
+### Search Analytics and Insight
+
+Activate Search provides insight into search behaviour and search performance.
+
+Analytics may include:
+
+- Search queries
+- Popular searches
+- No-result searches
+- Result clicks
+- Search sessions
+- Conversion from search sessions
+- Drop-offs
+- Query performance
+- Search trends
+- Campaign or merchandising impact
+
+Design implication:
+
+- Analytics should be actionable.
+- No-result searches are especially important for optimisation.
+- Search analytics should help teams improve synonyms, suggestions, ranking, content gaps, and merchandising rules.
+
+---
+
+### Personalised Search Experiences
+
+When combined with Spotler Activate or Spotler ActivatePro, search results can be tailored based on behaviour, interests, or audience segments.
+
+Personalisation inputs may include:
+
+- Previous interactions
+- Browsing behaviour
+- Interests
+- Visitor segment
+- Audience membership
+- Customer preferences
+- Behavioural data from Spotler Activate
+- Audience-based logic from Spotler ActivatePro
+
+Design implication:
+
+- Personalisation should be grounded in behaviour or audience data.
+- Search results may differ for returning visitors or specific segments.
+- Avoid implying personalisation exists without a connected data source or product context.
+
+---
+
+## Important Product Objects and Concepts
+
+### Search query
+
+The word, phrase, partial input, misspelled term, or broad intent entered by a visitor.
+
+### Search session
+
+A visitor interaction where search is used as part of the journey. Search sessions are often high-intent moments.
+
+### Search result
+
+A product, category, brand, page, article, document, or content item returned for a query.
+
+### Result ranking
+
+The order in which results appear, based on relevance, behaviour, rules, commercial priority, campaigns, or other ranking logic.
+
+### Relevance
+
+How well a result matches the visitor’s query, intent, behaviour, and context.
+
+### Auto-complete
+
+Suggestions shown while the visitor is still typing.
+
+### Suggestion
+
+A recommended query, product, category, brand, or content item shown to guide the visitor.
+
+### Synonym
+
+A related term that helps the system understand different words for the same or similar intent.
+
+### Typo handling
+
+The ability to recognise misspellings and still return relevant results.
+
+### Broad query
+
+A general or unclear search term that may require suggestions, categories, filters, or guided discovery.
+
+### No-result search
+
+A search query that returns no results. This is an important optimisation signal.
+
+### Filter
+
+A refinement option that narrows search results by category, brand, price, attribute, content type, availability, or another property.
+
+### Facet
+
+A structured filtering dimension based on product, content, or catalogue data.
+
+### Merchandising rule
+
+A rule used to influence search result visibility or order based on campaigns, commercial priorities, margin, stock, product priority, or business goals.
+
+### Boosting
+
+Increasing the visibility or ranking of a product, category, brand, or content item.
+
+### Campaign visibility
+
+The presence and prioritisation of campaign-related products, content, or promotions in search results.
+
+### Dataset
+
+A source of searchable data, such as products, categories, brands, content pages, documentation, or resources.
+
+### Index
+
+The searchable representation of product, content, category, brand, or other data.
+
+### Recommendation
+
+A suggested product or content item shown to support discovery, cross-sell, upsell, or engagement.
+
+### Search analytics
+
+Data about search behaviour and performance, including queries, no-result searches, result clicks, conversions, and trends.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- On-site search
+- Search experience
+- Search query
+- Search session
+- Search result
+- Search result ranking
+- Relevance
+- Intelligent ranking
+- Auto-complete
+- Suggestions
+- Search suggestions
+- Product suggestions
+- Category suggestions
+- Brand suggestions
+- Content suggestions
+- Synonyms
+- Related terms
+- Spelling errors
+- Typo handling
+- Broad search query
+- Guided discovery
+- Filters
+- Facets
+- Merchandising
+- Commercial control
+- Product visibility
+- Content visibility
+- Boosting
+- Product priority
+- Campaign visibility
+- Seasonal campaign
+- High-margin products
+- New collections
+- Recommendations
+- Cross-sell
+- Upsell
+- Multi-dataset search
+- Dataset
+- Index
+- Product catalogue
+- Content library
+- No-result search
+- Search analytics
+- Search performance
+- Search behaviour
+- Conversion from search sessions
+
+Avoid replacing these with generic SaaS language such as “items”, “records”, “objects”, or “cards” when a more specific Activate Search term exists.
+
+---
+
+## Key Integrations
+
+Spotler Activate Search integrates with systems for product data, content, analytics, and behavioural personalisation.
+
+### E-commerce platforms
+
+Used to index and search product data, categories, availability, and catalogue information.
+
+Important integration logic:
+
+- Product data powers search results.
+- Categories and attributes power filters and facets.
+- Availability, stock, pricing, or catalogue data may influence ranking or visibility.
+- Large and dynamic catalogues need reliable indexing.
+
+---
+
+### CMS and content platforms
+
+Used to index pages, articles, documentation, resources, and other content.
+
+Important integration logic:
+
+- Content can appear alongside products.
+- Search can support content discovery, not only product discovery.
+- Multi-dataset search may combine products, categories, brands, and content.
+
+---
+
+### Analytics and tracking
+
+Used to analyse and optimise search behaviour.
+
+Known analytics integration:
+
+- Google Analytics
+
+Important integration logic:
+
+- Analytics helps teams understand search queries, no-result searches, search performance, and optimisation opportunities.
+- Search events should connect to engagement and conversion insight.
+
+---
+
+### Spotler ecosystem products
+
+Activate Search can work with other Spotler products.
+
+Known Spotler product connections:
+
+- Spotler Activate
+- Spotler ActivatePro
+
+Important integration logic:
+
+- Spotler Activate can provide behavioural data for personalisation of search results.
+- Spotler ActivatePro can support audience-based and personalised discovery experiences.
+- Personalised search should be based on actual behavioural or audience data.
+
+---
+
+## Important Workflows
+
+### Workflow: Visitor uses high-intent product search
+
+1. A visitor enters a product-related search query.
+2. The query may be complete, incomplete, misspelled, or broad.
+3. Activate Search recognises intent using relevance, suggestions, synonyms, typo handling, and ranking logic.
+4. The visitor receives relevant product suggestions or search results.
+5. Filters and recommendations help the visitor refine and discover.
+6. The visitor clicks a result and moves closer to conversion.
+
+Design implications:
+
+- Search should respond quickly.
+- Suggestions should appear while typing.
+- Product results should be relevant and scannable.
+- Filters should help narrow large result sets.
+- Conversion from search sessions is an important outcome.
+
+---
+
+### Workflow: Search supports merchandising and campaigns
+
+1. A marketer or merchandiser identifies a campaign, seasonal goal, new collection, high-margin product, or priority item.
+2. The team configures merchandising rules or result boosting.
+3. Relevant products or content appear more prominently in search results.
+4. Visitors searching related terms see campaign-aligned results.
+5. Search performance and commercial impact are measured.
+
+Design implications:
+
+- Make commercial rules and boosted results clear.
+- Preserve relevance while allowing control.
+- Show which campaigns or priorities influence results.
+- Avoid hiding merchandising logic from the user.
+
+---
+
+### Workflow: Guide exploratory visitors
+
+1. A visitor enters a broad or unclear query.
+2. Activate Search shows related terms, categories, popular results, brands, or content suggestions.
+3. The visitor refines the search or clicks a suggestion.
+4. Results become more relevant.
+5. The visitor stays engaged instead of dropping off.
+
+Design implications:
+
+- Broad queries need guidance, not only result lists.
+- Suggestions, categories, and popular searches are useful.
+- The experience should reduce frustration and uncertainty.
+
+---
+
+### Workflow: Optimise no-result searches
+
+1. Visitors search for terms that return no results.
+2. Activate Search analytics records no-result queries.
+3. A marketer, content manager, or merchandiser reviews these queries.
+4. The team improves synonyms, adds content, adjusts product data, changes ranking, or creates suggestions.
+5. Future visitors receive better results.
+
+Design implications:
+
+- No-result searches are actionable signals.
+- Designs should show query examples and frequency.
+- Optimisation actions should be close to the insight.
+- Avoid treating no-result searches as a passive report only.
+
+---
+
+### Workflow: Search across products and content
+
+1. A visitor searches for a brand, topic, product type, or problem.
+2. Activate Search queries multiple datasets.
+3. Results may include products, categories, brands, content pages, articles, or documentation.
+4. Results are grouped or labelled by type.
+5. The visitor can choose the most relevant path.
+
+Design implications:
+
+- Multi-dataset results need clarity.
+- Labels, grouping, or tabs may help distinguish result types.
+- Do not assume all searches are direct product searches.
+
+---
+
+### Workflow: Wholesale customer navigates a large catalogue
+
+1. A wholesale customer searches within a large product catalogue.
+2. Activate Search ranks relevant products while considering rules such as product priority, commercial goals, high-margin items, new collections, or customer-specific relevance.
+3. Filters help narrow complex product ranges.
+4. The customer finds products faster.
+5. The organisation improves visibility of strategic products.
+
+Design implications:
+
+- B2B and wholesale search may need more complex filters and catalogue logic.
+- Commercial priorities matter.
+- Efficiency for repeat buyers is important.
+- Avoid designing only for simple consumer retail search.
+
+---
+
+### Workflow: Personalised search using Spotler Activate or ActivatePro
+
+1. A returning visitor or known segment has behavioural or audience data available.
+2. Activate Search receives or uses data from Spotler Activate or ActivatePro.
+3. Search results or recommendations are tailored to behaviour, interests, or audience segment.
+4. The visitor sees more relevant products or content.
+5. Engagement and conversion improve.
+
+Design implications:
+
+- Personalisation should depend on connected behavioural or audience data.
+- Make the personalisation source clear where relevant.
+- Avoid implying all search is personalised by default.
+
+---
+
+## Common Use Cases
+
+### High-intent product search
+
+Use when visitors know what they are looking for and are close to purchase.
+
+Important context:
+
+- Search sessions often indicate strong intent.
+- Speed, relevance, suggestions, and filters matter.
+- Poor search can directly reduce conversion.
+
+Outcome:
+
+- Faster product discovery
+- Higher conversion from search sessions
+
+---
+
+### Wholesale and complex catalogue search
+
+Use when customers need to navigate large product ranges.
+
+Important context:
+
+- Catalogues may contain many similar products.
+- Search may need to support commercial pricing, margin logic, customer-specific ranges, or product priorities.
+- Filters and ranking rules are important.
+
+Outcome:
+
+- Faster customer navigation
+- Better visibility of strategic products
+- Improved commercial alignment
+
+---
+
+### Merchandising and campaign visibility
+
+Use when campaigns, promotions, seasonal goals, or priority products should appear in search.
+
+Important context:
+
+- Search results should support business goals.
+- Teams need control over product or content visibility.
+- Relevance must still be preserved.
+
+Outcome:
+
+- Better alignment between visitor intent and commercial objectives
+
+---
+
+### Guided discovery for exploratory visitors
+
+Use when visitors search with broad, incomplete, or unclear queries.
+
+Important context:
+
+- Suggestions, related terms, categories, and popular results help guide the visitor.
+- Search can support orientation, not only direct lookup.
+
+Outcome:
+
+- More engagement
+- Fewer drop-offs
+- Better discovery
+
+---
+
+### Personalised search experiences
+
+Use when returning visitors or known segments should receive more relevant results.
+
+Important context:
+
+- Personalisation may depend on Spotler Activate or ActivatePro.
+- Inputs may include behaviour, interests, and audience segments.
+
+Outcome:
+
+- More relevant search experiences
+- Higher engagement and conversion
+
+---
+
+### Search analytics and optimisation
+
+Use when teams need to improve search based on actual behaviour.
+
+Important context:
+
+- Query data reveals demand.
+- No-result searches reveal gaps.
+- Result clicks and performance reveal relevance quality.
+
+Outcome:
+
+- Continuous search improvement
+- Fewer no-result searches
+- Better performance from search sessions
+
+---
+
+## Sector Context
+
+### Retail and e-commerce
+
+Common needs:
+
+- Product search
+- Category suggestions
+- Brand suggestions
+- Filters and facets
+- Product recommendations
+- Campaign visibility
+- Seasonal merchandising
+- Conversion optimisation
+
+Design emphasis:
+
+- Product discovery, conversion, commercial control, and speed matter most.
+
+---
+
+### Wholesale and B2B retail
+
+Common needs:
+
+- Large catalogue navigation
+- Customer-specific product ranges
+- Commercial pricing or margin logic
+- Product priority
+- New collection visibility
+- Repeat buyer efficiency
+
+Design emphasis:
+
+- Search should support both customer efficiency and commercial strategy.
+- Filters and ranking control may be more complex than in B2C.
+
+---
+
+### Manufacturers and B2B organisations with structured catalogues
+
+Common needs:
+
+- Product information search
+- Documentation search
+- Knowledge base search
+- Technical content discovery
+- Multi-dataset search
+
+Design emphasis:
+
+- Products and documentation may need to appear together.
+- Search should support orientation and decision-making, not only checkout conversion.
+
+---
+
+### Education and membership platforms
+
+Common needs:
+
+- Search across structured content
+- Training materials
+- Gated resources
+- Member content
+- Categories or topic-based discovery
+
+Design emphasis:
+
+- Content discovery and engagement are the main outcomes.
+- Avoid assuming every search is commercial or product-based.
+
+---
+
+## Feature Design Guidance
+
+### Design search as a high-intent journey
+
+Search is often used when visitors are close to action.
+
+Good designs should support:
+
+- Fast input
+- Immediate suggestions
+- Relevant results
+- Clear filters
+- Recommendations
+- Easy result scanning
+- Quick path to action
+
+Avoid:
+
+- Slow or static search experiences
+- Search flows that only start after pressing enter
+- Overwhelming result pages without guidance
+
+---
+
+### Balance relevance and commercial control
+
+Activate Search should help visitors find relevant results while allowing organisations to influence visibility.
+
+Good designs should show:
+
+- Why results appear
+- Which rules affect ranking
+- Which products or content are boosted
+- Which campaigns are active
+- Whether relevance is preserved
+
+Avoid:
+
+- Treating merchandising as separate from search
+- Letting commercial rules completely obscure relevance
+- Hiding product visibility logic
+
+---
+
+### Make suggestions useful before results
+
+Auto-complete and suggestions are core to the experience.
+
+Suggestions may help with:
+
+- Misspellings
+- Incomplete queries
+- Broad queries
+- Popular products
+- Categories
+- Brands
+- Content
+- Related terms
+
+Avoid designing suggestions as a minor enhancement. They are part of the search journey.
+
+---
+
+### Treat no-result searches as optimisation opportunities
+
+No-result searches are not just failures. They are signals for improvement.
+
+Good designs should help teams:
+
+- Identify frequent no-result searches
+- Add synonyms
+- Improve product data
+- Add missing content
+- Create redirects or suggestions
+- Adjust ranking or merchandising rules
+
+Avoid dead-end “no results” screens without recovery paths or insight.
+
+---
+
+### Support multi-dataset discovery
+
+Search may include more than products.
+
+Good designs should support:
+
+- Products
+- Categories
+- Brands
+- Articles
+- Pages
+- Documentation
+- Training materials
+- Resources
+
+Avoid assuming every search result should look like a product card.
+
+---
+
+### Keep search analytics actionable
+
+Search analytics should help teams improve search performance.
+
+Useful analytics questions:
+
+- What are visitors searching for?
+- Which searches convert?
+- Which searches return no results?
+- Which results get clicked?
+- Which queries lead to drop-off?
+- Which campaigns benefit from search?
+- Which synonyms or content gaps should be fixed?
+
+Avoid dashboards that only show raw query lists without recommended actions or optimisation context.
+
+---
+
+### Personalisation must have a data basis
+
+Personalised search should depend on behaviour, interests, audience segments, or connected Spotler products.
+
+Good designs should make clear:
+
+- What data personalises results
+- Which segment or behaviour is used
+- Whether personalisation comes from Spotler Activate or ActivatePro
+- How personalisation affects ranking or recommendations
+
+Avoid presenting personalised search as always available without integration or data context.
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- Spotler Activate Search is an on-site search solution.
+- Search is a high-intent moment in the visitor journey.
+- The product improves discovery, engagement, and conversion.
+- Relevance is based on more than keywords.
+- Speed matters from the first keystroke.
+- Auto-complete and suggestions are important parts of the search experience.
+- Search can include products, categories, brands, content, documentation, and resources.
+- Large catalogues and complex datasets are common use cases.
+- Merchandising and commercial control are core capabilities.
+- Search results can support campaigns, seasonal goals, product priorities, new collections, and margin objectives.
+- No-result searches are important optimisation signals.
+- Search analytics should lead to action.
+- Personalised search may depend on Spotler Activate or ActivatePro.
+- Search must preserve relevance while supporting business priorities.
+- B2B and wholesale search may involve more complex catalogue and commercial logic than B2C search.
+- Search optimisation is continuous.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing Spotler Activate Search features:
+
+- Do not treat Activate Search as just a search bar.
+- Do not treat search as only keyword matching.
+- Do not assume all search results are products.
+- Do not ignore content, categories, brands, documentation, or other datasets.
+- Do not ignore auto-complete and suggestions.
+- Do not make users wait until query submission before search becomes useful.
+- Do not design merchandising as unrelated to search.
+- Do not hide commercial ranking rules when they matter.
+- Do not let commercial boosting fully replace relevance.
+- Do not ignore no-result searches.
+- Do not show analytics without optimisation actions.
+- Do not assume every organisation is simple B2C retail.
+- Do not ignore wholesale, B2B, education, membership, or documentation use cases.
+- Do not invent unrelated SaaS objects such as tasks, boards, tickets, or projects unless specifically needed.
+- Do not replace product terminology with generic terms like “items” or “records”.
+- Do not assume personalised search is available without Spotler Activate, ActivatePro, or behavioural data.
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Misspelled query
+
+A visitor may type a misspelled search term. The system should still provide relevant suggestions or results where possible.
+
+### Incomplete query
+
+A visitor may type only part of a term. Auto-complete and suggestions should help before submission.
+
+### Broad query
+
+A visitor may search for a general term. Related terms, categories, filters, and popular results can guide discovery.
+
+### No-result query
+
+A query may return no results. The experience should provide recovery options and analytics should help teams fix the issue.
+
+### Too many results
+
+A broad query may return too many results. Filters, facets, sorting, and suggestions should reduce overwhelm.
+
+### Multiple result types
+
+A query may match products, brands, categories, content, and documentation. The design should make result types clear.
+
+### Commercial boost conflict
+
+A boosted product may be commercially important but less relevant than other results. Designs should preserve relevance and make merchandising rules manageable.
+
+### Campaign-specific results
+
+Campaign products or content may need temporary visibility. Designs should support time-bound or campaign-bound rules.
+
+### Product out of stock or unavailable
+
+Search results may include products that are unavailable. Designs should account for stock, availability, or fallback behaviour where relevant.
+
+### Stale index
+
+Product or content data may be outdated if indexing fails or has not run recently. Designs should show indexing status where relevant.
+
+### Personalisation unavailable
+
+A visitor may not have enough behavioural or profile data for personalised search. Designs should support default relevance-based search as fallback.
+
+### B2B customer-specific catalogue
+
+A wholesale or B2B customer may only be allowed to see certain products, pricing, or collections. Designs should not assume one universal public catalogue.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour
+- Workflows
+- Search terminology
+- User roles
+- Search result logic
+- Ranking logic
+- Merchandising logic
+- Suggestions and auto-complete behaviour
+- Multi-dataset search context
+- Search analytics and optimisation context
+- Integration context
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a Spotler Activate Search feature, check:
+
+- Does the design use Activate Search terminology?
+- Is the relevant user role clear?
+- Is the feature grounded in search, discovery, ranking, suggestions, merchandising, analytics, or personalisation?
+- Does the design avoid generic SaaS assumptions?
+- Does it treat search as a high-intent visitor journey?
+- Does it support auto-complete or suggestions where relevant?
+- Does it preserve the difference between relevance and commercial control?
+- Does it account for products, categories, brands, content, documentation, or other datasets where relevant?
+- Does it include filters or facets for large result sets?
+- Does it treat no-result searches as optimisation opportunities?
+- Does it make search analytics actionable?
+- Does it show integration or indexing status where relevant?
+- Does it avoid assuming personalised search exists without behavioural or audience data?
+- Does it avoid visual styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+“Using the Spotler Activate Search Product Context Skill, redesign the search results management screen for merchandisers who need to boost campaign products while preserving relevance.”
+
+“Using the Spotler Activate Search Product Context Skill, redesign the auto-complete experience for visitors searching products, brands, categories, and content.”
+
+“Using the Spotler Activate Search Product Context Skill, redesign the no-result search analytics screen so marketers can identify and fix search gaps.”
+
+“Using the Spotler Activate Search Product Context Skill, redesign the multi-dataset search results page for a website that includes products, categories, articles, and documentation.”
+
+“Using the Spotler Activate Search Product Context Skill, redesign the search performance dashboard for e-commerce teams optimising conversion from search sessions.”
+
+---
+
+### New feature prompts
+
+“Using the Spotler Activate Search Product Context Skill, design a merchandising rule builder for boosting high-margin products and new collections in search results.”
+
+“Using the Spotler Activate Search Product Context Skill, design a synonym management feature that helps teams fix misspelled, related, or no-result queries.”
+
+“Using the Spotler Activate Search Product Context Skill, design a personalised search configuration flow using behavioural data from Spotler Activate.”
+
+“Using the Spotler Activate Search Product Context Skill, design a search analytics feature that highlights popular queries, no-result searches, result clicks, and optimisation actions.”
+
+“Using the Spotler Activate Search Product Context Skill, design a B2B catalogue search experience for wholesale customers navigating large product ranges.”
+
+---
+
+### Product reasoning prompts
+
+“Using the Spotler Activate Search Product Context Skill, explain which product objects are involved in a personalised search result flow.”
+
+“Using the Spotler Activate Search Product Context Skill, map the workflow from visitor query to suggestions, ranked results, filters, recommendations, and conversion.”
+
+“Using the Spotler Activate Search Product Context Skill, identify edge cases for merchandising rules that boost campaign products.”
+
+“Using the Spotler Activate Search Product Context Skill, explain how no-result searches should inform search optimisation.”
+
+“Using the Spotler Activate Search Product Context Skill, suggest realistic search result types for an education platform with structured content and training materials.”
+
+---
+
+### Design review prompts
+
+“Using the Spotler Activate Search Product Context Skill, review this screen for incorrect terminology, missing product logic, or generic SaaS assumptions.”
+
+“Using the Spotler Activate Search Product Context Skill, check whether this search results experience properly supports high-intent visitors.”
+
+“Using the Spotler Activate Search Product Context Skill, review whether this merchandising concept balances relevance and commercial control.”
+
+“Using the Spotler Activate Search Product Context Skill, identify where this design should show indexing, integration, or data source status.”
+
+“Using the Spotler Activate Search Product Context Skill, check whether this analytics concept makes no-result searches and optimisation actions clear.”
