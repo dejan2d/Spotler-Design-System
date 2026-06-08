@@ -1,0 +1,96 @@
+/* Switch — Spotler Design System
+   Spec: references/components/switch.md
+   Pill track + circular knob (Border/Circular). Knob slides left/right; animated. */
+
+.sds-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-12);
+  font-family: var(--font-family);
+}
+
+.sds-switch__control {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: 40px;
+  height: 24px;
+}
+
+.sds-switch__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.sds-switch__track {
+  display: inline-flex;
+  align-items: center;
+  width: 40px;
+  height: 24px;
+  padding: 2px;
+  box-sizing: border-box;
+  background: var(--switch-rest-background);
+  border-radius: var(--border-circular);
+  transition: background-color 150ms ease-in-out;
+}
+
+.sds-switch__knob {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--border-circular);
+  background: var(--switch-rest-circle);
+  transform: translateX(0);
+  transition: transform 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+
+.sds-switch__label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  /* Switch token set has no label color; use the system neutral text primitive (#353B40). */
+  color: var(--monochrome-gray-1000);
+  cursor: pointer;
+}
+
+/* ===== On (checked) ===== */
+.sds-switch__input:checked ~ .sds-switch__track {
+  background: var(--switch-selected-background);
+}
+
+.sds-switch__input:checked ~ .sds-switch__track .sds-switch__knob {
+  background: var(--switch-selected-circle);
+  transform: translateX(16px);
+}
+
+/* ===== Focus ===== */
+.sds-switch__input:focus-visible ~ .sds-switch__track {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+/* ===== Disabled (preserve on/off distinction) ===== */
+.sds-switch--disabled .sds-switch__track {
+  background: var(--disabled-stroke);
+}
+
+.sds-switch--disabled .sds-switch__input:checked ~ .sds-switch__track {
+  background: var(--disabled-icon);
+}
+
+.sds-switch--disabled .sds-switch__knob {
+  background: var(--disabled-background);
+}
+
+.sds-switch--disabled .sds-switch__label {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-switch--disabled .sds-switch__input,
+.sds-switch--disabled .sds-switch__label {
+  cursor: not-allowed;
+}

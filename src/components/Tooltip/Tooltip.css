@@ -1,0 +1,59 @@
+/* Tooltip — Spotler Design System
+   Spec: references/components/tooltip.md
+   Floating surface: white background, body-small text, overlay shadow, pointer toward anchor. */
+
+.sds-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.sds-tooltip__anchor {
+  display: inline-flex;
+}
+
+.sds-tooltip__surface {
+  position: absolute;
+  z-index: 1;
+  max-width: 240px;
+  padding: var(--spacing-s-4) var(--spacing-s-8);
+  border-radius: var(--border-small);
+  background: var(--tooltip-background);
+  color: var(--tooltip-text);
+  font-family: var(--font-family);
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  white-space: nowrap;
+  box-shadow: var(--elevation-overlay);
+  pointer-events: none;
+}
+
+.sds-tooltip__surface[hidden] {
+  display: none;
+}
+
+/* ===== Placement ===== */
+.sds-tooltip__surface--top {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: var(--spacing-s-8);
+}
+.sds-tooltip__surface--bottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: var(--spacing-s-8);
+}
+.sds-tooltip__surface--left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: var(--spacing-s-8);
+}
+.sds-tooltip__surface--right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: var(--spacing-s-8);
+}

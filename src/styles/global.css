@@ -1,0 +1,23 @@
+/* Spotler Design System — Global styles */
+/* Import this once at your app root. It pulls in all design tokens. */
+
+@import './tokens.css';
+@import './component-tokens.css';
+
+/* Open Sans — load from your font provider or self-host.
+   Example (Google Fonts):
+   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+*/
+
+.sds-root,
+.sds-root * {
+  box-sizing: border-box;
+}
+
+.sds-root {
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--monochrome-gray-1000);
+}

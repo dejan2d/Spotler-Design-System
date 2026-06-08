@@ -1,0 +1,137 @@
+/* Context Menu — Spotler Design System
+   Spec: references/components/context-menu.md
+   Rounded container on the overlay surface, stacked basic/specific items. */
+
+.sds-context-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  padding: var(--spacing-s-4);
+  background: var(--context-menu-basic-rest-background);
+  border: 1px solid var(--context-menu-frame-border);
+  border-radius: var(--border-medium);
+  box-shadow: var(--elevation-overlay);
+  font-family: var(--font-family);
+}
+
+.sds-context-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  width: 100%;
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  border: none;
+  border-radius: var(--border-small);
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.sds-context-menu__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.sds-context-menu__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.sds-context-menu__checkmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* ===== Basic items (icon + label) ===== */
+.sds-context-menu__item--basic {
+  background: var(--context-menu-basic-rest-background);
+  color: var(--context-menu-basic-rest-text);
+}
+
+.sds-context-menu__item--basic .sds-context-menu__icon {
+  color: var(--context-menu-basic-rest-icon);
+}
+
+.sds-context-menu__item--basic:hover:not(:disabled),
+.sds-context-menu__item--basic:focus-visible:not(:disabled) {
+  background: var(--context-menu-basic-hover-background);
+  color: var(--context-menu-basic-hover-text);
+  outline: none;
+}
+
+.sds-context-menu__item--basic:hover:not(:disabled) .sds-context-menu__icon,
+.sds-context-menu__item--basic:focus-visible:not(:disabled) .sds-context-menu__icon {
+  color: var(--context-menu-basic-hover-icon);
+}
+
+.sds-context-menu__item--basic.sds-context-menu__item--selected {
+  background: var(--context-menu-basic-selected-background);
+  color: var(--context-menu-basic-selected-text);
+}
+
+.sds-context-menu__item--basic.sds-context-menu__item--selected .sds-context-menu__icon {
+  color: var(--context-menu-basic-selected-icon);
+}
+
+.sds-context-menu__item--basic.sds-context-menu__item--selected .sds-context-menu__checkmark {
+  color: var(--context-menu-basic-selected-checkmark);
+}
+
+/* ===== Specific items (label + checkmark) ===== */
+.sds-context-menu__item--specific {
+  background: var(--context-menu-specific-rest-background);
+  color: var(--context-menu-specific-rest-text);
+}
+
+.sds-context-menu__item--specific:hover:not(:disabled),
+.sds-context-menu__item--specific:focus-visible:not(:disabled) {
+  background: var(--context-menu-specific-hover-background);
+  color: var(--context-menu-specific-hover-text);
+  outline: none;
+}
+
+.sds-context-menu__item--specific.sds-context-menu__item--selected {
+  background: var(--context-menu-specific-selected-background);
+  color: var(--context-menu-specific-selected-text);
+}
+
+.sds-context-menu__item--specific.sds-context-menu__item--selected .sds-context-menu__checkmark {
+  color: var(--context-menu-specific-selected-checkmark);
+}
+
+/* ===== Destructive items =====
+   No context-menu destructive token exists; uses the semantic alert color. */
+.sds-context-menu__item--destructive,
+.sds-context-menu__item--destructive .sds-context-menu__icon {
+  color: var(--semantic-red-alert-alert);
+}
+
+.sds-context-menu__item--destructive:hover:not(:disabled),
+.sds-context-menu__item--destructive:focus-visible:not(:disabled) {
+  background: var(--semantic-red-alert-alert-lighter);
+  color: var(--semantic-red-alert-alet-darker);
+  outline: none;
+}
+
+.sds-context-menu__item--destructive:hover:not(:disabled) .sds-context-menu__icon,
+.sds-context-menu__item--destructive:focus-visible:not(:disabled) .sds-context-menu__icon {
+  color: var(--semantic-red-alert-alet-darker);
+}
+
+/* ===== Disabled ===== */
+.sds-context-menu__item:disabled {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-context-menu__item:disabled .sds-context-menu__icon {
+  color: var(--disabled-text);
+}

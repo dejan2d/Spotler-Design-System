@@ -1,0 +1,49 @@
+/* Avatar — Spotler Design System
+   Spec: references/components/avatar.md. Circular; tonal pair Avatar/background + Avatar/person. */
+
+.sds-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--border-circular);
+  background: var(--avatar-background);
+  color: var(--avatar-person);
+  font-family: var(--font-family);
+  font-weight: var(--font-h4-weight);
+  line-height: 1;
+  user-select: none;
+}
+
+.sds-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sds-avatar__fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Sizes ===== */
+.sds-avatar--small {
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--font-caption-size);
+}
+
+.sds-avatar--medium {
+  width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
+  font-size: var(--font-body-size);
+}
+
+.sds-avatar--large {
+  width: 52px;
+  height: 52px;
+  font-size: var(--font-h3-size);
+}

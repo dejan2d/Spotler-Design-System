@@ -1,0 +1,126 @@
+/* Table — Spotler Design System
+   Spec: references/components/table.md. Tokens Table/cell-* and Table/header-*.
+   Container uses a flat border (Border/Default) rather than a shadow. */
+
+.sds-table__container {
+  border: var(--border-default);
+  border-radius: var(--border-small);
+  overflow: hidden;
+  font-family: var(--font-family);
+}
+
+.sds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family);
+}
+
+.sds-table__caption {
+  padding: var(--spacing-s-12) var(--spacing-s-16);
+  text-align: left;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  color: var(--table-cell-default-help-text);
+}
+
+/* ===== Header ===== */
+.sds-table__header {
+  padding: var(--spacing-s-12) var(--spacing-s-16);
+  text-align: left;
+  background: var(--table-header-default-background);
+  color: var(--table-header-default-text);
+  border-bottom: 1px solid var(--table-header-default-stroke);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-h4-weight);
+  white-space: nowrap;
+}
+
+.sds-table__header--sortable:hover {
+  background: var(--table-header-hover-background);
+  color: var(--table-header-hover-text);
+  border-bottom-color: var(--table-header-hover-stroke);
+}
+
+.sds-table__header--active {
+  background: var(--table-header-selected-background);
+  color: var(--table-header-selected-text);
+  border-bottom-color: var(--table-header-selected-stroke);
+}
+
+.sds-table__header-label {
+  display: inline-block;
+}
+
+.sds-table__sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-4);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.sds-table__sort-button:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+.sds-table__sort-icon {
+  font-size: var(--font-caption-size);
+  color: var(--table-header-default-icon);
+}
+
+.sds-table__header--active .sds-table__sort-icon {
+  color: var(--table-header-selected-icon);
+}
+
+/* ===== Cells / rows ===== */
+.sds-table__cell {
+  padding: var(--spacing-s-12) var(--spacing-s-16);
+  background: var(--table-cell-default-background);
+  color: var(--table-cell-default-text);
+  border-bottom: 1px solid var(--table-cell-default-stroke);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  vertical-align: middle;
+}
+
+.sds-table__row {
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.sds-table__row:hover .sds-table__cell {
+  background: var(--table-cell-hover-background);
+  color: var(--table-cell-hover-text);
+  border-bottom-color: var(--table-cell-hover-stroke);
+}
+
+.sds-table__row--selected .sds-table__cell,
+.sds-table__row--selected:hover .sds-table__cell {
+  background: var(--table-cell-selected-background);
+  color: var(--table-cell-selected-text);
+  border-bottom-color: var(--table-cell-selected-stroke);
+}
+
+.sds-table__body .sds-table__row:last-child .sds-table__cell {
+  border-bottom: none;
+}
+
+/* ===== Selection column ===== */
+.sds-table__header--select,
+.sds-table__cell--select {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.sds-table__checkbox {
+  cursor: pointer;
+  accent-color: var(--primary-conceptual-conceptual);
+}

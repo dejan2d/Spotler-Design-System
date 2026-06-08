@@ -1,0 +1,94 @@
+/* Text Field — Spotler Design System
+   Spec: references/components/text-field.md (Inputs system, Regular Text Field tokens) */
+
+.sds-textfield {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  font-family: var(--font-family);
+}
+
+.sds-textfield__label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-regular-text-field-default-label);
+}
+
+.sds-textfield__optional {
+  color: var(--inputs-regular-text-field-default-label-optional-text);
+}
+
+.sds-textfield__field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  background: var(--inputs-regular-text-field-default-background);
+  border: 1px solid var(--inputs-regular-text-field-default-stroke);
+  border-radius: var(--border-small);
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.sds-textfield__field:hover {
+  background: var(--inputs-regular-text-field-hover-background);
+  border-color: var(--inputs-regular-text-field-hover-stroke);
+}
+
+.sds-textfield__field:focus-within {
+  background: var(--inputs-regular-text-field-focused-background);
+  border-color: var(--inputs-regular-text-field-focused-stroke);
+}
+
+.sds-textfield__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--inputs-regular-text-field-default-icon-start);
+}
+
+.sds-textfield__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--inputs-regular-text-field-filled-text);
+  min-width: 0;
+}
+
+.sds-textfield__input::placeholder {
+  color: var(--inputs-regular-text-field-default-text);
+}
+
+.sds-textfield__hint {
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  color: var(--inputs-regular-text-field-default-hint-message);
+}
+
+/* ===== Error ===== */
+.sds-textfield--error .sds-textfield__field,
+.sds-textfield--error .sds-textfield__field:hover,
+.sds-textfield--error .sds-textfield__field:focus-within {
+  background: var(--inputs-regular-text-field-error-background);
+  border-color: var(--inputs-regular-text-field-error-stroke);
+}
+
+.sds-textfield--error .sds-textfield__hint {
+  color: var(--inputs-regular-text-field-error-text);
+}
+
+/* ===== Disabled ===== */
+.sds-textfield--disabled .sds-textfield__field {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
+}
+
+.sds-textfield--disabled .sds-textfield__input {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}

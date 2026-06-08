@@ -1,0 +1,93 @@
+/* Spotler Design System — Foundation Tokens */
+/* Auto-generated from kit/guidelines/foundations. Do not edit by hand. */
+
+:root {
+
+  /* ===== Color ===== */
+  --primary-conceptual-conceptual: #005499;
+  --primary-conceptual-conceptual-darker: #003560;
+  --primary-conceptual-conceptual-lighter: #EAF6FF;
+  --secondary-spirit-spirit: #F0E306;
+  --secondary-spirit-spirit-darker: #CABF05;
+  --secondary-spirit-spirit-lighter: #FDFBDB;
+  --semantic-red-alert-alert: #B6000A;
+  --semantic-red-alert-alet-darker: #910008;
+  --semantic-red-alert-alert-lighter: #FCEAEB;
+  --semantic-green-success-success: #009930;
+  --semantic-green-success-success-darker: #00601E;
+  --semantic-green-success-success-lighter: #E6FEE8;
+  --semantic-orange-warning-warning-main: #D79F10;
+  --semantic-orange-warning-warning-darker: #846108;
+  --semantic-orange-warning-warning-lighter: #FCEFCF;
+  --rest-knowledge-knowledge-info: #002A4D;
+  --rest-knowledge-knowledge-darker: #001D34;
+  --rest-knowledge-knowledge-lighter: #DBE1E6;
+  --rest-uplifiting-uplifting: #942FEA;
+  --rest-uplifiting-uplifting-darker: #6F23B0;
+  --rest-uplifiting-uplifting-lighter: #EAD5FB;
+  --rest-legend-legend: #FB7C1C;
+  --rest-legend-legend-darker: #BC5D15;
+  --rest-legend-legend-lighter: #FEE2CC;
+  --rest-honesty-honesty: #23AFE6;
+  --rest-honesty-darker: #1D93C1;
+  --rest-honesty-lighter: #E0F4FB;
+  --rest-graph-chart-1: #005499;
+  --rest-graph-chart-2: #80C6FF;
+  --rest-graph-chart-3: #FFC107;
+  --rest-graph-chart-4: #009688;
+  --rest-graph-chart-5: #F9282B;
+  --rest-graph-chart-6: #9980FF;
+  --rest-graph-chart-7: #8BC34A;
+  --rest-graph-chart-8: #F3722C;
+  --rest-graph-chart-9: #728494;
+  --rest-graph-chart-10: #E79BE4;
+  --rest-graph-other: #D6D6D6;
+  --monochrome-white: #FFFFFF;
+  --monochrome-gray-50: #F8FAFA;
+  --monochrome-gray-100: #F2F4F5;
+  --monochrome-gray-200: #E7ECED;
+  --monochrome-gray-300: #D4DBDE;
+  --monochrome-gray-400: #BBC5CA;
+  --monochrome-gray-500: #9FACB3;
+  --monochrome-gray-600: #8795A0;
+  --monochrome-gray-700: #74818C;
+  --monochrome-gray-800: #616D76;
+  --monochrome-gray-900: #515A61;
+  --monochrome-gray-1000: #353B40;
+
+  /* ===== Spacing (4px scale) ===== */
+  --spacing-s-4: 4px;
+  --spacing-s-8: 8px;
+  --spacing-s-12: 12px;
+  --spacing-s-16: 16px;
+  --spacing-s-20: 20px;
+  --spacing-s-24: 24px;
+  --spacing-s-28: 28px;
+  --spacing-s-32: 32px;
+  --spacing-s-36: 36px;
+  --spacing-s-40: 40px;
+  --spacing-s-44: 44px;
+  --spacing-s-48: 48px;
+
+  /* ===== Corner radius ===== */
+  --border-none: 0px;
+  --border-small: 4px;
+  --border-medium: 6px;
+  --border-large: 8px;
+  --border-x-large: 16px;
+  --border-circular: 1000px;
+
+  /* ===== Typography (Open Sans) ===== */
+  --font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-h1-size: 32px;   --font-h1-line: 44px;   --font-h1-weight: 700;
+  --font-h2-size: 24px;   --font-h2-line: 33px;   --font-h2-weight: 400;
+  --font-h3-size: 22px;   --font-h3-line: 32px;   --font-h3-weight: 600;
+  --font-h4-size: 17px;   --font-h4-line: 28px;   --font-h4-weight: 600;
+  --font-body-size: 14px; --font-body-line: 20px; --font-body-weight: 400;
+  --font-caption-size: 12px; --font-caption-line: 16px; --font-caption-weight: 400;
+
+  /* ===== Elevation ===== */
+  --elevation-resting: 0px 0px 4px #D4DBDE;
+  --elevation-overlay: 0px 4px 16px rgba(53, 59, 64, 0.16);
+  --border-default: 1px solid #E7ECED;
+}

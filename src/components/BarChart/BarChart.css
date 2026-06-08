@@ -1,0 +1,87 @@
+/* BarChart — Spotler Design System (Diagrams)
+   Presentational wrapper: header (title + period picker), plot slot, legend.
+   Tokens: --diagrams-bar-chart-*. */
+
+.sds-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-16);
+  padding: var(--spacing-s-24);
+  border-radius: var(--border-large);
+  border: 1px solid var(--diagrams-bar-chart-background-lines);
+  background: var(--monochrome-white);
+  box-shadow: var(--elevation-resting);
+  font-family: var(--font-family);
+}
+
+.sds-bar-chart__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+}
+
+.sds-bar-chart__header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--diagrams-bar-chart-header-icon);
+}
+
+.sds-bar-chart__header-text {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
+  color: var(--diagrams-bar-chart-header-text);
+}
+
+.sds-bar-chart__period-picker {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--diagrams-bar-chart-period-picker);
+}
+
+.sds-bar-chart__plot {
+  position: relative;
+  min-height: 0;
+}
+
+.sds-bar-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-s-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sds-bar-chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+}
+
+.sds-bar-chart__legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--border-small);
+}
+
+.sds-bar-chart__legend-label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--diagrams-bar-chart-legend-text);
+}
+
+.sds-bar-chart__legend-value {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: 600;
+  color: var(--diagrams-bar-chart-legend-explanation);
+}

@@ -1,0 +1,116 @@
+/* Calendar — Spotler Design System
+   Spec: references/components/calendar.md (Date Picker token group) */
+
+.sds-calendar {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-12);
+  background: var(--date-picker-default-background);
+  border-radius: var(--border-medium);
+  font-family: var(--font-family);
+}
+
+.sds-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-s-8);
+}
+
+.sds-calendar__title {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-h3-weight);
+  color: var(--date-picker-default-text);
+}
+
+.sds-calendar__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--border-small);
+  color: var(--date-picker-icon);
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.sds-calendar__nav:hover {
+  background: var(--date-picker-hover-background);
+}
+
+.sds-calendar__nav:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+.sds-calendar__weekdays,
+.sds-calendar__weeks {
+  display: grid;
+  grid-template-columns: repeat(7, var(--spacing-s-36));
+  gap: var(--spacing-s-4);
+}
+
+.sds-calendar__weekday {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--spacing-s-24);
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  color: var(--date-picker-previous-text);
+}
+
+.sds-calendar__day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-36);
+  height: var(--spacing-s-36);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--border-small);
+  background: var(--date-picker-default-background);
+  color: var(--date-picker-default-text);
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.sds-calendar__day:hover {
+  background: var(--date-picker-hover-background);
+  color: var(--date-picker-hover-text);
+}
+
+.sds-calendar__day:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+/* Outside current month (previous / next) — muted text */
+.sds-calendar__day--previous {
+  background: var(--date-picker-previous-background);
+  color: var(--date-picker-previous-text);
+}
+
+/* Today (current) — non-color cue via stroke + bold weight */
+.sds-calendar__day--current {
+  border-color: var(--date-picker-current-stroke);
+  color: var(--date-picker-current-text);
+  font-weight: var(--font-h3-weight);
+}
+
+/* Selected — non-color cue via bold weight in addition to fill */
+.sds-calendar__day--selected {
+  background: var(--date-picker-selected-background);
+  color: var(--date-picker-selected-text);
+  font-weight: var(--font-h3-weight);
+}

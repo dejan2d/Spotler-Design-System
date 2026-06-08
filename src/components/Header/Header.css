@@ -1,0 +1,67 @@
+/* Header — Spotler Design System
+   Spec: references/components/header.md. Page tokens Headers/*, modal tokens Headers/Modal/*. */
+
+.sds-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  font-family: var(--font-family);
+}
+
+.sds-header__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.sds-header__title {
+  margin: 0;
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line);
+  font-weight: var(--font-h3-weight);
+}
+
+.sds-header__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  margin-left: auto;
+}
+
+.sds-header__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: var(--spacing-s-4);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--headers-modal-close-icon);
+}
+
+/* When actions are absent, the close control still aligns right in modal headers. */
+.sds-header--modal .sds-header__close {
+  margin-left: auto;
+}
+.sds-header--modal .sds-header__actions + .sds-header__close {
+  margin-left: 0;
+}
+
+/* ===== Page / section ===== */
+.sds-header--page .sds-header__icon {
+  color: var(--headers-icon);
+}
+.sds-header--page .sds-header__title {
+  color: var(--headers-text);
+}
+
+/* ===== Modal ===== */
+.sds-header--modal .sds-header__icon {
+  color: var(--headers-modal-icon);
+}
+.sds-header--modal .sds-header__title {
+  color: var(--headers-modal-text);
+}

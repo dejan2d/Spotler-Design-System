@@ -1,0 +1,235 @@
+/* Stepper — Spotler Design System
+   Spec: references/components/stepper.md
+   32x32 circular step icons; checkmark on complete (finished). 150ms transitions. */
+
+.sds-stepper {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-family);
+}
+
+.sds-stepper--horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.sds-stepper--vertical {
+  flex-direction: column;
+}
+
+.sds-stepper__step {
+  display: flex;
+  flex-direction: column;
+}
+
+.sds-stepper--horizontal .sds-stepper__step {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* ===== Head ===== */
+.sds-stepper__head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sds-stepper--vertical .sds-stepper__head {
+  gap: var(--spacing-s-16);
+}
+
+.sds-stepper--horizontal .sds-stepper__head {
+  gap: var(--spacing-s-8);
+}
+
+/* ===== Icon ===== */
+.sds-stepper__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-circular);
+  border: var(--border-small) solid transparent;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.sds-stepper__number {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.sds-stepper__icon--finished {
+  border-color: var(--stepper-icon-finished-stroke);
+  color: var(--stepper-icon-finished-icon);
+  background: transparent;
+}
+
+.sds-stepper__icon--current {
+  background: var(--stepper-icon-current-background);
+  border-color: var(--stepper-icon-current-background);
+  color: var(--stepper-icon-current-text);
+}
+
+.sds-stepper__icon--waiting {
+  border-color: var(--stepper-icon-waiting-stroke);
+  color: var(--stepper-icon-waiting-text);
+  background: transparent;
+}
+
+.sds-stepper__icon--error {
+  border-color: var(--stepper-icon-error-stroke);
+  color: var(--stepper-icon-error-icon);
+  background: transparent;
+}
+
+.sds-stepper__icon--warning {
+  border-color: var(--stepper-icon-warning-stroke);
+  color: var(--stepper-icon-warning-icon);
+  background: transparent;
+}
+
+/* ===== Title ===== */
+.sds-stepper__title {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--stepper-vertical-text-default);
+}
+
+.sds-stepper--horizontal .sds-stepper__title {
+  color: var(--stepper-horizontal-text-default);
+}
+
+.sds-stepper__step--current .sds-stepper__title {
+  font-weight: 600;
+}
+
+.sds-stepper--vertical .sds-stepper__step--error .sds-stepper__title {
+  color: var(--stepper-vertical-text-error);
+}
+
+.sds-stepper--horizontal .sds-stepper__step--error .sds-stepper__title {
+  color: var(--stepper-horizontal-text-error);
+}
+
+.sds-stepper--vertical .sds-stepper__step--warning .sds-stepper__title,
+.sds-stepper--horizontal .sds-stepper__step--warning .sds-stepper__title {
+  color: var(--stepper-icon-warning-stroke);
+}
+
+/* ===== Content / description ===== */
+.sds-stepper__content {
+  display: flex;
+}
+
+.sds-stepper--vertical .sds-stepper__content {
+  padding-left: var(--spacing-s-16);
+}
+
+.sds-stepper--horizontal .sds-stepper__content {
+  padding-left: var(--spacing-s-40);
+}
+
+.sds-stepper__description {
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+}
+
+/* Description colours by status (vertical defaults; horizontal mirrors). */
+.sds-stepper--vertical .sds-stepper__step--finished .sds-stepper__description {
+  color: var(--stepper-vertical-help-text-finished);
+}
+.sds-stepper--vertical .sds-stepper__step--waiting .sds-stepper__description {
+  color: var(--stepper-vertical-help-text-waiting);
+}
+.sds-stepper--vertical .sds-stepper__step--current .sds-stepper__description {
+  color: var(--stepper-vertical-help-text-in-progress);
+}
+.sds-stepper--vertical .sds-stepper__step--error .sds-stepper__description {
+  color: var(--stepper-vertical-help-text-error);
+}
+.sds-stepper--vertical .sds-stepper__step--warning .sds-stepper__description {
+  color: var(--stepper-vertical-help-text-warning);
+}
+
+.sds-stepper--horizontal .sds-stepper__step--finished .sds-stepper__description {
+  color: var(--stepper-horizontal-help-text-finished);
+}
+.sds-stepper--horizontal .sds-stepper__step--waiting .sds-stepper__description {
+  color: var(--stepper-horizontal-help-text-waiting);
+}
+.sds-stepper--horizontal .sds-stepper__step--current .sds-stepper__description {
+  color: var(--stepper-horizontal-help-text-in-progress);
+}
+.sds-stepper--horizontal .sds-stepper__step--error .sds-stepper__description {
+  color: var(--stepper-horizontal-help-text-error);
+}
+.sds-stepper--horizontal .sds-stepper__step--warning .sds-stepper__description {
+  color: var(--stepper-horizontal-help-text-warning);
+}
+
+/* ===== Connector / tail line ===== */
+.sds-stepper__line {
+  display: block;
+  background: transparent;
+}
+
+/* Vertical connector: short vertical segment beside the icon column. */
+.sds-stepper--vertical .sds-stepper__connector {
+  display: flex;
+  justify-content: flex-start;
+  padding: var(--spacing-s-4) 0;
+  margin-left: 16px;
+}
+
+.sds-stepper--vertical .sds-stepper__line {
+  width: 0;
+  height: 16px;
+  border-left: var(--border-small) solid var(--stepper-vertical-line-waiting);
+}
+
+.sds-stepper--vertical .sds-stepper__step--finished .sds-stepper__line {
+  border-left-color: var(--stepper-vertical-line-finished);
+}
+.sds-stepper--vertical .sds-stepper__step--current .sds-stepper__line {
+  border-left-color: var(--stepper-vertical-line-in-progress);
+}
+.sds-stepper--vertical .sds-stepper__step--error .sds-stepper__line {
+  border-left-color: var(--stepper-vertical-line-error);
+}
+.sds-stepper--vertical .sds-stepper__step--warning .sds-stepper__line {
+  border-left-color: var(--stepper-vertical-line-waiting);
+}
+
+/* Horizontal tail: fills remaining width between this step's title and the next. */
+.sds-stepper--horizontal .sds-stepper__tail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: var(--spacing-s-8);
+  flex-grow: 1;
+}
+
+.sds-stepper--horizontal .sds-stepper__line {
+  width: 100%;
+  height: 0;
+  border-top: var(--border-small) solid var(--stepper-horizontal-line-waiting);
+}
+
+.sds-stepper--horizontal .sds-stepper__step--finished .sds-stepper__line {
+  border-top-color: var(--stepper-horizontal-line-finished);
+}
+.sds-stepper--horizontal .sds-stepper__step--current .sds-stepper__line {
+  border-top-color: var(--stepper-horizontal-line-in-progress);
+}
+.sds-stepper--horizontal .sds-stepper__step--error .sds-stepper__line {
+  border-top-color: var(--stepper-horizontal-line-error);
+}
+.sds-stepper--horizontal .sds-stepper__step--warning .sds-stepper__line {
+  border-top-color: var(--stepper-horizontal-line-waiting);
+}

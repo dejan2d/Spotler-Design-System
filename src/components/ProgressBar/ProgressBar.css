@@ -1,0 +1,40 @@
+/* Progress Bar — Spotler Design System
+   Spec: references/components/progress-bar.md
+   Rounded track with proportional fill; optional label. 8px tall track, radius small. */
+
+.sds-progress-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  font-family: var(--font-family);
+}
+
+.sds-progress-bar__track {
+  position: relative;
+  flex: 1;
+  height: 8px;
+  border-radius: var(--border-small);
+  overflow: hidden;
+}
+
+.sds-progress-bar__fill {
+  height: 100%;
+  border-radius: var(--border-small);
+  transition: width 150ms ease-in-out;
+}
+
+.sds-progress-bar__label {
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+}
+
+/* ===== Primary ===== */
+.sds-progress-bar--primary .sds-progress-bar__track { background: var(--progress-bar-primary-background); }
+.sds-progress-bar--primary .sds-progress-bar__fill { background: var(--progress-bar-primary-fill); }
+.sds-progress-bar--primary .sds-progress-bar__label { color: var(--progress-bar-primary-label); }
+
+/* ===== Neutral ===== */
+.sds-progress-bar--neutral .sds-progress-bar__track { background: var(--progress-bar-neutral-background); }
+.sds-progress-bar--neutral .sds-progress-bar__fill { background: var(--progress-bar-neutral-fill); }
+.sds-progress-bar--neutral .sds-progress-bar__label { color: var(--progress-bar-neutral-label); }

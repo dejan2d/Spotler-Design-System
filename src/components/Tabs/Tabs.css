@@ -1,0 +1,139 @@
+/* Tabs — Spotler Design System
+   Spec: references/components/tabs.md
+   Horizontal: row over a baseline stroke; selected tab shows an underline stroke.
+   Vertical: stacked; selected shows a side stroke. */
+
+.sds-tabs {
+  display: flex;
+  font-family: var(--font-family);
+}
+
+.sds-tabs--horizontal {
+  flex-direction: column;
+}
+
+.sds-tabs--vertical {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.sds-tabs__list {
+  display: flex;
+}
+
+.sds-tabs--horizontal .sds-tabs__list {
+  flex-direction: row;
+  border-bottom: var(--border-small) solid var(--tabs-horizontal-default-stroke);
+}
+
+.sds-tabs--vertical .sds-tabs__list {
+  flex-direction: column;
+}
+
+.sds-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-8) var(--spacing-s-16);
+  background: transparent;
+  border: none;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 150ms ease-in-out, border-color 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+
+.sds-tabs__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.sds-tabs__tab:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: -2px;
+}
+
+/* ===== Horizontal ===== */
+.sds-tabs--horizontal .sds-tabs__tab {
+  background: transparent;
+  color: var(--tabs-horizontal-default-text);
+  border-bottom: 2px solid transparent;
+  margin-bottom: calc(-1 * var(--border-small));
+}
+
+.sds-tabs--horizontal .sds-tabs__tab .sds-tabs__icon {
+  color: var(--tabs-horizontal-default-icon);
+}
+
+.sds-tabs--horizontal .sds-tabs__tab:hover:not(:disabled) {
+  color: var(--tabs-horizontal-hover-text);
+}
+
+.sds-tabs--horizontal .sds-tabs__tab:hover:not(:disabled) .sds-tabs__icon {
+  color: var(--tabs-horizontal-hover-icon);
+}
+
+.sds-tabs--horizontal .sds-tabs__tab--selected {
+  color: var(--tabs-horizontal-selected-text);
+  border-bottom-color: var(--tabs-horizontal-selected-stroke);
+  font-weight: 600;
+}
+
+.sds-tabs--horizontal .sds-tabs__tab--selected .sds-tabs__icon {
+  color: var(--tabs-horizontal-selected-icon);
+}
+
+/* ===== Vertical ===== */
+.sds-tabs--vertical .sds-tabs__tab {
+  background: var(--tabs-vertical-default-background);
+  color: var(--tabs-vertical-default-text);
+  border-left: 2px solid transparent;
+  text-align: left;
+}
+
+.sds-tabs--vertical .sds-tabs__tab .sds-tabs__icon {
+  color: var(--tabs-vertical-default-icon);
+}
+
+.sds-tabs--vertical .sds-tabs__tab:hover:not(:disabled) {
+  background: var(--tabs-vertical-hover-background);
+  color: var(--tabs-vertical-hover-text);
+}
+
+.sds-tabs--vertical .sds-tabs__tab:hover:not(:disabled) .sds-tabs__icon {
+  color: var(--tabs-vertical-hover-icon);
+}
+
+.sds-tabs--vertical .sds-tabs__tab--selected {
+  background: var(--tabs-vertical-selected-background);
+  color: var(--tabs-vertical-selected-text);
+  border-left-color: var(--tabs-vertical-selected-stroke);
+  font-weight: 600;
+}
+
+.sds-tabs--vertical .sds-tabs__tab--selected .sds-tabs__icon {
+  color: var(--tabs-vertical-selected-icon);
+}
+
+/* ===== Disabled ===== */
+.sds-tabs__tab:disabled {
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+.sds-tabs__panel {
+  flex: 1;
+  padding: var(--spacing-s-16);
+}
+
+.sds-tabs__panel:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
