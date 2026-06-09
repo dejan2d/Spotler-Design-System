@@ -1,6 +1,7 @@
 /* Button — Spotler Design System
-   Spec: references/components/button.md
-   Row, padding 8px 16px, gap 8px, height 36px, min-width 80px, radius circular. */
+   An interactive element that initiates an action.
+   Row, padding 8px 16px, gap 8px, height 36px, min-width 80px, radius circular (1000px).
+   Optional 20px leading/trailing icon. All color/spacing/radius/type values are tokens. */
 
 .sds-button {
   display: inline-flex;
@@ -17,7 +18,8 @@
   line-height: var(--font-body-line);
   font-weight: var(--font-body-weight);
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
+    color 150ms ease-in-out, box-shadow 150ms ease-in-out;
   user-select: none;
   white-space: nowrap;
 }
@@ -29,6 +31,8 @@
   font-size: 20px;
   width: 20px;
   height: 20px;
+  /* Icon defaults to the per-variant icon token, falling back to the label color. */
+  color: var(--sds-button-icon-color, currentColor);
 }
 
 .sds-button__label {
@@ -40,9 +44,11 @@
   outline-offset: 2px;
 }
 
-/* Selected (toggle) — 2px stroke + inset white ring + semibold label */
+/* Selected (toggle) — 2px stroke + inset white ring + Semi-Bold label.
+   600 is a font-weight (not a color/spacing/radius); no dedicated weight token exists. */
 .sds-button--selected {
   font-weight: 600;
+  border-width: 2px;
   box-shadow: inset 0 0 0 4px var(--monochrome-white);
 }
 
@@ -50,30 +56,36 @@
 .sds-button--primary {
   background: var(--button-primary-rest-background);
   color: var(--button-primary-rest-text);
+  --sds-button-icon-color: var(--button-primary-rest-icon);
 }
 .sds-button--primary:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-primary-hover-background);
   color: var(--button-primary-hover-text);
+  --sds-button-icon-color: var(--button-primary-hover-icon);
 }
 .sds-button--primary.sds-button--selected {
   background: var(--button-primary-selected-background);
   border-color: var(--button-primary-selected-stroke);
   color: var(--button-primary-selected-text);
+  --sds-button-icon-color: var(--button-primary-selected-icon);
 }
 
 /* ===== Primary Accent (creation only) ===== */
 .sds-button--primary-accent {
   background: var(--button-primary-accent-rest-background);
   color: var(--button-primary-accent-rest-text);
+  --sds-button-icon-color: var(--button-primary-accent-rest-icon);
 }
 .sds-button--primary-accent:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-primary-accent-hover-background);
   color: var(--button-primary-accent-hover-text);
+  --sds-button-icon-color: var(--button-primary-accent-hover-icon);
 }
 .sds-button--primary-accent.sds-button--selected {
   background: var(--button-primary-accent-selected-background);
   border-color: var(--button-primary-accent-selected-stroke);
   color: var(--button-primary-accent-selected-text);
+  --sds-button-icon-color: var(--button-primary-accent-selected-icon);
 }
 
 /* ===== Secondary (outlined) ===== */
@@ -81,46 +93,76 @@
   background: transparent;
   border-color: var(--button-secondary-rest-stroke);
   color: var(--button-secondary-rest-text);
+  --sds-button-icon-color: var(--button-secondary-rest-icon);
 }
 .sds-button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-secondary-hover-background);
   border-color: var(--button-secondary-hover-stroke);
   color: var(--button-secondary-hover-text);
+  --sds-button-icon-color: var(--button-secondary-hover-icon);
 }
 .sds-button--secondary.sds-button--selected {
   background: var(--button-secondary-selected-background);
   border-color: var(--button-secondary-selected-stroke);
   color: var(--button-secondary-selected-text);
+  --sds-button-icon-color: var(--button-secondary-selected-icon);
 }
 
 /* ===== Tertiary (ghost) ===== */
 .sds-button--tertiary {
   background: transparent;
   color: var(--button-tertiary-rest-text);
+  --sds-button-icon-color: var(--button-tertiary-rest-icon);
 }
 .sds-button--tertiary:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-tertiary-hover-background);
   color: var(--button-tertiary-hover-text);
+  --sds-button-icon-color: var(--button-tertiary-hover-icon);
 }
 .sds-button--tertiary.sds-button--selected {
   background: var(--button-tertiary-selected-background);
   border-color: var(--button-tertiary-selected-stroke);
   color: var(--button-tertiary-selected-text);
+  --sds-button-icon-color: var(--button-tertiary-selected-icon);
+}
+
+/* ===== TextLink (frameless, inline link styling) ===== */
+.sds-button--textlink {
+  background: transparent;
+  border-color: transparent;
+  min-width: 0;
+  color: var(--button-textlink-rest-text);
+}
+.sds-button--textlink .sds-button__label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.sds-button--textlink:hover:not(:disabled):not([aria-disabled='true']) {
+  color: var(--button-textlink-hover-text);
+}
+.sds-button--textlink.sds-button--selected {
+  color: var(--button-textlink-selected-text);
+  /* TextLink has no fill/stroke; selected shows only the Semi-Bold label, no ring. */
+  border-color: transparent;
+  box-shadow: none;
 }
 
 /* ===== Destructive ===== */
 .sds-button--destructive {
   background: var(--button-destructive-rest-background);
   color: var(--button-destructive-rest-text);
+  --sds-button-icon-color: var(--button-destructive-rest-icon);
 }
 .sds-button--destructive:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-destructive-hover-background);
   color: var(--button-destructive-hover-text);
+  --sds-button-icon-color: var(--button-destructive-hover-icon);
 }
 .sds-button--destructive.sds-button--selected {
   background: var(--button-destructive-selected-background);
   border-color: var(--button-destructive-selected-stroke);
   color: var(--button-destructive-selected-text);
+  --sds-button-icon-color: var(--button-destructive-selected-icon);
 }
 
 /* ===== Destructive Outline ===== */
@@ -128,30 +170,36 @@
   background: transparent;
   border-color: var(--button-destructive-outline-rest-stroke);
   color: var(--button-destructive-outline-rest-text);
+  --sds-button-icon-color: var(--button-destructive-outline-rest-icon);
 }
 .sds-button--destructive-outline:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-destructive-outline-hover-background);
   color: var(--button-destructive-outline-hover-text);
+  --sds-button-icon-color: var(--button-destructive-outline-hover-icon);
 }
 .sds-button--destructive-outline.sds-button--selected {
   background: var(--button-destructive-outline-selected-background);
   border-color: var(--button-destructive-outline-selected-stroke);
   color: var(--button-destructive-outline-selected-text);
+  --sds-button-icon-color: var(--button-destructive-outline-selected-icon);
 }
 
 /* ===== Warning ===== */
 .sds-button--warning {
   background: var(--button-warning-rest-background);
   color: var(--button-warning-rest-text);
+  --sds-button-icon-color: var(--button-warning-rest-icon);
 }
 .sds-button--warning:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-warning-hover-background);
   color: var(--button-warning-hover-text);
+  --sds-button-icon-color: var(--button-warning-hover-icon);
 }
 .sds-button--warning.sds-button--selected {
   background: var(--button-warning-selected-background);
   border-color: var(--button-warning-selected-stroke);
   color: var(--button-warning-selected-text);
+  --sds-button-icon-color: var(--button-warning-selected-icon);
 }
 
 /* ===== Disabled (all variants) ===== */
@@ -160,6 +208,14 @@
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
   color: var(--disabled-text);
+  --sds-button-icon-color: var(--disabled-icon);
   cursor: not-allowed;
   box-shadow: none;
+}
+
+/* TextLink stays frameless when disabled (no fill/stroke), only desaturated text. */
+.sds-button--textlink:disabled,
+.sds-button--textlink[aria-disabled='true'] {
+  background: transparent;
+  border-color: transparent;
 }

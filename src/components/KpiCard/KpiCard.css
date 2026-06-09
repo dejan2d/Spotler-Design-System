@@ -1,6 +1,8 @@
 /* KPI Card — Spotler Design System
-   Spec: kit/guidelines/components/kpi-card.md.
-   Padding 24px 32px, internal gap 8px, radius Border/Large (8px), 1px stroke, resting Drop Shadow/50.
+   A raised surface that surfaces one or more metrics with value, status/trend, and helper text.
+   Outer: padding 24px 32px, internal gap 8px, radius Border/Large (8px), 1px stroke, Drop Shadow/50.
+   Value area: padding 8px 0, gap 8px, 1px bottom separator. Header icon 24px, trailing 20px,
+   label/helper/chip icons 16px. All color/spacing/radius/type values are tokens.
    Tokens: --diagrams-kpi-* + Status Chip palette. */
 
 .sds-kpi-card {
@@ -15,6 +17,7 @@
   font-family: var(--font-family);
 }
 
+/* ===== Header ===== */
 .sds-kpi-card__header {
   display: flex;
   align-items: center;
@@ -36,21 +39,21 @@
 }
 
 .sds-kpi-card__title-icon--start {
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
+  font-size: var(--spacing-s-24);
+  width: var(--spacing-s-24);
+  height: var(--spacing-s-24);
   color: var(--diagrams-kpi-title-start-icon);
 }
 
 .sds-kpi-card__title-icon--end {
   margin-left: auto;
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: var(--spacing-s-20);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   color: var(--diagrams-kpi-title-end-icon);
 }
 
-/* Value area — separated by a 1px stroke */
+/* ===== Value area — separated by a 1px stroke ===== */
 .sds-kpi-card__value-area {
   display: flex;
   flex-direction: column;
@@ -59,6 +62,59 @@
   border-bottom: 1px solid var(--diagrams-kpi-stroke);
 }
 
+/* The final value area sits flush against the bottom padding — drop the trailing rule. */
+.sds-kpi-card__value-area:last-child {
+  border-bottom: none;
+}
+
+/* ===== Label row ===== */
+.sds-kpi-card__label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+}
+
+.sds-kpi-card__label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--diagrams-kpi-value-area-title);
+}
+
+/* Right-aligned muted helper text on the label row. */
+.sds-kpi-card__label-help {
+  margin-left: auto;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--diagrams-kpi-value-area-title-help-text);
+}
+
+.sds-kpi-card__label-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--spacing-s-16);
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+}
+
+.sds-kpi-card__label-icon--start {
+  color: var(--diagrams-kpi-value-area-start-icon);
+}
+
+/* A trailing icon with no helper text still pushes to the row end. */
+.sds-kpi-card__label-icon--end {
+  margin-left: auto;
+  color: var(--diagrams-kpi-value-area-end-icon);
+}
+
+/* When helper text is present it owns the auto margin, so the trailing icon hugs it. */
+.sds-kpi-card__label-help ~ .sds-kpi-card__label-icon--end {
+  margin-left: 0;
+}
+
+/* ===== Value row ===== */
 .sds-kpi-card__value-row {
   display: flex;
   align-items: center;
@@ -73,6 +129,7 @@
   color: var(--diagrams-kpi-value-area-text);
 }
 
+/* ===== Helper text below value ===== */
 .sds-kpi-card__help-text {
   margin: 0;
   font-size: var(--font-caption-size);
@@ -81,7 +138,7 @@
   color: var(--diagrams-kpi-value-area-help-information);
 }
 
-/* Status / trend chip — Status Chip palette */
+/* ===== Status / trend chip — Status Chip palette ===== */
 .sds-kpi-card__chip {
   display: inline-flex;
   align-items: center;
@@ -94,23 +151,39 @@
   white-space: nowrap;
 }
 
+.sds-kpi-card__chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--spacing-s-16);
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  /* Icon tracks the per-variant chip icon token set below. */
+  color: var(--sds-kpi-chip-icon-color, currentColor);
+}
+
 .sds-kpi-card__chip--default {
   background: var(--status-chip-default-background);
   color: var(--status-chip-default-text);
+  --sds-kpi-chip-icon-color: var(--status-chip-default-icon);
 }
 .sds-kpi-card__chip--success {
   background: var(--status-chip-success-background);
   color: var(--status-chip-success-text);
+  --sds-kpi-chip-icon-color: var(--status-chip-success-icon);
 }
 .sds-kpi-card__chip--warning {
   background: var(--status-chip-warning-background);
   color: var(--status-chip-warning-text);
+  --sds-kpi-chip-icon-color: var(--status-chip-warning-icon);
 }
 .sds-kpi-card__chip--alert {
   background: var(--status-chip-alert-background);
   color: var(--status-chip-alert-text);
+  --sds-kpi-chip-icon-color: var(--status-chip-alert-icon);
 }
 .sds-kpi-card__chip--blue {
   background: var(--status-chip-blue-background);
   color: var(--status-chip-blue-text);
+  --sds-kpi-chip-icon-color: var(--status-chip-blue-icon);
 }

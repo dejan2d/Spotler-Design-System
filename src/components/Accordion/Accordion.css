@@ -1,5 +1,7 @@
 /* Accordion — Spotler Design System
-   Spec: references/components/accordion.md. Tokens Accordion/<variant>-*. */
+   Header padding 12px 16px, content padding 4px 16px 16px, gap 8px,
+   radius 4px (--border-small), 1px hairline stroke/divider from the foundation.
+   Chevron rotates 180° as a non-color state cue; panel height animates on toggle. */
 
 .sds-accordion {
   font-family: var(--font-family);
@@ -7,6 +9,7 @@
   overflow: hidden;
 }
 
+/* ===== Header (toggle button) ===== */
 .sds-accordion__header {
   display: flex;
   align-items: center;
@@ -16,8 +19,8 @@
   border: none;
   background: transparent;
   font-family: var(--font-family);
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
   font-weight: var(--font-h4-weight);
   text-align: left;
   cursor: pointer;
@@ -29,38 +32,83 @@
   outline-offset: -2px;
 }
 
-.sds-accordion__icon-start {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
+/* Chevron on the left swaps the visual order without changing DOM order. */
+.sds-accordion--chevron-left .sds-accordion__chevron {
+  order: -1;
 }
 
-.sds-accordion__heading {
-  flex: 1;
-}
-
+/* ===== Icons ===== */
+.sds-accordion__icon-start,
 .sds-accordion__chevron {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  flex: none;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
+}
+
+.sds-accordion__heading {
+  flex: 1 1 auto;
+}
+
+/* Default CSS-drawn chevron (no glyph/emoji) when no chevron node is provided.
+   Rotates 180° on expand. A provided chevron node renders inside this span and
+   rotates the same way. */
+.sds-accordion__chevron {
   transition: transform 150ms ease-in-out;
+}
+
+.sds-accordion__chevron:empty::before {
+  content: '';
+  width: var(--spacing-s-8);
+  height: var(--spacing-s-8);
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-25%) rotate(45deg);
 }
 
 .sds-accordion--expanded .sds-accordion__chevron {
   transform: rotate(180deg);
 }
 
+/* ===== Panel (animated height) ===== */
+.sds-accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms ease-in-out;
+}
+
+.sds-accordion--expanded .sds-accordion__panel {
+  grid-template-rows: 1fr;
+}
+
 .sds-accordion__content {
-  padding: var(--spacing-s-4) var(--spacing-s-16) var(--spacing-s-16);
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 var(--spacing-s-16);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+}
+
+/* Pad and reveal content only when expanded so the collapsed row truly is 0. */
+.sds-accordion--expanded .sds-accordion__content {
+  padding: var(--spacing-s-4) var(--spacing-s-16) var(--spacing-s-16);
+}
+
+/* Keep collapsed content out of the tab order. */
+.sds-accordion__panel[aria-hidden='true'] {
+  pointer-events: none;
 }
 
 /* ===== With background ===== */
 .sds-accordion--with-background {
   background: var(--accordion-with-background-fill);
+}
+.sds-accordion--with-background .sds-accordion__header:hover {
+  background: var(--monochrome-gray-100);
 }
 .sds-accordion--with-background .sds-accordion__heading {
   color: var(--accordion-with-background-heading);
@@ -81,6 +129,9 @@
   border: 1px solid var(--accordion-no-background-stroke);
   border-radius: var(--border-small);
 }
+.sds-accordion--no-background .sds-accordion__header:hover {
+  background: var(--monochrome-gray-50);
+}
 .sds-accordion--no-background .sds-accordion__heading {
   color: var(--accordion-no-background-heading);
 }
@@ -94,9 +145,31 @@
   color: var(--accordion-no-background-paragraph);
 }
 
-/* ===== Group ===== */
+/* ===== Disabled ===== */
+.sds-accordion--disabled .sds-accordion__header {
+  cursor: not-allowed;
+  color: var(--monochrome-gray-500);
+}
+.sds-accordion--disabled .sds-accordion__header:hover {
+  background: transparent;
+}
+.sds-accordion--disabled .sds-accordion__heading,
+.sds-accordion--disabled .sds-accordion__icon-start,
+.sds-accordion--disabled .sds-accordion__chevron {
+  color: var(--monochrome-gray-500);
+}
+
+/* ===== Group (stacked items with foundation divider) ===== */
 .sds-accordion-group {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s-8);
+}
+
+/* Reduced motion: keep state changes instant. */
+@media (prefers-reduced-motion: reduce) {
+  .sds-accordion__chevron,
+  .sds-accordion__panel {
+    transition: none;
+  }
 }

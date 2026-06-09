@@ -1,6 +1,8 @@
 /* Dropdown Menu — Spotler Design System
-   Spec: references/components/dropdown-menu.md
-   Composes the Inputs trigger (Dropdown Menu tokens) with a List Item menu on the overlay surface. */
+   A field-triggered menu for choosing one (single) or several (multiple) values from a set.
+   Composes the Inputs "Dropdown Menu" trigger with a Context Menu / List Item list on the
+   overlay surface. Trigger padding 8px 12px, gap 8px, radius small; menu radius medium,
+   4px padding, overlay elevation. All color/spacing/radius/type values are tokens. */
 
 .sds-dropdown-menu {
   display: flex;
@@ -20,7 +22,7 @@
   color: var(--inputs-dropdown-menu-default-label-optional-text);
 }
 
-/* ===== Trigger (Inputs field) ===== */
+/* ===== Trigger (Inputs "Dropdown Menu" field) ===== */
 .sds-dropdown-menu__trigger {
   display: flex;
   align-items: center;
@@ -52,6 +54,13 @@
   border-color: var(--inputs-dropdown-menu-focused-stroke);
 }
 
+/* Filled (selected) — a value is present, menu closed. */
+.sds-dropdown-menu--selected:not(.sds-dropdown-menu--open) .sds-dropdown-menu__trigger {
+  background: var(--inputs-dropdown-menu-selected-background);
+  border-color: var(--inputs-dropdown-menu-selected-stroke);
+}
+
+/* Open (focused) — overrides hover/selected while the menu is shown. */
 .sds-dropdown-menu--open .sds-dropdown-menu__trigger {
   background: var(--inputs-dropdown-menu-focused-background);
   border-color: var(--inputs-dropdown-menu-focused-stroke);
@@ -74,7 +83,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  flex: 0 0 auto;
+  font-size: var(--font-h4-size);
   color: var(--inputs-dropdown-menu-default-icon);
   transition: transform 150ms ease-in-out;
 }
@@ -83,57 +93,84 @@
   transform: rotate(180deg);
 }
 
+.sds-dropdown-menu--open .sds-dropdown-menu__chevron,
+.sds-dropdown-menu--open .sds-dropdown-menu__value:not(.sds-dropdown-menu__value--placeholder) {
+  color: var(--inputs-dropdown-menu-focused-icon);
+}
+
 /* ===== Popover (overlay surface) ===== */
 .sds-dropdown-menu__popover {
   position: absolute;
   top: calc(100% + var(--spacing-s-4));
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-s-4);
   padding: var(--spacing-s-4);
-  background: var(--inputs-dropdown-menu-default-background);
-  border: 1px solid var(--inputs-dropdown-menu-default-stroke);
+  background: var(--context-menu-basic-rest-background);
+  border: 1px solid var(--context-menu-frame-border);
   border-radius: var(--border-medium);
   box-shadow: var(--elevation-overlay);
 }
 
+/* ===== Search filter input ===== */
 .sds-dropdown-menu__search {
-  padding: var(--spacing-s-4);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sds-dropdown-menu__search-icon {
+  position: absolute;
+  left: var(--spacing-s-12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-h4-size);
+  color: var(--inputs-search-bar-default-icon-start);
+  pointer-events: none;
 }
 
 .sds-dropdown-menu__search-input {
   width: 100%;
   box-sizing: border-box;
   padding: var(--spacing-s-8) var(--spacing-s-12);
-  background: var(--inputs-dropdown-menu-default-background);
-  border: 1px solid var(--inputs-dropdown-menu-default-stroke);
+  background: var(--inputs-search-bar-default-background);
+  border: 1px solid var(--inputs-search-bar-default-stroke);
   border-radius: var(--border-small);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
-  color: var(--inputs-dropdown-menu-focused-text);
+  color: var(--inputs-search-bar-focused-text);
   outline: none;
   transition: border-color 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
+/* Pad the input when a leading search icon is present. */
+.sds-dropdown-menu__search-icon ~ .sds-dropdown-menu__search-input {
+  padding-left: var(--spacing-s-36);
+}
+
 .sds-dropdown-menu__search-input:focus {
-  background: var(--inputs-dropdown-menu-focused-background);
-  border-color: var(--inputs-dropdown-menu-focused-stroke);
+  background: var(--inputs-search-bar-focused-background);
+  border-color: var(--inputs-search-bar-focused-stroke);
 }
 
 .sds-dropdown-menu__search-input::placeholder {
-  color: var(--inputs-dropdown-menu-default-text);
+  color: var(--inputs-search-bar-default-text);
 }
 
-/* ===== List (List Item tokens) ===== */
+/* ===== List (Context Menu / List Item tokens) ===== */
 .sds-dropdown-menu__list {
   list-style: none;
   margin: 0;
   padding: 0;
   outline: none;
-  max-height: 240px;
+  /* Scroll cap (~10 rows). A relative unit (not a color/spacing/radius token) so the
+     menu scrolls instead of overflowing the viewport; no design token covers menu height. */
+  max-height: 15rem;
   overflow-y: auto;
 }
 
@@ -152,6 +189,7 @@
   border-radius: var(--border-small);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  background: var(--context-menu-basic-rest-background);
   color: var(--inputs-list-item-default-text);
   cursor: pointer;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
@@ -161,13 +199,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  flex: 0 0 auto;
+  font-size: var(--font-h4-size);
   color: var(--inputs-list-item-default-icon);
 }
 
 .sds-dropdown-menu__option-label {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Selected checkmark — conceptual blue per spec (Context Menu selected checkmark token). */
+.sds-dropdown-menu__option-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: var(--font-h4-size);
+  color: var(--context-menu-specific-selected-checkmark);
 }
 
 .sds-dropdown-menu__option--active,
@@ -195,27 +247,58 @@
   cursor: not-allowed;
 }
 
-/* ===== Hint ===== */
+.sds-dropdown-menu__option--disabled .sds-dropdown-menu__option-icon {
+  color: var(--disabled-icon);
+}
+
+/* ===== Hint / message ===== */
 .sds-dropdown-menu__hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-4);
   margin: 0;
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
   color: var(--inputs-dropdown-menu-default-hint-message);
 }
 
+.sds-dropdown-menu__hint-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: var(--font-caption-size);
+  color: var(--inputs-dropdown-menu-default-hint-message-icon);
+}
+
 /* ===== Error ===== */
 .sds-dropdown-menu--error .sds-dropdown-menu__trigger,
 .sds-dropdown-menu--error .sds-dropdown-menu__trigger:hover,
+.sds-dropdown-menu--error.sds-dropdown-menu--selected:not(.sds-dropdown-menu--open)
+  .sds-dropdown-menu__trigger,
 .sds-dropdown-menu--error.sds-dropdown-menu--open .sds-dropdown-menu__trigger {
   background: var(--inputs-dropdown-menu-error-background);
   border-color: var(--inputs-dropdown-menu-error-stroke);
+}
+
+.sds-dropdown-menu--error .sds-dropdown-menu__value:not(.sds-dropdown-menu__value--placeholder) {
+  color: var(--inputs-dropdown-menu-error-text);
 }
 
 .sds-dropdown-menu--error .sds-dropdown-menu__hint {
   color: var(--inputs-dropdown-menu-error-hint-message);
 }
 
+.sds-dropdown-menu--error .sds-dropdown-menu__hint-icon {
+  color: var(--inputs-dropdown-menu-error-hint-message-icon);
+}
+
 /* ===== Disabled ===== */
+.sds-dropdown-menu--disabled .sds-dropdown-menu__label,
+.sds-dropdown-menu--disabled .sds-dropdown-menu__optional {
+  color: var(--disabled-text);
+}
+
 .sds-dropdown-menu--disabled .sds-dropdown-menu__trigger {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
@@ -223,6 +306,11 @@
   cursor: not-allowed;
 }
 
-.sds-dropdown-menu--disabled .sds-dropdown-menu__chevron {
+.sds-dropdown-menu--disabled .sds-dropdown-menu__value,
+.sds-dropdown-menu--disabled .sds-dropdown-menu__value--placeholder {
   color: var(--disabled-text);
+}
+
+.sds-dropdown-menu--disabled .sds-dropdown-menu__chevron {
+  color: var(--disabled-icon);
 }

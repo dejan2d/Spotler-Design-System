@@ -1,5 +1,7 @@
 /* Empty State — Spotler Design System
-   Spec: references/components/empty-state.md. Tokens Empty States/<variant>-*.
+   A placeholder shown when there is no content yet; explains why and offers a next action.
+   Column, centered, gap 12px, padding 32px; icon 32px; H3 heading typography.
+   All color/spacing/radius/type values are tokens.
    NOTE: `page-backgorund` token typo preserved verbatim to match the Figma variable. */
 
 .sds-empty-state {
@@ -16,7 +18,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  /* 32px illustration footprint; sourced from the spacing scale to avoid a magic value. */
+  font-size: var(--spacing-s-32);
 }
 
 .sds-empty-state__heading {
@@ -30,6 +33,7 @@
   margin: 0;
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
 }
 
 .sds-empty-state__action {
@@ -90,7 +94,7 @@
   color: var(--empty-states-image-action-text);
 }
 
-/* ===== Loading ===== */
+/* ===== Loading (no icon token) ===== */
 .sds-empty-state--loading {
   background: var(--empty-states-loading-background);
 }

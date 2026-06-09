@@ -1,6 +1,9 @@
 /* Context Menu — Spotler Design System
-   Spec: references/components/context-menu.md
-   Rounded container on the overlay surface, stacked basic/specific items. */
+   A floating list of actions/options triggered by right-click or a more-actions affordance.
+   Rounded container (radius medium) on the overlay surface, 1px frame-border hairline,
+   overlay elevation, stacked basic/specific items with optional group dividers.
+   All color/spacing/radius/type values are tokens (icon sizing boxes use literal px,
+   matching the Button house style). */
 
 .sds-context-menu {
   display: flex;
@@ -12,6 +15,18 @@
   border-radius: var(--border-medium);
   box-shadow: var(--elevation-overlay);
   font-family: var(--font-family);
+}
+
+.sds-context-menu__row {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Group divider — hairline (1px) paired with the frame-border token color. */
+.sds-context-menu__divider {
+  height: 1px;
+  margin: var(--spacing-s-4) 0;
+  background: var(--context-menu-frame-border);
 }
 
 .sds-context-menu__item {
@@ -26,15 +41,24 @@
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   text-align: left;
   cursor: pointer;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.sds-context-menu__item:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: -2px;
 }
 
 .sds-context-menu__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
   font-size: 16px;
 }
 
@@ -47,10 +71,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
   font-size: 16px;
 }
 
-/* ===== Basic items (icon + label) ===== */
+/* ===== Basic items (leading icon + label) ===== */
 .sds-context-menu__item--basic {
   background: var(--context-menu-basic-rest-background);
   color: var(--context-menu-basic-rest-text);
@@ -60,15 +87,12 @@
   color: var(--context-menu-basic-rest-icon);
 }
 
-.sds-context-menu__item--basic:hover:not(:disabled),
-.sds-context-menu__item--basic:focus-visible:not(:disabled) {
+.sds-context-menu__item--basic:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--context-menu-basic-hover-background);
   color: var(--context-menu-basic-hover-text);
-  outline: none;
 }
 
-.sds-context-menu__item--basic:hover:not(:disabled) .sds-context-menu__icon,
-.sds-context-menu__item--basic:focus-visible:not(:disabled) .sds-context-menu__icon {
+.sds-context-menu__item--basic:hover:not(:disabled):not([aria-disabled='true']) .sds-context-menu__icon {
   color: var(--context-menu-basic-hover-icon);
 }
 
@@ -85,17 +109,15 @@
   color: var(--context-menu-basic-selected-checkmark);
 }
 
-/* ===== Specific items (label + checkmark) ===== */
+/* ===== Specific items (label only + trailing checkmark) ===== */
 .sds-context-menu__item--specific {
   background: var(--context-menu-specific-rest-background);
   color: var(--context-menu-specific-rest-text);
 }
 
-.sds-context-menu__item--specific:hover:not(:disabled),
-.sds-context-menu__item--specific:focus-visible:not(:disabled) {
+.sds-context-menu__item--specific:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--context-menu-specific-hover-background);
   color: var(--context-menu-specific-hover-text);
-  outline: none;
 }
 
 .sds-context-menu__item--specific.sds-context-menu__item--selected {
@@ -108,30 +130,30 @@
 }
 
 /* ===== Destructive items =====
-   No context-menu destructive token exists; uses the semantic alert color. */
+   No dedicated context-menu destructive token exists; falls back to the
+   semantic alert foundation colors. */
 .sds-context-menu__item--destructive,
 .sds-context-menu__item--destructive .sds-context-menu__icon {
   color: var(--semantic-red-alert-alert);
 }
 
-.sds-context-menu__item--destructive:hover:not(:disabled),
-.sds-context-menu__item--destructive:focus-visible:not(:disabled) {
+.sds-context-menu__item--destructive:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--semantic-red-alert-alert-lighter);
   color: var(--semantic-red-alert-alet-darker);
-  outline: none;
 }
 
-.sds-context-menu__item--destructive:hover:not(:disabled) .sds-context-menu__icon,
-.sds-context-menu__item--destructive:focus-visible:not(:disabled) .sds-context-menu__icon {
+.sds-context-menu__item--destructive:hover:not(:disabled):not([aria-disabled='true']) .sds-context-menu__icon {
   color: var(--semantic-red-alert-alet-darker);
 }
 
-/* ===== Disabled ===== */
-.sds-context-menu__item:disabled {
+/* ===== Disabled (all variants) ===== */
+.sds-context-menu__item:disabled,
+.sds-context-menu__item[aria-disabled='true'] {
   color: var(--disabled-text);
   cursor: not-allowed;
 }
 
-.sds-context-menu__item:disabled .sds-context-menu__icon {
-  color: var(--disabled-text);
+.sds-context-menu__item:disabled .sds-context-menu__icon,
+.sds-context-menu__item[aria-disabled='true'] .sds-context-menu__icon {
+  color: var(--disabled-icon);
 }

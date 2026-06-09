@@ -1,15 +1,21 @@
-/* Alert — Spotler Design System
-   Spec: references/components/alert.md
-   Row, padding 8px 16px, gap 12px, radius large (8px), min-width 500px. */
+/* Alert — Spotler Design System "Alert"
+   Container: padding 8px 16px, gap 12px, radius large (8px), min-width 500px.
+   Icon 20×20; H4 heading; Body Regular body; optional 8px auto-dismiss progress bar. */
 
 .sds-alert {
   display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-s-12);
+  flex-direction: column;
+  gap: var(--spacing-s-8);
   min-width: 500px;
   padding: var(--spacing-s-8) var(--spacing-s-16);
   border-radius: var(--border-large);
   font-family: var(--font-family);
+}
+
+.sds-alert__main {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-s-12);
 }
 
 .sds-alert__icon-start {
@@ -44,6 +50,20 @@
   font-weight: var(--font-body-weight);
 }
 
+/* Regular/Neutral variant embeds CTA links: Body Semi-Bold + underline.
+   Multiple CTAs must be separated by plain text so underlines never connect. */
+.sds-alert--regular .sds-alert__body a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.sds-alert--regular .sds-alert__body a:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
+}
+
 .sds-alert__dismiss {
   display: inline-flex;
   align-items: center;
@@ -59,6 +79,10 @@
   transition: opacity 150ms ease-in-out;
 }
 
+.sds-alert__dismiss:hover {
+  opacity: 0.7;
+}
+
 .sds-alert__dismiss:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
@@ -72,6 +96,38 @@
   line-height: 1;
   width: 20px;
   height: 20px;
+}
+
+/* Auto-dismiss progress bar — 8px tall, neutral track/fill, radius small (4px).
+   Spec track #F8FAFA + fill #353B40 map to the progress-bar neutral tokens. */
+.sds-alert__progress {
+  position: relative;
+  width: 100%;
+  height: var(--spacing-s-8);
+  border-radius: var(--border-small);
+  background: var(--progress-bar-neutral-background);
+  overflow: hidden;
+}
+
+.sds-alert__progress-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: var(--border-small);
+  background: var(--progress-bar-neutral-fill);
+  transform-origin: left center;
+  animation: sds-alert-countdown var(--sds-alert-progress-duration, 5000ms) linear forwards;
+}
+
+@keyframes sds-alert-countdown {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sds-alert__progress-fill {
+    animation: none;
+  }
 }
 
 /* ===== Primary (Info) ===== */

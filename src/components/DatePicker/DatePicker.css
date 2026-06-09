@@ -1,6 +1,7 @@
 /* Date Picker — Spotler Design System
-   Spec: references/components/date-picker.md
-   Field reuses Inputs Regular Text Field tokens; popover surface uses overlay elevation. */
+   Component: "Date Picker". The field reuses the "Inputs / Regular Text Field" tokens;
+   the popover floats on the Date Picker surface at overlay elevation.
+   Field: padding 8px 12px, gap 8px, radius small (4px); popover offset 4px below the field. */
 
 .sds-date-picker {
   display: flex;
@@ -16,8 +17,9 @@
   color: var(--inputs-regular-text-field-default-label);
 }
 
+/* NOTE: token name preserves the intentional "deafult" typo from component-tokens.css. */
 .sds-date-picker__optional {
-  color: var(--inputs-regular-text-field-default-label-optional-text);
+  color: var(--inputs-regular-text-field-deafult-label-optional-text);
 }
 
 .sds-date-picker__field {
@@ -78,7 +80,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
 }
 
 .sds-date-picker__hint {
@@ -88,7 +92,7 @@
   color: var(--inputs-regular-text-field-default-hint-message);
 }
 
-/* Popover surface — floating, overlay elevation */
+/* Popover surface — floating, overlay elevation, on the Date Picker default background. */
 .sds-date-picker__popover {
   position: absolute;
   top: calc(100% + var(--spacing-s-4));
@@ -97,6 +101,12 @@
   background: var(--date-picker-default-background);
   border-radius: var(--border-medium);
   box-shadow: var(--elevation-overlay);
+}
+
+/* While open, hold the field in its focused styling so the trigger stays visually active. */
+.sds-date-picker--open .sds-date-picker__field {
+  background: var(--inputs-regular-text-field-focused-background);
+  border-color: var(--inputs-regular-text-field-focused-stroke);
 }
 
 /* ===== Error ===== */
@@ -108,7 +118,7 @@
 }
 
 .sds-date-picker--error .sds-date-picker__hint {
-  color: var(--inputs-regular-text-field-error-text);
+  color: var(--inputs-regular-text-field-error-hint-message);
 }
 
 /* ===== Disabled ===== */
@@ -120,6 +130,10 @@
 .sds-date-picker--disabled .sds-date-picker__input {
   color: var(--disabled-text);
   cursor: not-allowed;
+}
+
+.sds-date-picker--disabled .sds-date-picker__input::placeholder {
+  color: var(--disabled-text);
 }
 
 .sds-date-picker--disabled .sds-date-picker__trigger {

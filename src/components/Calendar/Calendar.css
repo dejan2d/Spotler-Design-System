@@ -1,5 +1,6 @@
 /* Calendar — Spotler Design System
-   Spec: references/components/calendar.md (Date Picker token group) */
+   Component: "Calendar" (shares the `Date Picker` token group).
+   Container padding 12px, radius medium (6px); day cell 36×36, radius small (4px), gap 4px. */
 
 .sds-calendar {
   display: inline-flex;
@@ -32,17 +33,17 @@
   width: var(--spacing-s-32);
   height: var(--spacing-s-32);
   padding: 0;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   border-radius: var(--border-small);
   color: var(--date-picker-icon);
-  font-size: 20px;
   cursor: pointer;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
 }
 
 .sds-calendar__nav:hover {
   background: var(--date-picker-hover-background);
+  color: var(--date-picker-hover-text);
 }
 
 .sds-calendar__nav:focus-visible {
@@ -50,7 +51,35 @@
   outline-offset: 2px;
 }
 
+.sds-calendar__nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--font-h4-size);
+}
+
+/* Chevron fallback (used only when no icon node is supplied) — drawn from the
+   icon token so it never relies on a hardcoded glyph. */
+.sds-calendar__chevron {
+  display: inline-block;
+  width: var(--spacing-s-8);
+  height: var(--spacing-s-8);
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+
+.sds-calendar__chevron--prev {
+  transform: rotate(-135deg);
+}
+
+.sds-calendar__chevron--next {
+  transform: rotate(45deg);
+}
+
 .sds-calendar__weekdays,
+.sds-calendar__week,
 .sds-calendar__weeks {
   display: grid;
   grid-template-columns: repeat(7, var(--spacing-s-36));
@@ -64,6 +93,7 @@
   height: var(--spacing-s-24);
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-h3-weight);
   color: var(--date-picker-previous-text);
 }
 
@@ -113,4 +143,34 @@
   background: var(--date-picker-selected-background);
   color: var(--date-picker-selected-text);
   font-weight: var(--font-h3-weight);
+}
+
+/* Selected day keeps its fill on hover rather than reverting to the hover grey. */
+.sds-calendar__day--selected:hover {
+  background: var(--date-picker-selected-background);
+  color: var(--date-picker-selected-text);
+}
+
+/* Disabled days — not selectable; muted, no pointer affordance. */
+.sds-calendar__day[aria-disabled='true'] {
+  color: var(--date-picker-previous-text);
+  cursor: not-allowed;
+}
+
+.sds-calendar__day[aria-disabled='true']:hover {
+  background: var(--date-picker-default-background);
+  color: var(--date-picker-previous-text);
+}
+
+/* Visually-hidden live region for announcing the current selection. */
+.sds-calendar__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

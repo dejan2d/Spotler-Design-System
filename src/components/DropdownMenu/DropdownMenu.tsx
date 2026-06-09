@@ -1,64 +1,128 @@
-import { forwardRef, useEffect, useId, useRef, useState } from 'react';
-import type { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef, useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import type { HTMLAttributes, KeyboardEvent, MutableRefObject, ReactNode } from 'react';
 import './DropdownMenu.css';
 
+/** A single selectable entry rendered as a List Item inside the menu. */
 export interface DropdownMenuOption {
   /** Visible label for the option. */
   label: string;
-  /** Underlying value submitted/reported on selection. */
+  /** Underlying value submitted/reported on selection. Must be unique within `options`. */
   value: string;
-  /** Optional leading icon (FontAwesome Duotone node). */
+  /** Optional leading icon (FontAwesome Duotone node), shown before the label. */
   icon?: ReactNode;
-  /** Disables the individual option. */
-  disabled?: boolean;
-}
-
-export interface DropdownMenuProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  /** Visible label. Required for accessibility — never rely on placeholder alone. */
-  label: string;
-  /** Options to choose from. */
-  options: DropdownMenuOption[];
-  /** Currently selected value (controlled). */
-  value?: string;
-  /** Called with the chosen option's value when a selection is made. */
-  onChange?: (value: string) => void;
-  /** Placeholder shown when nothing is selected. */
-  placeholder?: string;
-  /** Marks the field optional; shows "(optional)" next to the label. */
-  optional?: boolean;
-  /** Helper text shown below the field. */
-  hint?: string;
-  /** Error message. When set, the trigger renders in the error state. */
-  error?: string;
-  /** When true, shows a filter input that narrows the option list as you type. */
-  searchable?: boolean;
-  /** Disables the whole control. */
+  /** Disables this single option without disabling the whole control. */
   disabled?: boolean;
 }
 
 /**
- * Dropdown Menu — a field-triggered list for choosing one value from a set.
- * Spec: references/components/dropdown-menu.md. Composes the Inputs trigger with a List Item menu.
+ * Visual state of the trigger field. Mirrors the Spotler "Dropdown Menu" Inputs token states.
+ * `default`/`hover`/`focused`/`selected` are driven automatically; `error` and `disabled`
+ * are derived from the `error` / `disabled` props.
+ */
+export type DropdownMenuState = 'default' | 'hover' | 'focused' | 'selected' | 'error' | 'disabled';
+
+interface DropdownMenuBaseProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  /** Visible label. Required for accessibility — never rely on the placeholder alone. */
+  label: string;
+  /** Options to choose from. */
+  options: DropdownMenuOption[];
+  /** Placeholder shown when nothing is selected. @default 'Select…' */
+  placeholder?: string;
+  /** Marks the field optional; appends "(optional)" next to the label. */
+  optional?: boolean;
+  /** Helper text shown below the field. Hidden when `error` is set. */
+  hint?: string;
+  /** Optional icon shown beside the hint / error message (FontAwesome Duotone node). */
+  hintIcon?: ReactNode;
+  /** Error message. When set, the trigger renders in the error state and exposes `aria-invalid`. */
+  error?: string;
+  /** When true, shows a filter input that narrows the option list as you type. @default false */
+  searchable?: boolean;
+  /** Message shown inside the menu when no option matches the current filter. @default 'No results' */
+  noResultsLabel?: string;
+  /** Placeholder for the searchable filter input. @default 'Search…' */
+  searchPlaceholder?: string;
+  /** Disables the whole control. */
+  disabled?: boolean;
+  /**
+   * Trailing chevron icon (FontAwesome Duotone node). Rotates 180° while open.
+   * Falls back to a built-in inline SVG chevron when omitted.
+   */
+  chevronIcon?: ReactNode;
+  /** Leading icon for the search input (FontAwesome Duotone node). */
+  searchIcon?: ReactNode;
+}
+
+/** Single-select Dropdown (default): one value at a time; selecting closes the menu. */
+export interface DropdownMenuSingleProps extends DropdownMenuBaseProps {
+  /** Selection mode. @default 'single' */
+  multiple?: false;
+  /** Currently selected value (controlled). */
+  value?: string;
+  /** Called with the chosen option's value when a selection is made. */
+  onChange?: (value: string) => void;
+}
+
+/** Multi-select Dropdown: several values; the menu stays open and chosen items show a checkmark. */
+export interface DropdownMenuMultipleProps extends DropdownMenuBaseProps {
+  /** Selection mode. */
+  multiple: true;
+  /** Currently selected values (controlled). */
+  value?: string[];
+  /** Called with the full next array of selected values when an option is toggled. */
+  onChange?: (value: string[]) => void;
+}
+
+export type DropdownMenuProps = DropdownMenuSingleProps | DropdownMenuMultipleProps;
+
+/**
+ * Dropdown Menu — Spotler Design System.
+ *
+ * A field-triggered menu for choosing one (single) or several (multiple) values from a
+ * medium-to-large option set, optionally searchable. Composes the Inputs "Dropdown Menu"
+ * trigger with a Context Menu / List Item list on the overlay surface.
+ *
+ * Trigger: input-style field, padding 8px 12px, gap 8px, radius small (4px), 1px stroke,
+ * inheriting input states (default / hover / focused / selected / error / disabled).
+ * Menu: overlay surface, radius medium (6px), 4px padding, overlay elevation; chosen items
+ * show a checkmark in the conceptual blue (#005499 token). Variants: single / multiple,
+ * searchable. States: default, hover, focused, selected, error, disabled.
+ *
+ * Accessibility: combobox/listbox pattern — trigger exposes `aria-haspopup="listbox"`,
+ * `aria-expanded`, `aria-controls`; options use `role="option"` with `aria-selected`;
+ * the active option is tracked via `aria-activedescendant`. Full keyboard support and
+ * focus returns to the trigger on close.
  */
 export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(function DropdownMenu(
-  {
+  props,
+  ref,
+) {
+  const {
     label,
     options,
-    value,
-    onChange,
     placeholder = 'Select…',
     optional,
     hint,
+    hintIcon,
     error,
     searchable = false,
+    noResultsLabel = 'No results',
+    searchPlaceholder = 'Search…',
     disabled,
+    chevronIcon,
+    searchIcon,
     id,
     className,
+    multiple,
+    value,
+    onChange,
     ...rest
-  },
-  ref,
-) {
+  } = props as DropdownMenuBaseProps & {
+    multiple?: boolean;
+    value?: string | string[];
+    onChange?: (value: never) => void;
+  };
+
   const autoId = useId();
   const fieldId = id ?? autoId;
   const listId = `${fieldId}-list`;
@@ -72,18 +136,37 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
   const containerRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const searchRef = useRef<HTMLInputElement | null>(null);
+  const listRef = useRef<HTMLUListElement | null>(null);
 
   const hasError = Boolean(error);
   const message = error ?? hint;
-  const selected = options.find((o) => o.value === value);
 
-  const visibleOptions = searchable
-    ? options.filter((o) => o.label.toLowerCase().includes(query.trim().toLowerCase()))
-    : options;
+  // Normalize the controlled value into a set regardless of selection mode.
+  const selectedValues = useMemo<string[]>(() => {
+    if (multiple) return Array.isArray(value) ? value : [];
+    return typeof value === 'string' && value.length > 0 ? [value] : [];
+  }, [multiple, value]);
 
-  // Close on outside click.
+  const selectedOptions = useMemo(
+    () => options.filter((option) => selectedValues.includes(option.value)),
+    [options, selectedValues],
+  );
+
+  const triggerLabel = multiple
+    ? selectedOptions.map((option) => option.label).join(', ')
+    : (selectedOptions[0]?.label ?? '');
+  const hasSelection = selectedOptions.length > 0;
+
+  const visibleOptions = useMemo(() => {
+    if (!searchable) return options;
+    const needle = query.trim().toLowerCase();
+    if (needle.length === 0) return options;
+    return options.filter((option) => option.label.toLowerCase().includes(needle));
+  }, [options, searchable, query]);
+
+  // Close the menu when clicking outside the control.
   useEffect(() => {
-    if (!open) return;
+    if (!open) return undefined;
     function onDocPointerDown(event: PointerEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setOpen(false);
@@ -93,54 +176,67 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
     return () => document.removeEventListener('pointerdown', onDocPointerDown);
   }, [open]);
 
-  // Focus the search input when opening a searchable menu.
+  // Move keyboard focus to the right element when the menu opens.
   useEffect(() => {
-    if (open && searchable) {
-      searchRef.current?.focus();
-    }
+    if (!open) return;
+    if (searchable) searchRef.current?.focus();
+    else listRef.current?.focus();
   }, [open, searchable]);
 
-  function openMenu() {
+  const openMenu = useCallback(() => {
     if (disabled) return;
     setQuery('');
-    const startIndex = options.findIndex((o) => o.value === value);
-    setActiveIndex(startIndex);
+    const firstSelected = options.findIndex((option) => selectedValues.includes(option.value));
+    setActiveIndex(firstSelected);
     setOpen(true);
-  }
+  }, [disabled, options, selectedValues]);
 
-  function closeMenu(returnFocus = true) {
+  const closeMenu = useCallback((returnFocus = true) => {
     setOpen(false);
     if (returnFocus) triggerRef.current?.focus();
-  }
+  }, []);
 
-  function selectOption(option: DropdownMenuOption) {
-    if (option.disabled) return;
-    onChange?.(option.value);
-    closeMenu();
-  }
-
-  function moveActive(delta: number) {
-    if (visibleOptions.length === 0) return;
-    setActiveIndex((prev) => {
-      let next = prev;
-      for (let i = 0; i < visibleOptions.length; i += 1) {
-        next = (next + delta + visibleOptions.length) % visibleOptions.length;
-        if (!visibleOptions[next]?.disabled) return next;
+  const selectOption = useCallback(
+    (option: DropdownMenuOption) => {
+      if (option.disabled) return;
+      if (multiple) {
+        const next = selectedValues.includes(option.value)
+          ? selectedValues.filter((v) => v !== option.value)
+          : [...selectedValues, option.value];
+        (onChange as ((value: string[]) => void) | undefined)?.(next);
+        // Multi-select keeps the menu open per spec.
+      } else {
+        (onChange as ((value: string) => void) | undefined)?.(option.value);
+        closeMenu();
       }
-      return prev;
-    });
-  }
+    },
+    [multiple, selectedValues, onChange, closeMenu],
+  );
 
-  function onTriggerKeyDown(event: React.KeyboardEvent) {
+  const moveActive = useCallback(
+    (delta: number) => {
+      if (visibleOptions.length === 0) return;
+      setActiveIndex((prev) => {
+        let next = prev < 0 ? (delta > 0 ? -1 : 0) : prev;
+        for (let i = 0; i < visibleOptions.length; i += 1) {
+          next = (next + delta + visibleOptions.length) % visibleOptions.length;
+          if (!visibleOptions[next]?.disabled) return next;
+        }
+        return prev;
+      });
+    },
+    [visibleOptions],
+  );
+
+  function onTriggerKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     if (disabled) return;
-    if (!open && (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ')) {
+    if (!open && (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault();
       openMenu();
-      return;
     }
   }
 
-  function onMenuKeyDown(event: React.KeyboardEvent) {
+  function onMenuKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
@@ -150,7 +246,19 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
         event.preventDefault();
         moveActive(-1);
         break;
+      case 'Home':
+        event.preventDefault();
+        setActiveIndex(0);
+        moveActive(0);
+        break;
+      case 'End':
+        event.preventDefault();
+        setActiveIndex(visibleOptions.length - 1);
+        break;
       case 'Enter':
+      case ' ':
+        // Space selects only when not typing in the search field.
+        if (event.key === ' ' && searchable && event.target === searchRef.current) break;
         event.preventDefault();
         if (activeIndex >= 0 && visibleOptions[activeIndex]) {
           selectOption(visibleOptions[activeIndex]);
@@ -168,15 +276,14 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
     }
   }
 
-  const activeId =
-    activeIndex >= 0 && visibleOptions[activeIndex]
-      ? `${listId}-opt-${visibleOptions[activeIndex].value}`
-      : undefined;
+  const activeOption = activeIndex >= 0 ? visibleOptions[activeIndex] : undefined;
+  const activeId = activeOption ? `${listId}-opt-${activeOption.value}` : undefined;
 
   const classes = [
     'sds-dropdown-menu',
     hasError && 'sds-dropdown-menu--error',
     open && 'sds-dropdown-menu--open',
+    hasSelection && 'sds-dropdown-menu--selected',
     disabled && 'sds-dropdown-menu--disabled',
     className,
   ]
@@ -216,15 +323,26 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
         <span
           className={[
             'sds-dropdown-menu__value',
-            !selected && 'sds-dropdown-menu__value--placeholder',
+            !hasSelection && 'sds-dropdown-menu__value--placeholder',
           ]
             .filter(Boolean)
             .join(' ')}
         >
-          {selected ? selected.label : placeholder}
+          {hasSelection ? triggerLabel : placeholder}
         </span>
         <span className="sds-dropdown-menu__chevron" aria-hidden="true">
-          ▾
+          {chevronIcon ?? (
+            <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false">
+              <path
+                d="M4 6l4 4 4-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
         </span>
       </button>
 
@@ -232,17 +350,25 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
         <div className="sds-dropdown-menu__popover" onKeyDown={onMenuKeyDown}>
           {searchable && (
             <div className="sds-dropdown-menu__search">
+              {searchIcon && (
+                <span className="sds-dropdown-menu__search-icon" aria-hidden="true">
+                  {searchIcon}
+                </span>
+              )}
               <input
                 ref={searchRef}
                 type="text"
+                role="combobox"
                 className="sds-dropdown-menu__search-input"
-                placeholder="Search…"
+                placeholder={searchPlaceholder}
                 value={query}
                 aria-label="Filter options"
+                aria-expanded={open}
                 aria-controls={listId}
                 aria-activedescendant={activeId}
-                onChange={(e) => {
-                  setQuery(e.target.value);
+                autoComplete="off"
+                onChange={(event) => {
+                  setQuery(event.target.value);
                   setActiveIndex(-1);
                 }}
               />
@@ -253,19 +379,18 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
             role="listbox"
             className="sds-dropdown-menu__list"
             aria-labelledby={labelId}
-            aria-activedescendant={activeId}
+            aria-multiselectable={multiple || undefined}
+            aria-activedescendant={searchable ? undefined : activeId}
             tabIndex={searchable ? -1 : 0}
-            ref={(node) => {
-              if (node && !searchable) node.focus();
-            }}
+            ref={listRef}
           >
             {visibleOptions.length === 0 && (
-              <li className="sds-dropdown-menu__empty" role="presentation">
-                No results
+              <li className="sds-dropdown-menu__empty" role="presentation" aria-live="polite">
+                {noResultsLabel}
               </li>
             )}
             {visibleOptions.map((option, index) => {
-              const isSelected = option.value === value;
+              const isSelected = selectedValues.includes(option.value);
               const isActive = index === activeIndex;
               return (
                 <li
@@ -291,6 +416,20 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
                     </span>
                   )}
                   <span className="sds-dropdown-menu__option-label">{option.label}</span>
+                  {isSelected && (
+                    <span className="sds-dropdown-menu__option-check" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false">
+                        <path
+                          d="M3.5 8.5l3 3 6-6.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.75"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  )}
                 </li>
               );
             })}
@@ -300,7 +439,12 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
 
       {message && (
         <p className="sds-dropdown-menu__hint" id={hintId}>
-          {message}
+          {hintIcon && (
+            <span className="sds-dropdown-menu__hint-icon" aria-hidden="true">
+              {hintIcon}
+            </span>
+          )}
+          <span className="sds-dropdown-menu__hint-text">{message}</span>
         </p>
       )}
     </div>

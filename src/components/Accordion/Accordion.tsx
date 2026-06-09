@@ -2,35 +2,58 @@ import { forwardRef, useId, useState } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import './Accordion.css';
 
+/** Surface treatment of the accordion container. */
 export type AccordionVariant = 'with-background' | 'no-background';
 
-export interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onToggle'> {
-  /** Header label. */
+/** Side the chevron toggle sits on within the header row. */
+export type AccordionChevronPosition = 'left' | 'right';
+
+export interface AccordionProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onToggle'> {
+  /** Header label shown in the toggle button. */
   title: ReactNode;
   /** Surface variant: filled `with-background` or `no-background` (divider stroke). */
   variant?: AccordionVariant;
-  /** Optional leading icon before the title. */
+  /** Side the chevron sits on: `right` (default) or `left`. */
+  chevronPosition?: AccordionChevronPosition;
+  /** Optional leading icon before the title (20px). Use a FontAwesome Duotone icon node. */
   iconStart?: ReactNode;
+  /**
+   * Optional custom chevron node (20px). Defaults to a CSS-drawn chevron that
+   * rotates 180° when expanded. Provide a FontAwesome Duotone icon to override.
+   */
+  chevron?: ReactNode;
   /** Controlled expanded state. Omit for uncontrolled. */
   expanded?: boolean;
   /** Uncontrolled initial expanded state. */
   defaultExpanded?: boolean;
+  /** Disables the header toggle and dims the item. */
+  disabled?: boolean;
   /** Called with the next expanded state when the header is toggled. */
   onToggle?: (expanded: boolean) => void;
   children?: ReactNode;
 }
 
 /**
- * Accordion — expand/collapse a content section behind a button header.
- * Spec: references/components/accordion.md. Tokens Accordion/<variant>-*.
+ * Accordion — a header button that expands/collapses a content panel for
+ * progressive disclosure. Spotler Design System "Accordion".
+ *
+ * Header padding 12px 16px, content padding 4px 16px 16px, radius 4px
+ * (--border-small), 1px hairline divider/stroke from the foundation. Header is
+ * a `button` with `aria-expanded` + `aria-controls`; the panel is a region
+ * labelled by the header. Chevron rotates 180° as a non-color state cue and the
+ * panel height animates on toggle.
  */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Accordion(
   {
     title,
     variant = 'with-background',
+    chevronPosition = 'right',
     iconStart,
+    chevron,
     expanded,
     defaultExpanded = false,
+    disabled = false,
     onToggle,
     className,
     children,
@@ -55,7 +78,9 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
   const classes = [
     'sds-accordion',
     `sds-accordion--${variant}`,
+    `sds-accordion--chevron-${chevronPosition}`,
     isOpen && 'sds-accordion--expanded',
+    disabled && 'sds-accordion--disabled',
     className,
   ]
     .filter(Boolean)
@@ -69,6 +94,8 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
         className="sds-accordion__header"
         aria-expanded={isOpen}
         aria-controls={panelId}
+        aria-disabled={disabled || undefined}
+        disabled={disabled}
         onClick={handleToggle}
       >
         {iconStart && (
@@ -78,7 +105,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
         )}
         <span className="sds-accordion__heading">{title}</span>
         <span className="sds-accordion__chevron" aria-hidden="true">
-          ⌄
+          {chevron}
         </span>
       </button>
       <div
@@ -86,7 +113,9 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
         role="region"
         aria-labelledby={headerId}
         className="sds-accordion__panel"
-        hidden={!isOpen}
+        // Collapsed content stays in the DOM so its height can animate; it is
+        // hidden from assistive tech (and CSS removes it from the tab order).
+        aria-hidden={!isOpen || undefined}
       >
         <div className="sds-accordion__content">{children}</div>
       </div>

@@ -1,6 +1,7 @@
 /* Badge — Spotler Design System
-   Spec: references/components/badge.md
-   Dot: 8px circle. Circle: 16px circle, radius circular, Semi-Bold 12 number.
+   Spotler component "Badge".
+   Dot: 8px circle. Circle (Counter): 16px circle, circular radius, Semi-Bold 12 number.
+   Overlay: pinned top-right of a host with a white separating stroke.
    Token typos preserved verbatim: `neutral-backgroud`, `warrning`. */
 
 .sds-badge {
@@ -13,8 +14,8 @@
 
 /* ===== Dot (8px) ===== */
 .sds-badge--dot {
-  width: 8px;
-  height: 8px;
+  width: var(--spacing-s-8);
+  height: var(--spacing-s-8);
   border-radius: var(--border-circular);
 }
 
@@ -29,8 +30,8 @@
 
 /* ===== Circle (16px, number) ===== */
 .sds-badge--circle {
-  min-width: 16px;
-  height: 16px;
+  min-width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
   padding: 0 var(--spacing-s-4);
   border-radius: var(--border-circular);
   font-size: var(--font-caption-size);
@@ -57,4 +58,15 @@
 .sds-badge--circle.sds-badge--active {
   background: var(--badges-circle-active-background);
   color: var(--badges-circle-active-text);
+}
+
+/* ===== Overlay (pinned top-right of a host icon/avatar) =====
+   Place inside a position:relative host container. The white separating stroke
+   reuses the dot's neutral stroke token (resolves to white). */
+.sds-badge--overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border: 1px solid var(--badges-dot-neutral-stroke);
 }

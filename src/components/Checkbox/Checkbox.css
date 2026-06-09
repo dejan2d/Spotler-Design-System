@@ -1,6 +1,8 @@
 /* Checkbox — Spotler Design System
-   Spec: references/components/checkbox.md
-   Square box with Border/Small radius, 20px label gap. */
+   20px square box with Border/Small radius, 20px label gap.
+   Label & help text use Body/Paragraph - Regular / Small.
+   States: default, checked, indeterminate, error — each combinable with
+   hover / focus / disabled. */
 
 .sds-checkbox {
   display: flex;
@@ -23,7 +25,7 @@
   height: 20px;
 }
 
-/* Native input sits on top, transparent, for hit area + a11y semantics */
+/* Native input sits on top, transparent, providing the hit area + a11y semantics. */
 .sds-checkbox__input {
   position: absolute;
   inset: 0;
@@ -69,14 +71,16 @@
 .sds-checkbox__label {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--checkbox-label);
   cursor: pointer;
 }
 
-.sds-checkbox__hint {
+.sds-checkbox__message {
   margin: 0;
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
   color: var(--checkbox-help-text);
 }
 
@@ -94,7 +98,12 @@
   opacity: 0;
 }
 
-/* ===== Indeterminate (overrides checked glyph with a dash) ===== */
+/* Checked label / help text colors (resolve to the same neutral as default). */
+.sds-checkbox__input:checked ~ .sds-checkbox__label {
+  color: var(--checkbox-checked-text);
+}
+
+/* ===== Indeterminate (overrides the checked glyph with a dash) ===== */
 .sds-checkbox__input:indeterminate ~ .sds-checkbox__box {
   background: var(--checkbox-checked-background);
   border-color: var(--checkbox-checked-border);
@@ -108,8 +117,14 @@
   opacity: 1;
 }
 
-/* ===== Hover ===== */
-.sds-checkbox__input:hover:not(:disabled) ~ .sds-checkbox__box {
+.sds-checkbox__input:indeterminate ~ .sds-checkbox__label {
+  color: var(--checkbox-checked-text);
+}
+
+/* ===== Hover (default / checked / indeterminate only) ===== */
+.sds-checkbox:not(.sds-checkbox--error):not(.sds-checkbox--disabled)
+  .sds-checkbox__input:hover:not(:disabled)
+  ~ .sds-checkbox__box {
   border-color: var(--checkbox-checked-border);
 }
 
@@ -119,46 +134,42 @@
   outline-offset: 2px;
 }
 
-/* ===== Error ===== */
+/* ===== Error (border + glyph + text all use the error color) ===== */
 .sds-checkbox--error .sds-checkbox__box {
   background: var(--checkbox-error-background);
   border-color: var(--checkbox-error-border);
 }
 
-.sds-checkbox--error .sds-checkbox__check,
-.sds-checkbox--error .sds-checkbox__dash {
+.sds-checkbox--error .sds-checkbox__check {
   color: var(--checkbox-error-icon);
+}
+
+.sds-checkbox--error .sds-checkbox__dash {
   background: var(--checkbox-error-icon);
 }
 
-.sds-checkbox--error .sds-checkbox__check {
-  background: transparent;
-}
-
-.sds-checkbox--error .sds-checkbox__hint {
+.sds-checkbox--error .sds-checkbox__label,
+.sds-checkbox--error .sds-checkbox__message {
   color: var(--checkbox-error-text);
 }
 
-/* ===== Disabled ===== */
+/* ===== Disabled (drops to muted neutral, wins over checked/error) ===== */
 .sds-checkbox--disabled .sds-checkbox__box {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
 }
 
-.sds-checkbox--disabled .sds-checkbox__check,
-.sds-checkbox--disabled .sds-checkbox__dash {
+.sds-checkbox--disabled .sds-checkbox__check {
   color: var(--disabled-icon);
+}
+
+.sds-checkbox--disabled .sds-checkbox__dash {
   background: var(--disabled-icon);
 }
 
-.sds-checkbox--disabled .sds-checkbox__check {
-  background: transparent;
-}
-
 .sds-checkbox--disabled .sds-checkbox__label,
-.sds-checkbox--disabled .sds-checkbox__hint {
+.sds-checkbox--disabled .sds-checkbox__message {
   color: var(--disabled-text);
-  cursor: not-allowed;
 }
 
 .sds-checkbox--disabled .sds-checkbox__input,

@@ -1,2 +1,2 @@
 export { EmptyState } from './EmptyState';
-export type { EmptyStateProps, EmptyStateVariant } from './EmptyState';
+export type { EmptyStateProps, EmptyStateVariant, EmptyStateHeadingLevel } from './EmptyState';

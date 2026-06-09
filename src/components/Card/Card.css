@@ -1,5 +1,6 @@
 /* Card — Spotler Design System
-   Spec: references/components/card.md. radius Border/Small (4px), Drop Shadow/50, padding 24px, region gap 24px. */
+   Radius Border/Small (4px), Drop Shadow/50 (0 0 4px), inner padding 24px,
+   region gap 24px. Headings #002A4D, body #353B40. */
 
 .sds-card {
   display: flex;
@@ -10,8 +11,12 @@
   border: 1px solid transparent;
   box-shadow: var(--elevation-resting);
   font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
 }
 
+/* ===== Header ===== */
 .sds-card__header {
   display: flex;
   align-items: center;
@@ -26,67 +31,166 @@
 
 .sds-card__heading-icon {
   display: inline-flex;
-  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
 }
 
 .sds-card__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-left: auto;
   border: none;
   background: transparent;
   cursor: pointer;
-  color: var(--cards-action-heading-close-icon);
-  font-size: 16px;
-  line-height: 1;
   padding: var(--spacing-s-4);
+  border-radius: var(--border-small);
+  color: var(--cards-action-heading-close-icon);
+}
+.sds-card__close:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
 }
 
+.sds-card__close-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
+  line-height: 1;
+}
+
+/* ===== Divider (Info) ===== */
+.sds-card__divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--divider-horizontal);
+}
+
+/* ===== Body / helper ===== */
 .sds-card__body {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+}
+
+.sds-card__help-text {
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+}
+
+/* ===== Media (Item) ===== */
+.sds-card__media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--border-small);
+  background: var(--monochrome-gray-100);
+}
+.sds-card__media--four-three {
+  aspect-ratio: 4 / 3;
+}
+.sds-card__media--thirteen-nine {
+  aspect-ratio: 13 / 9;
+}
+.sds-card__media > img,
+.sds-card__media > svg,
+.sds-card__media > picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Footer (Item / Action) ===== */
+.sds-card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
 }
 
 /* ===== Info ===== */
 .sds-card--info {
   background: var(--cards-info-background);
 }
-.sds-card--info .sds-card__heading,
-.sds-card--info .sds-card__heading-icon {
+.sds-card--info .sds-card__heading {
   color: var(--cards-info-heading-text);
+}
+.sds-card--info .sds-card__heading-icon {
+  color: var(--cards-info-heading-icon);
 }
 .sds-card--info .sds-card__body {
   color: var(--cards-info-text);
+}
+.sds-card--info .sds-card__help-text {
+  color: var(--cards-info-help-text);
 }
 
 /* ===== Action ===== */
 .sds-card--action {
   background: var(--cards-action-background);
 }
-.sds-card--action .sds-card__heading,
-.sds-card--action .sds-card__heading-icon {
+.sds-card--action .sds-card__heading {
   color: var(--cards-action-heading-text);
+}
+.sds-card--action .sds-card__heading-icon {
+  color: var(--cards-action-heading-icon);
 }
 .sds-card--action .sds-card__body {
   color: var(--cards-action-text);
 }
 
-/* ===== Product Specific (selectable/stateful) ===== */
+/* ===== Item =====
+   No dedicated `Cards/Item` component tokens exist; reuse the Action heading/
+   body aliases that resolve to the same headline (#002A4D) and body (#353B40). */
+.sds-card--item {
+  background: var(--cards-action-background);
+}
+.sds-card--item .sds-card__heading {
+  color: var(--cards-action-card-headline);
+}
+.sds-card--item .sds-card__heading-icon {
+  color: var(--cards-action-heading-icon);
+}
+.sds-card--item .sds-card__body {
+  color: var(--cards-action-additional-text);
+}
+
+/* ===== Product Specific (selectable / stateful) ===== */
 .sds-card--product-specific {
   background: var(--cards-product-specific-default-background);
   color: var(--cards-product-specific-default-text);
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
+    color 150ms ease-in-out;
 }
-.sds-card--product-specific:hover {
+.sds-card--product-specific:hover:not(.sds-card--disabled) {
   background: var(--cards-product-specific-hover-background);
   color: var(--cards-product-specific-hover-text);
 }
 .sds-card--product-specific:focus-visible {
   background: var(--cards-product-specific-focus-background);
   border-color: var(--cards-product-specific-focus-stroke);
+  color: var(--cards-product-specific-focus-text);
   outline: none;
 }
 .sds-card--product-specific.sds-card--selected {
   background: var(--cards-product-specific-selected-background);
   border-color: var(--cards-product-specific-selected-stroke);
   color: var(--cards-product-specific-selected-text);
+}
+
+/* Disabled — no dedicated `Cards` disabled tokens; fall back to the shared
+   disabled foundation aliases (#E7ECED background, #9FACB3 text). */
+.sds-card--product-specific.sds-card--disabled {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
+  color: var(--disabled-text);
+  cursor: not-allowed;
+  box-shadow: none;
 }

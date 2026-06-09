@@ -15,7 +15,8 @@
 }
 
 .sds-textfield__optional {
-  color: var(--inputs-regular-text-field-default-label-optional-text);
+  /* token name preserves the source 'deafult' typo to match the Figma variable id */
+  color: var(--inputs-regular-text-field-deafult-label-optional-text);
 }
 
 .sds-textfield__field {
