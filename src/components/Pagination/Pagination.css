@@ -1,7 +1,8 @@
 /* Pagination — Spotler Design System
-   Spec: references/components/pagination.md
-   Token names preserve Figma typos: `nagivation` and `elipsis`.
-   All page number and nav buttons are circular (border-radius: var(--border-circular)). */
+   Controls for moving through paged data: numbers, prev/next arrows, ellipses, size changer.
+   Number and navigation controls are 36px circular targets (radius var(--border-circular)).
+   All color/spacing/radius/type values are tokens.
+   Token names preserve the Figma typos verbatim: `nagivation` and `elipsis`. */
 
 .sds-pagination {
   display: inline-flex;
@@ -19,7 +20,7 @@
   list-style: none;
 }
 
-.sds-pagination__list li {
+.sds-pagination__item {
   display: inline-flex;
 }
 
@@ -28,8 +29,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: var(--spacing-s-36);
+  height: var(--spacing-s-36);
   padding: 0;
   background: var(--pagination-number-default-background);
   border: 1px solid transparent;
@@ -38,8 +39,10 @@
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
+    color 150ms ease-in-out;
 }
 
 .sds-pagination__number:hover {
@@ -53,6 +56,7 @@
   background: var(--pagination-number-selected-background);
   border-color: var(--pagination-number-selected-stroke);
   color: var(--pagination-number-selected-text);
+  font-weight: var(--font-h4-weight);
 }
 
 .sds-pagination__number:focus-visible,
@@ -67,20 +71,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: var(--spacing-s-36);
+  height: var(--spacing-s-36);
+  padding: 0;
   background: var(--pagination-nagivation-item-default-background);
   border: 1px solid transparent;
   border-radius: var(--border-circular);
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
+    color 150ms ease-in-out;
 }
 
-.sds-pagination__nav .sds-pagination__icon {
+.sds-pagination__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
   color: var(--pagination-nagivation-item-default-icon);
 }
 
@@ -104,11 +112,10 @@
 
 .sds-pagination__nav:disabled {
   cursor: not-allowed;
-  color: var(--disabled-text);
 }
 
 .sds-pagination__nav:disabled .sds-pagination__icon {
-  color: var(--disabled-text);
+  color: var(--disabled-icon);
 }
 
 /* ===== Ellipsis ===== */
@@ -116,9 +123,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  height: 36px;
+  min-width: var(--spacing-s-36);
+  height: var(--spacing-s-36);
   user-select: none;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
 }
 
 .sds-pagination__ellipsis--previous {
@@ -131,6 +140,7 @@
 
 /* ===== Size changer ===== */
 .sds-pagination__size-changer {
+  position: relative;
   display: inline-flex;
   align-items: center;
   margin-left: var(--spacing-s-8);
@@ -140,17 +150,19 @@
 }
 
 .sds-pagination__size-select {
-  height: 36px;
-  padding: 0 var(--spacing-s-8);
+  height: var(--spacing-s-36);
+  padding: 0 var(--spacing-s-32) 0 var(--spacing-s-8);
   background: var(--pagination-size-changer-default-background);
-  border: var(--border-small) solid var(--pagination-size-changer-default-stroke);
+  border: 1px solid var(--pagination-size-changer-default-stroke);
   border-radius: var(--border-small);
   color: var(--pagination-size-changer-default-text);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
   cursor: pointer;
-  transition: border-color 150ms ease-in-out, background-color 150ms ease-in-out;
+  appearance: none;
+  transition: border-color 150ms ease-in-out, background-color 150ms ease-in-out,
+    color 150ms ease-in-out;
 }
 
 .sds-pagination__size-select:hover {
@@ -159,8 +171,32 @@
   color: var(--pagination-size-changer-hover-text);
 }
 
-.sds-pagination__size-select:focus {
+.sds-pagination__size-select:focus,
+.sds-pagination__size-select:focus-visible {
   background: var(--pagination-size-changer-selected-background);
   border-color: var(--pagination-size-changer-selected-stroke);
   color: var(--pagination-size-changer-selected-text);
+}
+
+/* Trailing chevron slot; sits over the native control's hidden arrow. */
+.sds-pagination__size-icon {
+  position: absolute;
+  right: var(--spacing-s-8);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
+  pointer-events: none;
+  color: var(--pagination-size-changer-default-icon);
+}
+
+.sds-pagination__size-select:hover ~ .sds-pagination__size-icon {
+  color: var(--pagination-size-changer-hover-icon);
+}
+
+.sds-pagination__size-select:focus ~ .sds-pagination__size-icon,
+.sds-pagination__size-select:focus-visible ~ .sds-pagination__size-icon {
+  color: var(--pagination-size-changer-selected-icon);
 }

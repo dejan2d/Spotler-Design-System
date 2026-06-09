@@ -1,5 +1,8 @@
 /* Divider — Spotler Design System
-   Spec: references/components/divider.md. 1px thickness, color Divider/* (#E7ECED). */
+   A thin, non-interactive 1px rule that separates content groups.
+   1px thickness, color Divider/horizontal|vertical (resolves to Monochrome/Gray-200).
+   No padding of its own — control the gap with surrounding spacing tokens.
+   The literal 1px below is the hairline rule thickness, paired with a token color. */
 
 .sds-divider {
   border: none;

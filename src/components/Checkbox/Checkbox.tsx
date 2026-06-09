@@ -3,19 +3,31 @@ import type { InputHTMLAttributes, MutableRefObject, ReactNode } from 'react';
 import './Checkbox.css';
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  /** Visible label. Required for accessibility — associated via htmlFor. */
+  /** Visible label. Required for accessibility — associated to the input via htmlFor. */
   label: ReactNode;
-  /** Helper text shown below the control. */
+  /** Helper text shown below the control (Body/Paragraph - Regular / Small). */
   hint?: string;
-  /** Error message. When set, the control renders in the error state and is exposed via aria-describedby. */
+  /**
+   * Error message. When set, the control renders in the error state, the input is
+   * marked aria-invalid, and the message is exposed to screen readers via aria-describedby.
+   */
   error?: string;
-  /** Partial-selection state (e.g. "select all"). Renders a dash glyph and sets aria-checked="mixed". */
+  /**
+   * Partial-selection state (e.g. a "select all" parent). Renders the dash glyph,
+   * syncs the native `indeterminate` DOM property, and sets aria-checked="mixed".
+   */
   indeterminate?: boolean;
 }
 
 /**
- * Checkbox — selects one or more independent options, including indeterminate (partial) selection.
- * Spec: references/components/checkbox.md.
+ * Checkbox — selects one or more independent options, including indeterminate
+ * (partial) selection. Built on a native input[type=checkbox] with an associated
+ * label so it is fully accessible by default.
+ *
+ * Spotler Design System component: Checkbox.
+ * 20px square box, Border/Small radius, 20px label gap; label & help text use
+ * Body/Paragraph - Regular / Small. Default / checked / error states, each
+ * combinable with hover / focus / disabled.
  */
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
   { label, hint, error, indeterminate = false, id, disabled, className, ...rest },
@@ -23,12 +35,14 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
 ) {
   const autoId = useId();
   const fieldId = id ?? autoId;
-  const hintId = `${fieldId}-hint`;
+  const messageId = `${fieldId}-message`;
   const hasError = Boolean(error);
   const message = error ?? hint;
 
   const innerRef = useRef<HTMLInputElement>(null);
 
+  // The visual dash + AT "mixed" state both derive from the native DOM property,
+  // which has no JSX attribute — keep it in sync imperatively.
   useEffect(() => {
     if (innerRef.current) {
       innerRef.current.indeterminate = indeterminate;
@@ -62,7 +76,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
             disabled={disabled}
             aria-checked={indeterminate ? 'mixed' : undefined}
             aria-invalid={hasError || undefined}
-            aria-describedby={message ? hintId : undefined}
+            aria-describedby={message ? messageId : undefined}
             {...rest}
           />
           <span className="sds-checkbox__box" aria-hidden="true">
@@ -83,7 +97,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
         </label>
       </div>
       {message && (
-        <p className="sds-checkbox__hint" id={hintId}>
+        <p className="sds-checkbox__message" id={messageId}>
           {message}
         </p>
       )}

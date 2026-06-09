@@ -1,5 +1,6 @@
 /* Avatar — Spotler Design System
-   Spec: references/components/avatar.md. Circular; tonal pair Avatar/background + Avatar/person. */
+   Spotler "Avatar". Circular (Border/Circular); tonal pair Avatar/background + Avatar/person.
+   Sizes: S 16 · M 20 · L 32 · XL 40 · XXL 52 (px). */
 
 .sds-avatar {
   display: inline-flex;
@@ -30,20 +31,82 @@
 }
 
 /* ===== Sizes ===== */
+/* S 16 */
 .sds-avatar--small {
   width: var(--spacing-s-16);
   height: var(--spacing-s-16);
   font-size: var(--font-caption-size);
 }
 
+/* M 20 */
 .sds-avatar--medium {
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--font-caption-size);
+}
+
+/* L 32 */
+.sds-avatar--large {
   width: var(--spacing-s-32);
   height: var(--spacing-s-32);
   font-size: var(--font-body-size);
 }
 
-.sds-avatar--large {
-  width: 52px;
-  height: 52px;
+/* XL 40 */
+.sds-avatar--x-large {
+  width: var(--spacing-s-40);
+  height: var(--spacing-s-40);
+  font-size: var(--font-h4-size);
+}
+
+/* XXL 52 — no s-52 token exists; compose from foundation spacing tokens (48 + 4). */
+.sds-avatar--xx-large {
+  width: calc(var(--spacing-s-48) + var(--spacing-s-4));
+  height: calc(var(--spacing-s-48) + var(--spacing-s-4));
   font-size: var(--font-h3-size);
+}
+
+/* ===== Avatar group ===== */
+/* Overlapping stack with a consistent white ring; trailing +N overflow badge. */
+.sds-avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sds-avatar-group__item {
+  display: inline-flex;
+  border-radius: var(--border-circular);
+  /* Consistent ring separating overlapping avatars from one another. */
+  box-shadow: 0 0 0 1px var(--monochrome-white);
+}
+
+/* Overlap: each item after the first pulls left. Scaled per group size. */
+.sds-avatar-group__item + .sds-avatar-group__item {
+  margin-left: calc(-1 * var(--spacing-s-8));
+}
+
+.sds-avatar-group--small .sds-avatar-group__item + .sds-avatar-group__item {
+  margin-left: calc(-1 * var(--spacing-s-4));
+}
+
+.sds-avatar-group--medium .sds-avatar-group__item + .sds-avatar-group__item {
+  margin-left: calc(-1 * var(--spacing-s-4));
+}
+
+.sds-avatar-group--large .sds-avatar-group__item + .sds-avatar-group__item {
+  margin-left: calc(-1 * var(--spacing-s-8));
+}
+
+.sds-avatar-group--x-large .sds-avatar-group__item + .sds-avatar-group__item {
+  margin-left: calc(-1 * var(--spacing-s-12));
+}
+
+.sds-avatar-group--xx-large .sds-avatar-group__item + .sds-avatar-group__item {
+  margin-left: calc(-1 * var(--spacing-s-16));
+}
+
+/* +N overflow badge — tonal pair, same shape/size as the avatars. */
+.sds-avatar-group__overflow {
+  color: var(--avatar-person);
+  background: var(--avatar-background);
 }

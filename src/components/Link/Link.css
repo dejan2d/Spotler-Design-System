@@ -1,36 +1,48 @@
 /* Link — Spotler Design System
-   Spec: references/components/link.md
-   Inline text link; inherits surrounding text size; always underlined. */
+   Inline text link for navigation / low-emphasis actions within body copy.
+   Inherits the surrounding text size (standalone default Body/Paragraph 14/20)
+   and is always underlined so it is distinguishable without relying on color.
+   Reuses the Button/TextLink color tokens; no separate Link token group exists.
+   All color / typography values are tokens. */
 
 .sds-link {
   font-family: var(--font-family);
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  /* Inherit the surrounding text size/line-height so the link blends into body
+     copy; fall back to Body/Paragraph - Regular when used standalone. */
+  font-size: inherit;
+  line-height: inherit;
   font-weight: var(--font-body-weight);
   color: var(--button-textlink-rest-text);
+  /* Underline is the non-color cue — always present. */
   text-decoration: underline;
+  text-underline-offset: auto;
   cursor: pointer;
   transition: color 150ms ease-in-out;
 }
 
+/* ===== Hover ===== */
 .sds-link:hover {
   color: var(--button-textlink-hover-text);
   text-decoration: underline;
 }
 
+/* ===== Focus (visible ring required) ===== */
 .sds-link:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
-  outline-offset: 2px;
+  outline-offset: var(--spacing-s-4);
 }
 
-/* ===== Selected / active ===== */
-.sds-link--selected {
+/* ===== Selected / active — darker text + Semi-Bold.
+   600 is a font-weight (not a color/spacing/radius); no dedicated token. ===== */
+.sds-link--selected,
+.sds-link--selected:hover {
   color: var(--button-textlink-selected-text);
   font-weight: 600;
 }
 
-/* ===== Disabled ===== */
-.sds-link--disabled {
+/* ===== Disabled — desaturated text, underline kept, no activation ===== */
+.sds-link--disabled,
+.sds-link--disabled:hover {
   color: var(--disabled-text);
   cursor: not-allowed;
   pointer-events: none;

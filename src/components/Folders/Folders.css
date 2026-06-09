@@ -1,17 +1,34 @@
 /* Folders — Spotler Design System
-   Spec: references/components/folders.md
-   Folder Menu container: header + scrollable folder items. 150ms transitions. */
+   Folder Menu container: header + divider + scrollable folder items.
+   Container padding 8px, item gap 4px, radius 4px, optional 1px hairline border.
+   Header height 44px, padding 8px 12px. Item min-height 36px, padding 8px, radius 4px.
+   20×20 leading icon, 14/20 label. All color/spacing/radius/type values are tokens.
+   150ms transitions. */
 
 .sds-folders {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-s-4);
   width: 304px;
+  max-width: 100%;
   padding: var(--spacing-s-8);
   background: var(--folders-frame-background);
-  border: var(--border-small) solid var(--folders-frame-stroke);
+  border: 1px solid var(--folders-frame-stroke);
   border-radius: var(--border-small);
   font-family: var(--font-family);
   box-sizing: border-box;
+}
+
+/* ===== Shared icon slot (20×20) ===== */
+.sds-folders__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 1;
+  color: inherit;
 }
 
 /* ===== Header ===== */
@@ -19,11 +36,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
   height: 44px;
   padding: var(--spacing-s-8) var(--spacing-s-12);
+  box-sizing: border-box;
 }
 
 .sds-folders__title {
+  margin: 0;
   font-size: var(--font-h4-size);
   line-height: var(--font-h4-line);
   font-weight: var(--font-h4-weight);
@@ -46,12 +66,11 @@
   background: transparent;
   border: none;
   color: var(--folders-header-actions);
-  font-size: 18px;
-  line-height: 1;
   cursor: pointer;
   transition: color 150ms ease-in-out;
 }
 
+/* The second header action is the sort control. */
 .sds-folders__header-action:last-child {
   color: var(--folders-header-sort);
 }
@@ -62,11 +81,13 @@
   border-radius: var(--border-small);
 }
 
+/* ===== Divider (1px hairline, item width) ===== */
 .sds-folders__divider {
   display: block;
+  flex-shrink: 0;
   width: 288px;
   max-width: 100%;
-  border-top: var(--border-small) solid var(--monochrome-gray-200);
+  border-top: 1px solid var(--monochrome-gray-200);
 }
 
 /* ===== List ===== */
@@ -80,7 +101,7 @@
   overflow-y: auto;
 }
 
-.sds-folders__list li {
+.sds-folders__list-item {
   display: flex;
 }
 
@@ -110,6 +131,7 @@
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   cursor: pointer;
   text-align: left;
 }
@@ -143,9 +165,8 @@
   background: transparent;
   border: none;
   color: var(--folders-item-hover-action);
-  font-size: 18px;
-  line-height: 1;
   cursor: pointer;
+  /* Ellipsis is revealed on row hover / keyboard focus only. */
   visibility: hidden;
 }
 
@@ -156,7 +177,23 @@
   border-radius: var(--border-small);
 }
 
-/* Hover */
+/* ===== Multi-select checkboxes ===== */
+.sds-folders__checkbox {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--primary-conceptual-conceptual);
+  cursor: pointer;
+}
+
+.sds-folders__checkbox:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
+}
+
+/* ===== Hover ===== */
 .sds-folders__item:hover {
   background: var(--folders-item-hover-background);
 }
@@ -169,11 +206,13 @@
   color: var(--folders-item-hover-icon);
 }
 
-.sds-folders__item:hover .sds-folders__item-actions {
+/* Reveal the ellipsis on hover or when its control receives keyboard focus. */
+.sds-folders__item:hover .sds-folders__item-actions,
+.sds-folders__item-actions:focus-visible {
   visibility: visible;
 }
 
-/* Selected */
+/* ===== Selected ===== */
 .sds-folders__item--selected,
 .sds-folders__item--selected:hover {
   background: var(--folders-item-selected-background);
@@ -181,6 +220,7 @@
 
 .sds-folders__item--selected .sds-folders__item-button {
   color: var(--folders-item-selected-text);
+  /* 600 is a font-weight (not a color/spacing/radius); no dedicated weight token exists. */
   font-weight: 600;
 }
 
@@ -188,14 +228,14 @@
   color: var(--folders-item-selected-icon);
 }
 
-/* Disabled */
+/* ===== Disabled ===== */
 .sds-folders__item--disabled .sds-folders__item-button {
   color: var(--disabled-text);
   cursor: not-allowed;
 }
 
 .sds-folders__item--disabled .sds-folders__item-icon {
-  color: var(--disabled-text);
+  color: var(--disabled-icon);
 }
 
 /* ===== New / inline edit ===== */
@@ -209,13 +249,19 @@
   height: 36px;
   padding: var(--spacing-s-8) var(--spacing-s-12);
   background: var(--folders-item-new-background);
-  border: var(--border-small) solid var(--folders-item-new-stroke);
+  border: 1px solid var(--folders-item-new-stroke);
   border-radius: var(--border-small);
   color: var(--folders-item-new-text);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
   outline: none;
+  box-sizing: border-box;
+}
+
+.sds-folders__new-input:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
 }
 
 .sds-folders__new-confirm {
@@ -230,13 +276,24 @@
   border: none;
   border-radius: var(--border-circular);
   color: var(--folders-item-new-stroke);
-  font-size: 18px;
-  line-height: 1;
   cursor: pointer;
   transition: background-color 150ms ease-in-out;
+}
+
+.sds-folders__new-confirm:hover {
+  background: var(--folders-item-hover-background);
 }
 
 .sds-folders__new-confirm:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  .sds-folders__header-action,
+  .sds-folders__item,
+  .sds-folders__new-confirm {
+    transition: none;
+  }
 }

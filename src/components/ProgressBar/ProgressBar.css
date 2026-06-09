@@ -1,6 +1,7 @@
 /* Progress Bar — Spotler Design System
-   Spec: references/components/progress-bar.md
-   Rounded track with proportional fill; optional label. 8px tall track, radius small. */
+   A linear indicator of completion toward a known total.
+   Rounded track 8px tall (spacing-s-8) with a proportional fill; optional label.
+   Radius small; fill changes animate smoothly. All color/spacing/radius/type values are tokens. */
 
 .sds-progress-bar {
   display: flex;
@@ -12,7 +13,7 @@
 .sds-progress-bar__track {
   position: relative;
   flex: 1;
-  height: 8px;
+  height: var(--spacing-s-8);
   border-radius: var(--border-small);
   overflow: hidden;
 }
@@ -27,14 +28,56 @@
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
   font-weight: var(--font-caption-weight);
+  white-space: nowrap;
 }
 
 /* ===== Primary ===== */
-.sds-progress-bar--primary .sds-progress-bar__track { background: var(--progress-bar-primary-background); }
-.sds-progress-bar--primary .sds-progress-bar__fill { background: var(--progress-bar-primary-fill); }
-.sds-progress-bar--primary .sds-progress-bar__label { color: var(--progress-bar-primary-label); }
+.sds-progress-bar--primary .sds-progress-bar__track {
+  background: var(--progress-bar-primary-background);
+}
+.sds-progress-bar--primary .sds-progress-bar__fill {
+  background: var(--progress-bar-primary-fill);
+}
+.sds-progress-bar--primary .sds-progress-bar__label {
+  color: var(--progress-bar-primary-label);
+}
 
 /* ===== Neutral ===== */
-.sds-progress-bar--neutral .sds-progress-bar__track { background: var(--progress-bar-neutral-background); }
-.sds-progress-bar--neutral .sds-progress-bar__fill { background: var(--progress-bar-neutral-fill); }
-.sds-progress-bar--neutral .sds-progress-bar__label { color: var(--progress-bar-neutral-label); }
+.sds-progress-bar--neutral .sds-progress-bar__track {
+  background: var(--progress-bar-neutral-background);
+}
+.sds-progress-bar--neutral .sds-progress-bar__fill {
+  background: var(--progress-bar-neutral-fill);
+}
+.sds-progress-bar--neutral .sds-progress-bar__label {
+  color: var(--progress-bar-neutral-label);
+}
+
+/* ===== Indeterminate (unknown total) =====
+   No determinate width — a fixed-size fill slides across the track. */
+.sds-progress-bar--indeterminate .sds-progress-bar__fill {
+  width: 40%;
+  transition: none;
+  animation: sds-progress-bar-indeterminate 1.2s ease-in-out infinite;
+}
+
+@keyframes sds-progress-bar-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sds-progress-bar__fill {
+    transition: none;
+  }
+  .sds-progress-bar--indeterminate .sds-progress-bar__fill {
+    /* Avoid motion sickness: hold a steady partial fill instead of sliding. */
+    animation: none;
+    transform: none;
+    width: 100%;
+  }
+}

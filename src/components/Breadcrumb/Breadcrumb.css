@@ -1,12 +1,14 @@
 /* Breadcrumb — Spotler Design System
-   Spec: references/components/breadcrumb.md
-   No dedicated tokens — composes from Link color + Monochrome grays.
-   Body/Paragraph - Regular (14/20). Single line, no wrapping. */
+   Spotler component: Breadcrumb.
+   No dedicated tokens — composes from the Link color (--button-textlink-*)
+   and Monochrome grays. Body/Paragraph - Regular (14/20). Single line, no
+   wrapping; long trails collapse the middle into an ellipsis. */
 
 .sds-breadcrumb {
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
 }
 
 .sds-breadcrumb__list {
@@ -27,32 +29,63 @@
   min-width: 0;
 }
 
+/* ===== Ancestor link — Link color, underlined ===== */
 .sds-breadcrumb__link {
-  color: var(--primary-conceptual-conceptual);
+  color: var(--button-textlink-rest-text);
   text-decoration: underline;
   cursor: pointer;
   transition: color 150ms ease-in-out;
 }
 
 .sds-breadcrumb__link:hover {
-  color: var(--primary-conceptual-conceptual-darker);
+  color: var(--button-textlink-hover-text);
 }
 
 .sds-breadcrumb__link:focus-visible {
-  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline: 2px solid var(--button-textlink-rest-text);
   outline-offset: 2px;
   border-radius: var(--border-small);
 }
 
+/* ===== Current (last) segment — static gray text ===== */
 .sds-breadcrumb__current {
   color: var(--monochrome-gray-1000);
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* ===== Separator — muted gray, decorative ===== */
 .sds-breadcrumb__separator {
   color: var(--monochrome-gray-700);
   user-select: none;
+}
+
+/* ===== Collapse control — middle levels folded into an ellipsis ===== */
+.sds-breadcrumb__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--button-textlink-rest-text);
+  font: inherit;
+  line-height: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.sds-breadcrumb__ellipsis:hover {
+  color: var(--button-textlink-hover-text);
+}
+
+.sds-breadcrumb__ellipsis:focus-visible {
+  outline: 2px solid var(--button-textlink-rest-text);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
 }
 
 /* ===== Back-link form ===== */
@@ -60,18 +93,18 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-s-8);
-  color: var(--primary-conceptual-conceptual);
+  color: var(--button-textlink-rest-text);
   text-decoration: underline;
   cursor: pointer;
   transition: color 150ms ease-in-out;
 }
 
 .sds-breadcrumb__back:hover {
-  color: var(--primary-conceptual-conceptual-darker);
+  color: var(--button-textlink-hover-text);
 }
 
 .sds-breadcrumb__back:focus-visible {
-  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline: 2px solid var(--button-textlink-rest-text);
   outline-offset: 2px;
   border-radius: var(--border-small);
 }
@@ -80,4 +113,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.sds-breadcrumb__back-label {
+  display: inline-block;
 }

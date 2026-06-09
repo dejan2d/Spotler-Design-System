@@ -1,6 +1,9 @@
 /* Navigation — Spotler Design System
-   Spec: references/components/navigation.md
-   Dark sidebar (#002A4D). Expanded 220px / collapsed 60px. 150ms transitions. */
+   Left-side primary navigation. Dark sidebar (#002A4D), profile footer (#001D34).
+   Expanded 220px / collapsed 60px; items 52px tall, radius 4px; icon 20×20;
+   logo area 96px; collapse toggle 32×32 round; 150ms transitions.
+   All color/typography/radius/spacing values are tokens. Fixed structural
+   dimensions (220/60/52/96/44/32/42) are documented component sizes. */
 
 .sds-navigation {
   display: flex;
@@ -19,13 +22,70 @@
   width: 60px;
 }
 
+/* ===== Header / logo area (96px) ===== */
 .sds-navigation__header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-s-8);
   min-height: 96px;
   padding: 0 var(--spacing-s-8);
 }
 
+.sds-navigation--collapsed .sds-navigation__header {
+  justify-content: center;
+}
+
+.sds-navigation__brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.sds-navigation--collapsed .sds-navigation__brand {
+  display: none;
+}
+
+/* Collapse toggle — 32×32 round button, fa-chevron-left. */
+.sds-navigation__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: var(--navigation-background);
+  border: var(--border-small) solid transparent;
+  border-radius: var(--border-circular);
+  color: var(--navigation-expanded-menu-collapse-icon);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.sds-navigation__toggle:hover {
+  background: var(--navigation-expanded-menu-background);
+}
+
+.sds-navigation__toggle:focus-visible {
+  outline: none;
+  border-color: var(--monochrome-white);
+}
+
+.sds-navigation--collapsed .sds-navigation__toggle-icon {
+  transform: rotate(180deg);
+}
+
+.sds-navigation__toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+/* ===== Items area (padding 0 8px) ===== */
 .sds-navigation__items {
   flex: 1;
   display: flex;
@@ -47,16 +107,24 @@
   list-style: none;
 }
 
+.sds-navigation__list-item {
+  display: flex;
+}
+
+/* Divider — 1px #8795A0; width follows the item (204px / 44px). */
 .sds-navigation__divider {
   display: block;
-  border-top: var(--border-small) solid var(--monochrome-gray-600);
+  width: 100%;
+  height: 1px;
+  background: var(--monochrome-gray-600);
   margin: var(--spacing-s-8) 0;
 }
 
+/* Section labels (CRM) — SemiBold 14/28, #E7ECED, padding 0 16px. */
 .sds-navigation__section-label {
   font-weight: 600;
   font-size: var(--font-body-size);
-  line-height: 28px;
+  line-height: var(--font-h4-line);
   color: var(--monochrome-gray-200);
   padding: 0 var(--spacing-s-16);
 }
@@ -69,15 +137,17 @@
   width: 100%;
   height: 52px;
   background: transparent;
-  border: var(--border-small) solid transparent;
+  border: 1px solid transparent;
   border-radius: var(--border-small);
   color: var(--navigation-item-default-text);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   cursor: pointer;
   text-align: left;
-  transition: background-color 150ms ease-in-out, color 150ms ease-in-out, border-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
+    border-color 150ms ease-in-out;
 }
 
 .sds-navigation--expanded .sds-navigation__item {
@@ -112,20 +182,23 @@
   flex-shrink: 0;
 }
 
-.sds-navigation__item:hover:not(:disabled) {
+/* Hover — #DBE1E6 bg, #002A4D text + icon. */
+.sds-navigation__item:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--navigation-item-hover-background);
   color: var(--navigation-item-hover-text);
 }
 
-.sds-navigation__item:hover:not(:disabled) .sds-navigation__icon {
+.sds-navigation__item:hover:not(:disabled):not([aria-disabled='true']) .sds-navigation__icon {
   color: var(--navigation-item-hover-icon);
 }
 
+/* Focused — 1px solid #FFFFFF (no layout shift; rest border is transparent 1px). */
 .sds-navigation__item:focus-visible {
   outline: none;
   border-color: var(--monochrome-white);
 }
 
+/* Selected — #005499 bg, #FFFFFF SemiBold text + icon (overrides hover). */
 .sds-navigation__item--selected,
 .sds-navigation__item--selected:hover {
   background: var(--navigation-item-selected-background);
@@ -138,23 +211,27 @@
   color: var(--navigation-item-selected-icon);
 }
 
-.sds-navigation__item:disabled {
+/* Disabled — Regular 14/20, #9FACB3 text + icon, transparent bg. */
+.sds-navigation__item:disabled,
+.sds-navigation__item[aria-disabled='true'] {
+  background: transparent;
   color: var(--monochrome-gray-500);
   cursor: not-allowed;
 }
 
-.sds-navigation__item:disabled .sds-navigation__icon {
+.sds-navigation__item:disabled .sds-navigation__icon,
+.sds-navigation__item[aria-disabled='true'] .sds-navigation__icon {
   color: var(--monochrome-gray-500);
 }
 
-/* ===== Footer (profile) ===== */
+/* ===== Profile footer (#001D34) ===== */
 .sds-navigation__footer {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s-8);
   padding: var(--spacing-s-16) var(--spacing-s-8);
   background: var(--navigation-expanded-menu-background);
-  color: var(--navigation-expanded-menu-text);
+  color: var(--monochrome-gray-200);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
 }

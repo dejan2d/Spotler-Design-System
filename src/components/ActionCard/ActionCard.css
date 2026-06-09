@@ -1,8 +1,10 @@
 /* Action Card — Spotler Design System
-   Spec: kit/guidelines/components/action-card.md.
+   Spec: Spotler "Action Card".
    Outer: padding 24px 32px, gap 8px, radius Border/Large (8px), 1px stroke, resting Drop Shadow/50.
-   Internal item: padding 12px 16px, gap 8px, radius 8px, 1px stroke; hover lifts to Product Specific tint.
-   Tokens: --diagrams-action-card-* + --cards-action-*. */
+   Internal item: padding 12px 16px, gap 10px (nearest scale token s-8), radius Border/Large (8px),
+   1px stroke; hover lifts to Card -> Product Specific tint (#F8FAFA), distinct focus ring.
+   Leading tile: 40x40, padding ~10px (centered), radius Border/Small (4px), 20px glyph.
+   Tokens: --diagrams-action-card-* + --cards-product-specific-* + foundations. */
 
 .sds-action-card {
   display: flex;
@@ -24,6 +26,20 @@
   color: var(--diagrams-action-card-heading);
 }
 
+/* Items list — reset list semantics, keep the 8px outer gap between rows */
+.sds-action-card__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+}
+
+.sds-action-card__item-wrap {
+  display: flex;
+}
+
 /* Internal action item — the whole row is the target */
 .sds-action-card__item {
   display: flex;
@@ -40,7 +56,8 @@
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
+    box-shadow 150ms ease-in-out;
 }
 
 a.sds-action-card__item,
@@ -53,9 +70,9 @@ button.sds-action-card__item {
 }
 
 .sds-action-card__item:focus-visible {
-  outline: none;
+  outline: 2px solid var(--cards-product-specific-focus-stroke);
+  outline-offset: 2px;
   border-color: var(--cards-product-specific-focus-stroke);
-  box-shadow: 0 0 0 2px var(--cards-product-specific-focus-stroke);
 }
 
 /* Static (non-interactive) row — when the trailing affordance is a real Button */
@@ -66,19 +83,33 @@ button.sds-action-card__item {
   background: var(--diagrams-action-card-internal-area-background);
 }
 
-/* Leading icon tile — 40x40, 4px radius */
+/* Stacked / compact rows: drop the internal shadow and use the visible E7ECED border
+   (per spec, stacking shadows inside the card shadow looks heavy). */
+.sds-action-card__item--compact {
+  box-shadow: none;
+  border-color: var(--diagrams-action-card-stroke);
+}
+
+/* Leading icon tile — 40x40, 4px radius, 20px glyph centered */
 .sds-action-card__item-icon {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  box-sizing: border-box;
+  width: var(--spacing-s-40);
+  height: var(--spacing-s-40);
   padding: var(--spacing-s-8);
   border-radius: var(--border-small);
+  border: 1px solid var(--diagrams-action-card-internal-area-stroke);
   background: var(--diagrams-action-card-internal-area-icon-start-background);
   color: var(--diagrams-action-card-internal-area-icon-start);
-  font-size: 20px;
+  font-size: var(--spacing-s-20);
+}
+
+.sds-action-card__item-icon > * {
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
 }
 
 .sds-action-card__item-body {
@@ -89,6 +120,7 @@ button.sds-action-card__item {
   min-width: 0;
 }
 
+/* Body/Paragraph - Semi Bold (14/20, weight 600) */
 .sds-action-card__item-label {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
@@ -96,11 +128,13 @@ button.sds-action-card__item {
   color: var(--diagrams-action-card-internal-area-body-text);
 }
 
+/* Compact rows use Body/Paragraph - Small - Semi Bold (12/16, weight 600) */
 .sds-action-card__item--compact .sds-action-card__item-label {
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
 }
 
+/* Description stays at Body/Paragraph - Regular (14/20) even on compact rows */
 .sds-action-card__item-description {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
@@ -115,13 +149,26 @@ button.sds-action-card__item {
   margin-left: auto;
 }
 
+/* Decorative angle-right chevron (Icon Button default state color) */
 .sds-action-card__chevron {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-  line-height: 1;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   color: var(--diagrams-action-card-internal-area-icon-end);
+}
+
+.sds-action-card__chevron svg {
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+}
+
+/* Header + CTA only — full-width single action for the whole card */
+.sds-action-card__cta {
+  display: flex;
+}
+
+.sds-action-card__cta > * {
+  width: 100%;
 }
