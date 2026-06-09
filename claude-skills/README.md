@@ -43,7 +43,6 @@ One skill per Spotler product. Attach the skill for the product you are designin
 
 | Skill file | What it does |
 |---|---|
-| `spotler-design-system-usage.skill` | **Figma Make** — how to use the Spotler Design System Kit correctly: components first, tokens, states, accessibility, real Spotler patterns. Pair with any product skill. |
 | `spotler-design-system.skill` | **Claude Code** — the full design system for developers: all foundation tokens, 842 component tokens, per-component guidelines for all 36+ components. |
 | `spotler-design-principles.skill` | The 6 Spotler design pillars (Design, Layout, Consistency, Interaction, Simplicity, Accessibility). Useful in both contexts. |
 
@@ -69,7 +68,7 @@ Attach **two skills**:
 | | |
 |---|---|
 | `spotler-<product>.skill` | Product context (what the feature does) |
-| `spotler-design-system-usage.skill` | Visual guidance (how it should look) |
+| `spotler-design-system.skill` | Visual guidance (how it should look) |
 
 Optionally also attach `spotler-design-principles.skill` for deeper brand alignment.
 
@@ -79,11 +78,11 @@ Optionally also attach `spotler-design-principles.skill` for deeper brand alignm
 
 **Skills to attach:**
 - `spotler-activate.skill`
-- `spotler-design-system-usage.skill`
+- `spotler-design-system.skill`
 
 **Example prompts:**
 
-> "Using the Spotler Activate Product Context Skill and the Spotler Design System Usage Skill, design an abandoned cart campaign setup screen for an e-commerce marketer."
+> "Using the Spotler Activate Product Context Skill and the Spotler Design System Skill, design an abandoned cart campaign setup screen for an e-commerce marketer."
 
 > "Design a real-time trigger configuration screen that shows behavioural events, audience conditions, and the resulting on-site personalisation."
 
@@ -95,11 +94,11 @@ Optionally also attach `spotler-design-principles.skill` for deeper brand alignm
 
 **Skills to attach:**
 - `spotler-crm.skill`
-- `spotler-design-system-usage.skill`
+- `spotler-design-system.skill`
 
 **Example prompt:**
 
-> "Using the Spotler CRM Product Context Skill and the Spotler Design System Usage Skill, design a contact detail page showing contact data, company context, activity history, email engagement, website visits, lead score, and linked opportunities."
+> "Using the Spotler CRM Product Context Skill and the Spotler Design System Skill, design a contact detail page showing contact data, company context, activity history, email engagement, website visits, lead score, and linked opportunities."
 
 ---
 
@@ -107,11 +106,11 @@ Optionally also attach `spotler-design-principles.skill` for deeper brand alignm
 
 **Skills to attach:**
 - `spotler-engage.skill`
-- `spotler-design-system-usage.skill`
+- `spotler-design-system.skill`
 
 **Example prompt:**
 
-> "Using the Spotler Engage Product Context Skill and the Spotler Design System Usage Skill, redesign the central webcare inbox for agents handling social comments, WhatsApp, live chat, and reviews."
+> "Using the Spotler Engage Product Context Skill and the Spotler Design System Skill, redesign the central webcare inbox for agents handling social comments, WhatsApp, live chat, and reviews."
 
 ---
 
