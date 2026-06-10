@@ -4,9 +4,15 @@
 
 .sds-radio {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-s-20);
+  flex-direction: column;
+  gap: var(--spacing-s-4);
   font-family: var(--font-family);
+}
+
+.sds-radio__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-12);
 }
 
 .sds-radio__control {
@@ -53,6 +59,14 @@
   line-height: var(--font-body-line);
   color: var(--radio-button-label);
   cursor: pointer;
+}
+
+.sds-radio__hint {
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--monochrome-gray-800);
 }
 
 /* ===== Checked ===== */

@@ -36,6 +36,8 @@
   border-radius: var(--border-circular);
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  /* Open Sans Semi-Bold per spec; 600 is a font-weight (not a color/spacing/radius)
+     and no Semi-Bold caption weight token exists (--font-caption-weight resolves to 400). */
   font-weight: 600;
 }
 

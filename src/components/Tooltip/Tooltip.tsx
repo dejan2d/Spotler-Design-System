@@ -1,5 +1,5 @@
 import { forwardRef, useId, useState, useCallback } from 'react';
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import './Tooltip.css';
 
 export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -28,7 +28,7 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Toolti
   const show = useCallback(() => setOpen(true), []);
   const hide = useCallback(() => setOpen(false), []);
 
-  const onKeyDown = useCallback((e: React.KeyboardEvent) => {
+  const onKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') setOpen(false);
   }, []);
 

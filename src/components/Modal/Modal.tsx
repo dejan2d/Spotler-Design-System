@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useEffect, useId, useRef } from 'react';
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import './Modal.css';
 
 /** Layout treatment of the dialog surface. Mirrors the Spotler "Modal" variants. */
@@ -108,7 +108,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
   }, [open]);
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'Escape') {
         event.stopPropagation();
         onClose();

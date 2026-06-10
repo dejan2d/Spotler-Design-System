@@ -72,16 +72,18 @@
   outline-offset: 2px;
 }
 
-/* ===== Disabled (preserve on/off distinction) ===== */
-.sds-switch--disabled .sds-switch__track {
-  background: var(--disabled-stroke);
-}
-
+/* ===== Disabled (preserve on/off distinction) =====
+   The disabled palette only has two tones (--disabled-icon #9FACB3 and
+   --disabled-background/-stroke #E7ECED). Use the darker tone for the track in
+   BOTH states and the lighter tone for the knob, so the knob never blends into
+   the track and the on/off state stays readable via knob position. */
+.sds-switch--disabled .sds-switch__track,
 .sds-switch--disabled .sds-switch__input:checked ~ .sds-switch__track {
   background: var(--disabled-icon);
 }
 
-.sds-switch--disabled .sds-switch__knob {
+.sds-switch--disabled .sds-switch__knob,
+.sds-switch--disabled .sds-switch__input:checked ~ .sds-switch__track .sds-switch__knob {
   background: var(--disabled-background);
 }
 

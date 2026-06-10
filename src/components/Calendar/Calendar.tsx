@@ -149,7 +149,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
     if (cell) cell.focus();
   }, []);
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>, day: Date) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, day: Date) => {
     let next: Date | null = null;
     switch (event.key) {
       case 'ArrowLeft':

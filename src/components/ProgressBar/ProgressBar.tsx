@@ -96,7 +96,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
         aria-valuemax={safeMax}
         aria-valuenow={indeterminate ? undefined : clamp(value, min, safeMax)}
         aria-busy={indeterminate || undefined}
-        aria-label={ariaLabel ?? (label ? undefined : 'Progress')}
+        aria-label={ariaLabel ?? label ?? 'Progress'}
         aria-valuetext={!indeterminate && label ? label : undefined}
       >
         <div

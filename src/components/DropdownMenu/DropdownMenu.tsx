@@ -295,7 +295,7 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(functi
       ref={(node) => {
         containerRef.current = node;
         if (typeof ref === 'function') ref(node);
-        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        else if (ref) (ref as MutableRefObject<HTMLDivElement | null>).current = node;
       }}
       className={classes}
       {...rest}

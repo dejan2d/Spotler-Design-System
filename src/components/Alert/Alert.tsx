@@ -85,7 +85,6 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   const classes = [
     'sds-alert',
     `sds-alert--${variant}`,
-    showProgress && 'sds-alert--auto-dismiss',
     className,
   ]
     .filter(Boolean)

@@ -46,7 +46,9 @@ export interface ActionCardItem {
   trailing?: ReactNode;
 }
 
-export interface ActionCardProps extends HTMLAttributes<HTMLDivElement> {
+// `title` is re-typed as a ReactNode heading, so omit the native string `title` attribute
+// from the base to avoid the incompatible-override error (TS2430).
+export interface ActionCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Group heading — H4. Rendered as an `<h2>` styled to H4 by default; override with `headingLevel`. */
   title?: ReactNode;
   /** Semantic heading level for the group title. Defaults to `2`. */

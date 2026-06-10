@@ -23,7 +23,7 @@
 
 .sds-tabs--horizontal .sds-tabs__list {
   flex-direction: row;
-  border-bottom: var(--border-small) solid var(--tabs-horizontal-default-stroke);
+  border-bottom: 1px solid var(--tabs-horizontal-default-stroke);
 }
 
 .sds-tabs--vertical .sds-tabs__list {
@@ -65,7 +65,7 @@
   background: transparent;
   color: var(--tabs-horizontal-default-text);
   border-bottom: 2px solid transparent;
-  margin-bottom: calc(-1 * var(--border-small));
+  margin-bottom: -1px;
 }
 
 .sds-tabs--horizontal .sds-tabs__tab .sds-tabs__icon {

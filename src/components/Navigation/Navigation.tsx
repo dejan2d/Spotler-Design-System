@@ -139,7 +139,6 @@ export const Navigation = forwardRef<HTMLElement, NavigationProps>(function Navi
                 const itemClasses = [
                   'sds-navigation__item',
                   selected && 'sds-navigation__item--selected',
-                  item.disabled && 'sds-navigation__item--disabled',
                 ]
                   .filter(Boolean)
                   .join(' ');

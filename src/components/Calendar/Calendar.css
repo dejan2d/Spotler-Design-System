@@ -78,9 +78,14 @@
   transform: rotate(45deg);
 }
 
+.sds-calendar__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+}
+
 .sds-calendar__weekdays,
-.sds-calendar__week,
-.sds-calendar__weeks {
+.sds-calendar__week {
   display: grid;
   grid-template-columns: repeat(7, var(--spacing-s-36));
   gap: var(--spacing-s-4);
