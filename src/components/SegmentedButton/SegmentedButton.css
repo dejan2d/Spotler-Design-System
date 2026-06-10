@@ -64,10 +64,13 @@
   outline-offset: -2px;
 }
 
-/* ===== Selected ===== */
+/* ===== Selected =====
+   Semi-Bold label so selection is not conveyed by fill/color alone.
+   600 is a font-weight (not a color/spacing/radius/type); no dedicated weight token exists. */
 .sds-segmented-button__segment--selected {
   background: var(--segmented-button-default-selected-background);
   color: var(--segmented-button-default-selected-text);
+  font-weight: 600;
 }
 
 .sds-segmented-button__segment--selected .sds-segmented-button__icon {

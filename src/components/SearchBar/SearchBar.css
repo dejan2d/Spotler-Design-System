@@ -100,6 +100,25 @@
   outline-offset: 2px;
 }
 
+/* ===== Selected (active row look while a suggestion overlay is open) ===== */
+.sds-search-bar--selected .sds-search-bar__field,
+.sds-search-bar--selected .sds-search-bar__field:hover {
+  background: var(--inputs-search-bar-selected-background);
+  border-color: var(--inputs-search-bar-selected-stroke);
+}
+
+.sds-search-bar--selected .sds-search-bar__input {
+  color: var(--inputs-search-bar-selected-text);
+}
+
+.sds-search-bar--selected .sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-selected-icon-start);
+}
+
+.sds-search-bar--selected .sds-search-bar__icon--end {
+  color: var(--inputs-search-bar-selected-icon-end);
+}
+
 /* ===== Empty (active, no results) ===== */
 .sds-search-bar--empty .sds-search-bar__field,
 .sds-search-bar--empty .sds-search-bar__field:hover {

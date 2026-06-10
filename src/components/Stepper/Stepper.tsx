@@ -46,6 +46,15 @@ function deriveStatus(index: number, activeIndex: number, override?: StepStatus)
   return 'upcoming';
 }
 
+/** Human-readable status label announced to assistive tech (status is not conveyed by colour alone). */
+const STATUS_LABEL: Record<StepStatus, string> = {
+  complete: 'Completed',
+  current: 'Current step',
+  upcoming: 'Upcoming',
+  error: 'Error',
+  warning: 'Warning',
+};
+
 /**
  * Stepper — guides users through a multi-step linear process.
  * Spec: references/components/stepper.md. 32px circular step icons; checkmark on complete.
@@ -110,6 +119,7 @@ export const Stepper = forwardRef<HTMLOListElement, StepperProps>(function Stepp
                   <span className="sds-stepper__number">{index + 1}</span>
                 )}
               </span>
+              <span className="sds-stepper__status">{STATUS_LABEL[status]}: </span>
               <span className="sds-stepper__title">{step.title}</span>
               {!isLast && orientation === 'horizontal' && (
                 <span className="sds-stepper__tail" aria-hidden="true">

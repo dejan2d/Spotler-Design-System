@@ -36,8 +36,9 @@ export interface KpiCardValueProps extends HTMLAttributes<HTMLDivElement> {
   /** Optional 16px icon inside the Status Chip, tinted to match the chip text. */
   trendIcon?: ReactNode;
   /**
-   * Accessible description of the trend, announced as a status to assistive tech.
-   * Defaults to the visible `trend` content when that is a plain string.
+   * Accessible name for the Status Chip, set as its `aria-label`. Supply this when the
+   * visible `trend` is icon-only or otherwise not self-describing; when omitted, the
+   * visible chip text is used as the accessible name. Never rely on chip color alone.
    */
   trendLabel?: string;
   /** Short helper line shown below the value (Body/Paragraph - Small, 12/16). */
@@ -91,7 +92,6 @@ export const KpiCardValue = forwardRef<HTMLDivElement, KpiCardValueProps>(functi
 ) {
   const classes = ['sds-kpi-card__value-area', className].filter(Boolean).join(' ');
   const hasLabelRow = Boolean(label || labelIconStart || labelIconEnd || labelHelpText);
-  const accessibleTrend = trendLabel ?? (typeof trend === 'string' ? trend : undefined);
 
   return (
     <div ref={ref} className={classes} {...rest}>
@@ -117,8 +117,7 @@ export const KpiCardValue = forwardRef<HTMLDivElement, KpiCardValueProps>(functi
         {trend != null && trend !== false && (
           <span
             className={`sds-kpi-card__chip sds-kpi-card__chip--${status}`}
-            role="status"
-            aria-label={accessibleTrend}
+            aria-label={trendLabel}
           >
             {trendIcon && (
               <span className="sds-kpi-card__chip-icon" aria-hidden="true">

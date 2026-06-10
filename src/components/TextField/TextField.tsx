@@ -60,7 +60,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
         {iconEnd && <span className="sds-textfield__icon" aria-hidden="true">{iconEnd}</span>}
       </div>
       {message && (
-        <p className="sds-textfield__hint" id={hintId}>
+        <p
+          className="sds-textfield__hint"
+          id={hintId}
+          role={hasError ? 'alert' : undefined}
+        >
           {message}
         </p>
       )}

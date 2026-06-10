@@ -95,6 +95,8 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(function Upload(
     <div ref={ref} className={classes} {...rest}>
       <div
         className={zoneClasses}
+        role="group"
+        aria-label={title}
         onDragOver={(e) => {
           if (disabled) return;
           e.preventDefault();
@@ -128,6 +130,7 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(function Upload(
           id={inputId}
           className="sds-upload__input"
           type="file"
+          aria-label={browseLabel}
           accept={accept}
           multiple={multiple}
           disabled={disabled}

@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useId, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import './TimePicker.css';
 
 /** Generate "HH:MM" options across 24h at the given minute step. */
@@ -13,7 +13,7 @@ function buildOptions(step: number): string[] {
   return out;
 }
 
-export interface TimePickerProps {
+export interface TimePickerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Visible label. Required for accessibility — never rely on placeholder alone. */
   label: string;
   /** Selected time as "HH:MM" (24h). */
@@ -30,11 +30,13 @@ export interface TimePickerProps {
   error?: string;
   /** Placeholder shown when no time is selected. */
   placeholder?: string;
-  /** Trailing clock icon (FontAwesome Duotone node). Falls back to a default glyph. */
+  /** Trailing clock icon slot (FontAwesome Duotone node). Rendered inside an `aria-hidden` wrapper. */
   icon?: ReactNode;
+  /** Disables the field and prevents the option list from opening. */
   disabled?: boolean;
+  /** Id for the input. Auto-generated when omitted; also wires label + hint associations. */
   id?: string;
-  className?: string;
+  /** Native form field name for the underlying input. */
   name?: string;
 }
 
@@ -57,6 +59,7 @@ export const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(function
     id,
     className,
     name,
+    ...rest
   },
   ref,
 ) {
@@ -97,7 +100,7 @@ export const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(function
     .join(' ');
 
   return (
-    <div className={classes} ref={rootRef}>
+    <div className={classes} ref={rootRef} {...rest}>
       <label className="sds-time-picker__label" htmlFor={fieldId}>
         {label}
         {optional && <span className="sds-time-picker__optional"> (optional)</span>}
@@ -139,7 +142,7 @@ export const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(function
           onClick={() => !disabled && setOpen((o) => !o)}
         >
           <span className="sds-time-picker__icon" aria-hidden="true">
-            {icon ?? '🕐'}
+            {icon}
           </span>
         </button>
       </div>

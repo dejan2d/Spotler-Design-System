@@ -1,5 +1,10 @@
 import { forwardRef } from 'react';
-import type { HTMLAttributes, ReactNode } from 'react';
+import type {
+  HTMLAttributes,
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+} from 'react';
 import './Card.css';
 
 /** Visual/structural variant. Only `product-specific` is selectable/stateful. */
@@ -76,6 +81,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     disabled = false,
     className,
     children,
+    onClick,
+    onKeyDown,
     ...rest
   },
   ref,
@@ -84,6 +91,23 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   const showHeader = Boolean(heading || headingIcon || (variant === 'action' && onClose));
   const showDivider = variant === 'info' && divider && showHeader;
   const ratioModifier = imageRatio === '13:9' ? 'thirteen-nine' : 'four-three';
+  const isInert = isSelectable && disabled;
+
+  // The selectable variant is a real control: block activation when disabled and
+  // mirror native button keyboard activation (Enter / Space) for the role="button".
+  const handleClick = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (isInert) return;
+    onClick?.(event);
+  };
+
+  const handleKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    onKeyDown?.(event);
+    if (!isSelectable || disabled || event.defaultPrevented) return;
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+      event.currentTarget.click();
+    }
+  };
 
   const classes = [
     'sds-card',
@@ -104,7 +128,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
       role={isSelectable ? 'button' : undefined}
       tabIndex={isSelectable && !disabled ? 0 : undefined}
       aria-pressed={isSelectable ? selected : undefined}
-      aria-disabled={isSelectable && disabled ? true : undefined}
+      aria-disabled={isInert ? true : undefined}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
       {...rest}
     >
       {variant === 'item' && media && (

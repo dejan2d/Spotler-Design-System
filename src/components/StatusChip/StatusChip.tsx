@@ -7,9 +7,13 @@ export type StatusChipVariant = 'default' | 'blue' | 'alert' | 'warning' | 'succ
 export interface StatusChipProps extends HTMLAttributes<HTMLSpanElement> {
   /** Color carries the meaning: default (neutral), blue (info), success, warning, alert (error). */
   variant?: StatusChipVariant;
-  /** Optional leading icon (16px, FontAwesome Duotone node). */
+  /** Optional leading icon (16px, FontAwesome Duotone node). The icon is decorative (aria-hidden). */
   iconStart?: ReactNode;
-  /** Chip label — keep the text; status must not rely on color alone. */
+  /**
+   * Chip label — keep the text; status must not rely on color alone.
+   * Icon-only chips (no visible label) must instead provide `aria-label`
+   * so the status has an accessible name and isn't conveyed by color alone.
+   */
   children?: ReactNode;
 }
 

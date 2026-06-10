@@ -50,8 +50,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
   border-radius: var(--border-circular);
   border: 1px solid transparent;
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
@@ -94,6 +94,20 @@
   background: transparent;
 }
 
+/* Visually-hidden status label so the step's status is announced to assistive tech
+   (status is not conveyed by colour alone). */
+.sds-stepper__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ===== Title ===== */
 .sds-stepper__title {
   font-size: var(--font-body-size);
@@ -129,7 +143,7 @@
 
 .sds-stepper--vertical .sds-stepper__content {
   /* 32px icon + 16px gap = align description under the title, not the icon */
-  padding-left: calc(32px + var(--spacing-s-16));
+  padding-left: calc(var(--spacing-s-32) + var(--spacing-s-16));
 }
 
 .sds-stepper--horizontal .sds-stepper__content {
@@ -184,13 +198,14 @@
 .sds-stepper--vertical .sds-stepper__connector {
   display: flex;
   justify-content: flex-start;
-  padding: 4px 0;
+  /* Spec: connector wrapped in padding 6px 0 → 6px + 16px line + 6px = 28px content area. */
+  padding: 6px 0;
   margin-left: 15px;
 }
 
 .sds-stepper--vertical .sds-stepper__line {
   width: 0;
-  height: 16px;
+  height: var(--spacing-s-16);
   border-left: 1px solid var(--stepper-vertical-line-waiting);
 }
 
