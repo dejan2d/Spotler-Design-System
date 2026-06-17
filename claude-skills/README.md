@@ -30,6 +30,7 @@ One skill per Spotler product. Attach the skill for the product you are designin
 | `spotler-activate-search.skill` | Spotler Activate Search — on-site search, ranking, suggestions, merchandising, analytics |
 | `spotler-crm.skill` | Spotler CRM — leads, contacts, companies, pipeline, lead scoring, marketing-sales alignment |
 | `spotler-engage.skill` | Spotler Engage — webcare, social publishing, media monitoring, WhatsApp, live chat |
+| `spotler-feedback.skill` | Spotler FeedbackPro — customer-feedback platform: surveys, invites, inbox triage, deviation alerts, driver analysis, journeys, reporting, closed-loop follow-up (BX/CX/SX/EX) |
 | `spotler-mail-plus.skill` | Spotler Mail+ — email marketing, newsletters, automation, deliverability, CRM sync |
 | `spotler-mail-pro.skill` | Spotler MailPro — advanced email platform, multi-brand, relational data, approval workflows |
 | `spotler-message.skill` | Spotler Message — WhatsApp-first conversational messaging, campaigns, chatbots, routing |
