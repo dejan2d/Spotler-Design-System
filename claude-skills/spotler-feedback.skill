@@ -1,0 +1,1271 @@
+---
+name: spotler-feedback
+description: Product context for Spotler FeedbackPro
+---
+
+# Spotler FeedbackPro Product Context Skill
+
+## Purpose
+
+Use this Skill when designing or redesigning product features for Spotler FeedbackPro.
+
+This Skill gives Figma Make product context for FeedbackPro so it can make better UX and product decisions without starting from generic survey, form, dashboard, or SaaS assumptions. It explains what the product is, who uses it, how it works, which workflows matter, which terminology to use, and what product logic should be preserved.
+
+FeedbackPro is a customer-feedback platform, not a single survey builder. Treat every feature as one stage of a single closed feedback loop. The most important thing this Skill encodes is that loop and the vocabulary around it.
+
+This is not a Design System Skill. Do not use this Skill for visual styling, component rules, typography, spacing, colours, or layout patterns. Use the separate Spotler Design System Skill or attached design system documentation for those decisions.
+
+---
+
+## Product Summary
+
+Spotler FeedbackPro is a customer-feedback platform for teams that collect, manage, analyze, report on, and act on customer feedback as one continuous process.
+
+FeedbackPro covers the complete feedback lifecycle: designing and distributing surveys, collecting and triaging responses, analyzing drivers and themes, packaging insight into shareable reports, and following up with customers to resolve issues and feed improvements back into the business.
+
+The platform is organised around a single closed loop — Collect → Manage → Analyze → Report → Act → (back to Collect) — and around four named feedback experiences: Brand (BX), Customer (CX), Service (SX), and Employee (EX). Most analysis screens are one template instantiated four times (once per experience).
+
+FeedbackPro is most valuable for teams running a structured feedback or customer-experience (CX) programme — measuring NPS-style scores at journey moments, spotting deviations early, prioritising what to fix, and closing the loop with individual customers rather than just collecting data.
+
+The product was formerly called **Insocial**; older material or URLs may still use that name.
+
+---
+
+## Core Problem FeedbackPro Solves
+
+Many organisations collect customer feedback with disconnected tools and processes:
+
+- Standalone survey tools
+- Separate distribution via email or SMS
+- Spreadsheets of responses
+- Manual tagging and routing
+- Ad-hoc analysis
+- Static reports that are out of date the moment they are made
+- No structured follow-up with the customers who gave feedback
+
+This creates several problems:
+
+- Feedback is collected but never acted on
+- Responses pile up without triage
+- No early warning when scores drop
+- Teams see scores but not *what to fix first*
+- Free-text feedback is hard to interpret at scale
+- Insight is trapped in reports nobody can share or schedule
+- Detractors are never followed up with
+- No connection between feedback and CRM/segmentation data
+- The "loop" is never closed
+
+FeedbackPro solves this by treating feedback as a single closed loop in one platform: collect, manage, analyze, report, and **act** — with the act stage (Closed Loop Feedback) being the highest-value outcome.
+
+The goal is to make feedback continuously actionable, not just measured.
+
+---
+
+## Target Users and User Roles
+
+FeedbackPro is used by customer-experience, insight, service, and marketing teams running a feedback programme. Exact user types and their permissions are **configured per environment** and gate which tools each person sees — never assume a role has access to everything. The roles below are framed by their job in the feedback loop, which maps directly to the product's modules.
+
+### Primary users
+
+#### Feedback / CX programme manager
+
+Owns the feedback programme end to end.
+
+Goals:
+
+- Set up surveys at the right journey moments
+- Monitor scores (NPS-style) across experiences
+- Spot deviations early
+- Understand drivers and prioritise improvements
+- Make sure the loop is actually closed
+- Report programme results to stakeholders
+
+Typical needs:
+
+- Surveys and Invites
+- Insights (Driver Analysis, Journey)
+- Notifications (deviation alerts)
+- Reporting
+- Closed Loop Feedback oversight
+
+---
+
+#### Insights analyst
+
+Interprets the feedback data and turns it into prioritised findings.
+
+Goals:
+
+- Find what drives scores up or down
+- Interpret free-text (open) feedback
+- Map the customer journey
+- Answer ad-hoc questions about the data
+- Prioritise issues, not just display them
+
+Typical needs:
+
+- Insights: Driver Analysis / Driver Drilldown (priority matrix), Open Feedback, Journey
+- AI Feedback Assistant
+- Text Analysis (add-on)
+- Metadata-driven filtering and periods
+- Customized / Private reports
+
+---
+
+#### Response handler / service agent
+
+Works the incoming responses and the follow-up cases.
+
+Goals:
+
+- Triage incoming responses quickly
+- Tag, favourite, archive, or publish responses
+- Resolve detractor cases
+- Keep follow-up records up to date
+- Close the loop with individual customers
+
+Typical needs:
+
+- Inbox (filters, response actions, tags)
+- Closed Loop Feedback (cases, templates, status + notes)
+- Automated handling rules
+- Notifications
+
+---
+
+#### Survey designer / distributor
+
+Builds surveys and sends them to the right audience.
+
+Goals:
+
+- Create effective surveys (template or custom)
+- Control survey flow with logic
+- Distribute via the right channel
+- Track delivery
+- Maximise engagement and response rate
+
+Typical needs:
+
+- Surveys (templates, custom, survey logic, translation)
+- Invites (SMS / Email / WhatsApp batches, rules, templates)
+- Publish & Embed (survey script for websites)
+
+---
+
+#### Stakeholder / report consumer
+
+Consumes packaged insight without building it.
+
+Goals:
+
+- See current scores and trends
+- Receive scheduled reports
+- View results broadcast to a room or screen
+- Understand programme health at a glance
+
+Typical needs:
+
+- Standard and Customized reports
+- Scheduled report sends and manual PDF sends
+- Narrowcasting (live results on signage / in presentations)
+
+---
+
+### Secondary users
+
+#### Administrator
+
+Configures the environment and controls access.
+
+Goals:
+
+- Set up metadata linked to CRM variables
+- Manage users, user types, and groups
+- Configure environments and data retention
+- Apply white-labeling
+- Govern tool access by contract / user type / add-on
+
+Typical needs:
+
+- Settings (Metadata, Invites templates, Rules, Data Retention Manager, Environments, white-labeling)
+- Users & Groups
+- Visibility-tier governance
+
+---
+
+#### CRM / data operations user
+
+Connects feedback to the rest of the customer data.
+
+Goals:
+
+- Link metadata fields to CRM variables
+- Make segmentation consistent across modules
+- Use feedback data alongside CRM data
+
+Typical needs:
+
+- Metadata configuration
+- Consistent metadata filters everywhere
+- Segmentation across modules
+
+---
+
+## Product Mental Model
+
+Figma Make should understand FeedbackPro as a single **closed feedback loop**, not a survey tool. Every feature belongs to exactly one stage of the loop, plus a supporting configuration layer. Always know which stage you are designing for; if a screen does not clearly advance or close the loop, question whether it belongs.
+
+The loop:
+
+```
+COLLECT  ->  MANAGE  ->  ANALYZE  ->  REPORT  ->  ACT
+   ^                                                |
+   +------------------ (closed loop) ---------------+
+```
+
+1. **Collect** — design and distribute surveys.
+   - Modules: Surveys, Invites.
+
+2. **Manage** — triage, tag, and route incoming responses.
+   - Modules: Inbox, Notifications.
+
+3. **Analyze** — find drivers, themes, and journeys in the data.
+   - Modules: Insights, AI Feedback Assistant.
+
+4. **Report** — package data into shareable dashboards.
+   - Module: Reporting.
+
+5. **Act** — follow up with customers and resolve cases. This is the highest-value stage.
+   - Module: Closed Loop Feedback (CLF).
+
+6. **Configure** — the supporting layer that makes the loop work.
+   - Modules: Settings, Users & Groups, Publish & Embed.
+
+Two cross-cutting ideas hold the loop together:
+
+- **The four experiences (BX / CX / SX / EX).** The product is organised around four named experiences. Most analysis screens are *one template instantiated four times*. Designing one experience screen well means designing all four.
+- **Metadata is the connective tissue.** Metadata fields (linked to CRM variables) attach to responses and then automatically become filter options *everywhere*, so segmentation is consistent across every module.
+
+Do not treat FeedbackPro as only a survey builder, only an inbox, only a reporting tool, or only a dashboard. It is one continuous loop where responses collected at one stage become drivers, reports, and follow-up cases at later stages.
+
+---
+
+## Foundational Concepts (shared vocabulary)
+
+### The four experiences
+
+- **BX — Brand Experience**: the relationship between customers and the brand.
+- **CX — Customer Experience**: purchase / transaction moments.
+- **SX — Service Experience**: support interactions; the highest data volume.
+- **EX — Employee Experience**.
+- **UX — User Experience**: also appears in some notification contexts.
+
+Most analysis screens are a single template reused per experience. An **experience selector** switches the taxonomy and re-instantiates the same screen.
+
+### KPI / scoring vocabulary (NPS-style)
+
+- **Promoters** — score 9–10.
+- **Passives** — score 7–8.
+- **Detractors** — score 6 and below.
+
+KPIs are tied to **journey moments**: after delivery, after a service interaction, after an event, after checkout/booking, or during a periodic review.
+
+### Visibility tiers (access model)
+
+Reports and tools follow a consistent three-tier visibility model:
+
+- **Standard** — auto-generated, visible to all users, fixed structure.
+- **Customized** — modified or extended, still shared with all users. Editing a standard report's layout or adding a chart moves it to Customized.
+- **Private** — exclusive to a single team member; created by duplicating and modifying a report.
+
+Tool access is *also* gated by **contract conditions, user type, and add-ons** — never assume a feature is universally available.
+
+### Metadata
+
+Metadata fields are created in environment Settings and linked to CRM variables. Once metadata is attached to responses, it automatically becomes a **filter option everywhere**. Metadata is the connective tissue for segmentation across all modules.
+
+---
+
+## Main Product Areas and Capabilities
+
+### Getting Started (orientation)
+
+Orients new users and establishes two patterns reused everywhere:
+
+- **Filters** in a left-hand panel.
+- A **details view** — click a response (or case / driver) to see all of its data, status, and available actions.
+
+It also introduces tool gating by contract / user type / add-on, and the three reporting visibility tiers (Standard / Customized / Private).
+
+Design implication:
+
+- The filter panel + details view is the backbone of almost every module; keep it consistent.
+- Surface tool availability gracefully when a tool is gated.
+
+---
+
+### COLLECT — Surveys
+
+**Job:** create surveys to gather opinions and preferences.
+
+Two creation paths:
+
+- **Pre-made templates** — a fast start with professionally designed templates, chosen per experience (BX / CX / SX / EX).
+- **Custom surveys** — built from scratch for tailored, targeted insight.
+
+Template flow: Surveys → "Survey templates" (top-right) → select experience → select template → name it → "Use template" → step through with Next → save.
+
+**Survey type** should be chosen by how respondents interact and the context of use, to maximise engagement and response rate.
+
+**Survey logic** controls flow by showing, hiding, or skipping questions. The trigger source can be:
+
+- **Question** — react to a specific answer (e.g. "Yes" skips to the last question).
+- **Score** — react to a calculated score.
+- **Metadata** — react to a CRM / segment attribute.
+- **Chance** — branch by probability.
+
+Surveys also support **translation** for multi-language distribution.
+
+Design implication:
+
+- Survey creation is a multi-step wizard (Next … Finish).
+- Logic is a "when [trigger] then show/hide/skip" builder.
+- Avoid treating a survey as a static form with no flow control.
+
+---
+
+### COLLECT — Invites
+
+**Job:** distribute surveys and track delivery.
+
+- Channels: **SMS, Email, WhatsApp**.
+- Upload a client-base file (drag-and-drop) as a **batch**.
+- Per batch you set: survey, **rules** (batch-level rules override page-level rules but apply only to this batch), email template, subject, sender name, sender email, and toggles (e.g. send images as attachments).
+- The Invites overview lists previous batches with status, channel, date/time, language, and survey.
+
+Design implication:
+
+- Distribution is batch-based; the batch is the core unit of distribution and tracking.
+- Batch rules vs page rules precedence must be clear.
+- Avoid a single "send" action with no batch tracking or delivery status.
+
+---
+
+### MANAGE — Inbox
+
+**Job:** the central surface where all responses are collected, organised, and managed. "Responses are the building blocks for your reports."
+
+- **Layout:** left = category filters; centre = responses overview with data + status; filter dropdowns for metadata, survey, tags, and score; an action toolbar.
+- **Filtering:** quick filters for common categories; custom filters by keyword + score range (e.g. keyword "service" with score 8–10). Metadata appears automatically as filters.
+- **Response actions** (quick on hover; full when opened):
+  - **Favorite** — flag important responses.
+  - **Archive** — store without deleting.
+  - **Delete** — permanent removal.
+  - **Publish** — push to a linked website.
+- **Tags:** assigned in the response detail view.
+- **Automated handling:** rules with publishing conditions auto-process responses (a time-saver).
+- **Export:** some user types can generate a `.csv` of all inbox responses.
+
+Design implication:
+
+- Inbox is list → detail with hover/quick + open/full actions.
+- Responses are the raw material for every later stage; treat them as first-class records, not log lines.
+
+---
+
+### MANAGE — Notifications (Action Center)
+
+**Job:** alert users when scores deviate from a baseline average. Most useful for SX / CX / UX (high-frequency data).
+
+Three notification levels:
+
+- **Survey level** — total average score over the past X hours deviates by more than a set % from a defined baseline period (e.g. last 24h deviates 40% from the 90-day average).
+- **Question level** — same logic, scoped to one question.
+- **Email invites** — deviation in invite volume vs the same weekday over N weeks (e.g. 400 sent vs an 8-Monday average of 600 = 33% deviation).
+
+Thresholds are tiered (**Low / Medium / High** priority, e.g. 10% / 45%). Email alerts can be sent at a chosen threshold. Rules can be created, edited, activated, and deactivated.
+
+Design implication:
+
+- This is a deviation-from-baseline engine, not a generic notification feed.
+- Always show the baseline, the deviation, and the priority tier.
+
+---
+
+### ANALYZE — Insights
+
+The deepest module. Each experience (BX / CX / SX / EX) repeats the same toolkit.
+
+**Driver Analysis / Driver Drilldown** — a **priority matrix** (like an Eisenhower matrix) plotting drivers on two axes so you can see what to address first.
+
+- Found under each experience in Insights.
+- Select survey, period, and metadata.
+- The Priority Main Driver matrix shows main drivers + scores; hover the circles for data.
+- Select a main driver to reveal subdrivers (hover shows current + previous score).
+- Click a subdriver to **drill through to Open Feedback**.
+
+**Open Feedback** — analyze and interpret free-text responses.
+
+**Journey** — maps the path of customer interactions: **direct** (e.g. contacting support) and **indirect** (e.g. hearing about the brand at an event). Two types:
+
+- **Touchpoint journey** — a sequence of specific interactions across channels/stages (awareness → post-purchase).
+- **Phase journey** — structured stages/phases the customer passes through.
+
+**Text Analysis** — an add-on for at-scale open-text analysis (availability depends on the account).
+
+Design implication:
+
+- The priority matrix (hover-to-reveal, click-to-drill-through) is the signature analysis interaction.
+- Analysis should prioritise (what to fix first), not merely display scores.
+
+---
+
+### ANALYZE — AI Feedback Assistant
+
+**Job:** conversational analysis that answers context-specific questions and proactively surfaces insights when it detects noteworthy patterns.
+
+- An **add-on**; requires T&Cs acceptance and data sharing with the OpenAI API (first-run pop-up).
+- Requires a configured environment, report data refreshed every 24h, and sufficient data.
+- Patterns: a message box; auto-generated suggested questions (edit / star-save / remove); **effective prompts are specific** (compare "What's the highest score?" with "What is the highest score on {survey} in the last 30 days, and who gave it?"); chat history in a left panel; best practice is one chat per topic/objective; auto-generated insights.
+
+Design implication:
+
+- Treat the first run as an explicit consent moment.
+- Encourage specific prompts; show suggested questions and chat history.
+- Respect the 24h data-refresh and "sufficient data" preconditions.
+
+---
+
+### REPORT — Reporting
+
+**Job:** package data into tailored dashboards.
+
+- **Standard** reports (fixed structure), **Customized** reports (modify existing), **Private** reports (exclusive to one member, via duplicate-and-modify).
+- Report type is selected during survey creation; generation can take a few minutes and **data refreshes daily**.
+- Supporting flows: a **report scheduler** (set up / edit recurring sends) and **manual PDF send**.
+- Customized reports built for you are a paid service via Customer Success.
+
+Design implication:
+
+- Reflect the Standard / Customized / Private visibility tiers as a first-class access affordance.
+- Account for daily refresh latency and multi-minute generation.
+
+---
+
+### ACT — Closed Loop Feedback (CLF)
+
+**Job:** actively follow up after feedback to resolve concerns and feed improvements — "closing the loop, rather than just collecting data." This is the highest-value stage of the loop.
+
+- **Dashboard metrics:** Open cases, High-priority cases, Priority percentage (breakdown by priority), Resolution time (average to resolve), Average time open.
+- **Templates** — reusable email templates for follow-up; records carry a status and notes.
+- **Rules** — automatically trigger actions (notifications, follow-ups) based on survey responses.
+
+Design implication:
+
+- CLF is case management for feedback: status + notes on each record.
+- The dashboard is about throughput and resolution, not vanity scores.
+- Make the "act" stage feel like the destination of the whole loop.
+
+---
+
+### PUBLISH & EMBED
+
+- **Narrowcasting** — broadcast live results/scores to a specific small audience (e.g. digital signage, presentations).
+- **Survey script** — generates JavaScript to display surveys on websites via pop-ups and embeds.
+
+Design implication:
+
+- Narrowcasting is a display-out feature for a room/screen, not a shareable report.
+- The survey script is a website embed/pop-up generator.
+
+---
+
+### USERS & GROUPS
+
+- **User management** — create users, assign user types/roles.
+- **Group management** — group users to scope access.
+
+Design implication:
+
+- Roles and groups drive the gating seen throughout the product.
+
+---
+
+### SETTINGS (configuration layer)
+
+Metadata (CRM-linked fields), Invites templates, Rules, Data Retention Manager, Environments, and white-labeling for both the **survey domain** and the **email domain**.
+
+Design implication:
+
+- Settings is where metadata and environments are defined — the foundation the rest of the loop depends on.
+
+---
+
+## Important Product Objects and Concepts
+
+### Feedback loop
+
+The single closed cycle Collect → Manage → Analyze → Report → Act → Collect that every feature belongs to.
+
+### Experience (BX / CX / SX / EX)
+
+A named feedback domain. Most analysis screens are one template instantiated per experience. (UX also appears in some notification contexts.)
+
+### Survey
+
+A configured set of questions used to gather opinions and preferences; created from a template or custom.
+
+### Survey type
+
+The format chosen by how respondents interact and the context of use, to maximise engagement and response rate.
+
+### Survey logic
+
+Show / hide / skip rules controlling survey flow, triggered by Question, Score, Metadata, or Chance.
+
+### Invite / batch
+
+A distribution of a survey to an uploaded client base over SMS, Email, or WhatsApp; the batch is the unit of distribution and tracking.
+
+### Response
+
+A submitted survey answer set. "Responses are the building blocks for your reports." Can be favourited, archived, deleted, published, and tagged.
+
+### Tag
+
+A label assigned to a response in its detail view.
+
+### Score
+
+The numeric value of a response, used in NPS bands, filters, logic, and deviation alerts.
+
+### Metadata
+
+A CRM-linked field, defined in Settings, that attaches to responses and automatically becomes a filter everywhere.
+
+### Driver / Subdriver
+
+Factors influencing a score, ranked in a priority matrix; subdrivers drill through to Open Feedback.
+
+### Priority matrix
+
+A two-axis quadrant (Eisenhower-like) that plots drivers so users see what to address first.
+
+### Open Feedback
+
+Free-text responses analyzed and interpreted.
+
+### Journey
+
+A map of customer interactions; either a Touchpoint journey (specific interactions) or a Phase journey (structured stages).
+
+### Notification (deviation alert)
+
+An alert raised when a score or invite volume deviates from a baseline by more than a tiered threshold.
+
+### Report
+
+A packaged dashboard at one of three visibility tiers: Standard, Customized, or Private.
+
+### Closed Loop Feedback (CLF) case
+
+A follow-up record with status and notes, used to resolve a customer's concern.
+
+### Narrowcasting
+
+Broadcasting live results/scores to a small targeted audience (signage, presentations).
+
+### Environment
+
+A configured workspace/tenant where metadata, retention, and white-labeling are defined.
+
+### Visibility tier
+
+Standard / Customized / Private — the access level of a report or tool.
+
+---
+
+## Product Terminology
+
+Use the following product terminology consistently:
+
+- Customer feedback platform
+- Feedback loop (Collect, Manage, Analyze, Report, Act)
+- Experience (BX, CX, SX, EX; also UX in notifications)
+- Brand Experience, Customer Experience, Service Experience, Employee Experience
+- Survey
+- Survey template
+- Custom survey
+- Survey type
+- Survey logic (Question / Score / Metadata / Chance trigger)
+- Translation
+- Invite
+- Batch
+- Channel (SMS, Email, WhatsApp)
+- Response
+- Inbox
+- Tag
+- Favorite, Archive, Delete, Publish
+- Score
+- NPS bands: Promoters, Passives, Detractors
+- Metadata
+- Notification / Action Center
+- Deviation, baseline, threshold (Low / Medium / High priority)
+- Insights
+- Driver, Subdriver
+- Driver Analysis, Driver Drilldown
+- Priority matrix
+- Open Feedback
+- Journey (Touchpoint journey, Phase journey)
+- Text Analysis
+- AI Feedback Assistant
+- Reporting
+- Standard / Customized / Private report
+- Report scheduler
+- Closed Loop Feedback (CLF)
+- Case, Resolution time, Open cases, High-priority cases
+- Narrowcasting
+- Survey script
+- Environment
+- White-labeling (survey domain, email domain)
+- Data Retention Manager
+- Add-on, contract, user type
+
+Avoid replacing these with generic SaaS language such as "items", "records", "tickets", "tasks", "objects", "forms", or "submissions" when a more specific FeedbackPro term exists. A survey response is a "response", not a "record"; a follow-up is a "Closed Loop Feedback case", not a "ticket"; a deviation alert is a "notification", not a "ping".
+
+---
+
+## Key Integrations
+
+### CRM (via metadata)
+
+Metadata fields are linked to CRM variables in Settings.
+
+Important integration logic:
+
+- Once linked, metadata attaches to responses and becomes a filter everywhere.
+- Metadata is how feedback is segmented consistently across all modules.
+- Avoid designing segmentation that ignores metadata.
+
+---
+
+### OpenAI API (AI Feedback Assistant)
+
+The AI Feedback Assistant shares data with the OpenAI API.
+
+Important integration logic:
+
+- First run requires T&Cs acceptance and explicit consent to data sharing (pop-up).
+- Requires a configured environment and report data refreshed every 24h.
+- Requires sufficient data to be useful.
+
+---
+
+### Distribution channels (SMS / Email / WhatsApp)
+
+Invites are sent over SMS, Email, or WhatsApp.
+
+Important integration logic:
+
+- Channel is chosen per batch.
+- Email batches carry template, subject, sender name, sender email, and toggles.
+
+---
+
+### Website (survey script)
+
+The survey script generates JavaScript to display surveys on a website.
+
+Important integration logic:
+
+- Surveys appear via pop-ups and embeds.
+- Responses can be published back to a linked website from the Inbox.
+
+---
+
+### Customer Success (Customized reports)
+
+Customized reports built for you are a paid service delivered via Customer Success.
+
+---
+
+## Important Workflows
+
+### Workflow: Create a survey from a template
+
+1. Go to Surveys.
+2. Open "Survey templates" (top-right).
+3. Select an experience (BX / CX / SX / EX).
+4. Select a template.
+5. Name the survey.
+6. Click "Use template".
+7. Step through the wizard with Next.
+8. Save.
+
+Design implications:
+
+- Multi-step wizard with clear Next/Finish.
+- Experience selection comes first and frames the template set.
+
+---
+
+### Workflow: Build a custom survey with logic
+
+1. Create a custom survey from scratch.
+2. Add questions and choose a survey type suited to the interaction/context.
+3. Add survey logic: choose a trigger (Question, Score, Metadata, or Chance) and an action (show / hide / skip).
+4. Add translations if multi-language.
+5. Save.
+
+Design implications:
+
+- Logic is a "when [trigger] then [show/hide/skip]" builder.
+- Survey type should be explained in terms of engagement/response rate.
+
+---
+
+### Workflow: Distribute an invite batch
+
+1. Go to Invites.
+2. Upload a client-base file (drag-and-drop) as a batch.
+3. Choose the channel (SMS / Email / WhatsApp).
+4. Set survey, rules (batch rules override page rules for this batch only), email template, subject, sender name, sender email, and toggles.
+5. Send.
+6. Track the batch in the Invites overview (status, channel, date/time, language, survey).
+
+Design implications:
+
+- The batch is the unit; show delivery status.
+- Make batch-vs-page rule precedence explicit.
+
+---
+
+### Workflow: Triage responses in the Inbox
+
+1. Open the Inbox.
+2. Filter with quick filters or custom filters (keyword + score range); use metadata filters.
+3. Hover a response for quick actions, or open it for full actions.
+4. Favorite, Archive, Delete, or Publish as needed.
+5. Add tags in the detail view.
+6. Let automated handling rules auto-process responses where configured.
+7. Export a `.csv` if your user type allows.
+
+Design implications:
+
+- List → detail with hover/quick + open/full actions.
+- Responses feed every later stage; keep them first-class.
+
+---
+
+### Workflow: Set up a deviation notification
+
+1. Open Notifications (Action Center).
+2. Choose the level: Survey, Question, or Email invites.
+3. Define the baseline period and the deviation % that triggers an alert.
+4. Set tiered thresholds (Low / Medium / High).
+5. Choose the threshold at which an email alert is sent.
+6. Activate the rule (edit / deactivate later).
+
+Design implications:
+
+- Always show baseline, deviation, and priority tier.
+- This is a deviation engine, not a generic feed.
+
+---
+
+### Workflow: Run a driver analysis and act on it
+
+1. Open Insights for the relevant experience.
+2. Select survey, period, and metadata.
+3. Read the Priority Main Driver matrix; hover for data.
+4. Select a main driver to see subdrivers (hover for current + previous score).
+5. Click a subdriver to drill through to Open Feedback.
+6. Interpret the free-text feedback.
+7. Where issues need follow-up, create or route a Closed Loop Feedback case.
+
+Design implications:
+
+- Hover-to-reveal, click-to-drill-through is the core analysis interaction.
+- Analysis should hand off into action (CLF), closing the loop.
+
+---
+
+### Workflow: Build and schedule a report
+
+1. (Report type is selected during survey creation.)
+2. Open Reporting; allow a few minutes for generation; data refreshes daily.
+3. Use a Standard report, customise it (moves it to Customized), or duplicate-and-modify for a Private report.
+4. Set up the report scheduler for recurring sends, or send a PDF manually.
+
+Design implications:
+
+- Surface the Standard / Customized / Private tier clearly.
+- Account for generation time and daily refresh.
+
+---
+
+### Workflow: Close the loop on a detractor
+
+1. A detractor (score ≤ 6) response arrives.
+2. A CLF rule triggers a notification / follow-up, or a handler picks up the case.
+3. The handler follows up using a reusable email template.
+4. The case carries a status and notes; the handler updates them.
+5. The case is resolved; resolution time and open-case metrics update on the CLF dashboard.
+
+Design implications:
+
+- CLF is feedback case management (status + notes).
+- The dashboard tracks throughput and resolution, not scores.
+
+---
+
+### Workflow: Embed a survey on a website
+
+1. Open Publish & Embed.
+2. Generate the survey script (JavaScript).
+3. Place it on the website to show the survey via pop-up or embed.
+4. Collected responses flow into the Inbox; some can be published back to a linked website.
+
+Design implications:
+
+- The script is a generator; the output is website pop-ups/embeds.
+
+---
+
+## Common Use Cases
+
+### Measuring NPS-style scores at journey moments
+
+Use when teams need scores tied to specific moments (after delivery, after a service interaction, after an event, after checkout/booking, or during a periodic review).
+
+Important context:
+
+- Scores map to Promoters / Passives / Detractors.
+- The right journey moment matters more than raw volume.
+
+Outcome:
+
+- Comparable, moment-anchored scores.
+
+---
+
+### Triaging high-volume service feedback
+
+Use when SX generates the highest data volume and responses must be triaged.
+
+Important context:
+
+- Inbox filters, tags, and automated handling keep volume manageable.
+- Deviation notifications are most useful here.
+
+Outcome:
+
+- Responses are organised and the important ones surface fast.
+
+---
+
+### Catching score drops early
+
+Use when teams need an early warning when scores deviate from normal.
+
+Important context:
+
+- Notifications compare against a baseline with tiered thresholds.
+
+Outcome:
+
+- Problems are seen before they show up in a monthly report.
+
+---
+
+### Prioritising what to fix
+
+Use when teams have scores but don't know what to act on first.
+
+Important context:
+
+- Driver Analysis ranks drivers in a priority matrix; subdrivers drill into Open Feedback.
+
+Outcome:
+
+- A prioritised list of drivers, not just a wall of numbers.
+
+---
+
+### Closing the loop with customers
+
+Use when feedback must lead to follow-up and resolution, not just measurement.
+
+Important context:
+
+- CLF cases carry status + notes; rules and templates speed follow-up.
+
+Outcome:
+
+- Detractors are followed up with; the loop is closed.
+
+---
+
+### Sharing and broadcasting results
+
+Use when insight must reach stakeholders or a room.
+
+Important context:
+
+- Reports (Standard / Customized / Private) can be scheduled or sent as PDF.
+- Narrowcasting broadcasts live results to signage or presentations.
+
+Outcome:
+
+- The right audience sees the right view.
+
+---
+
+## Experience Contexts (BX / CX / SX / EX)
+
+FeedbackPro's equivalent of "sectors" is its four experiences. Most analysis screens are one template reused across them, so design decisions should generalise across all four while respecting their differences.
+
+### Brand Experience (BX)
+
+The relationship between customers and the brand.
+
+Design emphasis:
+
+- Longer-horizon, relationship-level sentiment rather than a single transaction.
+
+---
+
+### Customer Experience (CX)
+
+Purchase and transaction moments.
+
+Design emphasis:
+
+- Anchored to checkout/booking/delivery journey moments.
+
+---
+
+### Service Experience (SX)
+
+Support interactions; the highest data volume.
+
+Design emphasis:
+
+- High throughput — strong filtering, automated handling, and deviation alerts matter most here.
+
+---
+
+### Employee Experience (EX)
+
+Feedback from employees.
+
+Design emphasis:
+
+- Same toolkit, internal audience; respect privacy and access tiers.
+
+---
+
+## Feature Design Guidance
+
+### Always advance or close the loop
+
+Tie every screen to a loop stage (Collect / Manage / Analyze / Report / Act). The highest-value work is the **Act** stage (CLF).
+
+Good designs:
+
+- Make the current loop stage obvious.
+- Provide a path forward to the next stage (e.g. analysis hands off to a CLF case).
+
+Avoid screens that collect or display without advancing the loop.
+
+---
+
+### Respond and segment everywhere
+
+Metadata-driven filtering should be ubiquitous and consistent.
+
+Good designs:
+
+- Offer the Filter + Period + Metadata control cluster on data screens.
+- Treat metadata as automatic filters.
+
+Avoid one-off filtering that ignores metadata.
+
+---
+
+### Make deviation visible
+
+Surface alerts when data deviates from a baseline.
+
+Good designs:
+
+- Show baseline, deviation %, and the priority tier (Low / Medium / High).
+
+Avoid generic notification feeds with no baseline context.
+
+---
+
+### Prioritise, don't just display
+
+Use priority matrices to tell users what to act on first.
+
+Good designs:
+
+- Plot drivers on two axes; hover to reveal, click to drill through.
+
+Avoid dashboards that only show scores with no sense of priority.
+
+---
+
+### Respect access tiers and gating
+
+Reflect contract / user-type / add-on availability gracefully.
+
+Good designs:
+
+- Show Standard / Customized / Private clearly.
+- Hide or explain tools that are unavailable.
+
+Avoid implying a feature is available to everyone.
+
+---
+
+### Make privacy and consent explicit
+
+AI and data-sharing features require clear first-run consent.
+
+Good designs:
+
+- Treat the AI Assistant's first run as a consent moment (T&Cs + OpenAI data sharing).
+
+Avoid sharing data without an explicit opt-in.
+
+---
+
+## Reusable Interaction Patterns
+
+These behaviour patterns recur across modules; treat them as shared product patterns (the visual implementation belongs to the Design System Skill).
+
+1. **Filter + Period + Metadata triad** — one consistent control cluster on nearly every data screen.
+2. **List → Detail view** — a list of responses, cases, or drivers where clicking opens a detail panel exposing all actions.
+3. **Quick actions on hover + full actions on open** — favorite / archive / delete / publish style action sets.
+4. **Priority matrix (2-axis quadrant)** — hover-to-reveal data points, click-to-drill-through. The signature analysis interaction.
+5. **Experience selector (BX / CX / SX / EX)** — a taxonomy switch that re-instantiates the same screen template.
+6. **Rules / automation builder** — "when [condition] then [action]", shared by Notifications, Inbox automation, Invites, and CLF Rules. Supports threshold tiers (Low / Medium / High).
+7. **Template library** — pick → name → use, present in Surveys, CLF, and Invites.
+8. **Visibility tiering** — Standard / Customized / Private as a consistent access affordance.
+9. **Batch / wizard flow** — multi-step creation (Next … Finish) for surveys and invite batches.
+10. **Status + notes on records** — for follow-up tracking (CLF cases, response handling).
+
+---
+
+## Important Assumptions to Preserve
+
+Preserve these assumptions when generating product concepts, UX flows, screens, or feature ideas:
+
+- FeedbackPro is a customer-feedback platform by Spotler (formerly Insocial).
+- Every feature belongs to one stage of a single closed loop: Collect → Manage → Analyze → Report → Act.
+- The "Act" stage (Closed Loop Feedback) is the highest-value outcome.
+- The product is organised around four experiences (BX / CX / SX / EX), with most analysis screens being one template reused per experience.
+- Scores follow NPS bands: Promoters (9–10), Passives (7–8), Detractors (≤6).
+- KPIs are tied to journey moments.
+- Metadata (CRM-linked) attaches to responses and becomes a filter everywhere.
+- Reports and tools follow Standard / Customized / Private visibility tiers.
+- Tool access is gated by contract / user type / add-on.
+- Responses are the building blocks for reports.
+- Notifications are deviation-from-baseline alerts with tiered thresholds.
+- Driver Analysis uses a priority matrix and drills through to Open Feedback.
+- Invites are batch-based across SMS / Email / WhatsApp.
+- The AI Feedback Assistant is an add-on requiring consent and a 24h data refresh.
+- CLF cases carry status + notes and are driven by rules and templates.
+- Narrowcasting broadcasts live results to a small audience; the survey script embeds surveys on websites.
+
+---
+
+## Things Figma Make Should Avoid
+
+Avoid these mistakes when designing FeedbackPro features:
+
+- Do not treat FeedbackPro as only a survey builder.
+- Do not treat the Inbox as only a list of responses with no actions or lifecycle.
+- Do not treat Reporting as the end of the workflow — the loop ends at Act.
+- Do not design notifications as a generic feed without baselines and tiered thresholds.
+- Do not show scores without priority (skipping the driver/priority-matrix logic).
+- Do not ignore the four experiences or design a one-off screen that can't be reused per experience.
+- Do not ignore metadata-driven filtering.
+- Do not assume every tool is available — respect contract / user-type / add-on gating.
+- Do not skip the AI consent / data-sharing step.
+- Do not treat CLF follow-up as a generic ticketing system; it is feedback case management with status + notes.
+- Do not replace FeedbackPro terminology with generic SaaS terms like "items", "records", "tickets", "tasks", "objects", "forms", or "submissions" (and don't call a notification a "ping").
+- Do not overfocus on visual styling; that belongs in the Design System Skill.
+
+---
+
+## Edge Cases and Product Logic to Consider
+
+### Tool unavailable due to gating
+
+A tool may be hidden or disabled by contract, user type, or add-on. Designs should hide it gracefully or explain why it's unavailable.
+
+### Add-on not enabled
+
+Text Analysis and the AI Feedback Assistant are add-ons. Designs should handle the "not enabled" state.
+
+### AI first-run consent
+
+The AI Assistant's first use requires T&Cs acceptance and OpenAI data-sharing consent. Designs must include this gate.
+
+### Insufficient or stale data
+
+The AI Assistant needs sufficient data and a 24h refresh; reports refresh daily and can take minutes to generate. Designs should communicate freshness and "not enough data" states.
+
+### Batch rules vs page rules
+
+Batch-level rules override page-level rules but apply only to that batch. Designs should make precedence clear.
+
+### Report visibility transitions
+
+Editing a Standard report's layout or adding a chart moves it to Customized; duplicating and modifying creates a Private report. Designs should make these transitions and their sharing implications obvious.
+
+### Metadata not yet linked
+
+If metadata isn't configured/linked to CRM variables, filters everywhere are weaker. Designs should encourage metadata setup.
+
+### Low-volume deviation alerts
+
+Deviation logic depends on a baseline; low volume can produce noisy alerts. Designs should consider thresholds and tiers carefully.
+
+### Detractor with no follow-up
+
+A detractor response with no CLF case means the loop is open. Designs should make it easy to turn a response into a case.
+
+### Multi-language responses
+
+Surveys support translation; responses and open feedback may be multi-language. Designs should account for language in filtering and text analysis.
+
+### Data retention
+
+The Data Retention Manager governs how long data is kept. Designs should respect retention settings.
+
+---
+
+## Relationship to the Separate Design System Skill
+
+This Skill provides product context only.
+
+Use this Skill for:
+
+- Product behaviour and the feedback loop
+- Workflows
+- Feedback terminology
+- User roles
+- Survey, invite, and response logic
+- Inbox triage and automated handling logic
+- Notification / deviation logic
+- Insights, driver, and journey logic
+- Reporting and visibility-tier logic
+- Closed Loop Feedback logic
+- Metadata and segmentation context
+- Integration context (CRM, OpenAI, channels, website, Customer Success)
+- Reusable interaction patterns (what a screen does)
+- Feature-specific product assumptions
+
+Do not use this Skill for:
+
+- Component styling
+- Typography
+- Colour usage
+- Layout systems
+- Spacing
+- Icons
+- Button styles
+- Form styling
+- Navigation visual patterns
+- Design tokens
+
+For those topics, use the separate Spotler Design System Skill or attached Design System documentation.
+
+When both Skills are available:
+
+- Use this Skill to decide what the feature should do and how it should behave.
+- Use the Design System Skill to decide how the feature should look and be constructed visually.
+
+---
+
+## Final Checklist for Figma Make
+
+Before generating or redesigning a FeedbackPro feature, check:
+
+- Does the design use FeedbackPro terminology?
+- Is the relevant loop stage (Collect / Manage / Analyze / Report / Act) clear?
+- Does the screen advance or close the loop?
+- Is the relevant experience (BX / CX / SX / EX) accounted for, and could the screen be reused per experience?
+- Is the relevant user role clear (and is tool gating respected)?
+- Does it use metadata-driven filtering with the Filter + Period + Metadata triad where relevant?
+- Does it use NPS bands (Promoters / Passives / Detractors) correctly where scores appear?
+- For notifications, does it show baseline, deviation, and priority tier?
+- For analysis, does it prioritise (priority matrix) and drill through to Open Feedback?
+- For reports, does it reflect Standard / Customized / Private and refresh timing?
+- For follow-up, is it modelled as a CLF case with status + notes, not a generic ticket?
+- Does it respect contract / user-type / add-on availability?
+- Does it include consent for AI / data-sharing where relevant?
+- Does it avoid generic SaaS assumptions and visual-styling decisions that belong to the Design System Skill?
+
+---
+
+## Example Prompts for Using This Skill in Figma Make
+
+### Feature redesign prompts
+
+"Using the Spotler FeedbackPro Product Context Skill, redesign the Inbox so service teams can triage high-volume SX responses with quick/hover actions, metadata filters, tags, and automated handling rules."
+
+"Using the Spotler FeedbackPro Product Context Skill, redesign the Driver Analysis screen as a priority matrix with hover-to-reveal data and click-to-drill-through into Open Feedback, reusable across BX / CX / SX / EX."
+
+"Using the Spotler FeedbackPro Product Context Skill, redesign the Notifications (Action Center) setup for survey-level, question-level, and email-invite deviation alerts with Low / Medium / High thresholds."
+
+"Using the Spotler FeedbackPro Product Context Skill, redesign the Reporting overview so Standard, Customized, and Private reports are clearly distinguished, with a scheduler and manual PDF send."
+
+"Using the Spotler FeedbackPro Product Context Skill, redesign the Closed Loop Feedback dashboard around open cases, high-priority cases, priority percentage, resolution time, and average time open."
+
+---
+
+### New feature prompts
+
+"Using the Spotler FeedbackPro Product Context Skill, design a survey-logic builder with Question / Score / Metadata / Chance triggers and show/hide/skip actions."
+
+"Using the Spotler FeedbackPro Product Context Skill, design an invite-batch creation flow for SMS / Email / WhatsApp with batch rules that override page rules, plus delivery tracking."
+
+"Using the Spotler FeedbackPro Product Context Skill, design the AI Feedback Assistant chat with a first-run consent gate, suggested questions, chat history, and auto-generated insights."
+
+"Using the Spotler FeedbackPro Product Context Skill, design a Journey view supporting both Touchpoint and Phase journeys."
+
+"Using the Spotler FeedbackPro Product Context Skill, design a Narrowcasting screen that broadcasts live scores to digital signage."
+
+---
+
+### Product reasoning prompts
+
+"Using the Spotler FeedbackPro Product Context Skill, map a response from Inbox triage through Driver Analysis to a Closed Loop Feedback case."
+
+"Using the Spotler FeedbackPro Product Context Skill, explain how metadata links to CRM variables and becomes a filter across modules."
+
+"Using the Spotler FeedbackPro Product Context Skill, explain the difference between Standard, Customized, and Private reports and how a report moves between tiers."
+
+"Using the Spotler FeedbackPro Product Context Skill, explain how survey-level, question-level, and email-invite deviation notifications differ."
+
+"Using the Spotler FeedbackPro Product Context Skill, identify edge cases for deviation alerts at low data volume."
+
+---
+
+### Design review prompts
+
+"Using the Spotler FeedbackPro Product Context Skill, review this screen for incorrect terminology, missing loop stage, or generic survey-tool assumptions."
+
+"Using the Spotler FeedbackPro Product Context Skill, check whether this Inbox design treats responses as first-class records with proper actions and tags."
+
+"Using the Spotler FeedbackPro Product Context Skill, review whether this analysis design prioritises drivers rather than just displaying scores."
+
+"Using the Spotler FeedbackPro Product Context Skill, check whether this design respects contract / user-type / add-on gating and the Standard / Customized / Private tiers."
+
+"Using the Spotler FeedbackPro Product Context Skill, verify that the follow-up flow is modelled as Closed Loop Feedback (status + notes), not a generic ticket."
