@@ -5,6 +5,7 @@ _Do not edit by hand — it is overwritten on each run. This table is mirrored i
 
 | Date | Commit | Author | Change | Files |
 | --- | --- | --- | --- | --- |
+| 2026-07-09 | `6990479` | Dejan Skondric | Add automated CHANGELOG.md generation on push | 3 files |
 | 2026-07-09 | `dae8320` | Dejan Skondric | Update typography tokens to match design spec | 1 file |
 | 2026-06-17 | `f79b524` | dejan2d | Package spotler-feedback.skill as a zip with SKILL.md | 1 file |
 | 2026-06-17 | `a0fb521` | dejan2d | Add Spotler FeedbackPro product context skill | 2 files |
