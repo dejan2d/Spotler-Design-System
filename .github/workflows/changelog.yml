@@ -1,0 +1,37 @@
+name: Changelog
+
+# Regenerate CHANGELOG.md from git history whenever main changes.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'CHANGELOG.md'      # don't retrigger on our own changelog commit
+  workflow_dispatch:          # allow manual runs from the Actions tab
+
+permissions:
+  contents: write             # needed to push the regenerated file back
+
+jobs:
+  changelog:
+    # skip the run that our own bot commit would create (belt-and-braces with paths-ignore)
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0      # full history so the changelog is complete
+
+      - name: Generate CHANGELOG.md
+        run: bash scripts/generate-changelog.sh
+
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain CHANGELOG.md)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add CHANGELOG.md
+            git commit -m "docs: update CHANGELOG.md [skip ci]"
+            git push
+          else
+            echo "CHANGELOG.md already up to date."
+          fi
