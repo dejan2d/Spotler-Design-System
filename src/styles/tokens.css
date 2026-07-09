@@ -79,12 +79,14 @@
 
   /* ===== Typography (Open Sans) ===== */
   --font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-h1-size: 32px;   --font-h1-line: 44px;   --font-h1-weight: 700;
-  --font-h2-size: 24px;   --font-h2-line: 33px;   --font-h2-weight: 400;
-  --font-h3-size: 22px;   --font-h3-line: 32px;   --font-h3-weight: 600;
-  --font-h4-size: 17px;   --font-h4-line: 28px;   --font-h4-weight: 600;
+  --font-h1-size: 32px;   --font-h1-line: 32px;   --font-h1-weight: 700;
+  --font-h2-size: 27px;   --font-h2-line: 28px;   --font-h2-weight: 700;
+  --font-h3-size: 22px;   --font-h3-line: 24px;   --font-h3-weight: 600;
+  --font-h4-size: 17px;   --font-h4-line: 20px;   --font-h4-weight: 600;
   --font-body-size: 14px; --font-body-line: 20px; --font-body-weight: 400;
+  --font-body-semibold-size: 14px; --font-body-semibold-line: 20px; --font-body-semibold-weight: 600;
   --font-caption-size: 12px; --font-caption-line: 16px; --font-caption-weight: 400;
+  --font-caption-semibold-size: 12px; --font-caption-semibold-line: 16px; --font-caption-semibold-weight: 600;
 
   /* ===== Elevation ===== */
   --elevation-resting: 0px 0px 4px #D4DBDE;
