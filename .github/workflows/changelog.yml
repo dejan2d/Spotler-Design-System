@@ -1,6 +1,8 @@
 name: Changelog
 
-# Regenerate CHANGELOG.md from git history whenever main changes.
+# On every push to main:
+#   1. regenerate CHANGELOG.md from git history
+#   2. post an explanatory comment on each pushed commit
 on:
   push:
     branches: [main]
@@ -9,11 +11,11 @@ on:
   workflow_dispatch:          # allow manual runs from the Actions tab
 
 permissions:
-  contents: write             # needed to push the regenerated file back
+  contents: write             # needed to push CHANGELOG.md back and to post commit comments
 
 jobs:
   changelog:
-    # skip the run that our own bot commit would create (belt-and-braces with paths-ignore)
+    # skip the run that our own bot commit would create
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -35,3 +37,32 @@ jobs:
           else
             echo "CHANGELOG.md already up to date."
           fi
+
+  comment:
+    # runs on real pushes only; the changelog bot's own commits are skipped
+    if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on each pushed commit
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commits = context.payload.commits || [];
+            for (const c of commits) {
+              if (c.message.includes('[skip ci]')) continue;   // skip automated commits
+              const changed = [...(c.added || []), ...(c.modified || []), ...(c.removed || [])];
+              const fileLine = changed.length === 1 ? '1 file' : `${changed.length} files`;
+              const body = [
+                '🤖 **Change summary**',
+                '',
+                c.message,
+                '',
+                `_Files changed: ${fileLine}_`,
+              ].join('\n');
+              await github.rest.repos.createCommitComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: c.id,
+                body,
+              });
+            }
