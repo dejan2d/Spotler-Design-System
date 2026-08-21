@@ -46,6 +46,7 @@ One skill per Spotler product. Attach the skill for the product you are designin
 |---|---|
 | `spotler-design-system.skill` | **Claude Code** — the full design system for developers: all foundation tokens, 842 component tokens, per-component guidelines for all 36+ components. |
 | `spotler-design-principles.skill` | The 6 Spotler design pillars (Design, Layout, Consistency, Interaction, Simplicity, Accessibility). Useful in both contexts. |
+| `spotler-icons.skill` | Icon selection and usage: the 4,701-icon Font Awesome Pro Duotone Regular set, the action-to-icon map, and the rules that stop placeholder icons ending up in a design. Useful in both contexts. |
 
 ---
 
@@ -64,12 +65,13 @@ You do not need to mention the skill by name. Just describe what you want to des
 
 ### Designing a feature for a specific Spotler product (Figma Make)
 
-Attach **two skills**:
+Attach **three skills**:
 
 | | |
 |---|---|
 | `spotler-<product>.skill` | Product context (what the feature does) |
 | `spotler-design-system.skill` | Visual guidance (how it should look) |
+| `spotler-icons.skill` | Correct, meaningful icons (no placeholders) |
 
 Optionally also attach `spotler-design-principles.skill` for deeper brand alignment.
 
@@ -80,6 +82,7 @@ Optionally also attach `spotler-design-principles.skill` for deeper brand alignm
 **Skills to attach:**
 - `spotler-activate.skill`
 - `spotler-design-system.skill`
+- `spotler-icons.skill`
 
 **Example prompts:**
 
@@ -96,6 +99,7 @@ Optionally also attach `spotler-design-principles.skill` for deeper brand alignm
 **Skills to attach:**
 - `spotler-crm.skill`
 - `spotler-design-system.skill`
+- `spotler-icons.skill`
 
 **Example prompt:**
 
@@ -108,6 +112,7 @@ Optionally also attach `spotler-design-principles.skill` for deeper brand alignm
 **Skills to attach:**
 - `spotler-engage.skill`
 - `spotler-design-system.skill`
+- `spotler-icons.skill`
 
 **Example prompt:**
 
@@ -120,6 +125,7 @@ Optionally also attach `spotler-design-principles.skill` for deeper brand alignm
 **Skills to attach:**
 - `spotler-design-system.skill`
 - `spotler-design-principles.skill`
+- `spotler-icons.skill`
 
 **Example prompts:**
 
@@ -147,4 +153,7 @@ With the correct product skill, the AI understands user roles, real workflows, c
 
 - **Product skills** — regenerate when product logic, user roles, or terminology changes.
 - **Design system skills** — regenerate from the Spotler Kit when tokens or component specs change.
+- **Icon skill** — regenerate `references/icon-index.md` from `src/icons/duotone-regular/` when the
+  Font Awesome Pro version is bumped, and extend `references/action-icon-map.md` whenever a new
+  recurring action needs a house-standard icon.
 - Replace the files here to keep the whole team in sync.
