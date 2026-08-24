@@ -5,6 +5,8 @@ _Do not edit by hand — it is overwritten on each run. This table is mirrored i
 
 | Date | Commit | Author | Change | Files |
 | --- | --- | --- | --- | --- |
+| 2026-08-24 | `a0ffca4` | Dejan Skondric | Add CLAUDE.md so design rules apply automatically in Claude Code | 1 file |
+| 2026-08-21 | `c9a6eee` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-08-21 | `85f4d9e` | Dejan Skondric | Add spotler-icons skill to stop placeholder icons in designs | 2 files |
 | 2026-07-27 | `41fe1ea` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-07-27 | `d2c7cf4` | Dejan Skondric | Add Font Awesome Pro 7.1.0 Duotone Regular icon set | 4702 files |
