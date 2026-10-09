@@ -1,5 +1,5 @@
-/* Spotler Design System — Component Tokens (842 tokens) */
-/* Auto-generated from kit/guidelines/foundations/component-tokens.md. */
+/* Spotler Design System — Component Tokens (850 tokens) */
+/* Mirrors the Figma "Component Colors" variable collection. Figma is the source of truth. */
 
 :root {
   --accordion-with-background-heading: #353B40;
@@ -179,6 +179,10 @@
   --checkbox-error-border: #B6000A;
   --checkbox-error-text: #B6000A;
   --checkbox-error-icon: #B6000A;
+  --checkbox-hover-background: #F2F4F5;
+  --checkbox-hover-border: #D4DBDE;
+  --checkbox-checked-hover-background: #F2F4F5;
+  --checkbox-checked-hover-border: #BBC5CA;
   --color-picker-empty-background: #FFFFFF;
   --color-picker-empty-border: #E7ECED;
   --color-picker-empty-text: #8795A0;
@@ -675,6 +679,10 @@
   --radio-button-checked-background: #FFFFFF;
   --radio-button-checked-circle: #005499;
   --radio-button-checked-border: #BBC5CA;
+  --radio-button-hover-background: #F2F4F5;
+  --radio-button-hover-border: #D4DBDE;
+  --radio-button-checked-hover-background: #F2F4F5;
+  --radio-button-checked-hover-border: #BBC5CA;
   --segmented-button-default-rest-text: #74818C;
   --segmented-button-default-rest-icon: #74818C;
   --segmented-button-default-selected-icon: #003560;
