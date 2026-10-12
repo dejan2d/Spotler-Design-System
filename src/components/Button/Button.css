@@ -1,25 +1,42 @@
 /* Button — Spotler Design System
    An interactive element that initiates an action.
-   Row, padding 8px 16px, gap 8px, height 36px, min-width 80px, radius circular (1000px).
-   Optional 20px leading/trailing icon. All color/spacing/radius/type values are tokens. */
+   Figma: "Button" set 458:12420 (page 29:5).
+   Row, padding 8px 16px, gap 8px, height 36px, min-width 80px, radius circular.
+   Label: Text Styles/Body/Paragraph - Regular (14px); Paragraph - Semi Bold when Selected.
+   Optional 20px leading/trailing icon (hidden by default in Figma).
+   TextLink is a frameless text run: no padding, no height, no min-width (Figma 45×19),
+   underlined on hover only.
+
+   Strokes: Figma strokes do not take part in auto layout (strokesIncludedInLayout=false)
+   and are aligned INSIDE. They are therefore drawn as an inset box-shadow, never a
+   border, so a 1px (rest/hover) or 2px (selected) stroke never changes the button size.
+   All color/spacing/radius/type values are tokens. */
 
 .sds-button {
+  /* Per-variant stroke colour; transparent = no stroke in Figma. */
+  --sds-button-stroke: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-s-8);
-  height: 36px;
+  height: var(--spacing-s-36);
   min-width: 80px;
   padding: var(--spacing-s-8) var(--spacing-s-16);
-  border: 1px solid transparent;
+  border: 0;
   border-radius: var(--border-circular);
+  box-shadow: inset 0 0 0 1px var(--sds-button-stroke);
+  /* Invisible normally; becomes the button outline in forced-colors (high contrast)
+     mode, where box-shadows are dropped. */
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  background: transparent;
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
   font-weight: var(--font-body-weight);
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
-    color 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
+    box-shadow 150ms ease-in-out;
   user-select: none;
   white-space: nowrap;
 }
@@ -28,9 +45,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: var(--spacing-s-20);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   /* Icon defaults to the per-variant icon token, falling back to the label color. */
   color: var(--sds-button-icon-color, currentColor);
 }
@@ -39,17 +56,21 @@
   display: inline-block;
 }
 
+/* Keyboard focus ring — not designed in Figma; kept as an accessibility exception. */
 .sds-button:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
 
-/* Selected (toggle) — 2px stroke + inset white ring + Semi-Bold label.
-   600 is a font-weight (not a color/spacing/radius); no dedicated weight token exists. */
+/* Selected (toggle) — Figma: 2px INSIDE stroke + white inner shadow (spread 4).
+   The 2px stroke covers the outer half of the 4px inner shadow, so what renders is
+   2px stroke + 2px white ring. Label: Paragraph - Semi Bold. */
 .sds-button--selected {
-  font-weight: 600;
-  border-width: 2px;
-  box-shadow: inset 0 0 0 4px var(--monochrome-white);
+  box-shadow: inset 0 0 0 2px var(--sds-button-stroke),
+    inset 0 0 0 4px var(--monochrome-white);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
 }
 
 /* ===== Primary ===== */
@@ -65,7 +86,7 @@
 }
 .sds-button--primary.sds-button--selected {
   background: var(--button-primary-selected-background);
-  border-color: var(--button-primary-selected-stroke);
+  --sds-button-stroke: var(--button-primary-selected-stroke);
   color: var(--button-primary-selected-text);
   --sds-button-icon-color: var(--button-primary-selected-icon);
 }
@@ -83,32 +104,32 @@
 }
 .sds-button--primary-accent.sds-button--selected {
   background: var(--button-primary-accent-selected-background);
-  border-color: var(--button-primary-accent-selected-stroke);
+  --sds-button-stroke: var(--button-primary-accent-selected-stroke);
   color: var(--button-primary-accent-selected-text);
   --sds-button-icon-color: var(--button-primary-accent-selected-icon);
 }
 
-/* ===== Secondary (outlined) ===== */
+/* ===== Secondary (outlined, no fill at rest) ===== */
 .sds-button--secondary {
   background: transparent;
-  border-color: var(--button-secondary-rest-stroke);
+  --sds-button-stroke: var(--button-secondary-rest-stroke);
   color: var(--button-secondary-rest-text);
   --sds-button-icon-color: var(--button-secondary-rest-icon);
 }
 .sds-button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--button-secondary-hover-background);
-  border-color: var(--button-secondary-hover-stroke);
+  --sds-button-stroke: var(--button-secondary-hover-stroke);
   color: var(--button-secondary-hover-text);
   --sds-button-icon-color: var(--button-secondary-hover-icon);
 }
 .sds-button--secondary.sds-button--selected {
   background: var(--button-secondary-selected-background);
-  border-color: var(--button-secondary-selected-stroke);
+  --sds-button-stroke: var(--button-secondary-selected-stroke);
   color: var(--button-secondary-selected-text);
   --sds-button-icon-color: var(--button-secondary-selected-icon);
 }
 
-/* ===== Tertiary (ghost) ===== */
+/* ===== Tertiary (ghost: no fill, no stroke at rest) ===== */
 .sds-button--tertiary {
   background: transparent;
   color: var(--button-tertiary-rest-text);
@@ -121,29 +142,31 @@
 }
 .sds-button--tertiary.sds-button--selected {
   background: var(--button-tertiary-selected-background);
-  border-color: var(--button-tertiary-selected-stroke);
+  --sds-button-stroke: var(--button-tertiary-selected-stroke);
   color: var(--button-tertiary-selected-text);
   --sds-button-icon-color: var(--button-tertiary-selected-icon);
 }
 
-/* ===== TextLink (frameless, inline link styling) ===== */
+/* ===== TextLink — Figma: frameless text run (45×19 hug), padding 0, gap 8,
+   no fill, no stroke, no ring. The label is underlined on Hover only
+   (Default, Selected and Disabled have no underline), AUTO underline offset. ===== */
 .sds-button--textlink {
+  height: auto;
+  /* No 80px minimum — hugs the text; `auto` also stops a flex parent from
+     squeezing the run below its own width. */
+  min-width: auto;
+  padding: 0;
   background: transparent;
-  border-color: transparent;
-  min-width: 0;
   color: var(--button-textlink-rest-text);
-}
-.sds-button--textlink .sds-button__label {
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 .sds-button--textlink:hover:not(:disabled):not([aria-disabled='true']) {
   color: var(--button-textlink-hover-text);
 }
+.sds-button--textlink:hover:not(:disabled):not([aria-disabled='true']) .sds-button__label {
+  text-decoration: underline;
+}
 .sds-button--textlink.sds-button--selected {
   color: var(--button-textlink-selected-text);
-  /* TextLink has no fill/stroke; selected shows only the Semi-Bold label, no ring. */
-  border-color: transparent;
   box-shadow: none;
 }
 
@@ -160,7 +183,7 @@
 }
 .sds-button--destructive.sds-button--selected {
   background: var(--button-destructive-selected-background);
-  border-color: var(--button-destructive-selected-stroke);
+  --sds-button-stroke: var(--button-destructive-selected-stroke);
   color: var(--button-destructive-selected-text);
   --sds-button-icon-color: var(--button-destructive-selected-icon);
 }
@@ -168,7 +191,7 @@
 /* ===== Destructive Outline ===== */
 .sds-button--destructive-outline {
   background: transparent;
-  border-color: var(--button-destructive-outline-rest-stroke);
+  --sds-button-stroke: var(--button-destructive-outline-rest-stroke);
   color: var(--button-destructive-outline-rest-text);
   --sds-button-icon-color: var(--button-destructive-outline-rest-icon);
 }
@@ -177,9 +200,16 @@
   color: var(--button-destructive-outline-hover-text);
   --sds-button-icon-color: var(--button-destructive-outline-hover-icon);
 }
+/* Hover: Figma 1031:24931 has a fill only — the red outline disappears.
+   (A selected button keeps its selected stroke.) */
+.sds-button--destructive-outline:hover:not(:disabled):not([aria-disabled='true']):not(
+    .sds-button--selected
+  ) {
+  --sds-button-stroke: transparent;
+}
 .sds-button--destructive-outline.sds-button--selected {
   background: var(--button-destructive-outline-selected-background);
-  border-color: var(--button-destructive-outline-selected-stroke);
+  --sds-button-stroke: var(--button-destructive-outline-selected-stroke);
   color: var(--button-destructive-outline-selected-text);
   --sds-button-icon-color: var(--button-destructive-outline-selected-icon);
 }
@@ -197,25 +227,38 @@
 }
 .sds-button--warning.sds-button--selected {
   background: var(--button-warning-selected-background);
-  border-color: var(--button-warning-selected-stroke);
+  --sds-button-stroke: var(--button-warning-selected-stroke);
   color: var(--button-warning-selected-text);
   --sds-button-icon-color: var(--button-warning-selected-icon);
 }
 
-/* ===== Disabled (all variants) ===== */
+/* ===== Disabled — per variant, as in Figma =====
+   Filled variants (Primary, Primary Accent, Destructive, Warning):
+     Disabled/background fill, no stroke.
+   Outlined variants (Secondary, Destructive Outline): Disabled/stroke 1px, no fill.
+   Tertiary and TextLink: no fill, no stroke.
+   Text is Disabled/text and the icon Disabled/icon in every variant. */
 .sds-button:disabled,
 .sds-button[aria-disabled='true'] {
   background: var(--disabled-background);
-  border-color: var(--disabled-stroke);
+  --sds-button-stroke: transparent;
+  box-shadow: inset 0 0 0 1px var(--sds-button-stroke);
   color: var(--disabled-text);
   --sds-button-icon-color: var(--disabled-icon);
   cursor: not-allowed;
-  box-shadow: none;
 }
 
-/* TextLink stays frameless when disabled (no fill/stroke), only desaturated text. */
+.sds-button--secondary:disabled,
+.sds-button--secondary[aria-disabled='true'],
+.sds-button--destructive-outline:disabled,
+.sds-button--destructive-outline[aria-disabled='true'] {
+  background: transparent;
+  --sds-button-stroke: var(--disabled-stroke);
+}
+
+.sds-button--tertiary:disabled,
+.sds-button--tertiary[aria-disabled='true'],
 .sds-button--textlink:disabled,
 .sds-button--textlink[aria-disabled='true'] {
   background: transparent;
-  border-color: transparent;
 }

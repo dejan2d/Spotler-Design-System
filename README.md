@@ -62,7 +62,7 @@ src/
 
 ## Components
 
-**Buttons & actions:** Button, IconButton, Link, SegmentedButton
+**Buttons & actions:** Button (incl. TextLink), IconButton, SegmentedButton
 **Inputs & forms:** TextField, SearchBar, DropdownMenu, Checkbox, RadioButton, Switch, Slider, DatePicker, TimePicker, Calendar, Upload, ColorPicker
 **Display:** Card, ActionCard, KpiCard, Avatar, Table, Header, Modal, Divider
 **Feedback:** Alert, Badge, StatusChip, ProgressBar, Tooltip, EmptyState

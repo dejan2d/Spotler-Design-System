@@ -1,11 +1,16 @@
 /* Switch — Spotler Design System
-   Spec: references/components/switch.md
-   Pill track + circular knob (Border/Circular). Knob slides left/right; animated. */
+   Figma: "Switch" set 458:12084 (page 29:21).
+   Box: padding 2px, gap 8px; optional left/right labels (both hidden by default).
+   Toggle 28×16: pill track + 12×12 circular handle inset 2px, travelling 12px.
+   The on-state handle carries a 10×10 check icon. Animated. */
 
 .sds-switch {
   display: flex;
+  width: fit-content; /* Figma: hugs its content */
   align-items: center;
-  gap: var(--spacing-s-12);
+  gap: var(--spacing-s-8);
+  /* Figma padding 2px (32×20 box without labels); no 2px spacing token exists. */
+  padding: 2px;
   font-family: var(--font-family);
 }
 
@@ -13,8 +18,8 @@
   position: relative;
   display: inline-flex;
   flex: none;
-  width: 40px;
-  height: 24px;
+  width: var(--spacing-s-28);
+  height: var(--spacing-s-16);
 }
 
 .sds-switch__input {
@@ -30,8 +35,9 @@
 .sds-switch__track {
   display: inline-flex;
   align-items: center;
-  width: 40px;
-  height: 24px;
+  width: 100%;
+  height: 100%;
+  /* Handle inset 2px inside the track (Figma Handle x/y = 2). */
   padding: 2px;
   box-sizing: border-box;
   background: var(--switch-rest-background);
@@ -40,18 +46,34 @@
 }
 
 .sds-switch__knob {
-  width: 20px;
-  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--spacing-s-12);
+  height: var(--spacing-s-12);
   border-radius: var(--border-circular);
   background: var(--switch-rest-circle);
   transform: translateX(0);
   transition: transform 150ms ease-in-out, background-color 150ms ease-in-out;
 }
 
+/* Check icon: 10×10 (no 10px token), Switch/selected-icon; only visible when on. */
+.sds-switch__check {
+  display: block;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  color: var(--switch-selected-icon);
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+/* Label: Paragraph - Regular, Monochrome/Gray-1000 (as bound in Figma). */
 .sds-switch__label {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
-  /* Switch token set has no label color; use the system neutral text primitive (#353B40). */
+  font-weight: var(--font-body-weight);
   color: var(--monochrome-gray-1000);
   cursor: pointer;
 }
@@ -63,33 +85,38 @@
 
 .sds-switch__input:checked ~ .sds-switch__track .sds-switch__knob {
   background: var(--switch-selected-circle);
-  transform: translateX(16px);
+  transform: translateX(var(--spacing-s-12));
 }
 
-/* ===== Focus ===== */
+.sds-switch__input:checked ~ .sds-switch__track .sds-switch__check {
+  opacity: 1;
+}
+
+/* ===== Focus — not designed in Figma; kept as an accessibility exception ===== */
 .sds-switch__input:focus-visible ~ .sds-switch__track {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
 
-/* ===== Disabled (preserve on/off distinction) =====
-   The disabled palette only has two tones (--disabled-icon #9FACB3 and
-   --disabled-background/-stroke #E7ECED). Use the darker tone for the track in
-   BOTH states and the lighter tone for the knob, so the knob never blends into
-   the track and the on/off state stays readable via knob position. */
+/* ===== Disabled (Figma 458:12098 / 458:12104) =====
+   Light Disabled/background track, dark Disabled/icon handle in both states;
+   the on-state check uses Disabled/stroke. */
 .sds-switch--disabled .sds-switch__track,
 .sds-switch--disabled .sds-switch__input:checked ~ .sds-switch__track {
-  background: var(--disabled-icon);
+  background: var(--disabled-background);
 }
 
 .sds-switch--disabled .sds-switch__knob,
 .sds-switch--disabled .sds-switch__input:checked ~ .sds-switch__track .sds-switch__knob {
-  background: var(--disabled-background);
+  background: var(--disabled-icon);
+}
+
+.sds-switch--disabled .sds-switch__check {
+  color: var(--disabled-stroke);
 }
 
 .sds-switch--disabled .sds-switch__label {
   color: var(--disabled-text);
-  cursor: not-allowed;
 }
 
 .sds-switch--disabled .sds-switch__input,

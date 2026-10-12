@@ -25,7 +25,6 @@ export * from './components/Header';
 export * from './components/IconButton';
 export * from './components/KpiCard';
 export * from './components/LineChart';
-export * from './components/Link';
 export * from './components/Modal';
 export * from './components/Navigation';
 export * from './components/Pagination';
