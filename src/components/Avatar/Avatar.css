@@ -1,6 +1,6 @@
-/* Avatar — Spotler Design System
-   Spotler "Avatar". Circular (Border/Circular); tonal pair Avatar/background + Avatar/person.
-   Sizes: S 16 · M 20 · L 32 · XL 40 · XXL 52 (px). */
+/* Avatar — Spotler Design System (Figma "Avatar" 331:683, "Avatar group" 406:8756)
+   Circular (Border/Circular); default placeholder is the person glyph in Avatar/person on
+   Avatar/background. Sizes: S 16 · M 20 · L 32 · XL 40 · XXL 52 (px). */
 
 .sds-avatar {
   display: inline-flex;
@@ -11,9 +11,6 @@
   border-radius: var(--border-circular);
   background: var(--avatar-background);
   color: var(--avatar-person);
-  font-family: var(--font-family);
-  font-weight: var(--font-h4-weight);
-  line-height: 1;
   user-select: none;
 }
 
@@ -28,6 +25,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Person glyph (the only placeholder): scales with the avatar and is clipped by the circle. */
+.sds-avatar__person {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* ===== Sizes ===== */
@@ -35,78 +41,85 @@
 .sds-avatar--small {
   width: var(--spacing-s-16);
   height: var(--spacing-s-16);
-  font-size: var(--font-caption-size);
 }
 
 /* M 20 */
 .sds-avatar--medium {
   width: var(--spacing-s-20);
   height: var(--spacing-s-20);
-  font-size: var(--font-caption-size);
 }
 
 /* L 32 */
 .sds-avatar--large {
   width: var(--spacing-s-32);
   height: var(--spacing-s-32);
-  font-size: var(--font-body-size);
 }
 
 /* XL 40 */
 .sds-avatar--x-large {
   width: var(--spacing-s-40);
   height: var(--spacing-s-40);
-  font-size: var(--font-h4-size);
 }
 
 /* XXL 52 — no s-52 token exists; compose from foundation spacing tokens (48 + 4). */
 .sds-avatar--xx-large {
   width: calc(var(--spacing-s-48) + var(--spacing-s-4));
   height: calc(var(--spacing-s-48) + var(--spacing-s-4));
-  font-size: var(--font-h3-size);
 }
 
-/* ===== Avatar group ===== */
-/* Overlapping stack with a consistent white ring; trailing +N overflow badge. */
+/* ===== Avatar group (Figma "Avatar group" 406:8756) =====
+   Each avatar carries Drop Shadow/100 (no ring). Avatars overlap by 4px; the `+N` variants
+   ("more S 16x16", "more M 20x20") overlap by 8px. The leftmost avatar sits on top
+   (z-index set inline by AvatarGroup). */
 .sds-avatar-group {
   display: inline-flex;
   align-items: center;
 }
 
 .sds-avatar-group__item {
+  position: relative;
   display: inline-flex;
   border-radius: var(--border-circular);
-  /* Consistent ring separating overlapping avatars from one another. */
-  box-shadow: 0 0 0 1px var(--monochrome-white);
+  box-shadow: var(--drop-shadow-100);
 }
 
-/* Overlap: each item after the first pulls left. Scaled per group size. */
 .sds-avatar-group__item + .sds-avatar-group__item {
-  margin-left: calc(-1 * var(--spacing-s-8));
-}
-
-.sds-avatar-group--small .sds-avatar-group__item + .sds-avatar-group__item {
   margin-left: calc(-1 * var(--spacing-s-4));
 }
 
-.sds-avatar-group--medium .sds-avatar-group__item + .sds-avatar-group__item {
-  margin-left: calc(-1 * var(--spacing-s-4));
-}
-
-.sds-avatar-group--large .sds-avatar-group__item + .sds-avatar-group__item {
+.sds-avatar-group--small.sds-avatar-group--overflow .sds-avatar-group__item + .sds-avatar-group__item,
+.sds-avatar-group--medium.sds-avatar-group--overflow .sds-avatar-group__item + .sds-avatar-group__item {
   margin-left: calc(-1 * var(--spacing-s-8));
 }
 
-.sds-avatar-group--x-large .sds-avatar-group__item + .sds-avatar-group__item {
-  margin-left: calc(-1 * var(--spacing-s-12));
-}
-
-.sds-avatar-group--xx-large .sds-avatar-group__item + .sds-avatar-group__item {
-  margin-left: calc(-1 * var(--spacing-s-16));
-}
-
-/* +N overflow badge — tonal pair, same shape/size as the avatars. */
+/* +N overflow — Badge Counter (Neutral) as overridden in the Figma group: 16px tall pill,
+   2/4.5 padding, Monochrome/Gray-200 fill, Monochrome/Gray-1000 Open Sans SemiBold text
+   (no text style in Figma), line height 90%. It overlaps the last avatar and sits above it. */
 .sds-avatar-group__overflow {
-  color: var(--avatar-person);
-  background: var(--avatar-background);
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  box-sizing: border-box;
+  min-width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  padding: 2px 4.5px;
+  border-radius: var(--border-circular);
+  background: var(--monochrome-gray-200);
+  color: var(--monochrome-gray-1000);
+  font-family: var(--font-family);
+  font-size: var(--font-caption-semibold-size);
+  font-weight: var(--font-caption-semibold-weight);
+  line-height: 0.9;
+  white-space: nowrap;
+  user-select: none;
+  margin-left: calc(-1 * var(--spacing-s-8));
+}
+
+/* "more S 16x16": 8px text, overlapping the last avatar by 5px. */
+.sds-avatar-group--small .sds-avatar-group__overflow {
+  font-size: var(--spacing-s-8);
+  margin-left: -5px;
 }

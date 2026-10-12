@@ -1,48 +1,75 @@
 /* Header — Spotler Design System
-   A page/section header band — leading icon (optional) + title, with optional
-   trailing actions and a modal-specific close control.
-   Row, centered, gap 8px. Title uses the h3 type ramp; icon renders at 20px.
+   page  = Figma "Header" 4661:20796: Monochrome/White band, min-height 68px, 1px Monochrome/Gray-200
+           bottom border, no padding, gap 16, left/right content spread apart. Icon 28px + H2 title.
+   modal = Figma "Modal header" 833:32979: Monochrome/White, padding 24/40/16/40, gap 16,
+           1px Monochrome/Gray-400 bottom border. Icon 20px + H4 title, xmark close 20px.
    All color / spacing / radius / type values are tokens. */
 
 .sds-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-s-8);
+  justify-content: space-between;
+  gap: var(--spacing-s-16);
+  background: var(--monochrome-white);
   font-family: var(--font-family);
+}
+
+/* Figma "Left Content": heading, then the left content slots 24px later. */
+.sds-header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-24);
+  min-width: 0;
+}
+
+/* Figma "H1": icon + title, 8px apart. */
+.sds-header__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  min-width: 0;
 }
 
 .sds-header__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-s-20);
-  height: var(--spacing-s-20);
-  font-size: var(--spacing-s-20);
+  flex: none;
 }
 
 .sds-header__title {
   margin: 0;
-  font-size: var(--font-h3-size);
-  line-height: var(--font-h3-line);
-  font-weight: var(--font-h3-weight);
 }
 
+.sds-header__left-content,
 .sds-header__actions {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-16);
+}
+
+.sds-header__actions {
   margin-left: auto;
+}
+
+/* Vertical Divider instances (Divider/vertical), 28px tall in Figma. */
+.sds-header .sds-header__divider {
+  height: var(--spacing-s-28);
+  align-self: center;
 }
 
 .sds-header__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid transparent;
+  flex: none;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  border: none;
   border-radius: var(--border-circular);
   background: transparent;
   cursor: pointer;
-  padding: var(--spacing-s-4);
+  padding: 0;
   line-height: 1;
 }
 
@@ -60,27 +87,49 @@
   outline-offset: 2px;
 }
 
-/* When actions are absent, the close control still aligns right in modal headers. */
+/* The close control aligns right in modal headers. */
 .sds-header--modal .sds-header__close {
   margin-left: auto;
 }
-.sds-header--modal .sds-header__actions + .sds-header__close {
-  margin-left: 0;
-}
 
-/* ===== Page / section ===== */
+/* ===== Page (Figma "Header") ===== */
+.sds-header--page {
+  min-height: 68px;
+  border-bottom: 1px solid var(--monochrome-gray-200);
+}
 .sds-header--page .sds-header__icon {
+  width: var(--spacing-s-28);
+  height: var(--spacing-s-28);
+  font-size: var(--spacing-s-28);
   color: var(--headers-icon);
 }
+/* Text Styles/Display Headings/H2 */
 .sds-header--page .sds-header__title {
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line);
+  font-weight: var(--font-h2-weight);
   color: var(--headers-text);
 }
 
-/* ===== Modal ===== */
+/* ===== Modal (Figma "Modal header") ===== */
+.sds-header--modal {
+  padding: var(--spacing-s-24) var(--spacing-s-40) var(--spacing-s-16);
+  border-bottom: 1px solid var(--monochrome-gray-400);
+}
+.sds-header--modal .sds-header__left {
+  flex: 1;
+}
 .sds-header--modal .sds-header__icon {
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
   color: var(--headers-modal-icon);
 }
+/* Text Styles/Title Headings/H4 */
 .sds-header--modal .sds-header__title {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
   color: var(--headers-modal-text);
 }
 .sds-header--modal .sds-header__close {
