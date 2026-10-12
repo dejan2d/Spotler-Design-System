@@ -1,10 +1,16 @@
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
+import { Divider } from '../Divider';
 import './LineChart.css';
 
 /**
- * The 10 categorical chart color tokens plus the "other" bucket, as CSS variable
- * references. Index into this to color a series; series beyond 10 fall back to `other`.
+ * The 10 categorical chart color tokens (`Diagrams/Line Chart/chart-1..10`) plus the
+ * "Other" bucket (`other-charts`, index 10), as CSS variable references.
+ *
+ * Default series colors cycle through chart-1..chart-10: the 11th series starts again at
+ * chart-1 (Figma note "Extra colors": "11th will be the first color"). `other-charts` is
+ * never assigned automatically — pass `lineChartColors[10]` as a series `color` for a
+ * grouped "Others" series or for inactive data.
  */
 export const lineChartColors = [
   'var(--diagrams-line-chart-chart-1)',
@@ -20,39 +26,86 @@ export const lineChartColors = [
   'var(--diagrams-line-chart-other-charts)',
 ] as const;
 
+/** Number of cycling series colors (chart-1..chart-10); `other-charts` is excluded. */
+const SERIES_COLOR_COUNT = 10;
+
+/** Where the legend sits relative to the plot. Mirrors Figma "Legend position". */
+export type LineChartLegendPosition = 'under' | 'right';
+
 export interface LineChartSeries {
-  /** Legend label. */
+  /** Legend label — Body/Paragraph - Regular, `Diagrams/Line Chart/legend-text`. */
   label: ReactNode;
-  /** Optional value shown beside the label. */
-  value?: ReactNode;
-  /** Optional explicit color (CSS var or value). Defaults to `lineChartColors[index]`. */
+  /**
+   * Optional explicit color (CSS var or value). Defaults to
+   * `lineChartColors[index % 10]` (chart-1..chart-10, cycling).
+   */
   color?: string;
 }
 
-export interface LineChartProps extends HTMLAttributes<HTMLDivElement> {
-  /** Chart title (header text). */
+// `title` is re-typed as a ReactNode heading, so omit the native string `title`
+// attribute from the base to avoid the incompatible-override error (TS2430).
+export interface LineChartProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  /** Chart name — Title Headings/H4, `Diagrams/Line Chart/header-text`. Figma "Chart name". */
   title?: ReactNode;
-  /** Optional leading header icon. */
-  icon?: ReactNode;
-  /** Slot for a period picker rendered in the header. */
+  /**
+   * Label in front of the period picker — Body/Paragraph - Small,
+   * `Diagrams/Line Chart/period-picker`. Figma "Prediction period".
+   */
+  periodLabel?: ReactNode;
+  /** Slot for the period picker (a Spotler Dropdown in Figma). Figma "Show Date picker". */
   periodPicker?: ReactNode;
+  /**
+   * Trailing settings control at the end of the top nav — an `ellipsis-vertical` trigger,
+   * 20px glyph tinted `Diagrams/Line Chart/header-icon`. Figma "Show Settings".
+   */
+  settings?: ReactNode;
+  /**
+   * Legend placement. `under` — legend centered and wrapping below the plot (full-width
+   * graphs). `right` — legend stacked to the right of the plot, vertically centered.
+   * @default 'under'
+   */
+  legendPosition?: LineChartLegendPosition;
   /** Series used to build the legend. */
   series?: LineChartSeries[];
-  /** The plotted chart goes here. */
+  /** The plotted chart (lines) goes here. */
   children?: ReactNode;
 }
 
 /**
- * LineChart — presentational, token-driven wrapper providing an accessible container
- * with a header (title + period picker), a legend, and a slot for the plotted chart.
- * It does NOT render lines itself. Tokens: `--diagrams-line-chart-*`.
+ * LineChart — Spotler Design System (Figma "Graph", Graph Type=Line).
+ *
+ * Presentational, token-driven wrapper: it does NOT render lines itself. Figma variants
+ * offer 1–7 data series; data-point markers appear on hover only.
+ *
+ * Figma spec — frameless (no fill, stroke, radius, shadow or padding), vertical, gap 24px:
+ * 1. Top nav (shown when any header part is set): Chart name (H4) growing, then the period
+ *    area (Paragraph - Small label + picker, gap 10px), then the settings control;
+ *    gap 32px, vertically centered.
+ * 2. Horizontal Divider under the top nav.
+ * 3. Graph + legend, gap 32px. Legend items: 16x16 colour indicator (radius Border/Small)
+ *    + Paragraph - Regular label, gap 8px; items gap 16px (under) or 12px (right).
+ *
+ * Tokens: `--diagrams-line-chart-*`.
  */
 export const LineChart = forwardRef<HTMLDivElement, LineChartProps>(function LineChart(
-  { title, icon, periodPicker, series = [], className, children, ...rest },
+  {
+    title,
+    periodLabel,
+    periodPicker,
+    settings,
+    legendPosition = 'under',
+    series = [],
+    className,
+    children,
+    ...rest
+  },
   ref,
 ) {
-  const classes = ['sds-line-chart', className].filter(Boolean).join(' ');
+  const classes = ['sds-line-chart', `sds-line-chart--legend-${legendPosition}`, className]
+    .filter(Boolean)
+    .join(' ');
   const labelledById = title ? (rest.id ? `${rest.id}-title` : undefined) : undefined;
+  const hasTopNav = Boolean(title || periodLabel || periodPicker || settings);
 
   return (
     <div
@@ -62,39 +115,42 @@ export const LineChart = forwardRef<HTMLDivElement, LineChartProps>(function Lin
       aria-label={typeof title === 'string' ? title : undefined}
       {...rest}
     >
-      {(title || icon || periodPicker) && (
-        <div className="sds-line-chart__header">
-          {icon && (
-            <span className="sds-line-chart__header-icon" aria-hidden="true">
-              {icon}
-            </span>
-          )}
-          {title && (
+      {hasTopNav && (
+        <>
+          <div className="sds-line-chart__header">
             <span className="sds-line-chart__header-text" id={labelledById}>
               {title}
             </span>
-          )}
-          {periodPicker && <span className="sds-line-chart__period-picker">{periodPicker}</span>}
-        </div>
+            {(periodLabel || periodPicker) && (
+              <span className="sds-line-chart__period">
+                {periodLabel && <span className="sds-line-chart__period-label">{periodLabel}</span>}
+                {periodPicker && <span className="sds-line-chart__period-picker">{periodPicker}</span>}
+              </span>
+            )}
+            {settings && <span className="sds-line-chart__settings">{settings}</span>}
+          </div>
+          <Divider className="sds-line-chart__divider" />
+        </>
       )}
 
-      <div className="sds-line-chart__plot">{children}</div>
+      <div className="sds-line-chart__body">
+        <div className="sds-line-chart__plot">{children}</div>
 
-      {series.length > 0 && (
-        <ul className="sds-line-chart__legend">
-          {series.map((s, i) => (
-            <li className="sds-line-chart__legend-item" key={i}>
-              <span
-                className="sds-line-chart__legend-swatch"
-                aria-hidden="true"
-                style={{ backgroundColor: s.color ?? lineChartColors[Math.min(i, lineChartColors.length - 1)] }}
-              />
-              <span className="sds-line-chart__legend-label">{s.label}</span>
-              {s.value != null && <span className="sds-line-chart__legend-value">{s.value}</span>}
-            </li>
-          ))}
-        </ul>
-      )}
+        {series.length > 0 && (
+          <ul className="sds-line-chart__legend">
+            {series.map((s, i) => (
+              <li className="sds-line-chart__legend-item" key={i}>
+                <span
+                  className="sds-line-chart__legend-swatch"
+                  aria-hidden="true"
+                  style={{ backgroundColor: s.color ?? lineChartColors[i % SERIES_COLOR_COUNT] }}
+                />
+                <span className="sds-line-chart__legend-label">{s.label}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 });

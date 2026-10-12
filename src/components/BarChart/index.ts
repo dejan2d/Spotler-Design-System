@@ -1,2 +1,2 @@
 export { BarChart, barChartColors } from './BarChart';
-export type { BarChartProps, BarChartSeries } from './BarChart';
+export type { BarChartProps, BarChartSeries, BarChartLegendPosition } from './BarChart';
