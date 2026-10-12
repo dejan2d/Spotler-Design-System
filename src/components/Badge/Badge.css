@@ -1,7 +1,8 @@
 /* Badge — Spotler Design System
-   Spotler component "Badge".
-   Dot: 8px circle. Circle (Counter): 16px circle, circular radius, Semi-Bold 12 number.
-   Overlay: pinned top-right of a host with a white separating stroke.
+   Spotler component "Badge" (Figma set 455:7448) + "Badge with instance" (set 455:7775).
+   Counter (circle): 16px tall, min 16px wide, padding 2px 4.5px, circular radius, 12px Semi Bold.
+   Dot: 8px circle, no stroke.
+   Overlay: counter top-right / dot bottom-right of a host; white ring on the neutral dot only.
    Token typos preserved verbatim: `neutral-backgroud`, `warrning`. */
 
 .sds-badge {
@@ -12,33 +13,31 @@
   font-family: var(--font-family);
 }
 
-/* ===== Dot (8px) ===== */
+/* ===== Dot (8px, no stroke — Figma 455:7447 etc.) ===== */
 .sds-badge--dot {
   width: var(--spacing-s-8);
   height: var(--spacing-s-8);
   border-radius: var(--border-circular);
 }
 
-.sds-badge--dot.sds-badge--neutral {
-  background: var(--badges-dot-neutral-backgroud);
-  border: 1px solid var(--badges-dot-neutral-stroke);
-}
+.sds-badge--dot.sds-badge--neutral { background: var(--badges-dot-neutral-backgroud); }
 .sds-badge--dot.sds-badge--primary { background: var(--badges-dot-primary-background); }
 .sds-badge--dot.sds-badge--inactive { background: var(--badges-dot-inactive-background); }
 .sds-badge--dot.sds-badge--warrning { background: var(--badges-dot-warrning-background); }
 .sds-badge--dot.sds-badge--active { background: var(--badges-dot-active-background); }
 
-/* ===== Circle (16px, number) ===== */
+/* ===== Counter / circle (16px, number) =====
+   Padding 2px 4.5px and the 90% line height are unbound raw values in Figma
+   (no matching spacing token); reproduced as-is. Text: Small - Semi Bold (12px / 600). */
 .sds-badge--circle {
   min-width: var(--spacing-s-16);
   height: var(--spacing-s-16);
-  padding: 0 var(--spacing-s-4);
+  padding: 2px 4.5px;
   border-radius: var(--border-circular);
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  /* Open Sans Semi-Bold per spec; 600 is a font-weight (not a color/spacing/radius)
-     and no Semi-Bold caption weight token exists (--font-caption-weight resolves to 400). */
-  font-weight: 600;
+  font-size: var(--font-caption-semibold-size);
+  font-weight: var(--font-caption-semibold-weight);
+  line-height: 90%;
+  white-space: nowrap;
 }
 
 .sds-badge--circle.sds-badge--neutral {
@@ -62,13 +61,28 @@
   color: var(--badges-circle-active-text);
 }
 
-/* ===== Overlay (pinned top-right of a host icon/avatar) =====
-   Place inside a position:relative host container. The white separating stroke
-   reuses the dot's neutral stroke token (resolves to white). */
+/* ===== Overlay (Figma "Badge with instance") =====
+   Place inside a position:relative container sized to the host icon/avatar.
+   Counter: overlaps the host's right edge by 4px, centered on its top edge.
+   Dot: centered on the host's right edge, aligned to its bottom edge. */
 .sds-badge--overlay {
   position: absolute;
+}
+
+.sds-badge--overlay.sds-badge--circle {
   top: 0;
+  left: calc(100% - var(--spacing-s-4));
+  transform: translateY(-50%);
+}
+
+.sds-badge--overlay.sds-badge--dot {
   right: 0;
-  transform: translate(50%, -50%);
-  border: 1px solid var(--badges-dot-neutral-stroke);
+  bottom: 0;
+  transform: translateX(50%);
+}
+
+/* White separating ring: Figma puts a 1px OUTSIDE stroke (Badges/Dot/neutral-stroke)
+   only on the neutral dot overlaid on an icon — box-shadow keeps the 8px fill intact. */
+.sds-badge--overlay.sds-badge--dot.sds-badge--neutral {
+  box-shadow: 0 0 0 1px var(--badges-dot-neutral-stroke);
 }

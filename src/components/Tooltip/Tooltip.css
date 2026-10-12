@@ -1,6 +1,10 @@
-/* Tooltip — Spotler Design System
-   Spec: references/components/tooltip.md
-   Floating surface: white background, body-small text, overlay shadow, pointer toward anchor. */
+/* Tooltip — Spotler Design System (Figma set 458:11945)
+   Surface: padding 16px, radius large (8px), max width 300px (wraps beyond), Paragraph - Regular,
+   Tooltip/background + Tooltip/text. Pointer: 16×8 triangle centered on the edge facing the anchor,
+   4px from the anchor (Figma usage example 458:12000).
+   Shadow: Figma applies effect style "OBSOLETE - Drop Shadow/100" to the whole component
+   (surface + pointer). It has no token, so its raw values are reproduced here:
+   0 1px 4px #0C0C0D @5% + 0 1px 4px #0C0C0D @10%. */
 
 .sds-tooltip {
   position: relative;
@@ -17,48 +21,106 @@
 }
 
 .sds-tooltip__surface {
+  /* Anchor ↔ surface distance: 4px without a pointer, 8px pointer + 4px with one. */
+  --sds-tooltip-offset: var(--spacing-s-4);
   position: absolute;
   z-index: 1;
-  max-width: 240px;
-  padding: var(--spacing-s-4) var(--spacing-s-8);
-  border-radius: var(--border-small);
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 300px;
+  padding: var(--spacing-s-16);
+  border-radius: var(--border-large);
   background: var(--tooltip-background);
   color: var(--tooltip-text);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
   font-weight: var(--font-body-weight);
-  white-space: nowrap;
-  box-shadow: var(--elevation-overlay);
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+  filter: drop-shadow(0 1px 4px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 4px rgba(12, 12, 13, 0.1));
   pointer-events: none;
+}
+
+.sds-tooltip__surface--pointer {
+  --sds-tooltip-offset: var(--spacing-s-12);
 }
 
 .sds-tooltip__surface[hidden] {
   display: none;
 }
 
-/* ===== Placement ===== */
+/* ===== Placement (surface relative to the anchor) ===== */
 .sds-tooltip__surface--top {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: var(--spacing-s-8);
+  margin-bottom: var(--sds-tooltip-offset);
 }
 .sds-tooltip__surface--bottom {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: var(--spacing-s-8);
+  margin-top: var(--sds-tooltip-offset);
 }
 .sds-tooltip__surface--left {
   right: 100%;
   top: 50%;
   transform: translateY(-50%);
-  margin-right: var(--spacing-s-8);
+  margin-right: var(--sds-tooltip-offset);
 }
 .sds-tooltip__surface--right {
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  margin-left: var(--spacing-s-8);
+  margin-left: var(--sds-tooltip-offset);
+}
+
+/* ===== Pointer (Figma "Arrow", 16×8, centered on the edge facing the anchor) =====
+   Figma binds the arrow fill to Monochrome/White; it uses Tooltip/background (same #FFFFFF)
+   so it always matches the surface. */
+.sds-tooltip__pointer {
+  position: absolute;
+  background: var(--tooltip-background);
+}
+
+/* Surface below the anchor → pointer on top, pointing up (Figma Pointer pozition=Top, default). */
+.sds-tooltip__surface--bottom .sds-tooltip__pointer {
+  bottom: 100%;
+  left: 50%;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-8);
+  transform: translateX(-50%);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+/* Surface above the anchor → pointer at the bottom, pointing down (Pointer pozition=Down). */
+.sds-tooltip__surface--top .sds-tooltip__pointer {
+  top: 100%;
+  left: 50%;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-8);
+  transform: translateX(-50%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* Surface right of the anchor → pointer on the left, pointing left (Pointer pozition=Left). */
+.sds-tooltip__surface--right .sds-tooltip__pointer {
+  right: 100%;
+  top: 50%;
+  width: var(--spacing-s-8);
+  height: var(--spacing-s-16);
+  transform: translateY(-50%);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+/* Surface left of the anchor → pointer on the right, pointing right (Pointer pozition=Right). */
+.sds-tooltip__surface--left .sds-tooltip__pointer {
+  left: 100%;
+  top: 50%;
+  width: var(--spacing-s-8);
+  height: var(--spacing-s-16);
+  transform: translateY(-50%);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }

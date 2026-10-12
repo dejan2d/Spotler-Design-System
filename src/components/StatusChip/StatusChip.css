@@ -1,11 +1,12 @@
-/* Status Chip — Spotler Design System
-   Spec: references/components/status-chip.md
-   Row, padding 4px 8px, gap 8px, radius large (8px), 24px tall. Non-interactive. */
+/* Status Chip — Spotler Design System (Figma set 9359:1696)
+   Row, padding 4px 8px, gap 8px, radius large (8px), 24px tall, items centered.
+   Icon 16px; label Paragraph - Small. Non-interactive. */
 
 .sds-status-chip {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-s-8);
+  box-sizing: border-box;
   height: var(--spacing-s-24);
   padding: var(--spacing-s-4) var(--spacing-s-8);
   border-radius: var(--border-large);

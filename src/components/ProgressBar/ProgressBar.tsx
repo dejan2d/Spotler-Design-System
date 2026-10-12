@@ -2,18 +2,23 @@ import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import './ProgressBar.css';
 
-/** Color variant. Mirrors the Spotler "Progress Bar" component variants. */
-export type ProgressBarVariant = 'primary' | 'neutral';
+/**
+ * Color variant. Mirrors the Figma "Progress bar" `Type` property (set 670:14965):
+ * `Primary` → `primary`, `Neutral` → `neutral`, `Disabled` → `disabled`.
+ */
+export type ProgressBarVariant = 'primary' | 'neutral' | 'disabled';
 
 export interface ProgressBarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'role'> {
   /**
-   * Color variant.
-   * `primary` fills with the conceptual blue; `neutral` fills with monochrome gray.
+   * Color variant (Figma `Type`).
+   * - `primary` — blue fill; use on white backgrounds.
+   * - `neutral` — gray fill; use on colored backgrounds (including inside alerts).
+   * - `disabled` — Disabled/background track, Disabled/icon fill, Disabled/text labels.
    * @default 'primary'
    */
   variant?: ProgressBarVariant;
   /**
-   * Completion value, clamped to `min`..`max`. Ignored when `indeterminate` is set.
+   * Completion value, clamped to `min`..`max`.
    * @default 0
    */
   value?: number;
@@ -28,14 +33,18 @@ export interface ProgressBarProps extends Omit<HTMLAttributes<HTMLDivElement>, '
    */
   max?: number;
   /**
-   * Indeterminate (unknown total) progress. Animates a moving fill and omits
-   * `aria-valuenow` per the spec. Prefer a Loader for unknown-duration waits.
-   * @default false
+   * Show the label before the track (Figma `Show Left Label`).
+   * @default true
    */
-  indeterminate?: boolean;
+  showLeftLabel?: boolean;
   /**
-   * Optional visible label shown alongside the track (e.g. "Uploading" or "60%").
-   * Never rely on color alone to convey state — pair the bar with a label or percentage.
+   * Show the label after the track (Figma `Show Label Right`).
+   * @default true
+   */
+  showRightLabel?: boolean;
+  /**
+   * Text of the visible labels. Defaults to the rounded percentage (e.g. `"70%"`), which is
+   * what Figma's `Percentage` text layers show.
    */
   label?: string;
   /**
@@ -48,18 +57,19 @@ export interface ProgressBarProps extends Omit<HTMLAttributes<HTMLDivElement>, '
 const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
 
 /**
- * Progress Bar — Spotler Design System.
+ * Progress Bar — Spotler Design System (Figma "Progress bar", set 670:14965).
  *
- * A linear indicator of completion or ongoing progress toward a known total
- * (uploads, multi-item processing, completion meters). For unknown-duration waits
- * use a Loader; progress bars are not interactive (never a slider).
+ * A linear indicator of completion toward a known total (uploads, multi-item processing,
+ * completion meters). For unknown-duration waits use a Loader; progress bars are not
+ * interactive (never a slider).
  *
- * Anatomy: rounded track (8px tall, radius small) with a filled portion proportional
- * to value; optional percentage/label. Fill changes animate smoothly. Variants:
- * Primary, Neutral. States: determinate, indeterminate.
+ * Figma spec: horizontal row, gap 12px, items centered. Optional percentage label on each
+ * side (both shown by default), text style Paragraph - Regular. Track 8px tall, radius 4px;
+ * fill radius 4px. Types: Primary (Progress Bar/primary-*), Neutral (Progress Bar/neutral-*),
+ * Disabled (Disabled/background, Disabled/icon, Disabled/text).
  *
- * Accessibility: renders `role="progressbar"` with `aria-valuenow/min/max`. For
- * indeterminate work `aria-valuenow` is omitted and `aria-busy` is set.
+ * Accessibility: renders `role="progressbar"` with `aria-valuenow/min/max`; the visible
+ * labels are `aria-hidden` duplicates; `disabled` sets `aria-disabled`.
  */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function ProgressBar(
   {
@@ -67,7 +77,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
     value = 0,
     min = 0,
     max = 100,
-    indeterminate = false,
+    showLeftLabel = true,
+    showRightLabel = true,
     label,
     ariaLabel,
     className,
@@ -76,12 +87,13 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
   ref,
 ) {
   const safeMax = max > min ? max : min + 1;
-  const pct = indeterminate ? 0 : ((clamp(value, min, safeMax) - min) / (safeMax - min)) * 100;
+  const clamped = clamp(value, min, safeMax);
+  const pct = ((clamped - min) / (safeMax - min)) * 100;
+  const labelText = label ?? `${Math.round(pct)}%`;
 
   const classes = [
     'sds-progress-bar',
     `sds-progress-bar--${variant}`,
-    indeterminate && 'sds-progress-bar--indeterminate',
     className,
   ]
     .filter(Boolean)
@@ -89,24 +101,26 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
 
   return (
     <div ref={ref} className={classes} {...rest}>
+      {showLeftLabel && labelText && (
+        <span className="sds-progress-bar__label sds-progress-bar__label--left" aria-hidden="true">
+          {labelText}
+        </span>
+      )}
       <div
         className="sds-progress-bar__track"
         role="progressbar"
         aria-valuemin={min}
         aria-valuemax={safeMax}
-        aria-valuenow={indeterminate ? undefined : clamp(value, min, safeMax)}
-        aria-busy={indeterminate || undefined}
+        aria-valuenow={clamped}
+        aria-disabled={variant === 'disabled' || undefined}
         aria-label={ariaLabel ?? label ?? 'Progress'}
-        aria-valuetext={!indeterminate && label ? label : undefined}
+        aria-valuetext={label}
       >
-        <div
-          className="sds-progress-bar__fill"
-          style={indeterminate ? undefined : { width: `${pct}%` }}
-        />
+        <div className="sds-progress-bar__fill" style={{ width: `${pct}%` }} />
       </div>
-      {label && (
-        <span className="sds-progress-bar__label" aria-hidden="true">
-          {label}
+      {showRightLabel && labelText && (
+        <span className="sds-progress-bar__label sds-progress-bar__label--right" aria-hidden="true">
+          {labelText}
         </span>
       )}
     </div>
