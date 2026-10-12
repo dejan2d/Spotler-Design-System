@@ -1,15 +1,17 @@
 /* Navigation — Spotler Design System
-   Left-side primary navigation. Dark sidebar (#002A4D), profile footer (#001D34).
-   Expanded 220px / collapsed 60px; items 52px tall, radius 4px; icon 20×20;
-   logo area 96px; collapse toggle 32×32 round; 150ms transitions.
-   All color/typography/radius/spacing values are tokens. Fixed structural
-   dimensions (220/60/52/96/44/32/42) are documented component sizes. */
+   Figma: Navigation Item 4228:9237, Spotler Activate / CRM / Engage Left Navigation,
+   Profile 1887:56096.
+   Sidebar Rest/Knowledge/Knowledge - Info (Figma binds the base colour; the
+   Navigation/background token has the same value), profile footer
+   Navigation/Expanded Menu/background. Expanded 220px / collapsed 60px; items
+   52px, radius 4px, stacked with no gap; icon 20×20; logo area 96px; toggle 32×32.
+   Fixed structural dimensions (220/60/52/96/32) are documented component sizes. */
 
 .sds-navigation {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--navigation-background);
+  background: var(--rest-knowledge-knowledge-info);
   font-family: var(--font-family);
   transition: width 150ms ease-in-out;
 }
@@ -22,18 +24,20 @@
   width: 60px;
 }
 
-/* ===== Header / logo area (96px) ===== */
+/* ===== Header / logo area (96px; padding 20px 0, row padding-left 16px, gap 12px) ===== */
 .sds-navigation__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-12);
   min-height: 96px;
-  padding: 0 var(--spacing-s-8);
+  padding: var(--spacing-s-20) 0 var(--spacing-s-20) var(--spacing-s-16);
+  box-sizing: border-box;
 }
 
 .sds-navigation--collapsed .sds-navigation__header {
   justify-content: center;
+  padding: var(--spacing-s-20) 0;
 }
 
 .sds-navigation__brand {
@@ -46,7 +50,8 @@
   display: none;
 }
 
-/* Collapse toggle — 32×32 round button, fa-chevron-left. */
+/* Collapse toggle — 32×32 round button, chevron-left glyph in Monochrome/White on
+   Rest/Knowledge/Knowledge - Info (Figma). No hover state in Figma. */
 .sds-navigation__toggle {
   display: inline-flex;
   align-items: center;
@@ -55,16 +60,20 @@
   width: 32px;
   height: 32px;
   padding: 0;
-  background: var(--navigation-background);
+  background: var(--rest-knowledge-knowledge-info);
   border: var(--border-small) solid transparent;
   border-radius: var(--border-circular);
-  color: var(--navigation-expanded-menu-collapse-icon);
+  color: var(--monochrome-white);
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+  transition: border-color 150ms ease-in-out;
 }
 
-.sds-navigation__toggle:hover {
-  background: var(--navigation-expanded-menu-background);
+/* Figma: the expanded logo row is 233px wide inside the 220px sidebar, so the
+   toggle hangs 13px past the sidebar's right edge (no spacing token for 13px). */
+.sds-navigation--expanded .sds-navigation__toggle {
+  position: relative;
+  z-index: 1;
+  margin-right: -13px;
 }
 
 .sds-navigation__toggle:focus-visible {
@@ -85,12 +94,12 @@
   font-size: 20px;
 }
 
-/* ===== Items area (padding 0 8px) ===== */
+/* ===== Items area (padding 0 8px; items stack with no gap) ===== */
 .sds-navigation__items {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-4);
+  gap: 0;
   margin: 0;
   padding: 0 var(--spacing-s-8);
   list-style: none;
@@ -101,7 +110,7 @@
 .sds-navigation__section-items {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-4);
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -111,20 +120,21 @@
   display: flex;
 }
 
-/* Divider — 1px #8795A0; width follows the item (204px / 44px). */
+/* Divider — 1px Monochrome/Gray - 600, item width (204px / 44px). In Figma it is a
+   zero-height line between items, so it takes no space (-1px margin). */
 .sds-navigation__divider {
   display: block;
   width: 100%;
-  height: 1px;
-  background: var(--monochrome-gray-600);
-  margin: var(--spacing-s-8) 0;
+  height: 0;
+  border-top: 1px solid var(--monochrome-gray-600);
+  margin: 0 0 -1px;
 }
 
-/* Section labels (CRM) — SemiBold 14/28, #E7ECED, padding 0 16px. */
+/* Section labels (CRM) — H4, Monochrome/Gray - 200, padding 0 16px. */
 .sds-navigation__section-label {
-  font-weight: 600;
-  font-size: var(--font-body-size);
+  font-size: var(--font-h4-size);
   line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
   color: var(--monochrome-gray-200);
   padding: 0 var(--spacing-s-16);
 }
@@ -182,28 +192,35 @@
   flex-shrink: 0;
 }
 
-/* Hover — #DBE1E6 bg, #002A4D text + icon. */
-.sds-navigation__item:hover:not(:disabled):not([aria-disabled='true']) {
+/* Focused — 1px Monochrome/White stroke (no layout shift; rest border is transparent
+   1px), Paragraph - Semi Bold, selected text + icon colours, no fill. */
+.sds-navigation__item:focus-visible {
+  outline: none;
+  border-color: var(--monochrome-white);
+  color: var(--navigation-item-selected-text);
+  font-weight: var(--font-body-semibold-weight);
+}
+
+.sds-navigation__item:focus-visible .sds-navigation__icon {
+  color: var(--navigation-item-selected-icon);
+}
+
+/* Hover — Navigation/Item/hover-* (selected items keep the Selected look). */
+.sds-navigation__item:hover:not(:disabled):not([aria-disabled='true']):not(.sds-navigation__item--selected) {
   background: var(--navigation-item-hover-background);
   color: var(--navigation-item-hover-text);
 }
 
-.sds-navigation__item:hover:not(:disabled):not([aria-disabled='true']) .sds-navigation__icon {
+.sds-navigation__item:hover:not(:disabled):not([aria-disabled='true']):not(.sds-navigation__item--selected) .sds-navigation__icon {
   color: var(--navigation-item-hover-icon);
 }
 
-/* Focused — 1px solid #FFFFFF (no layout shift; rest border is transparent 1px). */
-.sds-navigation__item:focus-visible {
-  outline: none;
-  border-color: var(--monochrome-white);
-}
-
-/* Selected — #005499 bg, #FFFFFF SemiBold text + icon (overrides hover). */
+/* Selected — Navigation/Item/selected-*, Paragraph - Semi Bold. */
 .sds-navigation__item--selected,
 .sds-navigation__item--selected:hover {
   background: var(--navigation-item-selected-background);
   color: var(--navigation-item-selected-text);
-  font-weight: 600;
+  font-weight: var(--font-body-semibold-weight);
 }
 
 .sds-navigation__item--selected .sds-navigation__icon,
@@ -211,27 +228,33 @@
   color: var(--navigation-item-selected-icon);
 }
 
-/* Disabled — Regular 14/20, #9FACB3 text + icon, transparent bg. */
+/* Disabled — Paragraph - Regular, Disabled/text + Disabled/icon, no fill. */
 .sds-navigation__item:disabled,
 .sds-navigation__item[aria-disabled='true'] {
   background: transparent;
-  color: var(--monochrome-gray-500);
+  color: var(--disabled-text);
+  font-weight: var(--font-body-weight);
   cursor: not-allowed;
 }
 
 .sds-navigation__item:disabled .sds-navigation__icon,
 .sds-navigation__item[aria-disabled='true'] .sds-navigation__icon {
-  color: var(--monochrome-gray-500);
+  color: var(--disabled-icon);
 }
 
-/* ===== Profile footer (#001D34) ===== */
+/* ===== Profile footer — Figma Profile: Navigation/Expanded Menu/background band,
+   Company Name (…/heading) + Name User (…/text), both #FFFFFF Paragraph - Regular,
+   centred, 4px apart. ===== */
 .sds-navigation__footer {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-8);
+  align-items: center;
+  gap: var(--spacing-s-4);
   padding: var(--spacing-s-16) var(--spacing-s-8);
   background: var(--navigation-expanded-menu-background);
-  color: var(--monochrome-gray-200);
+  color: var(--navigation-expanded-menu-text);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  text-align: center;
 }

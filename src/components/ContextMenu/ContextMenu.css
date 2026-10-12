@@ -1,40 +1,46 @@
 /* Context Menu — Spotler Design System
-   A floating list of actions/options triggered by right-click or a more-actions affordance.
-   Rounded container (radius medium) on the overlay surface, 1px frame-border hairline,
-   overlay elevation, stacked basic/specific items with optional group dividers.
-   All color/spacing/radius/type values are tokens (icon sizing boxes use literal px,
-   matching the Button house style). */
+   Figma: Context Menu 968:47065, Context item 849:8010, Context List 849:8047.
+   Frame: white, 1px frame-border stroke (Figma "Inside" → inset box-shadow so the
+   8px padding is measured from the outer edge), radius 4px, 8px padding, 2px item
+   gap, effect Drop Shadow/50. Items 36px, radius 4px, padding 8px, 20×20 icon slots.
+   2px has no spacing token (Figma List itemSpacing 2). */
 
 .sds-context-menu {
   display: flex;
   flex-direction: column;
-  min-width: 200px;
-  padding: var(--spacing-s-4);
-  background: var(--context-menu-basic-rest-background);
-  border: 1px solid var(--context-menu-frame-border);
-  border-radius: var(--border-medium);
-  box-shadow: var(--elevation-overlay);
+  gap: 2px;
+  /* 180px items + 2 × 8px padding (Figma frame 196px). */
+  min-width: 196px;
+  padding: var(--spacing-s-8);
+  background: var(--monochrome-white);
+  border: none;
+  border-radius: var(--border-small);
+  box-shadow: inset 0 0 0 1px var(--context-menu-frame-border), var(--drop-shadow-50);
   font-family: var(--font-family);
+  box-sizing: border-box;
 }
 
 .sds-context-menu__row {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
-/* Group divider — hairline (1px) paired with the frame-border token color. */
+/* Group divider — Figma Divider line, 1px Monochrome/Gray - 200; spacing comes from the 2px gap. */
 .sds-context-menu__divider {
   height: 1px;
-  margin: var(--spacing-s-4) 0;
-  background: var(--context-menu-frame-border);
+  margin: 0;
+  background: var(--monochrome-gray-200);
 }
 
+/* Paragraph - Regular; 8px padding on all sides, 8px gap (Figma state-layer). */
 .sds-context-menu__item {
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
   width: 100%;
-  padding: var(--spacing-s-8) var(--spacing-s-12);
+  min-height: var(--spacing-s-36);
+  padding: var(--spacing-s-8);
   border: none;
   border-radius: var(--border-small);
   background: transparent;
@@ -52,14 +58,15 @@
   outline-offset: -2px;
 }
 
+/* 20×20 icon slot (Figma "Icon box"). */
 .sds-context-menu__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
 }
 
 .sds-context-menu__label {
@@ -67,14 +74,20 @@
   min-width: 0;
 }
 
+/* 20×20 trailing checkmark (Figma `check` instance). */
 .sds-context-menu__checkmark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
+}
+
+/* Selected — Paragraph - Semi Bold (both kinds). */
+.sds-context-menu__item--selected {
+  font-weight: var(--font-body-semibold-weight);
 }
 
 /* ===== Basic items (leading icon + label) ===== */
@@ -129,26 +142,10 @@
   color: var(--context-menu-specific-selected-checkmark);
 }
 
-/* ===== Destructive items =====
-   No dedicated context-menu destructive token exists; falls back to the
-   semantic alert foundation colors. */
-.sds-context-menu__item--destructive,
-.sds-context-menu__item--destructive .sds-context-menu__icon {
-  color: var(--semantic-red-alert-alert);
-}
-
-.sds-context-menu__item--destructive:hover:not(:disabled):not([aria-disabled='true']) {
-  background: var(--semantic-red-alert-alert-lighter);
-  color: var(--semantic-red-alert-alet-darker);
-}
-
-.sds-context-menu__item--destructive:hover:not(:disabled):not([aria-disabled='true']) .sds-context-menu__icon {
-  color: var(--semantic-red-alert-alet-darker);
-}
-
-/* ===== Disabled (all variants) ===== */
+/* ===== Disabled (all variants) — white fill (Monochrome/White), Disabled/text + Disabled/icon ===== */
 .sds-context-menu__item:disabled,
 .sds-context-menu__item[aria-disabled='true'] {
+  background: var(--monochrome-white);
   color: var(--disabled-text);
   cursor: not-allowed;
 }

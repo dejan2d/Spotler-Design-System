@@ -1,11 +1,15 @@
 /* Accordion — Spotler Design System
-   Header padding 12px 16px, content padding 4px 16px 16px, gap 8px,
-   radius 4px (--border-small), 1px hairline stroke/divider from the foundation.
-   Chevron rotates 180° as a non-color state cue; panel height animates on toggle. */
+   Figma: Accordion 1555:18885, Accordion group 1578:22656.
+   Outer padding 8px; header row padding 8px 4px, radius 4px (collapsed item = 52px);
+   panel padding 8px; heading + paragraph = Paragraph - Regular.
+   No-background: white fill, 1px bottom stroke (inside), no radius.
+   With-background: Accordion/with-background-fill, radius 4px.
+   No hover or disabled state (none in Figma); keyboard focus ring kept.
+   Chevron is angle-down in both states (Figma, no rotation); panel height animates on toggle. */
 
 .sds-accordion {
   font-family: var(--font-family);
-  border-radius: var(--border-small);
+  padding: var(--spacing-s-8);
   overflow: hidden;
 }
 
@@ -13,18 +17,18 @@
 .sds-accordion__header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-4);
   width: 100%;
-  padding: var(--spacing-s-12) var(--spacing-s-16);
+  padding: var(--spacing-s-8) var(--spacing-s-4);
   border: none;
+  border-radius: var(--border-small);
   background: transparent;
   font-family: var(--font-family);
-  font-size: var(--font-h4-size);
-  line-height: var(--font-h4-line);
-  font-weight: var(--font-h4-weight);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   text-align: left;
   cursor: pointer;
-  transition: background-color 150ms ease-in-out;
 }
 
 .sds-accordion__header:focus-visible {
@@ -32,12 +36,21 @@
   outline-offset: -2px;
 }
 
+/* Title + chevron share a row with an 8px gap (Figma "Left+text"). */
+.sds-accordion__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 /* Chevron on the left swaps the visual order without changing DOM order. */
 .sds-accordion--chevron-left .sds-accordion__chevron {
   order: -1;
 }
 
-/* ===== Icons ===== */
+/* ===== Icons (20×20) ===== */
 .sds-accordion__icon-start,
 .sds-accordion__chevron {
   display: inline-flex;
@@ -51,15 +64,11 @@
 
 .sds-accordion__heading {
   flex: 1 1 auto;
+  min-width: 0;
 }
 
-/* Default CSS-drawn chevron (no glyph/emoji) when no chevron node is provided.
-   Rotates 180° on expand. A provided chevron node renders inside this span and
-   rotates the same way. */
-.sds-accordion__chevron {
-  transition: transform 150ms ease-in-out;
-}
-
+/* Default CSS-drawn angle-down (no glyph/emoji) when no chevron node is provided.
+   Figma shows angle-down in both the expanded and collapsed states. */
 .sds-accordion__chevron:empty::before {
   content: '';
   width: var(--spacing-s-8);
@@ -67,10 +76,6 @@
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: translateY(-25%) rotate(45deg);
-}
-
-.sds-accordion--expanded .sds-accordion__chevron {
-  transform: rotate(180deg);
 }
 
 /* ===== Panel (animated height) ===== */
@@ -87,15 +92,16 @@
 .sds-accordion__content {
   overflow: hidden;
   min-height: 0;
-  padding: 0 var(--spacing-s-16);
+  padding: 0 var(--spacing-s-8);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
   font-weight: var(--font-body-weight);
 }
 
-/* Pad and reveal content only when expanded so the collapsed row truly is 0. */
+/* Pad and reveal content only when expanded so the collapsed row truly is 0
+   (Figma Panel padding 8px on all sides). */
 .sds-accordion--expanded .sds-accordion__content {
-  padding: var(--spacing-s-4) var(--spacing-s-16) var(--spacing-s-16);
+  padding: var(--spacing-s-8);
 }
 
 /* Keep collapsed content out of the tab order. */
@@ -106,9 +112,7 @@
 /* ===== With background ===== */
 .sds-accordion--with-background {
   background: var(--accordion-with-background-fill);
-}
-.sds-accordion--with-background .sds-accordion__header:hover {
-  background: var(--monochrome-gray-100);
+  border-radius: var(--border-small);
 }
 .sds-accordion--with-background .sds-accordion__heading {
   color: var(--accordion-with-background-heading);
@@ -123,14 +127,11 @@
   color: var(--accordion-with-background-paragraph);
 }
 
-/* ===== No background ===== */
+/* ===== No background — white fill, 1px bottom stroke (Figma "Inside"), no radius ===== */
 .sds-accordion--no-background {
-  background: transparent;
-  border: 1px solid var(--accordion-no-background-stroke);
-  border-radius: var(--border-small);
-}
-.sds-accordion--no-background .sds-accordion__header:hover {
-  background: var(--monochrome-gray-50);
+  background: var(--monochrome-white);
+  border-radius: var(--border-none);
+  box-shadow: inset 0 -1px 0 var(--accordion-no-background-stroke);
 }
 .sds-accordion--no-background .sds-accordion__heading {
   color: var(--accordion-no-background-heading);
@@ -145,30 +146,15 @@
   color: var(--accordion-no-background-paragraph);
 }
 
-/* ===== Disabled ===== */
-.sds-accordion--disabled .sds-accordion__header {
-  cursor: not-allowed;
-  color: var(--monochrome-gray-500);
-}
-.sds-accordion--disabled .sds-accordion__header:hover {
-  background: transparent;
-}
-.sds-accordion--disabled .sds-accordion__heading,
-.sds-accordion--disabled .sds-accordion__icon-start,
-.sds-accordion--disabled .sds-accordion__chevron {
-  color: var(--monochrome-gray-500);
-}
-
-/* ===== Group (stacked items with foundation divider) ===== */
+/* ===== Group — items stack edge to edge (Figma gap 0) ===== */
 .sds-accordion-group {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-8);
+  gap: 0;
 }
 
 /* Reduced motion: keep state changes instant. */
 @media (prefers-reduced-motion: reduce) {
-  .sds-accordion__chevron,
   .sds-accordion__panel {
     transition: none;
   }
