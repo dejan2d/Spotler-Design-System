@@ -1,7 +1,9 @@
 /* Time Picker — Spotler Design System
-   Spec: references/components/time-picker.md
-   Field reuses Inputs Regular Text Field tokens; option list uses Time Picker tokens
-   on the overlay surface. */
+   Picker: Figma "Time picker" 1302:13533 — row, padding 16px 8px, gap 4px, radius 4px, Monochrome/White;
+   hours | minutes columns (5 visible slots, gap 8px) split by a vertical Divider.
+   Slot: "single time slot" 1302:13503 — padding 12px, radius 4px, Paragraph - Regular.
+   Field: Inputs › Input Field 9396:14218, Size=Regular (label Paragraph - Semi Bold, 40px,
+   padding 8px 12px, radius 8px) with the Inputs/Regular Text Field/<state>-* tokens. */
 
 .sds-time-picker {
   display: flex;
@@ -12,12 +14,16 @@
 }
 
 .sds-time-picker__label {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
   color: var(--inputs-regular-text-field-default-label);
 }
 
 .sds-time-picker__optional {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   /* token name preserves the source 'deafult' typo to match the Figma variable id */
   color: var(--inputs-regular-text-field-deafult-label-optional-text);
 }
@@ -26,31 +32,25 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  min-height: var(--spacing-s-40);
   padding: var(--spacing-s-8) var(--spacing-s-12);
   background: var(--inputs-regular-text-field-default-background);
   border: 1px solid var(--inputs-regular-text-field-default-stroke);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
-}
-
-.sds-time-picker__field:hover {
-  background: var(--inputs-regular-text-field-hover-background);
-  border-color: var(--inputs-regular-text-field-hover-stroke);
-}
-
-.sds-time-picker__field:focus-within {
-  background: var(--inputs-regular-text-field-focused-background);
-  border-color: var(--inputs-regular-text-field-focused-stroke);
 }
 
 .sds-time-picker__input {
   flex: 1;
+  padding: 0;
   border: none;
   outline: none;
   background: transparent;
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--inputs-regular-text-field-filled-text);
   min-width: 0;
   cursor: pointer;
@@ -58,10 +58,12 @@
 
 .sds-time-picker__input::placeholder {
   color: var(--inputs-regular-text-field-default-text);
+  opacity: 1;
 }
 
 .sds-time-picker__trigger {
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -76,79 +78,163 @@
   outline-offset: 2px;
 }
 
+/* Input Field icons are 20×20 */
 .sds-time-picker__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
 }
 
 .sds-time-picker__hint {
   margin: 0;
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
   color: var(--inputs-regular-text-field-default-hint-message);
 }
 
-/* Option list — floating, overlay elevation */
-.sds-time-picker__listbox {
+/* ===== Filled (a time is set) ===== */
+.sds-time-picker--filled .sds-time-picker__label {
+  color: var(--inputs-regular-text-field-filled-label);
+}
+
+.sds-time-picker--filled .sds-time-picker__field {
+  background: var(--inputs-regular-text-field-filled-background);
+  border-color: var(--inputs-regular-text-field-filled-stroke);
+}
+
+.sds-time-picker--filled .sds-time-picker__trigger {
+  color: var(--inputs-regular-text-field-filled-icon-end);
+}
+
+/* ===== Hover ===== */
+.sds-time-picker__field:hover {
+  background: var(--inputs-regular-text-field-hover-background);
+  border-color: var(--inputs-regular-text-field-hover-stroke);
+}
+
+.sds-time-picker__field:hover .sds-time-picker__input::placeholder {
+  color: var(--inputs-regular-text-field-hover-text);
+}
+
+/* ===== Focused (also held while the picker is open) ===== */
+.sds-time-picker__field:focus-within,
+.sds-time-picker--open .sds-time-picker__field {
+  background: var(--inputs-regular-text-field-focused-background);
+  border-color: var(--inputs-regular-text-field-focused-stroke);
+}
+
+.sds-time-picker:focus-within .sds-time-picker__label,
+.sds-time-picker--open .sds-time-picker__label {
+  color: var(--inputs-regular-text-field-focused-label);
+}
+
+/* ===== Picker panel (Figma "Time picker") ===== */
+.sds-time-picker__popover {
   position: absolute;
   top: calc(100% + var(--spacing-s-4));
   left: 0;
-  right: 0;
   z-index: 10;
-  margin: 0;
-  padding: var(--spacing-s-4);
-  list-style: none;
-  max-height: 220px;
-  overflow-y: auto;
-  background: var(--time-picker-default-background);
-  border-radius: var(--border-medium);
-  box-shadow: var(--elevation-overlay);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-s-4);
+  padding: var(--spacing-s-16) var(--spacing-s-8);
+  border-radius: var(--border-small);
+  background: var(--monochrome-white);
+  /* Figma "Time picker" has no effect style, so no shadow */
 }
 
+/* A column shows 5 slots: 5 × 43px + 4 × 8px gap = 247px; scrolls without a visible scrollbar */
+.sds-time-picker__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+  height: 247px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sds-time-picker__column::-webkit-scrollbar {
+  display: none;
+}
+
+/* Divider / Orientation=Vertical */
+.sds-time-picker__divider {
+  flex: none;
+  align-self: stretch;
+  width: 1px;
+  background: var(--divider-vertical);
+}
+
+/* single time slot — Type=Default */
 .sds-time-picker__option {
-  padding: var(--spacing-s-8) var(--spacing-s-12);
+  flex: none;
+  padding: var(--spacing-s-12);
   border-radius: var(--border-small);
   background: var(--time-picker-default-background);
   color: var(--time-picker-default-text);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  text-align: center;
   cursor: pointer;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
 }
 
+/* Type=Hover */
 .sds-time-picker__option:hover {
   background: var(--time-picker-hover-background);
   color: var(--time-picker-hover-text);
 }
 
+/* Focus — not designed in Figma; kept for keyboard users */
 .sds-time-picker__option:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: -2px;
 }
 
-/* Selected — non-color cue via bold weight in addition to fill */
-.sds-time-picker__option--selected {
+/* Type=Selected */
+.sds-time-picker__option--selected,
+.sds-time-picker__option--selected:hover {
   background: var(--time-picker-selected-background);
   color: var(--time-picker-selected-text);
-  font-weight: var(--font-h3-weight);
 }
 
 /* ===== Error ===== */
+.sds-time-picker--error .sds-time-picker__label {
+  color: var(--inputs-regular-text-field-error-label);
+}
+
 .sds-time-picker--error .sds-time-picker__field,
 .sds-time-picker--error .sds-time-picker__field:hover,
-.sds-time-picker--error .sds-time-picker__field:focus-within {
+.sds-time-picker--error .sds-time-picker__field:focus-within,
+.sds-time-picker--error.sds-time-picker--open .sds-time-picker__field {
   background: var(--inputs-regular-text-field-error-background);
   border-color: var(--inputs-regular-text-field-error-stroke);
 }
 
-.sds-time-picker--error .sds-time-picker__hint {
+.sds-time-picker--error .sds-time-picker__input {
   color: var(--inputs-regular-text-field-error-text);
 }
 
+.sds-time-picker--error .sds-time-picker__hint {
+  color: var(--inputs-regular-text-field-error-hint-message);
+}
+
 /* ===== Disabled ===== */
-.sds-time-picker--disabled .sds-time-picker__field {
+.sds-time-picker--disabled .sds-time-picker__label,
+.sds-time-picker--disabled .sds-time-picker__optional {
+  color: var(--disabled-text);
+}
+
+.sds-time-picker--disabled .sds-time-picker__field,
+.sds-time-picker--disabled .sds-time-picker__field:hover {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
 }
@@ -156,6 +242,10 @@
 .sds-time-picker--disabled .sds-time-picker__input {
   color: var(--disabled-text);
   cursor: not-allowed;
+}
+
+.sds-time-picker--disabled .sds-time-picker__input::placeholder {
+  color: var(--disabled-text);
 }
 
 .sds-time-picker--disabled .sds-time-picker__trigger {

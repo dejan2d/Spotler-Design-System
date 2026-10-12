@@ -1,7 +1,9 @@
 /* Date Picker — Spotler Design System
-   Component: "Date Picker". The field reuses the "Inputs / Regular Text Field" tokens;
-   the popover floats on the Date Picker surface at overlay elevation.
-   Field: padding 8px 12px, gap 8px, radius small (4px); popover offset 4px below the field. */
+   Field: Figma has no date-field design, so it follows Inputs › Input Field 9396:14218, Size=Regular:
+   label Paragraph - Semi Bold · field 40px, padding 8px 12px, gap 8px, radius 8px (Border/Large), 1px stroke
+   States Default / Filled / Hover / Focused / Error / Disabled → Inputs/Regular Text Field/<state>-* tokens.
+   Popover: offset 4px below the field, holds the Calendar (Figma "Date picker" 1302:11951 —
+   no effect, no radius). */
 
 .sds-date-picker {
   display: flex;
@@ -12,13 +14,17 @@
 }
 
 .sds-date-picker__label {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
   color: var(--inputs-regular-text-field-default-label);
 }
 
 /* NOTE: token name preserves the intentional "deafult" typo from component-tokens.css. */
 .sds-date-picker__optional {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--inputs-regular-text-field-deafult-label-optional-text);
 }
 
@@ -26,31 +32,25 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  min-height: var(--spacing-s-40);
   padding: var(--spacing-s-8) var(--spacing-s-12);
   background: var(--inputs-regular-text-field-default-background);
   border: 1px solid var(--inputs-regular-text-field-default-stroke);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
-}
-
-.sds-date-picker__field:hover {
-  background: var(--inputs-regular-text-field-hover-background);
-  border-color: var(--inputs-regular-text-field-hover-stroke);
-}
-
-.sds-date-picker__field:focus-within {
-  background: var(--inputs-regular-text-field-focused-background);
-  border-color: var(--inputs-regular-text-field-focused-stroke);
 }
 
 .sds-date-picker__input {
   flex: 1;
+  padding: 0;
   border: none;
   outline: none;
   background: transparent;
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--inputs-regular-text-field-filled-text);
   min-width: 0;
   cursor: pointer;
@@ -58,10 +58,12 @@
 
 .sds-date-picker__input::placeholder {
   color: var(--inputs-regular-text-field-default-text);
+  opacity: 1;
 }
 
 .sds-date-picker__trigger {
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -76,45 +78,84 @@
   outline-offset: 2px;
 }
 
+/* Input Field icons are 20×20 */
 .sds-date-picker__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-s-16);
-  height: var(--spacing-s-16);
-  font-size: var(--spacing-s-16);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
 }
 
 .sds-date-picker__hint {
   margin: 0;
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
   color: var(--inputs-regular-text-field-default-hint-message);
 }
 
-/* Popover surface — floating, overlay elevation, on the Date Picker default background. */
-.sds-date-picker__popover {
-  position: absolute;
-  top: calc(100% + var(--spacing-s-4));
-  left: 0;
-  z-index: 10;
-  background: var(--date-picker-default-background);
-  border-radius: var(--border-medium);
-  box-shadow: var(--elevation-overlay);
+/* ===== Filled (a date is set) ===== */
+.sds-date-picker--filled .sds-date-picker__label {
+  color: var(--inputs-regular-text-field-filled-label);
 }
 
-/* While open, hold the field in its focused styling so the trigger stays visually active. */
+.sds-date-picker--filled .sds-date-picker__field {
+  background: var(--inputs-regular-text-field-filled-background);
+  border-color: var(--inputs-regular-text-field-filled-stroke);
+}
+
+.sds-date-picker--filled .sds-date-picker__trigger {
+  color: var(--inputs-regular-text-field-filled-icon-end);
+}
+
+/* ===== Hover ===== */
+.sds-date-picker__field:hover {
+  background: var(--inputs-regular-text-field-hover-background);
+  border-color: var(--inputs-regular-text-field-hover-stroke);
+}
+
+.sds-date-picker__field:hover .sds-date-picker__input::placeholder {
+  color: var(--inputs-regular-text-field-hover-text);
+}
+
+/* ===== Focused (also held while the popover is open) ===== */
+.sds-date-picker__field:focus-within,
 .sds-date-picker--open .sds-date-picker__field {
   background: var(--inputs-regular-text-field-focused-background);
   border-color: var(--inputs-regular-text-field-focused-stroke);
 }
 
+.sds-date-picker:focus-within .sds-date-picker__label,
+.sds-date-picker--open .sds-date-picker__label {
+  color: var(--inputs-regular-text-field-focused-label);
+}
+
+/* Popover — positions the Calendar 4px below the field. The Figma Date picker panel
+   (1302:11951) has no effect, no radius and no stroke, so none is added here. */
+.sds-date-picker__popover {
+  position: absolute;
+  top: calc(100% + var(--spacing-s-4));
+  left: 0;
+  z-index: 10;
+}
+
 /* ===== Error ===== */
+.sds-date-picker--error .sds-date-picker__label {
+  color: var(--inputs-regular-text-field-error-label);
+}
+
 .sds-date-picker--error .sds-date-picker__field,
 .sds-date-picker--error .sds-date-picker__field:hover,
-.sds-date-picker--error .sds-date-picker__field:focus-within {
+.sds-date-picker--error .sds-date-picker__field:focus-within,
+.sds-date-picker--error.sds-date-picker--open .sds-date-picker__field {
   background: var(--inputs-regular-text-field-error-background);
   border-color: var(--inputs-regular-text-field-error-stroke);
+}
+
+.sds-date-picker--error .sds-date-picker__input {
+  color: var(--inputs-regular-text-field-error-text);
 }
 
 .sds-date-picker--error .sds-date-picker__hint {
@@ -122,7 +163,13 @@
 }
 
 /* ===== Disabled ===== */
-.sds-date-picker--disabled .sds-date-picker__field {
+.sds-date-picker--disabled .sds-date-picker__label,
+.sds-date-picker--disabled .sds-date-picker__optional {
+  color: var(--disabled-text);
+}
+
+.sds-date-picker--disabled .sds-date-picker__field,
+.sds-date-picker--disabled .sds-date-picker__field:hover {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
 }

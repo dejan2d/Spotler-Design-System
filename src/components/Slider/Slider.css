@@ -1,59 +1,96 @@
 /* Slider — Spotler Design System
-   No spec file; built from --slider-* tokens.
-   Anatomy: label, value display, track, fill, circular thumb. */
+   Figma: "Slider" component set 8247:42854 (page 93:103), Style=Single.
+   Min width 150px · slider area 44px tall · rail 4px · fill 6px · thumb 20×20 circle
+   Counter tooltip 4px above the thumb: padding 8px 12px, radius 4px, 16×8 arrow, Drop Shadow/100
+   Values row (min / max) directly under the slider area: Paragraph - Regular.
+   No visible label (visually hidden accessible name). The tooltip overflows above the box, as in Figma. */
 
 .sds-slider {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-8);
+  min-width: 150px;
   font-family: var(--font-family);
-  background: var(--slider-rest-range-background);
 }
 
-.sds-slider__header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--spacing-s-8);
-}
-
+/* Figma has no visible label: the accessible name is visually hidden. */
 .sds-slider__label {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  color: var(--slider-rest-text);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.sds-slider__value {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  color: var(--slider-rest-range-text);
+/* ===== Slider area (Figma "Slider" frame, 44px tall) =====
+   The rail, fill and tooltip are drawn behind / above a transparent native range input,
+   so keyboard and screen-reader behaviour stay native. --sds-slider-pct (0..1) is set inline. */
+.sds-slider__control {
+  position: relative;
+  height: var(--spacing-s-44);
 }
 
-/* Track + fill drawn via a gradient using the per-instance --sds-slider-fill var */
-.sds-slider__input {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 4px;
-  margin: 8px 0;
+/* *SliderRail — 4px, centred in the 44px area (y 20–24) */
+.sds-slider__rail {
+  position: absolute;
+  top: var(--spacing-s-20);
+  left: 0;
+  right: 0;
+  height: var(--spacing-s-4);
   border-radius: var(--border-circular);
-  background: linear-gradient(
-    to right,
-    var(--slider-rest-range-slider-fill) 0%,
-    var(--slider-rest-range-slider-fill) var(--sds-slider-fill, 0%),
-    var(--slider-rest-range-slider-background) var(--sds-slider-fill, 0%),
-    var(--slider-rest-range-slider-background) 100%
-  );
-  cursor: pointer;
+  background: var(--slider-rest-range-slider-background);
   transition: background-color 150ms ease-in-out;
 }
 
-/* Thumb — WebKit */
+/* *SliderTrack (fill) — 6px, centred on the rail (y 19–25), runs from the start to the thumb centre */
+.sds-slider__fill {
+  position: absolute;
+  top: 19px;
+  left: 0;
+  width: calc(var(--spacing-s-20) / 2 + (100% - var(--spacing-s-20)) * var(--sds-slider-pct, 0));
+  height: 6px;
+  border-radius: var(--border-circular);
+  background: var(--slider-rest-range-slider-fill);
+  transition: background-color 150ms ease-in-out;
+}
+
+/* Native range input — fills the 44px area; track is transparent, only the thumb is painted. */
+.sds-slider__input {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: var(--border-circular);
+  cursor: pointer;
+}
+
+.sds-slider__input::-webkit-slider-runnable-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+.sds-slider__input::-moz-range-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+/* Thumb — WebKit (20×20, centred: (44 - 20) / 2 = 12px) */
 .sds-slider__input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  margin-top: var(--spacing-s-12);
   border: none;
   border-radius: var(--border-circular);
   background: var(--slider-rest-range-slider-circle);
@@ -63,8 +100,8 @@
 
 /* Thumb — Firefox */
 .sds-slider__input::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   border: none;
   border-radius: var(--border-circular);
   background: var(--slider-rest-range-slider-circle);
@@ -72,68 +109,126 @@
   transition: background-color 150ms ease-in-out;
 }
 
-.sds-slider__input::-moz-range-track {
-  height: 4px;
-  border-radius: var(--border-circular);
-  background: transparent;
+/* ===== Counter tooltip (Figma "counter tooltip", Counter Toolbar = true) =====
+   Bottom edge sits 4px above the thumb top (thumb top = 12px → tooltip bottom at 8px). */
+.sds-slider__tooltip {
+  position: absolute;
+  bottom: calc(100% - var(--spacing-s-8));
+  left: calc(var(--spacing-s-20) / 2 + (100% - var(--spacing-s-20)) * var(--sds-slider-pct, 0));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+  filter: drop-shadow(var(--drop-shadow-100));
+  pointer-events: none;
 }
 
-/* ===== Hover ===== */
-.sds-slider__input:hover:not(:disabled) {
-  background: linear-gradient(
-    to right,
-    var(--slider-hover-range-slider-fill) 0%,
-    var(--slider-hover-range-slider-fill) var(--sds-slider-fill, 0%),
-    var(--slider-hover-range-slider-background) var(--sds-slider-fill, 0%),
-    var(--slider-hover-range-slider-background) 100%
-  );
+.sds-slider__tooltip-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  border-radius: var(--border-small);
+  background: var(--slider-rest-range-background);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--slider-rest-text);
+  white-space: nowrap;
 }
 
-.sds-slider__input:hover:not(:disabled)::-webkit-slider-thumb {
+/* 16×8 arrow under the bubble */
+.sds-slider__tooltip-arrow {
+  width: 0;
+  height: 0;
+  margin-top: -1px;
+  border-left: var(--spacing-s-8) solid transparent;
+  border-right: var(--spacing-s-8) solid transparent;
+  border-top: var(--spacing-s-8) solid var(--slider-rest-range-background);
+}
+
+/* ===== Values row — min (left) / max (right) ===== */
+/* Figma stacks the Values row directly under the 44px slider area (no gap). */
+.sds-slider__values {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-s-8);
+}
+
+.sds-slider__value-label {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--slider-rest-range-text);
+  transition: color 150ms ease-in-out;
+}
+
+/* ===== Hover (Figma Type=Hover) ===== */
+.sds-slider:not(.sds-slider--disabled):hover .sds-slider__rail {
+  background: var(--slider-hover-range-slider-background);
+}
+
+.sds-slider:not(.sds-slider--disabled):hover .sds-slider__fill {
+  background: var(--slider-hover-range-slider-fill);
+}
+
+/* Hover thumb: Figma's four raw drop shadows (no effect style / token exists for them). */
+.sds-slider:not(.sds-slider--disabled):hover .sds-slider__input::-webkit-slider-thumb {
   background: var(--slider-hover-range-slider-circle);
+  box-shadow:
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.25),
+    0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-.sds-slider__input:hover:not(:disabled)::-moz-range-thumb {
+.sds-slider:not(.sds-slider--disabled):hover .sds-slider__input::-moz-range-thumb {
   background: var(--slider-hover-range-slider-circle);
+  box-shadow:
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.25),
+    0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-.sds-slider:hover .sds-slider__label {
-  color: var(--slider-hover-text);
-}
-
-.sds-slider:hover .sds-slider__value {
+.sds-slider:not(.sds-slider--disabled):hover .sds-slider__value-label {
   color: var(--slider-hover-range-text);
 }
 
-/* ===== Focus ===== */
+
+/* ===== Focus — not designed in Figma; kept for keyboard users ===== */
 .sds-slider__input:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
-  outline-offset: 4px;
+  outline-offset: 2px;
 }
 
-/* ===== Disabled ===== */
+/* ===== Disabled (Figma Type=Disabled) ===== */
 .sds-slider--disabled .sds-slider__input {
   cursor: not-allowed;
-  background: linear-gradient(
-    to right,
-    var(--disabled-icon) 0%,
-    var(--disabled-icon) var(--sds-slider-fill, 0%),
-    var(--disabled-stroke) var(--sds-slider-fill, 0%),
-    var(--disabled-stroke) 100%
-  );
+}
+
+.sds-slider--disabled .sds-slider__rail {
+  background: var(--disabled-background);
+  opacity: 0.38;
+}
+
+.sds-slider--disabled .sds-slider__fill {
+  background: var(--disabled-icon);
 }
 
 .sds-slider--disabled .sds-slider__input::-webkit-slider-thumb {
   background: var(--disabled-icon);
+  box-shadow: var(--drop-shadow-100);
   cursor: not-allowed;
 }
 
 .sds-slider--disabled .sds-slider__input::-moz-range-thumb {
   background: var(--disabled-icon);
+  box-shadow: var(--drop-shadow-100);
   cursor: not-allowed;
 }
 
-.sds-slider--disabled .sds-slider__label,
-.sds-slider--disabled .sds-slider__value {
+.sds-slider--disabled .sds-slider__tooltip-bubble,
+.sds-slider--disabled .sds-slider__value-label {
   color: var(--disabled-text);
 }
