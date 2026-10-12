@@ -2,20 +2,50 @@ import { forwardRef, useCallback, useId, useMemo, useRef, useState } from 'react
 import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import './Calendar.css';
 
+/* Figma weekday header row: single letters, Monday first. */
 const WEEKDAYS = [
-  { short: 'Mo', long: 'Monday' },
-  { short: 'Tu', long: 'Tuesday' },
-  { short: 'We', long: 'Wednesday' },
-  { short: 'Th', long: 'Thursday' },
-  { short: 'Fr', long: 'Friday' },
-  { short: 'Sa', long: 'Saturday' },
-  { short: 'Su', long: 'Sunday' },
+  { short: 'M', long: 'Monday' },
+  { short: 'T', long: 'Tuesday' },
+  { short: 'W', long: 'Wednesday' },
+  { short: 'T', long: 'Thursday' },
+  { short: 'F', long: 'Friday' },
+  { short: 'S', long: 'Saturday' },
+  { short: 'S', long: 'Sunday' },
 ];
 
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
+
+/* Built-in Font Awesome Pro 7.1.0 Duotone Regular icons (src/icons/duotone-regular/).
+   Font Awesome Pro by @fontawesome — https://fontawesome.com (Commercial License), © 2025 Fonticons, Inc. */
+const AngleLeftIcon = () => (
+  <svg viewBox="0 0 640 640" width="1em" height="1em" focusable="false" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M207.5 303C198.1 312.4 198.1 327.6 207.5 336.9L367.5 496.9C376.9 506.3 392.1 506.3 401.4 496.9C410.7 487.5 410.8 472.3 401.4 463L258.4 320L401.4 177C410.8 167.6 410.8 152.4 401.4 143.1C392 133.8 376.8 133.7 367.5 143.1L207.5 303z"
+    />
+  </svg>
+);
+
+const AngleRightIcon = () => (
+  <svg viewBox="0 0 640 640" width="1em" height="1em" focusable="false" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M433.5 303C442.9 312.4 442.9 327.6 433.5 336.9L273.5 497C264.1 506.4 248.9 506.4 239.6 497C230.3 487.6 230.2 472.4 239.6 463.1L382.6 320.1L239.6 177.1C230.2 167.7 230.2 152.5 239.6 143.2C249 133.9 264.2 133.8 273.5 143.2L433.5 303.2z"
+    />
+  </svg>
+);
+
+const AngleDownIcon = () => (
+  <svg viewBox="0 0 640 640" width="1em" height="1em" focusable="false" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M337.5 433C328.1 442.4 312.9 442.4 303.6 433L143.5 273C134.1 263.6 134.1 248.4 143.5 239.1C152.9 229.8 168.1 229.7 177.4 239.1L320.4 382.1L463.4 239.1C472.8 229.7 488 229.7 497.3 239.1C506.6 248.5 506.7 263.7 497.3 273L337.3 433z"
+    />
+  </svg>
+);
 
 function startOfMonth(date: Date): Date {
   return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -37,14 +67,19 @@ function addDays(date: Date, amount: number): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
 }
 
-/** Build the 6×7 grid of dates (Monday-first) that covers `month`, as six week rows. */
+/**
+ * Build the Monday-first week rows that cover `month`. Like the Figma Date picker, only the
+ * weeks the month needs are rendered (usually 5), padded with previous / next month days.
+ */
 function buildWeeks(month: Date): Date[][] {
   const first = startOfMonth(month);
   // JS getDay(): 0=Sun..6=Sat. Convert to Monday-first offset.
   const leading = (first.getDay() + 6) % 7;
+  const daysInMonth = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+  const weekCount = Math.ceil((leading + daysInMonth) / 7);
   const start = addDays(first, -leading);
   const weeks: Date[][] = [];
-  for (let w = 0; w < 6; w += 1) {
+  for (let w = 0; w < weekCount; w += 1) {
     const week: Date[] = [];
     for (let d = 0; d < 7; d += 1) {
       week.push(addDays(start, w * 7 + d));
@@ -61,30 +96,40 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   value?: Date | null;
   /** Called with the clicked / keyboard-activated day. */
   onSelect?: (date: Date) => void;
-  /** Called whenever the visible month changes via the prev/next controls. */
+  /** Called whenever the visible month changes (prev/next controls or the Month / Year selects). */
   onMonthChange?: (month: Date) => void;
   /** Overrides "today" for the current-day marker (mainly for testing / time zones). */
   today?: Date;
-  /** Predicate to disable individual days (e.g. min/max range). Disabled days are not selectable. */
-  isDateDisabled?: (date: Date) => boolean;
   /** Accessible label for the whole calendar. Defaults to "Calendar". */
   ariaLabel?: string;
-  /** Leading icon for the previous-month control. Use a FontAwesome Duotone icon node. */
+  /** Icon for the previous-month control (20×20). Defaults to the built-in Font Awesome `angle-left`. */
   iconPrev?: ReactNode;
-  /** Trailing icon for the next-month control. Use a FontAwesome Duotone icon node. */
+  /** Icon for the next-month control (20×20). Defaults to the built-in Font Awesome `angle-right`. */
   iconNext?: ReactNode;
+  /** First year offered in the Year select. @default today's year − 100 */
+  minYear?: number;
+  /** Last year offered in the Year select. @default today's year + 20 */
+  maxYear?: number;
 }
 
 /**
  * Calendar — the month-grid day surface shared with the Date Picker, usable inline or in a popover.
  *
- * Anatomy: month/year header + prev/next, weekday row, 6×7 day grid.
- * Day-cell states: default, hover, today (current-stroke), selected, out-of-month (previous), disabled.
- * Day cell 36×36, radius small (4px), gap 4px; container padding 12px, radius medium (6px).
- * Accessibility: role="grid" with arrow-key roving navigation, month paging, announced selection,
- * and non-color cues (stroke for today, bold weight for selected).
+ * Figma: "Date picker" 1302:11951 and "Calendar Item" set 1302:2058 (page 29:7). 316px wide.
+ * - Header 60px: Month and Year selects on the left (Input Field State=Default, Size=Regular,
+ *   110×40, radius 8px, gap 20px, `angle-down`), `angle-left` / `angle-right` 20×20 controls on the
+ *   right in `Date Picker/icon`.
+ * - Weekday row: M T W T F S S as Calendar Item Default cells (Paragraph - Regular,
+ *   `Date Picker/default-text`), 1px Monochrome/Gray - 200 bottom stroke.
+ * - Week rows: padding 0 4px, no gap; only the weeks the month needs.
+ * - Day cell (Calendar Item) 44×44, circular, Paragraph - Regular in every state:
+ *   Default `default-*`, Hover `hover-*`, Current Day 1px `current-stroke` + `current-text`,
+ *   Previous Month (any day outside the month) `previous-*`, selected `selected-background` +
+ *   `selected-text` (the Figma DR fill).
  *
- * Spec: Spotler Design System "Calendar" (shares the `Date Picker` token group).
+ * The keyboard focus rings are not designed in Figma; they are kept for accessibility.
+ * Not implemented: Figma's date-range (DR - Left / Center / Right) selection.
+ * Accessibility: role="grid" with arrow-key roving navigation, month paging and announced selection.
  */
 export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calendar(
   {
@@ -93,10 +138,11 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
     onSelect,
     onMonthChange,
     today,
-    isDateDisabled,
     ariaLabel = 'Calendar',
     iconPrev,
     iconNext,
+    minYear,
+    maxYear,
     className,
     ...rest
   },
@@ -115,8 +161,19 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
 
   const labelId = useId();
   const statusId = useId();
+  const monthSelectId = useId();
+  const yearSelectId = useId();
   const todayDate = today ?? new Date();
   const weeks = useMemo(() => buildWeeks(viewMonth), [viewMonth]);
+
+  const viewYear = viewMonth.getFullYear();
+  const firstYear = Math.min(minYear ?? todayDate.getFullYear() - 100, viewYear);
+  const lastYear = Math.max(maxYear ?? todayDate.getFullYear() + 20, viewYear);
+  const years = useMemo(() => {
+    const list: number[] = [];
+    for (let y = firstYear; y <= lastYear; y += 1) list.push(y);
+    return list;
+  }, [firstYear, lastYear]);
 
   // Roving-tabindex anchor: the one day cell that is focusable in the grid.
   // Prefer the selected day, then today, then the first day of the month.
@@ -137,8 +194,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
     [onMonthChange],
   );
 
-  const goPrev = () => setMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1));
-  const goNext = () => setMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1));
+  const goPrev = () => setMonth(new Date(viewYear, viewMonth.getMonth() - 1, 1));
+  const goNext = () => setMonth(new Date(viewYear, viewMonth.getMonth() + 1, 1));
 
   /** Move keyboard focus to the cell for `target`, paging the month if it falls outside. */
   const focusDay = useCallback((target: Date) => {
@@ -204,29 +261,70 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
       {...rest}
     >
       <div className="sds-calendar__header">
-        <button
-          type="button"
-          className="sds-calendar__nav"
-          aria-label="Previous month"
-          onClick={goPrev}
-        >
-          <span className="sds-calendar__nav-icon" aria-hidden="true">
-            {iconPrev ?? <span className="sds-calendar__chevron sds-calendar__chevron--prev" />}
-          </span>
-        </button>
+        <div className="sds-calendar__selects">
+          <div className="sds-calendar__select">
+            <select
+              id={monthSelectId}
+              className="sds-calendar__select-input"
+              aria-label="Month"
+              value={viewMonth.getMonth()}
+              onChange={(e) => setMonth(new Date(viewYear, Number(e.target.value), 1))}
+            >
+              {MONTHS.map((name, index) => (
+                <option key={name} value={index}>
+                  {name}
+                </option>
+              ))}
+            </select>
+            <span className="sds-calendar__select-icon" aria-hidden="true">
+              <AngleDownIcon />
+            </span>
+          </div>
+          <div className="sds-calendar__select">
+            <select
+              id={yearSelectId}
+              className="sds-calendar__select-input"
+              aria-label="Year"
+              value={viewYear}
+              onChange={(e) => setMonth(new Date(Number(e.target.value), viewMonth.getMonth(), 1))}
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+            <span className="sds-calendar__select-icon" aria-hidden="true">
+              <AngleDownIcon />
+            </span>
+          </div>
+        </div>
+        <div className="sds-calendar__navs">
+          <button
+            type="button"
+            className="sds-calendar__nav"
+            aria-label="Previous month"
+            onClick={goPrev}
+          >
+            <span className="sds-calendar__nav-icon" aria-hidden="true">
+              {iconPrev ?? <AngleLeftIcon />}
+            </span>
+          </button>
+          <button
+            type="button"
+            className="sds-calendar__nav"
+            aria-label="Next month"
+            onClick={goNext}
+          >
+            <span className="sds-calendar__nav-icon" aria-hidden="true">
+              {iconNext ?? <AngleRightIcon />}
+            </span>
+          </button>
+        </div>
+        {/* Visible month is shown by the selects; this hidden label names the grid. */}
         <span className="sds-calendar__title" id={labelId}>
-          {MONTHS[viewMonth.getMonth()]} {viewMonth.getFullYear()}
+          {MONTHS[viewMonth.getMonth()]} {viewYear}
         </span>
-        <button
-          type="button"
-          className="sds-calendar__nav"
-          aria-label="Next month"
-          onClick={goNext}
-        >
-          <span className="sds-calendar__nav-icon" aria-hidden="true">
-            {iconNext ?? <span className="sds-calendar__chevron sds-calendar__chevron--next" />}
-          </span>
-        </button>
       </div>
 
       <div
@@ -238,7 +336,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
         <div className="sds-calendar__weekdays" role="row">
           {WEEKDAYS.map((wd) => (
             <span
-              key={wd.short}
+              key={wd.long}
               className="sds-calendar__weekday"
               role="columnheader"
               aria-label={wd.long}
@@ -253,7 +351,6 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
               const outside = !isSameMonth(day, viewMonth);
               const isToday = isSameDay(day, todayDate);
               const isSelected = value ? isSameDay(day, value) : false;
-              const disabled = isDateDisabled ? isDateDisabled(day) : false;
               const isActive = isSameDay(day, activeDay);
               const cellClasses = [
                 'sds-calendar__day',
@@ -273,10 +370,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
                   tabIndex={isActive ? 0 : -1}
                   aria-current={isToday ? 'date' : undefined}
                   aria-selected={isSelected}
-                  aria-disabled={disabled || undefined}
                   aria-label={`${day.getDate()} ${MONTHS[day.getMonth()]} ${day.getFullYear()}`}
                   onClick={() => {
-                    if (disabled) return;
                     if (outside) setMonth(day);
                     onSelect?.(day);
                   }}

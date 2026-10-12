@@ -1,93 +1,108 @@
 /* Upload — Spotler Design System
-   Spec: references/components/upload.md (Upload token group) */
+   Figma page 93:75. Drop zone + items stacked with a 20px gap (frame 1373:35803).
+   Drop file 1326:33366: padding 24px 20px, gap 20px, radius 8px, 1px inside dashed stroke (2/2),
+     title H4 + paragraph Paragraph - Regular (gap 8px), CTA = Button Primary.
+   File upload item 1353:1221: padding 8px, gap 4px, radius 8px, 1px inside stroke,
+     row + nested Progress bar (8px track, % label both sides). */
 
 .sds-upload {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-12);
+  gap: var(--spacing-s-20);
   font-family: var(--font-family);
 }
 
-/* ===== Drop zone ===== */
+/* ===== Drop zone (Figma "Drop file") ===== */
 .sds-upload__zone {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-s-8);
-  padding: var(--spacing-s-32);
+  gap: var(--spacing-s-20);
+  padding: var(--spacing-s-24) var(--spacing-s-20);
   text-align: center;
   background: var(--upload-drop-file-default-background);
-  border: 1px dashed var(--upload-drop-file-default-border);
-  border-radius: var(--border-medium);
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+  border-radius: var(--border-large);
+  transition: background-color 150ms ease-in-out;
 }
 
-.sds-upload__zone--hover {
-  background: var(--upload-drop-file-hover-background);
-  border-color: var(--upload-drop-file-hover-border);
+/* Dashed stroke: an SVG rect inset by half the stroke so the 1px line sits fully inside the box,
+   like Figma's inside stroke, with the exact 2px dash / 2px gap. */
+.sds-upload__zone-border {
+  position: absolute;
+  top: 0.5px;
+  left: 0.5px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  overflow: visible;
+  pointer-events: none;
 }
 
-.sds-upload__zone--disabled {
-  background: var(--disabled-background);
-  border-color: var(--disabled-stroke);
-  cursor: not-allowed;
+.sds-upload__zone-border-rect {
+  fill: none;
+  stroke: var(--upload-drop-file-default-border);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+  transition: stroke 150ms ease-in-out;
 }
 
-.sds-upload__zone-icon {
-  display: inline-flex;
-  font-size: 24px;
-  color: var(--upload-drop-file-default-title);
+.sds-upload__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-s-8);
 }
 
 .sds-upload__title {
   margin: 0;
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
   font-weight: var(--font-h4-weight);
   color: var(--upload-drop-file-default-title);
 }
 
 .sds-upload__paragraph {
   margin: 0;
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--upload-drop-file-default-paragraph);
 }
 
-.sds-upload__browse {
-  margin-top: var(--spacing-s-4);
-  height: 36px;
-  min-width: 80px;
-  padding: var(--spacing-s-8) var(--spacing-s-16);
-  border: 1px solid var(--upload-drop-file-default-border);
-  border-radius: var(--border-circular);
-  background: var(--upload-upload-item-default-background);
-  color: var(--upload-drop-file-default-title);
-  font-family: var(--font-family);
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
-}
-
-.sds-upload__browse:hover {
+/* Hover (Figma Type=Hover) — shown while files are dragged over the zone */
+.sds-upload__zone--hover {
   background: var(--upload-drop-file-hover-background);
 }
 
-.sds-upload__browse:focus-visible {
-  outline: 2px solid var(--primary-conceptual-conceptual);
-  outline-offset: 2px;
+.sds-upload__zone--hover .sds-upload__zone-border-rect {
+  stroke: var(--upload-drop-file-hover-border);
 }
 
-.sds-upload__browse:disabled {
+.sds-upload__zone--hover .sds-upload__title {
+  color: var(--upload-drop-file-hover-title);
+}
+
+.sds-upload__zone--hover .sds-upload__paragraph {
+  color: var(--upload-drop-file-hover-paragraph);
+}
+
+/* Disabled (Figma Type=Disabled) — the Button renders its own Primary Disabled state */
+.sds-upload__zone--disabled {
   background: var(--disabled-background);
-  border-color: var(--disabled-stroke);
-  color: var(--disabled-text);
   cursor: not-allowed;
 }
 
-/* Visually hidden native input — still keyboard reachable via the browse button */
+.sds-upload__zone--disabled .sds-upload__zone-border-rect {
+  stroke: var(--disabled-stroke);
+}
+
+.sds-upload__zone--disabled .sds-upload__title,
+.sds-upload__zone--disabled .sds-upload__paragraph {
+  color: var(--disabled-text);
+}
+
+/* Visually hidden native input — opened by the Upload button */
 .sds-upload__input {
   position: absolute;
   width: 1px;
@@ -100,11 +115,11 @@
   border: 0;
 }
 
-/* ===== File items ===== */
+/* ===== File items (Figma "File upload item") ===== */
 .sds-upload__list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-20);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -112,39 +127,52 @@
 
 .sds-upload__item {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-s-12);
-  padding: var(--spacing-s-12);
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  /* 8px Figma padding sits inside the inside-aligned stroke; the CSS border takes 1px of it */
+  padding: calc(var(--spacing-s-8) - 1px);
   border: 1px solid var(--upload-upload-item-default-stroke);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   background: var(--upload-upload-item-default-background);
 }
 
-.sds-upload__item-icon {
-  display: inline-flex;
+.sds-upload__item-row {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: var(--upload-upload-item-default-icon);
+  justify-content: space-between;
+  gap: var(--spacing-s-4);
+  min-height: var(--spacing-s-36);
 }
 
-.sds-upload__item-body {
-  flex: 1;
-  min-width: 0;
+.sds-upload__item-main {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-s-4);
+  align-items: center;
+  min-width: 0;
+}
+
+/* 32×32 box holding the 20px file icon */
+.sds-upload__item-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
+  font-size: var(--spacing-s-20);
+  color: var(--upload-upload-item-default-icon);
 }
 
 .sds-upload__item-line {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--spacing-s-8);
+  min-width: 0;
 }
 
 .sds-upload__item-name {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--upload-upload-item-default-text);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -152,49 +180,32 @@
 }
 
 .sds-upload__item-size {
+  flex: none;
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
   color: var(--upload-upload-item-default-text-file-size);
 }
 
-.sds-upload__item-error {
-  margin: 0;
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  color: var(--upload-upload-item-upload-failed-status-icon);
-}
-
-/* Progress track */
-.sds-upload__progress {
-  width: 100%;
-  height: var(--spacing-s-4);
-  border-radius: var(--border-circular);
-  background: var(--upload-upload-item-uploading-stroke);
-  overflow: hidden;
-}
-
-.sds-upload__progress-bar {
-  height: 100%;
-  border-radius: var(--border-circular);
-  background: var(--upload-upload-item-uploading-status-icon);
-  transition: width 150ms ease-in-out;
-}
-
-/* Status pill */
+/* Status: padding 0 8px 0 16px, gap 4px, 20px icon + Paragraph - Small */
 .sds-upload__status {
   display: inline-flex;
+  flex: none;
   align-items: center;
   gap: var(--spacing-s-4);
+  padding: 0 var(--spacing-s-8) 0 var(--spacing-s-16);
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
 }
 
 .sds-upload__status-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
 }
 
 .sds-upload__status--uploading .sds-upload__status-icon {
@@ -218,40 +229,112 @@
   color: var(--upload-upload-item-upload-failed-status-text);
 }
 
-/* Per-status item surfaces */
+/* Action slots — Icon button Variant=Tertiary, gap 4px */
+.sds-upload__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--spacing-s-4);
+}
+
+/* ===== Nested Progress bar: padding 0 8px, gap 12px, % label both sides ===== */
+.sds-upload__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-12);
+  padding: 0 var(--spacing-s-8);
+}
+
+.sds-upload__progress-label {
+  flex: none;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--progress-bar-primary-label);
+  white-space: nowrap;
+}
+
+.sds-upload__progress-track {
+  position: relative;
+  flex: 1;
+  height: var(--spacing-s-8);
+  border-radius: var(--border-small);
+  background: var(--progress-bar-primary-background);
+  overflow: hidden;
+}
+
+.sds-upload__progress-fill {
+  height: 100%;
+  border-radius: var(--border-small);
+  background: var(--progress-bar-primary-fill);
+  transition: width 150ms ease-in-out;
+}
+
+/* Progress bar Type=Disabled — used by the Failed and Disabled items */
+.sds-upload__progress--disabled .sds-upload__progress-label {
+  color: var(--disabled-text);
+}
+.sds-upload__progress--disabled .sds-upload__progress-track {
+  background: var(--disabled-background);
+}
+.sds-upload__progress--disabled .sds-upload__progress-fill {
+  background: var(--disabled-icon);
+}
+
+/* ===== Per-state item tokens ===== */
 .sds-upload__item--uploading {
   background: var(--upload-upload-item-uploading-background);
   border-color: var(--upload-upload-item-uploading-stroke);
 }
+.sds-upload__item--uploading .sds-upload__item-icon {
+  color: var(--upload-upload-item-uploading-icon);
+}
+.sds-upload__item--uploading .sds-upload__item-name {
+  color: var(--upload-upload-item-uploading-text);
+}
+.sds-upload__item--uploading .sds-upload__item-size {
+  color: var(--upload-upload-item-uploading-text-file-size);
+}
+
 .sds-upload__item--uploaded {
   background: var(--upload-upload-item-uploaded-background);
   border-color: var(--upload-upload-item-uploaded-stroke);
 }
+.sds-upload__item--uploaded .sds-upload__item-icon {
+  color: var(--upload-upload-item-uploaded-icon);
+}
+.sds-upload__item--uploaded .sds-upload__item-name {
+  color: var(--upload-upload-item-uploaded-text);
+}
+.sds-upload__item--uploaded .sds-upload__item-size {
+  color: var(--upload-upload-item-uploaded-text-file-size);
+}
+
 .sds-upload__item--upload-failed {
   background: var(--upload-upload-item-upload-failed-background);
   border-color: var(--upload-upload-item-upload-failed-stroke);
 }
-
-.sds-upload__action {
-  padding: var(--spacing-s-4) var(--spacing-s-8);
-  border: none;
-  background: transparent;
-  border-radius: var(--border-small);
-  color: var(--primary-conceptual-conceptual);
-  font-family: var(--font-family);
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  cursor: pointer;
-  transition: background-color 150ms ease-in-out;
+.sds-upload__item--upload-failed .sds-upload__item-icon {
+  color: var(--upload-upload-item-upload-failed-icon);
+}
+.sds-upload__item--upload-failed .sds-upload__item-name {
+  color: var(--upload-upload-item-upload-failed-text);
+}
+.sds-upload__item--upload-failed .sds-upload__item-size {
+  color: var(--upload-upload-item-upload-failed-text-file-size);
 }
 
-.sds-upload__action:hover {
-  background: var(--upload-drop-file-default-background);
+/* Disabled (Figma Type=Disabled) — wins over the status tokens */
+.sds-upload__item.sds-upload__item--disabled {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
 }
-
-.sds-upload__action:focus-visible {
-  outline: 2px solid var(--primary-conceptual-conceptual);
-  outline-offset: 2px;
+.sds-upload__item--disabled .sds-upload__item-icon {
+  color: var(--disabled-icon);
+}
+.sds-upload__item--disabled .sds-upload__item-name,
+.sds-upload__item--disabled .sds-upload__item-size {
+  color: var(--disabled-text);
 }
 
 /* Visually hidden live region for status announcements */

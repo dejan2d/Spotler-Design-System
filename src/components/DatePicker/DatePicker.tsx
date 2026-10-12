@@ -37,8 +37,6 @@ export interface DatePickerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'o
   iconPrev?: ReactNode;
   /** Trailing icon for the calendar's next-month control (FontAwesome Duotone node). */
   iconNext?: ReactNode;
-  /** Predicate to disable individual days in the calendar (e.g. min/max range). */
-  isDateDisabled?: (date: Date) => boolean;
   /** Overrides "today" for the current-day marker (mainly for testing / time zones). */
   today?: Date;
   /** Disables the field and prevents the calendar from opening. */
@@ -56,14 +54,18 @@ export interface DatePickerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'o
 /**
  * Date Picker — Spotler Design System.
  *
- * A date input field that opens the `Calendar` day-grid in a popover for choosing a date.
- * The field reuses the "Inputs / Regular Text Field" tokens; the popover floats on the
- * `Date Picker` surface (default background) at overlay elevation.
+ * A pick-only date field that opens the `Calendar` (Figma "Date picker" 1302:11951) in a popover.
+ * Figma has no date-field design, so the field follows the Inputs "Input Field" set 9396:14218,
+ * Size=Regular: label Paragraph - Semi Bold, field 40px tall, padding 8px 12px, gap 8px,
+ * radius 8px (Border/Large), 1px stroke, value Paragraph - Regular, with the
+ * `Inputs/Regular Text Field/<state>-*` tokens for Default, Filled (a date is set), Hover,
+ * Focused, Error and Disabled (`Disabled/*`).
  *
- * Field: row, padding 8px 12px, gap 8px, radius small (4px), 1px hairline stroke.
- * States: default, hover, focus-within, error, disabled. Popover offset 4px below the field.
- * Pair with a real `<label>`; the calendar carries `role="grid"` with arrow-key navigation,
- * month paging, an announced selection, and non-color cues for today/selected.
+ * Typing a date is intentionally not supported (Figma has no typed-date design); the value is
+ * shown as YYYY-MM-DD. The popover sits 4px below the field and, like the Figma Date picker panel,
+ * has no shadow and no corner radius.
+ * The calendar carries `role="grid"` with arrow-key navigation, month paging and an announced
+ * selection. The keyboard focus ring is not designed in Figma; it is kept for accessibility.
  */
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function DatePicker(
   {
@@ -78,7 +80,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
     icon,
     iconPrev,
     iconNext,
-    isDateDisabled,
     today,
     disabled,
     open: openProp,
@@ -141,6 +142,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
 
   const classes = [
     'sds-date-picker',
+    value ? 'sds-date-picker--filled' : false,
     hasError && 'sds-date-picker--error',
     disabled && 'sds-date-picker--disabled',
     open && 'sds-date-picker--open',
@@ -218,7 +220,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
             month={value ?? undefined}
             value={value ?? null}
             today={today}
-            isDateDisabled={isDateDisabled}
             iconPrev={iconPrev}
             iconNext={iconNext}
             onMonthChange={onMonthChange}

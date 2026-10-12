@@ -1,6 +1,10 @@
 /* Color Picker — Spotler Design System
-   No spec file; built from --color-picker-* tokens.
-   Anatomy: label, swatch box + hex text field, hint. */
+   Figma: "Color Picker" component set 5197:1404 (page 93:33), Type=Empty|Filled.
+   Root gap 4px · label Paragraph - Semi Bold
+   Field 36px tall, padding 8px 12px, gap 8px, radius 8px (Border/Large), 1px inside stroke
+   Colour indicator 20×20, radius 4px (Transparent: white + Gray-200 stroke + red slash; Picked: colour, no stroke)
+   End icon: 16×16 xmark clear control · hint row: 16px circle-info + Paragraph - Small, gap 4px.
+   Only the keyboard focus ring is added (not designed in Figma); there is no disabled styling. */
 
 .sds-color-picker {
   display: flex;
@@ -10,18 +14,23 @@
 }
 
 .sds-color-picker__label {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
   color: var(--color-picker-label);
 }
 
+/* Figma "Union": 36px tall. A CSS border adds to the box, so the 8px / 12px Figma padding
+   (measured inside an inside-aligned stroke) is reduced by the 1px border. */
 .sds-color-picker__field {
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
-  padding: var(--spacing-s-8) var(--spacing-s-12);
+  box-sizing: border-box;
+  min-height: var(--spacing-s-36);
+  padding: calc(var(--spacing-s-8) - 1px) calc(var(--spacing-s-12) - 1px);
   border: 1px solid var(--color-picker-empty-border);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   background: var(--color-picker-empty-background);
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
 }
@@ -31,89 +40,139 @@
   border-color: var(--color-picker-filled-stroke);
 }
 
+/* ===== Colour indicator (Figma "Start icon") ===== */
 .sds-color-picker__swatch {
   position: relative;
   display: inline-flex;
   flex: none;
-  width: 20px;
-  height: 20px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   border-radius: var(--border-small);
   overflow: hidden;
 }
 
-/* Native color input fills the swatch; strip its chrome so it reads as a solid box */
+/* Color=Color picked — the picked colour, no stroke */
+.sds-color-picker__swatch--picked {
+  background: var(--sds-color-picker-swatch);
+}
+
+/* Color=Transparent — Monochrome/White, 1px Monochrome/Gray - 200 inside stroke,
+   3px Semantic/Red - Alert/Alert slash rotated 40° across the box */
+.sds-color-picker__swatch--transparent {
+  background: var(--monochrome-white);
+}
+
+.sds-color-picker__swatch--transparent::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 3px;
+  background: var(--semantic-red-alert-alert);
+  transform: translate(-50%, -50%) rotate(-40deg);
+}
+
+/* Stroke drawn above the slash, as Figma paints frame strokes over children */
+.sds-color-picker__swatch--transparent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1px solid var(--monochrome-gray-200);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Native color input covers the indicator invisibly; it only opens the browser colour dialog. */
 .sds-color-picker__swatch-input {
   position: absolute;
   inset: 0;
+  z-index: 2;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   border: none;
   background: none;
+  opacity: 0;
   cursor: pointer;
-}
-
-.sds-color-picker__swatch-input::-webkit-color-swatch-wrapper {
-  padding: 0;
-}
-
-.sds-color-picker__swatch-input::-webkit-color-swatch {
-  border: none;
-  border-radius: var(--border-small);
-}
-
-.sds-color-picker__swatch-input::-moz-color-swatch {
-  border: none;
-  border-radius: var(--border-small);
 }
 
 .sds-color-picker__text {
   flex: 1;
   min-width: 0;
+  padding: 0;
   border: none;
   outline: none;
   background: transparent;
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--color-picker-filled-text);
 }
 
 .sds-color-picker__text::placeholder {
   color: var(--color-picker-empty-text);
+  opacity: 1;
 }
 
-.sds-color-picker__hint {
-  margin: 0;
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  color: var(--color-picker-hint-message);
+/* ===== Clear control (Figma "End icon": xmark 16×16, Monochrome/Gray - 600) ===== */
+.sds-color-picker__clear {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  padding: 0;
+  border: none;
+  border-radius: var(--border-small);
+  background: transparent;
+  color: var(--monochrome-gray-600);
+  cursor: pointer;
 }
 
-/* ===== Focus ===== */
-.sds-color-picker__field:focus-within {
-  border-color: var(--color-picker-filled-stroke);
+/* Figma's xmark vector is Monochrome/Gray - 600 at 40% opacity */
+.sds-color-picker__clear-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--spacing-s-16);
+  opacity: 0.4;
+}
+
+.sds-color-picker__clear:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
 
-/* ===== Disabled ===== */
-.sds-color-picker--disabled .sds-color-picker__field {
-  background: var(--disabled-background);
-  border-color: var(--disabled-stroke);
+/* ===== Hint row ===== */
+.sds-color-picker__hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-4);
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--color-picker-hint-message);
 }
 
-.sds-color-picker--disabled .sds-color-picker__text {
-  color: var(--disabled-text);
-  cursor: not-allowed;
+.sds-color-picker__hint-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
+  color: var(--color-picker-hint-message-icon);
 }
 
-.sds-color-picker--disabled .sds-color-picker__swatch-input {
-  cursor: not-allowed;
-}
-
-.sds-color-picker--disabled .sds-color-picker__label,
-.sds-color-picker--disabled .sds-color-picker__hint {
-  color: var(--disabled-text);
+/* ===== Focus ring — not designed in Figma; kept for keyboard users ===== */
+.sds-color-picker__field:focus-within {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
 }
