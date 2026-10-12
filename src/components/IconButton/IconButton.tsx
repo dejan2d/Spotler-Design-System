@@ -7,15 +7,15 @@ export type IconButtonVariant = 'secondary' | 'tertiary';
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Visual emphasis.
-   * `secondary` (white background + border) is the default choice;
-   * `tertiary` is the transparent, borderless lowest-emphasis ghost.
+   * Visual emphasis (Figma `Variant`).
+   * `secondary` (white fill + 1px outside stroke) is the default choice;
+   * `tertiary` is the transparent, strokeless lowest-emphasis ghost.
    * @default 'secondary'
    */
   variant?: IconButtonVariant;
   /**
-   * Selected (toggle) state. Adds a 2px stroke + inset white ring and exposes
-   * `aria-pressed` to assistive tech.
+   * Selected (toggle) state — Figma `State=Pressed`. Adds a 2px inside stroke with a
+   * 2px white inner ring and exposes `aria-pressed` to assistive tech.
    * @default false
    */
   selected?: boolean;
@@ -40,9 +40,14 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
  * understood controls where space is limited. Same hierarchy as Button, without
  * a visible label, so an `aria-label` is always required.
  *
- * Sizing: 36×36 visual box, padding 6px, border-radius circular, centered 20px
- * icon, with a ≥44px hit area for touch. Variants: Secondary (white + border),
- * Tertiary (transparent ghost). States: default, hover, selected, disabled.
+ * Figma: "Icon button" component set 9279:53527 (page 29:5).
+ * Sizing: 36×36 box, padding 6px, border-radius circular, centered 20px icon,
+ * with a ≥44px hit area for touch.
+ * Variants: Secondary (white fill, 1px Icon Button/Secondary stroke aligned outside
+ * the box), Tertiary (no fill, no stroke). States: default, hover (Gray-100 fill),
+ * pressed/`selected` (Gray-100 fill, 2px inside stroke + 2px white ring), disabled
+ * (Disabled/background fill, no stroke, Disabled/icon — both variants).
+ * The keyboard focus ring is not designed in Figma; it is kept for accessibility.
  */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
   {

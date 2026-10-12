@@ -1,11 +1,20 @@
 /* IconButton — Spotler Design System
    A compact, icon-only button for tight spaces or universally understood actions.
-   36×36 visual box, 6px padding, radius circular, centered 20px icon, ≥44px hit area.
+   Figma: "Icon button" set 9279:53527 (page 29:5). Variants Secondary / Tertiary,
+   states Default / Hover / Pressed (= `selected`) / Disabled.
+   36×36 box, 6px padding, radius circular, centered 20px icon, ≥44px hit area.
    The fixed 36×36 box with a flex-centered 20px icon makes padding purely cosmetic
    (spec calls for 6px; no 6px spacing token exists, so the box + centering is exact).
+
+   Strokes are drawn as box-shadows so they never change the 36px box:
+   - Secondary Default/Hover: 1px stroke aligned OUTSIDE (renders 38px visually).
+   - Pressed: 2px stroke INSIDE + white inner shadow spread 4 → 2px stroke + 2px white ring.
+   - Disabled: Disabled/background fill, no stroke (both variants).
    All color/radius values come from tokens. */
 
 .sds-icon-button {
+  /* Per-variant stroke colour; transparent = no stroke in Figma. */
+  --sds-icon-button-stroke: transparent;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -14,12 +23,16 @@
   box-sizing: border-box;
   width: var(--spacing-s-36);
   height: var(--spacing-s-36);
-  border: 1px solid transparent;
+  border: 0;
   border-radius: var(--border-circular);
   background: transparent;
+  /* Invisible normally; becomes the button outline in forced-colors (high contrast)
+     mode, where box-shadows are dropped. */
+  outline: 1px solid transparent;
+  outline-offset: -1px;
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
-    color 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
+    box-shadow 150ms ease-in-out;
   user-select: none;
 }
 
@@ -43,38 +56,41 @@
   height: var(--spacing-s-20);
 }
 
+/* Keyboard focus ring — not designed in Figma; kept as an accessibility exception. */
 .sds-icon-button:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
 
-/* Selected (toggle) — 2px stroke + inset white ring. */
-.sds-icon-button--selected {
-  border-width: 2px;
-  box-shadow: inset 0 0 0 4px var(--monochrome-white);
+/* Selected (Figma "Pressed") — 2px INSIDE stroke + white inner shadow spread 4.
+   The stroke covers the outer half of the shadow: 2px stroke + 2px white ring. */
+.sds-icon-button.sds-icon-button--selected {
+  box-shadow: inset 0 0 0 2px var(--sds-icon-button-stroke),
+    inset 0 0 0 4px var(--monochrome-white);
 }
 
-/* ===== Secondary (white + border) ===== */
+/* ===== Secondary (white fill + 1px outside stroke) ===== */
 .sds-icon-button--secondary {
   background: var(--icon-button-secondary-default-background);
-  border-color: var(--icon-button-secondary-default-stroke);
+  --sds-icon-button-stroke: var(--icon-button-secondary-default-stroke);
+  /* 1px stroke aligned OUTSIDE the 36px box. */
+  box-shadow: 0 0 0 1px var(--sds-icon-button-stroke);
   color: var(--icon-button-secondary-default-icon);
 }
 .sds-icon-button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--icon-button-secondary-hover-background);
-  border-color: var(--icon-button-secondary-hover-stroke);
+  --sds-icon-button-stroke: var(--icon-button-secondary-hover-stroke);
   color: var(--icon-button-secondary-hover-icon);
 }
 .sds-icon-button--secondary.sds-icon-button--selected {
   background: var(--icon-button-secondary-selected-background);
-  border-color: var(--icon-button-secondary-selected-stroke);
+  --sds-icon-button-stroke: var(--icon-button-secondary-selected-stroke);
   color: var(--icon-button-secondary-selected-icon);
 }
 
 /* ===== Tertiary (transparent ghost) ===== */
 .sds-icon-button--tertiary {
   background: transparent;
-  border-color: transparent;
   color: var(--icon-button-tertiary-default-icon);
 }
 .sds-icon-button--tertiary:hover:not(:disabled):not([aria-disabled='true']) {
@@ -83,15 +99,15 @@
 }
 .sds-icon-button--tertiary.sds-icon-button--selected {
   background: var(--icon-button-tertiary-selected-background);
-  border-color: var(--icon-button-tertiary-selected-stroke);
+  --sds-icon-button-stroke: var(--icon-button-tertiary-selected-stroke);
   color: var(--icon-button-tertiary-selected-icon);
 }
 
-/* ===== Disabled (all variants) ===== */
+/* ===== Disabled (both variants) — Disabled/background fill, stroke hidden,
+   Disabled/icon. ===== */
 .sds-icon-button:disabled,
 .sds-icon-button[aria-disabled='true'] {
   background: var(--disabled-background);
-  border-color: var(--disabled-stroke);
   color: var(--disabled-icon);
   cursor: not-allowed;
   box-shadow: none;
