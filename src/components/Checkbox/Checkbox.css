@@ -1,36 +1,42 @@
 /* Checkbox — Spotler Design System
-   20px square box with Border/Small radius, 20px label gap.
-   Label & help text use Body/Paragraph - Regular / Small.
-   States: default, checked, indeterminate, error — each combinable with
-   hover / focus / disabled. */
+   Figma: Selectors › Checkbox (184:3150).
+   Root: 2px padding, column gap 8px (row → error message).
+   Row: 16×16 box (radius 4px / Border/Small, 1px inside stroke) + 8px gap + text column
+   (label Paragraph - Regular, help text Paragraph - Small, 8px apart).
+   The native input covers the 20×20 component frame as the hit area.
+   States (Checked False/True): Default, Hover, Disabled, Error. The keyboard focus ring
+   is code-only (no Figma variant). */
 
 .sds-checkbox {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-4);
+  gap: var(--spacing-s-8);
+  /* Figma component padding 2px (20px frame around the 16px box); off the spacing scale. */
+  padding: 2px;
   font-family: var(--font-family);
 }
 
 .sds-checkbox__row {
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-s-20);
+  gap: var(--spacing-s-8);
 }
 
 .sds-checkbox__control {
   position: relative;
   display: inline-flex;
   flex: none;
-  width: 20px;
-  height: 20px;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
 }
 
-/* Native input sits on top, transparent, providing the hit area + a11y semantics. */
+/* Native input sits on top, transparent, providing the 20×20 hit area + a11y semantics. */
 .sds-checkbox__input {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: -2px;
+  left: -2px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   margin: 0;
   opacity: 0;
   cursor: pointer;
@@ -41,8 +47,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  box-sizing: border-box;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
   background: var(--checkbox-default-background);
   border: 1px solid var(--checkbox-default-border);
   border-radius: var(--border-small);
@@ -50,25 +57,20 @@
     color 150ms ease-in-out;
 }
 
+/* Figma `internal-check` 10×10 (no matching spacing token). */
 .sds-checkbox__check {
-  width: 16px;
-  height: 16px;
+  width: 10px;
+  height: 10px;
   color: var(--checkbox-checked-checkmark);
   opacity: 0;
   transition: opacity 150ms ease-in-out;
 }
 
-.sds-checkbox__dash {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 2px;
-  border-radius: var(--border-small);
-  background: var(--checkbox-checked-checkmark);
-  opacity: 0;
-  transition: opacity 150ms ease-in-out;
+.sds-checkbox__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+  min-width: 0;
 }
 
 .sds-checkbox__label {
@@ -79,12 +81,35 @@
   cursor: pointer;
 }
 
-.sds-checkbox__message {
+.sds-checkbox__hint {
   margin: 0;
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
   font-weight: var(--font-caption-weight);
   color: var(--checkbox-help-text);
+}
+
+/* Error message row — Figma: 16px icon + 8px gap + Paragraph - Small. */
+.sds-checkbox__message {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--checkbox-error-text);
+}
+
+.sds-checkbox__message-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
+  color: var(--checkbox-error-icon);
 }
 
 /* ===== Checked ===== */
@@ -97,67 +122,36 @@
   opacity: 1;
 }
 
-.sds-checkbox__input:checked ~ .sds-checkbox__box .sds-checkbox__dash {
-  opacity: 0;
-}
-
-/* Checked label / help text colors (resolve to the same neutral as default). */
-.sds-checkbox__input:checked ~ .sds-checkbox__label {
-  color: var(--checkbox-checked-text);
-}
-
-/* ===== Indeterminate (overrides the checked glyph with a dash) ===== */
-.sds-checkbox__input:indeterminate ~ .sds-checkbox__box {
-  background: var(--checkbox-checked-background);
-  border-color: var(--checkbox-checked-border);
-}
-
-.sds-checkbox__input:indeterminate ~ .sds-checkbox__box .sds-checkbox__check {
-  opacity: 0;
-}
-
-.sds-checkbox__input:indeterminate ~ .sds-checkbox__box .sds-checkbox__dash {
-  opacity: 1;
-}
-
-.sds-checkbox__input:indeterminate ~ .sds-checkbox__label {
-  color: var(--checkbox-checked-text);
-}
-
-/* ===== Hover (default / checked / indeterminate only) ===== */
+/* ===== Hover — Figma State=Hover: box background changes, border unchanged ===== */
 .sds-checkbox:not(.sds-checkbox--error):not(.sds-checkbox--disabled)
-  .sds-checkbox__input:hover:not(:disabled)
-  ~ .sds-checkbox__box {
-  border-color: var(--checkbox-checked-border);
+  .sds-checkbox__row:hover
+  .sds-checkbox__box {
+  background: var(--checkbox-hover-background);
+  border-color: var(--checkbox-hover-border);
 }
 
-/* ===== Focus ===== */
+.sds-checkbox:not(.sds-checkbox--error):not(.sds-checkbox--disabled)
+  .sds-checkbox__row:hover
+  .sds-checkbox__input:checked
+  ~ .sds-checkbox__box {
+  background: var(--checkbox-checked-hover-background);
+  border-color: var(--checkbox-checked-hover-border);
+}
+
+/* ===== Focus (code-only keyboard ring) ===== */
 .sds-checkbox__input:focus-visible ~ .sds-checkbox__box {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
 
-/* ===== Error (border + glyph + text all use the error color) ===== */
-.sds-checkbox--error .sds-checkbox__box {
+/* ===== Error — only the box border changes; label and checkmark keep their colours ===== */
+.sds-checkbox--error .sds-checkbox__input ~ .sds-checkbox__box {
   background: var(--checkbox-error-background);
   border-color: var(--checkbox-error-border);
 }
 
-.sds-checkbox--error .sds-checkbox__check {
-  color: var(--checkbox-error-icon);
-}
-
-.sds-checkbox--error .sds-checkbox__dash {
-  background: var(--checkbox-error-icon);
-}
-
-.sds-checkbox--error .sds-checkbox__label,
-.sds-checkbox--error .sds-checkbox__message {
-  color: var(--checkbox-error-text);
-}
-
-/* ===== Disabled (drops to muted neutral, wins over checked/error) ===== */
-.sds-checkbox--disabled .sds-checkbox__box {
+/* ===== Disabled (Disabled/* tokens; wins over checked / error) ===== */
+.sds-checkbox--disabled .sds-checkbox__input ~ .sds-checkbox__box {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
 }
@@ -166,12 +160,8 @@
   color: var(--disabled-icon);
 }
 
-.sds-checkbox--disabled .sds-checkbox__dash {
-  background: var(--disabled-icon);
-}
-
 .sds-checkbox--disabled .sds-checkbox__label,
-.sds-checkbox--disabled .sds-checkbox__message {
+.sds-checkbox--disabled .sds-checkbox__hint {
   color: var(--disabled-text);
 }
 

@@ -1,69 +1,85 @@
 /* Dropdown Menu — Spotler Design System
-   A field-triggered menu for choosing one (single) or several (multiple) values from a set.
-   Composes the Inputs "Dropdown Menu" trigger with a Context Menu / List Item list on the
-   overlay surface. Trigger padding 8px 12px, gap 8px, radius small; menu radius medium,
-   4px padding, overlay elevation. All color/spacing/radius/type values are tokens. */
+   Figma (Inputs page):
+   - Trigger `Dropdown` 9422:104912 — root column gap 4px; label row gap 4px
+     (Paragraph - Semi Bold + "(optional)" Paragraph - Regular); field 40px tall,
+     padding 8px 12px, gap 8px, radius 8px (Border/Large), 1px stroke; 20px chevron;
+     hint row 16px icon + Paragraph - Small, gap 4px. Tokens Inputs/Dropdown Menu/<state>-*.
+   - Menu `Dropdown Menu` 9445:23950 — 4px below the field, padding 12px, gap 4px,
+     radius 8px, white fill, no border, Drop Shadow/50.
+   - Options `List Item` 9422:99325 — 40px tall, padding 8px 12px, gap 8px, radius 8px.
+     Slots: Checkbox Left / Icon Left (20px) / label / Checkbox Right / Badge (16px) /
+     Icon Right (20px). Selected (9422:99322) = selected background + Paragraph - Semi Bold,
+     no checkmark. Tokens Inputs/List Item/<state>-*. */
 
 .sds-dropdown-menu {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s-4);
-  position: relative;
   font-family: var(--font-family);
 }
 
+/* ===== Label row ===== */
 .sds-dropdown-menu__label {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  display: inline-flex;
+  align-items: baseline;
+  align-self: flex-start;
+  gap: var(--spacing-s-4);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
   color: var(--inputs-dropdown-menu-default-label);
 }
 
 .sds-dropdown-menu__optional {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--inputs-dropdown-menu-default-label-optional-text);
 }
 
-/* ===== Trigger (Inputs "Dropdown Menu" field) ===== */
+.sds-dropdown-menu--selected .sds-dropdown-menu__label {
+  color: var(--inputs-dropdown-menu-selected-label);
+}
+
+.sds-dropdown-menu--selected .sds-dropdown-menu__optional {
+  color: var(--inputs-dropdown-menu-selected-label-optional-text);
+}
+
+.sds-dropdown-menu--open .sds-dropdown-menu__label {
+  color: var(--inputs-dropdown-menu-focused-label);
+}
+
+.sds-dropdown-menu--open .sds-dropdown-menu__optional {
+  color: var(--inputs-dropdown-menu-focused-label-optional-text);
+}
+
+/* Positions the menu relative to the field (not the hint below it). */
+.sds-dropdown-menu__anchor {
+  position: relative;
+}
+
+/* ===== Trigger (Figma `Dropdown` field) ===== */
 .sds-dropdown-menu__trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-s-8);
+  box-sizing: border-box;
   width: 100%;
+  min-height: var(--spacing-s-40);
   padding: var(--spacing-s-8) var(--spacing-s-12);
   background: var(--inputs-dropdown-menu-default-background);
   border: 1px solid var(--inputs-dropdown-menu-default-stroke);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--inputs-dropdown-menu-default-text);
   cursor: pointer;
   text-align: left;
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
     color 150ms ease-in-out;
-}
-
-.sds-dropdown-menu__trigger:hover {
-  background: var(--inputs-dropdown-menu-hover-background);
-  border-color: var(--inputs-dropdown-menu-hover-stroke);
-}
-
-.sds-dropdown-menu__trigger:focus-visible {
-  outline: none;
-  background: var(--inputs-dropdown-menu-focused-background);
-  border-color: var(--inputs-dropdown-menu-focused-stroke);
-}
-
-/* Filled (selected) — a value is present, menu closed. */
-.sds-dropdown-menu--selected:not(.sds-dropdown-menu--open) .sds-dropdown-menu__trigger {
-  background: var(--inputs-dropdown-menu-selected-background);
-  border-color: var(--inputs-dropdown-menu-selected-stroke);
-}
-
-/* Open (focused) — overrides hover/selected while the menu is shown. */
-.sds-dropdown-menu--open .sds-dropdown-menu__trigger {
-  background: var(--inputs-dropdown-menu-focused-background);
-  border-color: var(--inputs-dropdown-menu-focused-stroke);
 }
 
 .sds-dropdown-menu__value {
@@ -79,12 +95,19 @@
   color: var(--inputs-dropdown-menu-default-text);
 }
 
+.sds-dropdown-menu__badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
 .sds-dropdown-menu__chevron {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  font-size: var(--font-h4-size);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
   color: var(--inputs-dropdown-menu-default-icon);
   transition: transform 150ms ease-in-out;
 }
@@ -93,12 +116,49 @@
   transform: rotate(180deg);
 }
 
-.sds-dropdown-menu--open .sds-dropdown-menu__chevron,
-.sds-dropdown-menu--open .sds-dropdown-menu__value:not(.sds-dropdown-menu__value--placeholder) {
+/* Selected — a value is present (menu closed). */
+.sds-dropdown-menu--selected .sds-dropdown-menu__trigger {
+  background: var(--inputs-dropdown-menu-selected-background);
+  border-color: var(--inputs-dropdown-menu-selected-stroke);
+}
+
+.sds-dropdown-menu--selected .sds-dropdown-menu__trigger .sds-dropdown-menu__chevron {
+  color: var(--inputs-dropdown-menu-selected-icon);
+}
+
+/* Hover */
+.sds-dropdown-menu__trigger:hover {
+  background: var(--inputs-dropdown-menu-hover-background);
+  border-color: var(--inputs-dropdown-menu-hover-stroke);
+}
+
+.sds-dropdown-menu__trigger:hover .sds-dropdown-menu__value--placeholder {
+  color: var(--inputs-dropdown-menu-hover-text);
+}
+
+.sds-dropdown-menu__trigger:hover .sds-dropdown-menu__chevron {
+  color: var(--inputs-dropdown-menu-hover-icon);
+}
+
+/* Focused — menu open, or keyboard focus on the trigger (the focused stroke is the ring). */
+.sds-dropdown-menu__trigger:focus-visible,
+.sds-dropdown-menu--open .sds-dropdown-menu__trigger {
+  outline: none;
+  background: var(--inputs-dropdown-menu-focused-background);
+  border-color: var(--inputs-dropdown-menu-focused-stroke);
+}
+
+.sds-dropdown-menu__trigger:focus-visible .sds-dropdown-menu__value:not(.sds-dropdown-menu__value--placeholder),
+.sds-dropdown-menu--open .sds-dropdown-menu__trigger .sds-dropdown-menu__value:not(.sds-dropdown-menu__value--placeholder) {
+  color: var(--inputs-dropdown-menu-focused-text);
+}
+
+.sds-dropdown-menu__trigger:focus-visible .sds-dropdown-menu__chevron,
+.sds-dropdown-menu--open .sds-dropdown-menu__trigger .sds-dropdown-menu__chevron {
   color: var(--inputs-dropdown-menu-focused-icon);
 }
 
-/* ===== Popover (overlay surface) ===== */
+/* ===== Popover (Figma `Dropdown Menu` surface) ===== */
 .sds-dropdown-menu__popover {
   position: absolute;
   top: calc(100% + var(--spacing-s-4));
@@ -108,87 +168,65 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s-4);
-  padding: var(--spacing-s-4);
-  background: var(--context-menu-basic-rest-background);
-  border: 1px solid var(--context-menu-frame-border);
-  border-radius: var(--border-medium);
-  box-shadow: var(--elevation-overlay);
-}
-
-/* ===== Search filter input ===== */
-.sds-dropdown-menu__search {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.sds-dropdown-menu__search-icon {
-  position: absolute;
-  left: var(--spacing-s-12);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-h4-size);
-  color: var(--inputs-search-bar-default-icon-start);
-  pointer-events: none;
-}
-
-.sds-dropdown-menu__search-input {
-  width: 100%;
   box-sizing: border-box;
-  padding: var(--spacing-s-8) var(--spacing-s-12);
-  background: var(--inputs-search-bar-default-background);
-  border: 1px solid var(--inputs-search-bar-default-stroke);
-  border-radius: var(--border-small);
-  font-family: var(--font-family);
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  color: var(--inputs-search-bar-focused-text);
-  outline: none;
-  transition: border-color 150ms ease-in-out, background-color 150ms ease-in-out;
+  padding: var(--spacing-s-12);
+  background: var(--context-menu-basic-rest-background);
+  border-radius: var(--border-large);
+  box-shadow: var(--drop-shadow-50);
 }
 
-/* Pad the input when a leading search icon is present. */
-.sds-dropdown-menu__search-icon ~ .sds-dropdown-menu__search-input {
-  padding-left: var(--spacing-s-36);
-}
-
-.sds-dropdown-menu__search-input:focus {
-  background: var(--inputs-search-bar-focused-background);
-  border-color: var(--inputs-search-bar-focused-stroke);
-}
-
-.sds-dropdown-menu__search-input::placeholder {
-  color: var(--inputs-search-bar-default-text);
-}
-
-/* ===== List (Context Menu / List Item tokens) ===== */
+/* ===== List (Figma `List Item` rows, 4px apart) ===== */
 .sds-dropdown-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
   list-style: none;
   margin: 0;
   padding: 0;
   outline: none;
-  /* Scroll cap (~10 rows). A relative unit (not a color/spacing/radius token) so the
-     menu scrolls instead of overflowing the viewport; no design token covers menu height. */
+  /* Scroll cap. A relative unit (not a color/spacing/radius token) so the menu
+     scrolls instead of overflowing the viewport; no design token covers menu height. */
   max-height: 15rem;
   overflow-y: auto;
 }
 
+/* No-results row — Figma: a List Item with a leading circle-info icon. */
 .sds-dropdown-menu__empty {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  min-height: var(--spacing-s-40);
   padding: var(--spacing-s-8) var(--spacing-s-12);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
-  color: var(--inputs-dropdown-menu-default-text);
+  font-weight: var(--font-body-weight);
+  color: var(--inputs-list-item-default-text);
+}
+
+.sds-dropdown-menu__empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
+  color: var(--inputs-list-item-default-icon);
 }
 
 .sds-dropdown-menu__option {
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
+  flex: none;
+  box-sizing: border-box;
+  min-height: var(--spacing-s-40);
   padding: var(--spacing-s-8) var(--spacing-s-12);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   background: var(--context-menu-basic-rest-background);
   color: var(--inputs-list-item-default-text);
   cursor: pointer;
@@ -200,7 +238,9 @@
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  font-size: var(--font-h4-size);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
   color: var(--inputs-list-item-default-icon);
 }
 
@@ -212,14 +252,44 @@
   white-space: nowrap;
 }
 
-/* Selected checkmark — conceptual blue per spec (Context Menu selected checkmark token). */
-.sds-dropdown-menu__option-check {
+.sds-dropdown-menu__option-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+/* List Item checkbox — Figma Checkbox instance: 20×20 frame, 2px padding, 16×16 box. */
+.sds-dropdown-menu__option-checkbox {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  font-size: var(--font-h4-size);
-  color: var(--context-menu-specific-selected-checkmark);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+}
+
+.sds-dropdown-menu__option-checkbox-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  background: var(--checkbox-default-background);
+  border: 1px solid var(--checkbox-default-border);
+  border-radius: var(--border-small);
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.sds-dropdown-menu__option-checkbox--checked .sds-dropdown-menu__option-checkbox-box {
+  background: var(--checkbox-checked-background);
+  border-color: var(--checkbox-checked-border);
+}
+
+/* Figma `internal-check` 10×10 (no matching spacing token). */
+.sds-dropdown-menu__option-checkbox-check {
+  width: 10px;
+  height: 10px;
+  color: var(--checkbox-checked-checkmark);
 }
 
 .sds-dropdown-menu__option--active,
@@ -236,19 +306,13 @@
 .sds-dropdown-menu__option--selected {
   background: var(--inputs-list-item-selected-background);
   color: var(--inputs-list-item-selected-text);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
 }
 
 .sds-dropdown-menu__option--selected .sds-dropdown-menu__option-icon {
   color: var(--inputs-list-item-selected-icon);
-}
-
-.sds-dropdown-menu__option--disabled {
-  color: var(--disabled-text);
-  cursor: not-allowed;
-}
-
-.sds-dropdown-menu__option--disabled .sds-dropdown-menu__option-icon {
-  color: var(--disabled-icon);
 }
 
 /* ===== Hint / message ===== */
@@ -259,6 +323,7 @@
   margin: 0;
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
   color: var(--inputs-dropdown-menu-default-hint-message);
 }
 
@@ -267,50 +332,92 @@
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  font-size: var(--font-caption-size);
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
   color: var(--inputs-dropdown-menu-default-hint-message-icon);
 }
 
-/* ===== Error ===== */
+.sds-dropdown-menu--selected .sds-dropdown-menu__hint {
+  color: var(--inputs-dropdown-menu-selected-hint-message);
+}
+
+.sds-dropdown-menu--selected .sds-dropdown-menu__hint-icon {
+  color: var(--inputs-dropdown-menu-selected-hint-message-icon);
+}
+
+.sds-dropdown-menu--open .sds-dropdown-menu__hint {
+  color: var(--inputs-dropdown-menu-focused-hint-message);
+}
+
+.sds-dropdown-menu--open .sds-dropdown-menu__hint-icon {
+  color: var(--inputs-dropdown-menu-focused-hint-message-icon);
+}
+
+/* ===== Error (wins over selected / hover / focused) ===== */
+.sds-dropdown-menu.sds-dropdown-menu--error .sds-dropdown-menu__label {
+  color: var(--inputs-dropdown-menu-error-label);
+}
+
+.sds-dropdown-menu.sds-dropdown-menu--error .sds-dropdown-menu__optional {
+  color: var(--inputs-dropdown-menu-error-label-optional-text);
+}
+
 .sds-dropdown-menu--error .sds-dropdown-menu__trigger,
 .sds-dropdown-menu--error .sds-dropdown-menu__trigger:hover,
-.sds-dropdown-menu--error.sds-dropdown-menu--selected:not(.sds-dropdown-menu--open)
-  .sds-dropdown-menu__trigger,
+.sds-dropdown-menu--error .sds-dropdown-menu__trigger:focus-visible,
+.sds-dropdown-menu--error.sds-dropdown-menu--selected .sds-dropdown-menu__trigger,
 .sds-dropdown-menu--error.sds-dropdown-menu--open .sds-dropdown-menu__trigger {
   background: var(--inputs-dropdown-menu-error-background);
   border-color: var(--inputs-dropdown-menu-error-stroke);
 }
 
-.sds-dropdown-menu--error .sds-dropdown-menu__value:not(.sds-dropdown-menu__value--placeholder) {
+.sds-dropdown-menu.sds-dropdown-menu--error
+  .sds-dropdown-menu__trigger
+  .sds-dropdown-menu__value:not(.sds-dropdown-menu__value--placeholder) {
   color: var(--inputs-dropdown-menu-error-text);
 }
 
-.sds-dropdown-menu--error .sds-dropdown-menu__hint {
+.sds-dropdown-menu.sds-dropdown-menu--error .sds-dropdown-menu__trigger .sds-dropdown-menu__chevron {
+  color: var(--inputs-dropdown-menu-error-icon);
+}
+
+.sds-dropdown-menu.sds-dropdown-menu--error .sds-dropdown-menu__hint {
   color: var(--inputs-dropdown-menu-error-hint-message);
 }
 
-.sds-dropdown-menu--error .sds-dropdown-menu__hint-icon {
+.sds-dropdown-menu.sds-dropdown-menu--error .sds-dropdown-menu__hint-icon {
   color: var(--inputs-dropdown-menu-error-hint-message-icon);
 }
 
-/* ===== Disabled ===== */
-.sds-dropdown-menu--disabled .sds-dropdown-menu__label,
-.sds-dropdown-menu--disabled .sds-dropdown-menu__optional {
+/* ===== Disabled (Disabled/* tokens; wins over everything) ===== */
+.sds-dropdown-menu.sds-dropdown-menu--disabled .sds-dropdown-menu__label,
+.sds-dropdown-menu.sds-dropdown-menu--disabled .sds-dropdown-menu__optional,
+.sds-dropdown-menu.sds-dropdown-menu--disabled .sds-dropdown-menu__hint {
   color: var(--disabled-text);
 }
 
-.sds-dropdown-menu--disabled .sds-dropdown-menu__trigger {
+.sds-dropdown-menu.sds-dropdown-menu--disabled .sds-dropdown-menu__hint-icon {
+  color: var(--disabled-icon);
+}
+
+.sds-dropdown-menu--disabled .sds-dropdown-menu__trigger,
+.sds-dropdown-menu--disabled .sds-dropdown-menu__trigger:hover,
+.sds-dropdown-menu--disabled.sds-dropdown-menu--selected .sds-dropdown-menu__trigger,
+.sds-dropdown-menu--disabled.sds-dropdown-menu--error .sds-dropdown-menu__trigger {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
   color: var(--disabled-text);
   cursor: not-allowed;
 }
 
-.sds-dropdown-menu--disabled .sds-dropdown-menu__value,
-.sds-dropdown-menu--disabled .sds-dropdown-menu__value--placeholder {
+.sds-dropdown-menu.sds-dropdown-menu--disabled
+  .sds-dropdown-menu__anchor
+  .sds-dropdown-menu__trigger
+  .sds-dropdown-menu__value {
   color: var(--disabled-text);
 }
 
-.sds-dropdown-menu--disabled .sds-dropdown-menu__chevron {
+.sds-dropdown-menu.sds-dropdown-menu--disabled .sds-dropdown-menu__trigger .sds-dropdown-menu__chevron {
   color: var(--disabled-icon);
 }
