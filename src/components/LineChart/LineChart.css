@@ -1,49 +1,73 @@
-/* LineChart — Spotler Design System (Diagrams)
-   Presentational wrapper: header (title + period picker), plot slot, legend.
+/* LineChart — Spotler Design System (Figma "Graph" 2818:7530, Graph Type=Line)
+   Frameless: no fill, stroke, radius, shadow or padding (Figma Graph variants have none).
+   Root: vertical, gap 24px — top nav, Divider, graph + legend.
+   Top nav: gap 32px, space-between, centered — Chart name (H4, grows), period area
+   (Paragraph - Small label + picker, gap 10px), settings control (20px, header-icon).
+   Graph + legend: gap 32px; legend under (wrapping, centered, gap 16px) or right (stacked,
+   gap 12px, vertically centered). Legend item: 16x16 indicator + Paragraph - Regular, gap 8px.
    Tokens: --diagrams-line-chart-*. */
 
 .sds-line-chart {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-16);
-  padding: var(--spacing-s-24);
-  border-radius: var(--border-large);
-  border: 1px solid var(--diagrams-line-chart-background-lines);
-  background: var(--monochrome-white);
-  box-shadow: var(--elevation-resting);
+  gap: var(--spacing-s-24);
   font-family: var(--font-family);
 }
 
+/* ===== Top nav ===== */
 .sds-line-chart__header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-s-8);
+  justify-content: space-between;
+  gap: var(--spacing-s-32);
 }
 
-.sds-line-chart__header-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-  color: var(--diagrams-line-chart-header-icon);
-}
-
+/* Chart name — Text Styles/Title Headings/H4, grows */
 .sds-line-chart__header-text {
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: var(--font-h4-size);
   line-height: var(--font-h4-line);
   font-weight: var(--font-h4-weight);
   color: var(--diagrams-line-chart-header-text);
 }
 
+/* Period area — Figma "Period date": gap 10px (no s-10 token; half of s-20 is exact). */
+.sds-line-chart__period {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: calc(var(--spacing-s-20) / 2);
+}
+
+/* Text Styles/Body/Paragraph - Small */
+.sds-line-chart__period-label {
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--diagrams-line-chart-period-picker);
+}
+
 .sds-line-chart__period-picker {
-  margin-left: auto;
   display: inline-flex;
   align-items: center;
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  color: var(--diagrams-line-chart-period-picker);
+}
+
+/* Settings control — ellipsis-vertical, 20px, header-icon */
+.sds-line-chart__settings {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--spacing-s-20);
+  color: var(--diagrams-line-chart-header-icon);
+}
+
+/* ===== Graph + legend ===== */
+.sds-line-chart__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-32);
 }
 
 .sds-line-chart__plot {
@@ -53,11 +77,34 @@
 
 .sds-line-chart__legend {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-s-12);
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* Legend position = Under: wrapping row, centered, 16px gaps both ways */
+.sds-line-chart--legend-under .sds-line-chart__legend {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-s-16);
+}
+
+/* Legend position = Right: plot grows, legend stacked (12px gap), vertically centered */
+.sds-line-chart--legend-right .sds-line-chart__body {
+  flex-direction: row;
+  align-items: center;
+}
+
+.sds-line-chart--legend-right .sds-line-chart__plot {
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: stretch;
+}
+
+.sds-line-chart--legend-right .sds-line-chart__legend {
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: var(--spacing-s-12);
 }
 
 .sds-line-chart__legend-item {
@@ -66,22 +113,19 @@
   gap: var(--spacing-s-8);
 }
 
+/* Color indicator — 16x16, radius Border/Small (4px) */
 .sds-line-chart__legend-swatch {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  flex: 0 0 auto;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
   border-radius: var(--border-small);
 }
 
+/* Text Styles/Body/Paragraph - Regular */
 .sds-line-chart__legend-label {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--diagrams-line-chart-legend-text);
-}
-
-.sds-line-chart__legend-value {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  font-weight: 600;
-  color: var(--diagrams-line-chart-legend-explanation);
 }

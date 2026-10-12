@@ -1,10 +1,14 @@
 /* Action Card — Spotler Design System
-   Spec: Spotler "Action Card".
-   Outer: padding 24px 32px, gap 8px, radius Border/Large (8px), 1px stroke, resting Drop Shadow/50.
-   Internal item: padding 12px 16px, gap 10px (nearest scale token s-8), radius Border/Large (8px),
-   1px stroke; hover lifts to Card -> Product Specific tint (#F8FAFA), distinct focus ring.
-   Leading tile: 40x40, padding ~10px (centered), radius Border/Small (4px), 20px glyph.
-   Tokens: --diagrams-action-card-* + --cards-product-specific-* + foundations. */
+   Figma: "Action Card" 3352:20493 + "Action card - internal Area" 3352:17425 (Diagrams & Stats).
+   Card: vertical, padding 24px 32px, gap 8px, radius Border/Large (8px), 1px inside stroke,
+   effect style Drop Shadow/100. Title: H4.
+   Row: padding 12px 16px, gap 8px, radius Border/Large (8px), 1px stroke, Drop Shadow/100.
+   Leading tile: 36x36, padding 8px, radius Border/Small (4px), 1px Monochrome/White stroke,
+   20px glyph. Text column gap 4px.
+   Trailing: Tertiary Icon Button look — 36x36, circular, 20px angle-right glyph.
+   Figma defines no row states. The keyboard focus ring is the one code-only state, kept for
+   accessibility (Cards/Product Specific focus-stroke token); there is no hover styling.
+   Tokens: --diagrams-action-card-* + --icon-button-tertiary-* + --cards-product-specific-*. */
 
 .sds-action-card {
   display: flex;
@@ -14,10 +18,11 @@
   border-radius: var(--border-large);
   border: 1px solid var(--diagrams-action-card-stroke);
   background: var(--diagrams-action-card-background);
-  box-shadow: var(--elevation-resting);
+  box-shadow: var(--drop-shadow-100);
   font-family: var(--font-family);
 }
 
+/* Text Styles/Title Headings/H4 */
 .sds-action-card__heading {
   margin: 0;
   font-size: var(--font-h4-size);
@@ -26,7 +31,7 @@
   color: var(--diagrams-action-card-heading);
 }
 
-/* Items list — reset list semantics, keep the 8px outer gap between rows */
+/* Items list — reset list semantics, keep the 8px card gap between rows */
 .sds-action-card__items {
   list-style: none;
   margin: 0;
@@ -40,7 +45,7 @@
   display: flex;
 }
 
-/* Internal action item — the whole row is the target */
+/* Internal action row — the whole row is the target */
 .sds-action-card__item {
   display: flex;
   align-items: center;
@@ -50,14 +55,13 @@
   border-radius: var(--border-large);
   border: 1px solid var(--diagrams-action-card-internal-area-stroke);
   background: var(--diagrams-action-card-internal-area-background);
-  box-shadow: var(--elevation-resting);
+  box-shadow: var(--drop-shadow-100);
   font-family: var(--font-family);
   text-align: left;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
-    box-shadow 150ms ease-in-out;
+  transition: border-color 150ms ease-in-out;
 }
 
 a.sds-action-card__item,
@@ -65,10 +69,7 @@ button.sds-action-card__item {
   appearance: none;
 }
 
-.sds-action-card__item:hover {
-  background: var(--cards-product-specific-hover-background);
-}
-
+/* Keyboard focus ring — the one code-only state, kept for accessibility */
 .sds-action-card__item:focus-visible {
   outline: 2px solid var(--cards-product-specific-focus-stroke);
   outline-offset: 2px;
@@ -79,29 +80,20 @@ button.sds-action-card__item {
 .sds-action-card__item--static {
   cursor: default;
 }
-.sds-action-card__item--static:hover {
-  background: var(--diagrams-action-card-internal-area-background);
-}
 
-/* Stacked / compact rows: drop the internal shadow and use the visible E7ECED border
-   (per spec, stacking shadows inside the card shadow looks heavy). */
-.sds-action-card__item--compact {
-  box-shadow: none;
-  border-color: var(--diagrams-action-card-stroke);
-}
-
-/* Leading icon tile — 40x40, 4px radius, 20px glyph centered */
+/* Leading icon tile — 36x36 (8px padding + 20px glyph), 4px radius, 1px white inside stroke.
+   The fixed box with a flex-centered 20px glyph reproduces Figma's 8px padding exactly
+   (Figma's stroke sits inside the padding, a CSS border would add to it). */
 .sds-action-card__item-icon {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: var(--spacing-s-40);
-  height: var(--spacing-s-40);
-  padding: var(--spacing-s-8);
+  width: var(--spacing-s-36);
+  height: var(--spacing-s-36);
   border-radius: var(--border-small);
-  border: 1px solid var(--diagrams-action-card-internal-area-stroke);
+  border: 1px solid var(--monochrome-white);
   background: var(--diagrams-action-card-internal-area-icon-start-background);
   color: var(--diagrams-action-card-internal-area-icon-start);
   font-size: var(--spacing-s-20);
@@ -120,21 +112,15 @@ button.sds-action-card__item {
   min-width: 0;
 }
 
-/* Body/Paragraph - Semi Bold (14/20, weight 600) */
+/* Text Styles/Body/Paragraph - Semi Bold */
 .sds-action-card__item-label {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  font-weight: 600;
-  color: var(--diagrams-action-card-internal-area-body-text);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
+  color: var(--diagrams-action-card-internal-area-h2);
 }
 
-/* Compact rows use Body/Paragraph - Small - Semi Bold (12/16, weight 600) */
-.sds-action-card__item--compact .sds-action-card__item-label {
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-}
-
-/* Description stays at Body/Paragraph - Regular (14/20) even on compact rows */
+/* Text Styles/Body/Paragraph - Regular */
 .sds-action-card__item-description {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
@@ -149,26 +135,22 @@ button.sds-action-card__item {
   margin-left: auto;
 }
 
-/* Decorative angle-right chevron (Icon Button default state color) */
+/* Decorative Tertiary Icon Button (State=Default): 36x36, circular, transparent,
+   centered 20px glyph in Icon Button/Tertiary/default-icon. */
 .sds-action-card__chevron {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  width: var(--spacing-s-36);
+  height: var(--spacing-s-36);
+  border-radius: var(--border-circular);
+  background: transparent;
+  color: var(--icon-button-tertiary-default-icon);
+  font-size: var(--spacing-s-20);
+}
+
+.sds-action-card__chevron > * {
   width: var(--spacing-s-20);
   height: var(--spacing-s-20);
-  color: var(--diagrams-action-card-internal-area-icon-end);
-}
-
-.sds-action-card__chevron svg {
-  width: var(--spacing-s-20);
-  height: var(--spacing-s-20);
-}
-
-/* Header + CTA only — full-width single action for the whole card */
-.sds-action-card__cta {
-  display: flex;
-}
-
-.sds-action-card__cta > * {
-  width: 100%;
 }

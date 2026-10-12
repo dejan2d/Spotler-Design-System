@@ -16,31 +16,35 @@ export interface ActionCardItem {
   /** Stable key for the row. */
   id: string;
   /**
-   * Leading 20px glyph rendered inside the 40x40 tile (FontAwesome Duotone in real use,
-   * e.g. `tickets`). Omit to render the row with no leading tile.
+   * Leading 20px glyph rendered inside the 36x36 tile (FontAwesome Duotone in real use,
+   * e.g. `tickets`). Omit to render the row with no leading tile. Figma "Icon Instance".
    */
   icon?: ReactNode;
-  /** Item title — Body/Paragraph - Semi Bold (or Small - Semi Bold when `compact`). */
+  /**
+   * Item title — Body/Paragraph - Semi Bold, `Diagrams/Action Card/internal-area-h2`.
+   * Figma "Title Text".
+   */
   label: ReactNode;
-  /** Supporting description — Body/Paragraph - Regular. */
+  /** Supporting description — Body/Paragraph - Regular, `internal-area-body-text`. Figma "Body Text". */
   description?: ReactNode;
   /** Where the row navigates to. When set the row renders as an anchor. */
   href?: string;
   /** Click handler — the whole row is the target. */
   onClick?: MouseEventHandler<HTMLElement>;
-  /** Render the row in the compact (stacked) style with the smaller 12/16 title. */
-  compact?: boolean;
   /**
    * Trailing affordance:
-   * - `'chevron'` (default) — decorative `angle-right`, row is the target.
+   * - `'chevron'` (default) — decorative `angle-right` drawn as a Tertiary Icon Button
+   *   (36x36, circular, `Icon Button/Tertiary/default-icon`); the row is the target.
+   *   Figma "Icon Button" on.
    * - `'button'` — pass a real Button via `trailing`; the row is made non-interactive.
-   * - `'none'` — no trailing affordance.
+   *   Figma "Button" on.
+   * - `'none'` — no trailing affordance (Figma "Icon Button" and "Button" off).
    */
   trailingKind?: ActionCardTrailing;
   /**
    * Node for the trailing affordance.
-   * - With `trailingKind="chevron"` this overrides the default chevron glyph (pass the
-   *   FontAwesome `angle-right` Duotone node).
+   * - With `trailingKind="chevron"` this overrides the default 20px glyph inside the
+   *   36x36 Tertiary Icon Button box (pass a FontAwesome Duotone node).
    * - With `trailingKind="button"` pass the actual Button/CTA element.
    */
   trailing?: ReactNode;
@@ -49,34 +53,35 @@ export interface ActionCardItem {
 // `title` is re-typed as a ReactNode heading, so omit the native string `title` attribute
 // from the base to avoid the incompatible-override error (TS2430).
 export interface ActionCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
-  /** Group heading — H4. Rendered as an `<h2>` styled to H4 by default; override with `headingLevel`. */
+  /**
+   * Card title — Title Headings/H4, `Diagrams/Action Card/heading`. Figma "Title Text";
+   * omit to hide it (Figma "Title" off). Rendered as an `<h2>` by default; override with
+   * `headingLevel`.
+   */
   title?: ReactNode;
   /** Semantic heading level for the group title. Defaults to `2`. */
   headingLevel?: 2 | 3 | 4 | 5 | 6;
-  /** Internal action items. */
-  items?: ActionCardItem[];
   /**
-   * Full-width CTA for the "Header + CTA only" variant — a single action for the whole card,
-   * rendered below the title with no internal item. Pass a Button element.
+   * Internal action rows ("Action card - internal Area" instances), stacked 8px apart.
+   * Every row uses the same Figma row style.
    */
-  cta?: ReactNode;
-  /** Escape hatch for bespoke content rendered after the items / CTA. */
+  items?: ActionCardItem[];
+  /** Content rendered after the rows — Figma "Instance Swap" (Instance stack slot). */
   children?: ReactNode;
 }
 
-/** Default decorative chevron when no `trailing` node is supplied for a `chevron` row. */
-const DefaultChevron = () => (
-  <span className="sds-action-card__chevron" aria-hidden="true">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" focusable="false">
-      <path
-        d="M7.5 4.5L13 10l-5.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  </span>
+/**
+ * Default glyph for a `chevron` row: Font Awesome Pro 7.1.0 Duotone Regular `angle-right`
+ * (src/icons/duotone-regular/angle-right.svg), the icon Figma places in the trailing
+ * Tertiary Icon Button.
+ */
+const AngleRightIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 640 640" focusable="false" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M433.5 303C442.9 312.4 442.9 327.6 433.5 336.9L273.5 497C264.1 506.4 248.9 506.4 239.6 497C230.3 487.6 230.2 472.4 239.6 463.1L382.6 320.1L239.6 177.1C230.2 167.7 230.2 152.5 239.6 143.2C249 133.9 264.2 133.8 273.5 143.2L433.5 303.2z"
+    />
+  </svg>
 );
 
 interface ActionCardRowProps {
@@ -105,7 +110,14 @@ function RowBody({ item }: ActionCardRowProps) {
       </span>
       {kind !== 'none' && (
         <span className="sds-action-card__item-trailing">
-          {kind === 'chevron' ? item.trailing ?? <DefaultChevron /> : item.trailing}
+          {kind === 'chevron' ? (
+            // Decorative Tertiary Icon Button look — not a nested control, the row is the target.
+            <span className="sds-action-card__chevron" aria-hidden="true">
+              {item.trailing ?? <AngleRightIcon />}
+            </span>
+          ) : (
+            item.trailing
+          )}
         </span>
       )}
     </>
@@ -115,21 +127,31 @@ function RowBody({ item }: ActionCardRowProps) {
 /**
  * Action Card — groups one or more navigable internal action items under an H4 title.
  *
- * Spec: Spotler "Action Card". Outer card padding 24px 32px, internal gap 8px,
- * radius Border/Large (8px), 1px stroke, resting Drop Shadow/50. Internal row padding
- * 12px 16px, gap 10px, radius Border/Large (8px). Leading tile 40x40, padding 10px,
- * radius Border/Small (4px), 20px glyph.
+ * Figma spec ("Action Card" 3352:20493 + "Action card - internal Area" 3352:17425):
+ * - Card: vertical, padding 24px 32px, gap 8px, radius Border/Large (8px), 1px inside
+ *   stroke `Diagrams/Action Card/stroke`, fill `Diagrams/Action Card/background`,
+ *   effect style Drop Shadow/100. Title: Title Headings/H4, `Diagrams/Action Card/heading`.
+ * - Row: horizontal, padding 12px 16px, gap 8px, radius Border/Large (8px), 1px stroke
+ *   `internal-area-stroke`, fill `internal-area-background`, Drop Shadow/100.
+ * - Leading tile: 36x36, padding 8px, radius Border/Small (4px), 1px `Monochrome/White`
+ *   stroke, fill `internal-area-icon-start-background`, 20px glyph `internal-area-icon-start`.
+ * - Text: vertical, gap 4px — title Paragraph - Semi Bold (`internal-area-h2`), body
+ *   Paragraph - Regular (`internal-area-body-text`).
+ * - Trailing: Tertiary Icon Button, 36x36 circular, 20px `angle-right`
+ *   (`Icon Button/Tertiary/default-icon`).
  *
- * Variants (driven by props, not a single union):
- * - Single item — one row with a trailing chevron Icon Button affordance.
- * - Single item + Button — one row whose `trailingKind="button"` carries a real CTA (row non-interactive).
- * - Stacked items — a primary row plus `compact` rows using the smaller 12/16 title.
- * - Header + CTA only — `title` + `cta` (full-width Button) with no internal item.
+ * Figma has a single Action Card layout with no variants: optional title, one or more
+ * internal rows (each with optional icon, title, body and trailing Icon Button or Button),
+ * then an optional slot (`children`).
  *
- * Tokens: `--diagrams-action-card-*` + `--cards-product-specific-*` + foundations.
+ * Figma defines no row states (no hover). The keyboard focus ring (`:focus-visible`,
+ * `--cards-product-specific-focus-stroke`) is the one code-only state, kept for accessibility.
+ *
+ * Tokens: `--diagrams-action-card-*` + `--icon-button-tertiary-default-icon` +
+ * `--cards-product-specific-focus-stroke` + foundations.
  */
 export const ActionCard = forwardRef<HTMLDivElement, ActionCardProps>(function ActionCard(
-  { title, headingLevel = 2, items = [], cta, className, children, ...rest },
+  { title, headingLevel = 2, items = [], className, children, ...rest },
   ref,
 ) {
   const classes = ['sds-action-card', className].filter(Boolean).join(' ');
@@ -148,7 +170,6 @@ export const ActionCard = forwardRef<HTMLDivElement, ActionCardProps>(function A
 
             const itemClasses = [
               'sds-action-card__item',
-              item.compact && 'sds-action-card__item--compact',
               !interactive && 'sds-action-card__item--static',
             ]
               .filter(Boolean)
@@ -195,8 +216,6 @@ export const ActionCard = forwardRef<HTMLDivElement, ActionCardProps>(function A
           })}
         </ul>
       )}
-
-      {cta && <div className="sds-action-card__cta">{cta}</div>}
 
       {children}
     </div>
