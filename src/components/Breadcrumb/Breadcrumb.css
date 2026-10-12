@@ -1,4 +1,6 @@
 /* Breadcrumb — Spotler Design System
+   DEPRECATED: the Figma Breadcrumbs page (29:6) is marked "DONT USE". Kept for
+   existing screens only; do not use in new work.
    Spotler component: Breadcrumb.
    No dedicated tokens — composes from the Link color (--button-textlink-*)
    and Monochrome grays. Body/Paragraph - Regular (14/20). Single line, no

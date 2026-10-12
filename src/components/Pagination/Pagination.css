@@ -1,20 +1,65 @@
 /* Pagination — Spotler Design System
-   Controls for moving through paged data: numbers, prev/next arrows, ellipses, size changer.
-   Number and navigation controls are 36px circular targets (radius var(--border-circular)).
-   All color/spacing/radius/type values are tokens.
+   Figma: Pagination 298:24472 (Version=Large|Small × State=Normal|Disabled),
+   Components/Pagination-Item 298:24583, -Item-Ellipsis 298:24604, -Next 298:24629,
+   -Prev 298:24642, size-changer 298:27292.
+   Large: full width, padding 16px 8px, options left / controls right (space-between).
+   Small: padding 12px 8px, controls only.
+   Number, navigation and ellipsis controls are 32×32, 8px apart; strokes are "Inside"
+   (buttons are border-box, so the 1px border stays within 32px).
    Token names preserve the Figma typos verbatim: `nagivation` and `elipsis`. */
 
 .sds-pagination {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+/* Version=Large — padding 16px 8px, gap 16px, space-between. */
+.sds-pagination--large {
+  justify-content: space-between;
+  gap: var(--spacing-s-16);
+  width: 100%;
+  padding: var(--spacing-s-16) var(--spacing-s-8);
+}
+
+/* Version=Small — padding 12px 8px, gap 8px. */
+.sds-pagination--small {
+  display: inline-flex;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-12) var(--spacing-s-8);
+}
+
+/* Options group: "Show" + size changer + range label, 8px apart. */
+.sds-pagination__options {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-s-4);
-  font-family: var(--font-family);
+  gap: var(--spacing-s-8);
+  color: var(--pagination-size-changer-text);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+}
+
+/* "Show" and the range label: Paragraph - Regular, Pagination/Size Changer/text
+   (they keep this colour in State=Disabled). */
+.sds-pagination__label,
+.sds-pagination__range {
+  color: var(--pagination-size-changer-text);
+  white-space: nowrap;
+}
+
+/* Controls group: prev, numbers/ellipses, next — 8px apart. */
+.sds-pagination__controls {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
 }
 
 .sds-pagination__list {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-s-4);
+  gap: var(--spacing-s-8);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -24,17 +69,18 @@
   display: inline-flex;
 }
 
-/* ===== Number ===== */
+/* ===== Number — 32×32, Paragraph - Regular ===== */
 .sds-pagination__number {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-s-36);
-  height: var(--spacing-s-36);
+  width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
   padding: 0;
   background: var(--pagination-number-default-background);
   border: 1px solid transparent;
   border-radius: var(--border-circular);
+  box-sizing: border-box;
   color: var(--pagination-number-default-text);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
@@ -45,18 +91,29 @@
     color 150ms ease-in-out;
 }
 
-.sds-pagination__number:hover {
+.sds-pagination__number:hover:not(:disabled) {
   background: var(--pagination-number-hover-background);
   border-color: var(--pagination-number-hover-stroke);
   color: var(--pagination-number-hover-text);
 }
 
+/* Selected — Paragraph - Semi Bold. */
 .sds-pagination__number--selected,
-.sds-pagination__number--selected:hover {
+.sds-pagination__number--selected:hover:not(:disabled) {
   background: var(--pagination-number-selected-background);
   border-color: var(--pagination-number-selected-stroke);
   color: var(--pagination-number-selected-text);
-  font-weight: var(--font-h4-weight);
+  font-weight: var(--font-body-semibold-weight);
+}
+
+/* Disabled (Pagination-Item Type=Disabled) — Paragraph - Regular. */
+.sds-pagination__number:disabled,
+.sds-pagination__number--selected:disabled {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
+  color: var(--disabled-text);
+  font-weight: var(--font-body-weight);
+  cursor: not-allowed;
 }
 
 .sds-pagination__number:focus-visible,
@@ -66,17 +123,18 @@
   outline-offset: 2px;
 }
 
-/* ===== Navigation item (prev/next) ===== */
+/* ===== Navigation item (prev/next) — 32×32, 12px icon ===== */
 .sds-pagination__nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-s-36);
-  height: var(--spacing-s-36);
+  width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
   padding: 0;
   background: var(--pagination-nagivation-item-default-background);
   border: 1px solid transparent;
   border-radius: var(--border-circular);
+  box-sizing: border-box;
   cursor: pointer;
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out,
     color 150ms ease-in-out;
@@ -86,9 +144,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-s-20);
-  height: var(--spacing-s-20);
-  font-size: var(--spacing-s-20);
+  width: var(--spacing-s-12);
+  height: var(--spacing-s-12);
+  font-size: var(--spacing-s-12);
   color: var(--pagination-nagivation-item-default-icon);
 }
 
@@ -110,7 +168,10 @@
   color: var(--pagination-nagivation-item-selected-icon);
 }
 
+/* Disabled (bounds or whole pagination) — Disabled/background + Disabled/stroke + Disabled/icon. */
 .sds-pagination__nav:disabled {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
   cursor: not-allowed;
 }
 
@@ -118,16 +179,17 @@
   color: var(--disabled-icon);
 }
 
-/* ===== Ellipsis ===== */
+/* ===== Ellipsis — 32×32, 20px glyph ===== */
 .sds-pagination__ellipsis {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: var(--spacing-s-36);
-  height: var(--spacing-s-36);
+  min-width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
+  border-radius: var(--border-small);
   user-select: none;
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  font-size: var(--spacing-s-20);
+  line-height: 1;
 }
 
 .sds-pagination__ellipsis--previous {
@@ -138,47 +200,111 @@
   color: var(--pagination-elipsis-next-default);
 }
 
-/* ===== Size changer ===== */
+/* Hover (Figma Ellipsis State=Hover): the dots give way to a 12px angle pointing
+   previous/next in Pagination/elipsis-*-hover. Visual only — no behaviour. */
+.sds-pagination__ellipsis-arrow {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-12);
+  height: var(--spacing-s-12);
+}
+
+/* CSS-drawn angle (5px arms ≈ Figma's 7×4 angle glyph in a 12px box). */
+.sds-pagination__ellipsis-arrow::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+
+.sds-pagination__ellipsis--next .sds-pagination__ellipsis-arrow::before {
+  transform: translateX(-1px) rotate(45deg);
+}
+
+.sds-pagination__ellipsis--previous .sds-pagination__ellipsis-arrow::before {
+  transform: translateX(1px) rotate(-135deg);
+}
+
+.sds-pagination:not(.sds-pagination--disabled) .sds-pagination__ellipsis:hover .sds-pagination__ellipsis-dots {
+  display: none;
+}
+
+.sds-pagination:not(.sds-pagination--disabled) .sds-pagination__ellipsis:hover .sds-pagination__ellipsis-arrow {
+  display: inline-flex;
+}
+
+.sds-pagination:not(.sds-pagination--disabled) .sds-pagination__ellipsis--next:hover {
+  color: var(--pagination-elipsis-next-hover);
+}
+
+.sds-pagination:not(.sds-pagination--disabled) .sds-pagination__ellipsis--previous:hover {
+  color: var(--pagination-elipsis-previous-hover);
+}
+
+/* Figma Ellipsis State=Disabled colours the glyph with Disabled/background. */
+.sds-pagination--disabled .sds-pagination__ellipsis {
+  color: var(--disabled-background);
+}
+
+/* ===== Size changer — 80×32, radius 4px, padding 4px 8px ===== */
 .sds-pagination__size-changer {
   position: relative;
   display: inline-flex;
   align-items: center;
-  margin-left: var(--spacing-s-8);
   color: var(--pagination-size-changer-text);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
 }
 
 .sds-pagination__size-select {
-  height: var(--spacing-s-36);
+  /* 80px = Figma size-changer width (no spacing token). Right padding leaves room
+     for the 20px chevron at 8px from the edge. */
+  min-width: 80px;
+  height: var(--spacing-s-32);
   padding: 0 var(--spacing-s-32) 0 var(--spacing-s-8);
   background: var(--pagination-size-changer-default-background);
-  border: 1px solid var(--pagination-size-changer-default-stroke);
+  /* Figma 298:27292 Type=Default binds the stroke to Monochrome/Gray - 200
+     (same value as --pagination-size-changer-default-stroke). */
+  border: 1px solid var(--monochrome-gray-200);
   border-radius: var(--border-small);
+  box-sizing: border-box;
   color: var(--pagination-size-changer-default-text);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   cursor: pointer;
   appearance: none;
   transition: border-color 150ms ease-in-out, background-color 150ms ease-in-out,
     color 150ms ease-in-out;
 }
 
-.sds-pagination__size-select:hover {
+.sds-pagination__size-select:hover:not(:disabled) {
   background: var(--pagination-size-changer-hover-background);
   border-color: var(--pagination-size-changer-hover-stroke);
   color: var(--pagination-size-changer-hover-text);
 }
 
-.sds-pagination__size-select:focus,
-.sds-pagination__size-select:focus-visible {
+/* Selected (open/focused) — Paragraph - Semi Bold. */
+.sds-pagination__size-select:focus:not(:disabled),
+.sds-pagination__size-select:focus-visible:not(:disabled) {
   background: var(--pagination-size-changer-selected-background);
   border-color: var(--pagination-size-changer-selected-stroke);
   color: var(--pagination-size-changer-selected-text);
+  font-weight: var(--font-body-semibold-weight);
 }
 
-/* Trailing chevron slot; sits over the native control's hidden arrow. */
+/* Disabled — Figma binds both fill and stroke to Disabled/background. */
+.sds-pagination__size-select:disabled {
+  background: var(--disabled-background);
+  border-color: var(--disabled-background);
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+/* Trailing chevron slot (20px); sits over the native control's hidden arrow. */
 .sds-pagination__size-icon {
   position: absolute;
   right: var(--spacing-s-8);
@@ -192,11 +318,15 @@
   color: var(--pagination-size-changer-default-icon);
 }
 
-.sds-pagination__size-select:hover ~ .sds-pagination__size-icon {
+.sds-pagination__size-select:hover:not(:disabled) ~ .sds-pagination__size-icon {
   color: var(--pagination-size-changer-hover-icon);
 }
 
-.sds-pagination__size-select:focus ~ .sds-pagination__size-icon,
-.sds-pagination__size-select:focus-visible ~ .sds-pagination__size-icon {
+.sds-pagination__size-select:focus:not(:disabled) ~ .sds-pagination__size-icon,
+.sds-pagination__size-select:focus-visible:not(:disabled) ~ .sds-pagination__size-icon {
   color: var(--pagination-size-changer-selected-icon);
+}
+
+.sds-pagination__size-select:disabled ~ .sds-pagination__size-icon {
+  color: var(--disabled-icon);
 }

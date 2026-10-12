@@ -2,6 +2,12 @@ import { forwardRef, useState } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import './Breadcrumb.css';
 
+/**
+ * One segment of a Breadcrumb trail.
+ *
+ * @deprecated The Figma Breadcrumbs page (29:6) is marked "DONT USE". Kept only for
+ * existing screens — do not use in new work. It will be removed in a future major release.
+ */
 export interface BreadcrumbItem {
   /** Visible label for the segment. */
   label: ReactNode;
@@ -9,6 +15,12 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
+/**
+ * Props for the deprecated Breadcrumb.
+ *
+ * @deprecated The Figma Breadcrumbs page (29:6) is marked "DONT USE". Kept only for
+ * existing screens — do not use in new work. It will be removed in a future major release.
+ */
 export interface BreadcrumbProps extends HTMLAttributes<HTMLElement> {
   /** Ordered trail from root to current page. The last item is the current location. */
   items: BreadcrumbItem[];
@@ -55,11 +67,18 @@ const DEFAULT_BACK_ICON = '←';
  * Breadcrumb — a horizontal trail showing the user's location in the app
  * hierarchy and letting them jump back to an ancestor level.
  *
+ * DEPRECATED: the Figma source of truth marks Breadcrumbs "DONT USE" (page 29:6).
+ * The component is kept, unchanged, so existing screens keep working. Do not
+ * use it in new designs or code.
+ *
  * Spotler component: Breadcrumb. Single line, Body/Paragraph - Regular (14/20),
  * no wrapping — long trails collapse the middle into an ellipsis. Has no
  * dedicated color tokens: ancestor segments use the Link color
  * (rest `#005499`, hover `#003560`, underlined) and the current segment is
  * static gray text. Separators use the muted gray.
+ *
+ * @deprecated The Figma Breadcrumbs page (29:6) is marked "DONT USE". Kept only for
+ * existing screens — do not use in new work. It will be removed in a future major release.
  */
 export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Breadcrumb(
   {

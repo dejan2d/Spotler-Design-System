@@ -1,6 +1,7 @@
 /* Stepper — Spotler Design System
-   Spec: references/components/stepper.md
-   32x32 circular step icons; checkmark on complete (finished). 150ms transitions. */
+   Figma: Stepper/Icon 823:6412, Stepper/Steps/Horizontal 823:6434,
+   Stepper/Step/Vertical 823:6467, Stepper 823:6513.
+   32x32 circular step icons with 20x20 glyphs; 150ms transitions. */
 
 .sds-stepper {
   display: flex;
@@ -10,11 +11,14 @@
   font-family: var(--font-family);
 }
 
+/* Horizontal steps sit 16px apart (Figma Stepper Direction=Horizontal, gap 16). */
 .sds-stepper--horizontal {
   flex-direction: row;
   align-items: flex-start;
+  gap: var(--spacing-s-16);
 }
 
+/* Vertical steps stack with no gap (60px each). */
 .sds-stepper--vertical {
   flex-direction: column;
 }
@@ -44,6 +48,25 @@
   gap: var(--spacing-s-8);
 }
 
+/* Clickable step: the head is a reset <button>. */
+.sds-stepper__head--button {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sds-stepper__head--button:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
+}
+
 /* ===== Icon ===== */
 .sds-stepper__icon {
   display: inline-flex;
@@ -57,10 +80,11 @@
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
 }
 
+/* Figma: number text 16px (no text style), Regular. */
 .sds-stepper__number {
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
+  font-weight: var(--font-body-weight);
   text-align: center;
 }
 
@@ -88,10 +112,24 @@
   background: transparent;
 }
 
+/* Warning: orange ring; two-tone glyph (orange triangle, Gray-1000 mark). */
 .sds-stepper__icon--warning {
   border-color: var(--stepper-icon-warning-stroke);
   color: var(--stepper-icon-warning-icon);
   background: transparent;
+}
+
+.sds-stepper__warning-triangle {
+  fill: var(--semantic-orange-warning-warning-main);
+  stroke: var(--semantic-orange-warning-warning-main);
+}
+
+.sds-stepper__warning-mark {
+  stroke: var(--stepper-icon-warning-icon);
+}
+
+.sds-stepper__warning-dot {
+  fill: var(--stepper-icon-warning-icon);
 }
 
 /* Visually-hidden status label so the step's status is announced to assistive tech
@@ -108,10 +146,11 @@
   border: 0;
 }
 
-/* ===== Title ===== */
+/* ===== Title — Paragraph - Regular; in progress = Paragraph - Semi Bold ===== */
 .sds-stepper__title {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--stepper-vertical-text-default);
 }
 
@@ -120,7 +159,7 @@
 }
 
 .sds-stepper__step--current .sds-stepper__title {
-  font-weight: 600;
+  font-weight: var(--font-body-semibold-weight);
 }
 
 .sds-stepper--vertical .sds-stepper__step--error .sds-stepper__title {
@@ -131,19 +170,20 @@
   color: var(--stepper-horizontal-text-error);
 }
 
-.sds-stepper--vertical .sds-stepper__step--warning .sds-stepper__title,
-.sds-stepper--horizontal .sds-stepper__step--warning .sds-stepper__title {
-  color: var(--stepper-icon-warning-stroke);
-}
+/* Warning (vertical only — Figma has no horizontal Warning) keeps the title in
+   text-default (Figma 6374:11718); only the icon is orange. */
 
-/* ===== Content / description ===== */
+/* ===== Content / description — Paragraph - Small ===== */
 .sds-stepper__content {
   display: flex;
 }
 
+/* Vertical: 28px row = connector (padding-left 16 → under the icon centre) + 32px gap
+   + description at x = 48px with 12px bottom padding. */
 .sds-stepper--vertical .sds-stepper__content {
-  /* 32px icon + 16px gap = align description under the title, not the icon */
-  padding-left: calc(var(--spacing-s-32) + var(--spacing-s-16));
+  flex-direction: row;
+  gap: var(--spacing-s-32);
+  padding-left: var(--spacing-s-16);
 }
 
 .sds-stepper--horizontal .sds-stepper__content {
@@ -153,6 +193,11 @@
 .sds-stepper__description {
   font-size: var(--font-caption-size);
   line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+}
+
+.sds-stepper--vertical .sds-stepper__description {
+  padding-bottom: var(--spacing-s-12);
 }
 
 /* Description colours by status (vertical defaults; horizontal mirrors). */
@@ -184,9 +229,6 @@
 .sds-stepper--horizontal .sds-stepper__step--error .sds-stepper__description {
   color: var(--stepper-horizontal-help-text-error);
 }
-.sds-stepper--horizontal .sds-stepper__step--warning .sds-stepper__description {
-  color: var(--stepper-horizontal-help-text-warning);
-}
 
 /* ===== Connector / tail line ===== */
 .sds-stepper__line {
@@ -194,13 +236,14 @@
   background: transparent;
 }
 
-/* Vertical connector: sits centered below the 32px icon (margin-left = 15px = (32px - 1px border) / 2). */
+/* Vertical connector: zero-width column at x = 16px (icon centre), padding 6px 0
+   around a 16px line → 28px. 6px has no spacing token (Figma tail p6/0/6/0). */
 .sds-stepper--vertical .sds-stepper__connector {
   display: flex;
-  justify-content: flex-start;
-  /* Spec: connector wrapped in padding 6px 0 → 6px + 16px line + 6px = 28px content area. */
+  flex-shrink: 0;
+  width: 0;
   padding: 6px 0;
-  margin-left: 15px;
+  box-sizing: border-box;
 }
 
 .sds-stepper--vertical .sds-stepper__line {
@@ -218,8 +261,9 @@
 .sds-stepper--vertical .sds-stepper__step--error .sds-stepper__line {
   border-left-color: var(--stepper-vertical-line-error);
 }
+/* Figma binds the Warning step's line to Stepper/Vertical/line-error. */
 .sds-stepper--vertical .sds-stepper__step--warning .sds-stepper__line {
-  border-left-color: var(--stepper-vertical-line-waiting);
+  border-left-color: var(--stepper-vertical-line-error);
 }
 
 /* Horizontal tail: fills remaining width between this step's title and the next. */
@@ -246,6 +290,37 @@
 .sds-stepper--horizontal .sds-stepper__step--error .sds-stepper__line {
   border-top-color: var(--stepper-horizontal-line-error);
 }
-.sds-stepper--horizontal .sds-stepper__step--warning .sds-stepper__line {
-  border-top-color: var(--stepper-horizontal-line-waiting);
+
+/* ===== Hovered — clickable steps on hover / keyboard focus (Figma Status=Hovered) ===== */
+.sds-stepper__step--clickable:hover .sds-stepper__icon,
+.sds-stepper__step--clickable:focus-within .sds-stepper__icon {
+  background: var(--stepper-icon-hovered-background);
+  border-color: var(--stepper-icon-hovered-background);
+  color: var(--stepper-icon-hovered-icon);
+}
+
+.sds-stepper--vertical .sds-stepper__step--clickable:hover .sds-stepper__line,
+.sds-stepper--vertical .sds-stepper__step--clickable:focus-within .sds-stepper__line {
+  border-left-color: var(--stepper-vertical-line-hovered);
+}
+
+.sds-stepper--horizontal .sds-stepper__step--clickable:hover .sds-stepper__line,
+.sds-stepper--horizontal .sds-stepper__step--clickable:focus-within .sds-stepper__line {
+  border-top-color: var(--stepper-horizontal-line-hovered);
+}
+
+.sds-stepper--vertical .sds-stepper__step--clickable:hover .sds-stepper__description,
+.sds-stepper--vertical .sds-stepper__step--clickable:focus-within .sds-stepper__description {
+  color: var(--stepper-vertical-help-text-hovered);
+}
+
+.sds-stepper--horizontal .sds-stepper__step--clickable:hover .sds-stepper__description,
+.sds-stepper--horizontal .sds-stepper__step--clickable:focus-within .sds-stepper__description {
+  color: var(--stepper-horizontal-help-text-hovered);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sds-stepper__icon {
+    transition: none;
+  }
 }

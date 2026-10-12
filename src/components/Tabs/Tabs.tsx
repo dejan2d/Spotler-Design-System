@@ -9,7 +9,11 @@ export interface TabItem {
   value: string;
   /** Visible tab label. */
   label: ReactNode;
-  /** Optional leading icon (20px). */
+  /**
+   * Optional icon (20×20). Horizontal tabs show it left of the label
+   * (Figma "Show Left Icon"); vertical tabs show it above the label
+   * (Figma "Show Top Icon").
+   */
   icon?: ReactNode;
   /** Disables this tab. */
   disabled?: boolean;
@@ -22,7 +26,7 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   value: string;
   /** Fired with the newly selected tab value. */
   onChange: (value: string) => void;
-  /** Layout direction. */
+  /** Layout direction: Figma "Horizontal Tab" or "Vertical Tab". @default 'horizontal' */
   orientation?: TabsOrientation;
   /** Content of the active panel. Rendered in the tabpanel region. */
   children?: ReactNode;
@@ -30,7 +34,17 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
 
 /**
  * Tabs — switch between peer views within the same context, showing one panel at a time.
- * Spec: references/components/tabs.md. Roving tabindex + arrow-key navigation.
+ * Roving tabindex + arrow-key navigation.
+ *
+ * Figma (page "Tabs", sets Horizontal Tab 669:8029 / Vertical Tab 669:9165;
+ * states Default / Hover / Active / Disabled — "Active" is the selected tab):
+ * - Horizontal: row, padding 8px 20px, icon-label gap 4px, 1px bottom stroke
+ *   (2px `selected-stroke` when active); hover fill Monochrome/Gray - 100.
+ *   Tabs sit edge to edge (Tab Group gap 0) and each carries its own stroke.
+ * - Vertical: icon stacked ABOVE the label, padding 8px 12px, gap 4px; active
+ *   tab has a 2px left stroke; hover fill Monochrome/Gray - 100.
+ * - Text: Paragraph - Regular (14px); active is Paragraph - Semi Bold.
+ * - Disabled: Disabled/text + Disabled/icon (+ Disabled/stroke horizontally).
  */
 export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   { tabs, value, onChange, orientation = 'horizontal', className, children, ...rest },

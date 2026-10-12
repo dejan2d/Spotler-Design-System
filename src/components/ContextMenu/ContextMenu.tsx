@@ -3,9 +3,9 @@ import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import './ContextMenu.css';
 
 /**
- * Item kind:
- * - `basic`    — leading icon + label (default).
- * - `specific` — label only (no leading icon).
+ * Item kind (Figma Context item `Type`):
+ * - `specific` — label only, no leading icon (Figma default).
+ * - `basic`    — leading icon + label.
  *
  * Both kinds support `selected`, which renders a trailing checkmark and the
  * conceptual-blue selected background per the Spotler "Context Menu" spec.
@@ -18,16 +18,19 @@ export interface ContextMenuItem {
   /** Stable identifier passed to `onSelect`. */
   value: string;
   /**
-   * Item kind. `basic` shows a leading icon; `specific` is label-only.
-   * @default 'basic'
+   * Item kind. `specific` is label-only; `basic` shows a leading icon.
+   * @default 'specific'
    */
   kind?: ContextMenuItemKind;
-  /** Leading icon (basic items only). FontAwesome Duotone node in real use. */
+  /** Leading icon in a 20×20 slot (basic items only). FontAwesome Duotone node in real use. */
   icon?: ReactNode;
-  /** Selected/checked state — renders a trailing checkmark and sets `aria-checked`. */
+  /** Selected/checked state — Semi Bold label, tinted background, trailing checkmark; sets `aria-checked`. */
   selected?: boolean;
-  /** Marks the item as destructive (e.g. Delete) — rendered in the semantic alert color. */
-  destructive?: boolean;
+  /**
+   * Shows the trailing checkmark on a selected item (Figma "Show check").
+   * @default true
+   */
+  showCheck?: boolean;
   /** Disables the item — non-focusable, non-activatable, desaturated. */
   disabled?: boolean;
   /**
@@ -53,9 +56,9 @@ export interface ContextMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   'aria-label'?: string;
 }
 
-/** Built-in fallback checkmark so consumers needn't always pass an icon node. */
+/** Built-in fallback checkmark (20×20 slot, like Figma's `check` icon) so consumers needn't always pass an icon node. */
 const DefaultCheckmark = (
-  <svg viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true">
+  <svg viewBox="0 0 16 16" width="20" height="20" focusable="false" aria-hidden="true">
     <path
       d="M6.2 11.3 3 8.1l1.1-1.1 2.1 2.1 5-5L12.3 5.2z"
       fill="currentColor"
@@ -71,9 +74,12 @@ const DefaultCheckmark = (
  * `specific` (label only); both support a `selected` state with a trailing
  * checkmark in conceptual blue. Optional `dividerBefore` groups related items.
  *
- * Frame: rounded container (radius medium 6px) on the overlay surface, 1px
- * frame-border hairline, overlay elevation, 4px inner padding. Items: 8px/12px
- * padding, 8px gap, radius small (4px). States: rest, hover, selected, disabled.
+ * Figma (Context Menu 968:47065, Context item 849:8010, Context List 849:8047):
+ * Frame: white, 1px Context Menu/frame-border (inside), radius 4px, 8px padding,
+ * 2px between items, effect Drop Shadow/50. Group divider: 1px Monochrome/Gray - 200.
+ * Items: 36px tall, radius 4px, 8px padding on all sides, 8px gap, 20×20 icon and
+ * checkmark slots. Text Paragraph - Regular; selected Paragraph - Semi Bold.
+ * States: rest (Default), hover, selected, disabled.
  *
  * Accessibility: `role="menu"` with `menuitem`/`menuitemradio` children; full
  * keyboard support (Arrow Up/Down, Home, End, Enter/Space, Esc); focus moves
@@ -156,14 +162,13 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(function
   return (
     <div ref={ref} role="menu" className={classes} {...rest}>
       {items.map((item, index) => {
-        const kind: ContextMenuItemKind = item.kind ?? 'basic';
+        const kind: ContextMenuItemKind = item.kind ?? 'specific';
         // Selectable items expose radio semantics + aria-checked.
         const selectable = Boolean(item.selected);
         const itemClasses = [
           'sds-context-menu__item',
           `sds-context-menu__item--${kind}`,
           item.selected && 'sds-context-menu__item--selected',
-          item.destructive && 'sds-context-menu__item--destructive',
         ]
           .filter(Boolean)
           .join(' ');
@@ -197,7 +202,7 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(function
                 </span>
               )}
               <span className="sds-context-menu__label">{item.label}</span>
-              {item.selected && (
+              {item.selected && item.showCheck !== false && (
                 <span className="sds-context-menu__checkmark" aria-hidden="true">
                   {checkmarkIcon ?? DefaultCheckmark}
                 </span>

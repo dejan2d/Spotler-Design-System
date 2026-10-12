@@ -1,9 +1,11 @@
 /* Folders — Spotler Design System
-   Folder Menu container: header + divider + scrollable folder items.
-   Container padding 8px, item gap 4px, radius 4px, optional 1px hairline border.
-   Header height 44px, padding 8px 12px. Item min-height 36px, padding 8px, radius 4px.
-   20×20 leading icon, 14/20 label. All color/spacing/radius/type values are tokens.
-   150ms transitions. */
+   Figma: Folder menu 849:8105, Folder header 968:39833, Folder item 849:8070,
+   Folder item group 968:38519.
+   Container: 304px, padding 8px, 4px between header and item group, radius 4px,
+   1px Folders/frame-stroke drawn OUTSIDE (box-shadow, so the content stays 288px).
+   Header: 40px, padding 8px, 12px gap, H4 title; Divider/horizontal underneath.
+   Items: stacked with no gap, 36px, padding 8px, radius 4px, 20×20 icon,
+   Paragraph - Regular label (selected: Paragraph - Semi Bold). 150ms transitions. */
 
 .sds-folders {
   display: flex;
@@ -13,7 +15,8 @@
   max-width: 100%;
   padding: var(--spacing-s-8);
   background: var(--folders-frame-background);
-  border: 1px solid var(--folders-frame-stroke);
+  border: none;
+  box-shadow: 0 0 0 1px var(--folders-frame-stroke);
   border-radius: var(--border-small);
   font-family: var(--font-family);
   box-sizing: border-box;
@@ -31,14 +34,16 @@
   color: inherit;
 }
 
-/* ===== Header ===== */
+/* ===== Header — padding 8px, gap 12px (Figma state-layer), 40px tall ===== */
 .sds-folders__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-s-12);
   flex-shrink: 0;
-  height: 44px;
-  padding: var(--spacing-s-8) var(--spacing-s-12);
+  min-height: var(--spacing-s-40);
+  padding: var(--spacing-s-8);
+  border-radius: var(--border-small);
   box-sizing: border-box;
 }
 
@@ -48,12 +53,30 @@
   line-height: var(--font-h4-line);
   font-weight: var(--font-h4-weight);
   color: var(--folders-header-text);
+  min-width: 0;
+}
+
+/* Title + supportive text stack with no gap (Figma header "Content"). */
+.sds-folders__header-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Supportive text — Paragraph - Small in Monochrome/Gray-800 (Figma Folder header 968:39833). */
+.sds-folders__supportive-text {
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--monochrome-gray-800);
 }
 
 .sds-folders__header-actions {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-12);
 }
 
 .sds-folders__header-action {
@@ -81,20 +104,24 @@
   border-radius: var(--border-small);
 }
 
-/* ===== Divider (1px hairline, item width) ===== */
+/* ===== Divider — part of the Folder header in Figma (Divider/horizontal, 1px),
+   so it sits directly under the header with no container gap above it. ===== */
 .sds-folders__divider {
   display: block;
   flex-shrink: 0;
-  width: 288px;
-  max-width: 100%;
-  border-top: 1px solid var(--monochrome-gray-200);
+  width: 100%;
+  border-top: 1px solid var(--divider-horizontal);
 }
 
-/* ===== List ===== */
+.sds-folders__header + .sds-folders__divider {
+  margin-top: calc(var(--spacing-s-4) * -1);
+}
+
+/* ===== List — Folder item group stacks items with no gap ===== */
 .sds-folders__list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-4);
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -111,10 +138,11 @@
   align-items: center;
   gap: var(--spacing-s-8);
   width: 100%;
-  min-height: 36px;
+  min-height: var(--spacing-s-36);
   padding: var(--spacing-s-8);
   border-radius: var(--border-small);
   background: transparent;
+  box-sizing: border-box;
   transition: background-color 150ms ease-in-out;
 }
 
@@ -177,22 +205,6 @@
   border-radius: var(--border-small);
 }
 
-/* ===== Multi-select checkboxes ===== */
-.sds-folders__checkbox {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  margin: 0;
-  accent-color: var(--primary-conceptual-conceptual);
-  cursor: pointer;
-}
-
-.sds-folders__checkbox:focus-visible {
-  outline: 2px solid var(--primary-conceptual-conceptual);
-  outline-offset: 2px;
-  border-radius: var(--border-small);
-}
-
 /* ===== Hover ===== */
 .sds-folders__item:hover {
   background: var(--folders-item-hover-background);
@@ -220,8 +232,8 @@
 
 .sds-folders__item--selected .sds-folders__item-button {
   color: var(--folders-item-selected-text);
-  /* 600 is a font-weight (not a color/spacing/radius); no dedicated weight token exists. */
-  font-weight: 600;
+  /* Paragraph - Semi Bold */
+  font-weight: var(--font-body-semibold-weight);
 }
 
 .sds-folders__item--selected .sds-folders__item-icon {
@@ -238,9 +250,11 @@
   color: var(--disabled-icon);
 }
 
-/* ===== New / inline edit ===== */
+/* ===== New / inline edit — Figma State=New: 2px vertical padding, 12px gap,
+   36px input with a 1px OUTSIDE item-new-stroke, 36×36 confirm icon button. ===== */
 .sds-folders__item--new {
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-12);
+  padding: 2px 0;
 }
 
 .sds-folders__new-input {
@@ -249,7 +263,8 @@
   height: 36px;
   padding: var(--spacing-s-8) var(--spacing-s-12);
   background: var(--folders-item-new-background);
-  border: 1px solid var(--folders-item-new-stroke);
+  border: none;
+  box-shadow: 0 0 0 1px var(--folders-item-new-stroke);
   border-radius: var(--border-small);
   color: var(--folders-item-new-text);
   font-family: var(--font-family);
@@ -269,13 +284,14 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: var(--spacing-s-36);
+  height: var(--spacing-s-36);
   padding: 0;
   background: transparent;
   border: none;
   border-radius: var(--border-circular);
-  color: var(--folders-item-new-stroke);
+  /* Figma: confirm icon (circle-check) is Folders/item-new-icon. */
+  color: var(--folders-item-new-icon);
   cursor: pointer;
   transition: background-color 150ms ease-in-out;
 }

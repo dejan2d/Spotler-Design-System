@@ -10,25 +10,32 @@ export type AccordionChevronPosition = 'left' | 'right';
 
 export interface AccordionProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onToggle'> {
-  /** Header label shown in the toggle button. */
+  /** Header label shown in the toggle button (Figma "Heading Text", Paragraph - Regular). */
   title: ReactNode;
-  /** Surface variant: filled `with-background` or `no-background` (divider stroke). */
+  /**
+   * Surface variant (Figma "Background"): `no-background` = white fill with a
+   * 1px bottom divider and no radius (Figma default); `with-background` =
+   * Accordion/with-background-fill with a 4px radius.
+   * @default 'no-background'
+   */
   variant?: AccordionVariant;
-  /** Side the chevron sits on: `right` (default) or `left`. */
+  /** Side the chevron sits on (Figma "Chevron"). @default 'left' */
   chevronPosition?: AccordionChevronPosition;
-  /** Optional leading icon before the title (20px). Use a FontAwesome Duotone icon node. */
+  /**
+   * Optional leading icon before the title (20px, Figma "Show Filter"; shown
+   * in the Chevron=Right variants). Use a FontAwesome Duotone icon node.
+   */
   iconStart?: ReactNode;
   /**
-   * Optional custom chevron node (20px). Defaults to a CSS-drawn chevron that
-   * rotates 180° when expanded. Provide a FontAwesome Duotone icon to override.
+   * Optional custom chevron node (20px). Defaults to a CSS-drawn angle-down.
+   * As in Figma, the chevron is angle-down in both states (no rotation).
+   * Provide a FontAwesome Duotone icon to override.
    */
   chevron?: ReactNode;
   /** Controlled expanded state. Omit for uncontrolled. */
   expanded?: boolean;
-  /** Uncontrolled initial expanded state. */
+  /** Uncontrolled initial expanded state (Figma "Expanded"). @default true */
   defaultExpanded?: boolean;
-  /** Disables the header toggle and dims the item. */
-  disabled?: boolean;
   /** Called with the next expanded state when the header is toggled. */
   onToggle?: (expanded: boolean) => void;
   children?: ReactNode;
@@ -36,24 +43,29 @@ export interface AccordionProps
 
 /**
  * Accordion — a header button that expands/collapses a content panel for
- * progressive disclosure. Spotler Design System "Accordion".
+ * progressive disclosure. Spotler Design System "Accordion" (Figma 1555:18885).
  *
- * Header padding 12px 16px, content padding 4px 16px 16px, radius 4px
- * (--border-small), 1px hairline divider/stroke from the foundation. Header is
- * a `button` with `aria-expanded` + `aria-controls`; the panel is a region
- * labelled by the header. Chevron rotates 180° as a non-color state cue and the
- * panel height animates on toggle.
+ * Figma defaults: Expanded=True, Chevron=Left, Background=False.
+ * Layout: 8px outer padding; header row padding 8px 4px, radius 4px, 20px icons,
+ * 4px gap after the start icon and 8px between title and chevron (collapsed row
+ * = 52px); panel padding 8px. Heading and paragraph: Paragraph - Regular (14px).
+ * No-background: white fill, 1px bottom stroke (Accordion/no-background-stroke),
+ * no radius. With-background: Accordion/with-background-fill, radius 4px.
+ *
+ * Header is a `button` with `aria-expanded` + `aria-controls`; the panel is a
+ * region labelled by the header; `aria-expanded` conveys the state. The chevron
+ * is angle-down in both states (Figma) and the panel height animates on toggle. Figma defines no hover or disabled
+ * state, so there is none (the keyboard focus ring stays).
  */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Accordion(
   {
     title,
-    variant = 'with-background',
-    chevronPosition = 'right',
+    variant = 'no-background',
+    chevronPosition = 'left',
     iconStart,
     chevron,
     expanded,
-    defaultExpanded = false,
-    disabled = false,
+    defaultExpanded = true,
     onToggle,
     className,
     children,
@@ -80,7 +92,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
     `sds-accordion--${variant}`,
     `sds-accordion--chevron-${chevronPosition}`,
     isOpen && 'sds-accordion--expanded',
-    disabled && 'sds-accordion--disabled',
     className,
   ]
     .filter(Boolean)
@@ -94,8 +105,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
         className="sds-accordion__header"
         aria-expanded={isOpen}
         aria-controls={panelId}
-        aria-disabled={disabled || undefined}
-        disabled={disabled}
         onClick={handleToggle}
       >
         {iconStart && (
@@ -103,9 +112,11 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
             {iconStart}
           </span>
         )}
-        <span className="sds-accordion__heading">{title}</span>
-        <span className="sds-accordion__chevron" aria-hidden="true">
-          {chevron}
+        <span className="sds-accordion__title-row">
+          <span className="sds-accordion__heading">{title}</span>
+          <span className="sds-accordion__chevron" aria-hidden="true">
+            {chevron}
+          </span>
         </span>
       </button>
       <div
@@ -128,7 +139,8 @@ export interface AccordionGroupProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * AccordionGroup — vertically stacks Accordion items with consistent spacing.
+ * AccordionGroup — vertically stacks Accordion items edge to edge
+ * (Figma "Accordion group" 1578:22656: gap 0).
  */
 export const AccordionGroup = forwardRef<HTMLDivElement, AccordionGroupProps>(
   function AccordionGroup({ className, children, ...rest }, ref) {

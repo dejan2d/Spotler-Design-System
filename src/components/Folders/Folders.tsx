@@ -10,27 +10,37 @@ import './Folders.css';
 /**
  * A single row in the Folders list.
  *
- * Anatomy (left → right): leading checkbox (multi-select), leading icon
+ * Anatomy (left → right, Figma Folder item 849:8070): leading icon
  * (`fa-file-lines` 20×20), label, trailing ellipsis (`fa-ellipsis-vertical`,
- * shown on hover), trailing checkbox (multi-select).
+ * shown on hover).
  */
 export interface FolderItem {
   /** Stable value used for selection, multi-select and callbacks. */
   value: string;
-  /** Visible label. Item label (default) is 14/20 Regular; selected is 14/20 SemiBold. */
+  /** Visible label. Paragraph - Regular; the selected item is Paragraph - Semi Bold. */
   label: ReactNode;
   /**
    * Leading icon slot (20×20 duotone, e.g. FontAwesome `fa-file-lines`).
    * Falls back to the component's `itemIcon` and then a built-in file glyph.
    */
   icon?: ReactNode;
-  /** Disables the row: non-interactive, hides ellipsis and checkboxes. */
+  /** Disables the row: non-interactive, hides the ellipsis. */
   disabled?: boolean;
 }
 
 export interface FoldersProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {
-  /** Header title, rendered as an H4 (17/28 SemiBold). */
+  /** Header title, rendered as an H4 (Text Styles/Title Headings/H4). */
   title: ReactNode;
+  /**
+   * Optional supportive text under the title (Figma Folder header "Supportive text",
+   * hidden by default there). Paragraph - Small.
+   */
+  supportiveText?: ReactNode;
+  /**
+   * Shows the Divider/horizontal line under the header (Figma Folder header "Show divider").
+   * @default true
+   */
+  showDivider?: boolean;
   /** Folder items, rendered in a scrollable list beneath the header divider. */
   items: FolderItem[];
   /** Value of the currently selected (active) item. */
@@ -45,23 +55,14 @@ export interface FoldersProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSe
   onSort?: () => void;
   /**
    * When `true`, renders an inline-edit ("new") row at the bottom of the list:
-   * a text input bordered with the conceptual color plus a circular confirm button.
+   * a text input with a 1px Folders/item-new-stroke outline plus a 36×36 circular
+   * confirm button (icon in Folders/item-new-icon).
    */
   newItem?: boolean;
   /** Initial value for the inline "new" row's text input. @default '' */
   newItemDefaultValue?: string;
   /** Fired with the entered name when the inline "new" row is confirmed. */
   onConfirmNew?: (name: string) => void;
-  /**
-   * Enables multi-select. Leading + trailing checkboxes become visible for
-   * non-disabled rows; `selectedValues` controls which are checked.
-   * @default false
-   */
-  multiSelect?: boolean;
-  /** Checked values when `multiSelect` is on. */
-  selectedValues?: string[];
-  /** Fired with the next set of checked values when a checkbox is toggled. */
-  onSelectedValuesChange?: (values: string[]) => void;
   /**
    * Default leading icon for every item (overridable per `FolderItem.icon`).
    * Use a 20×20 FontAwesome Duotone node; defaults to a built-in file glyph.
@@ -102,15 +103,22 @@ const FileIcon = (
  * A sidebar panel for organising and navigating file items: a Folder Menu
  * container (header + divider) above a scrollable list of Folder Items.
  *
- * Container: padding 8px, item gap 4px, radius 4px, optional 1px hairline border.
- * Header: height 44px, padding 8px 12px, H4 title (17/28 SemiBold) + add/sort icons.
- * Item: min-height 36px, padding 8px, radius 4px, 20×20 leading icon, 14/20 label.
- * States: default, hover (ellipsis revealed), selected (SemiBold + tinted),
- * new (inline edit), disabled. Optional multi-select checkboxes.
+ * Figma (Folder menu 849:8105, Folder header 968:39833, Folder item 849:8070):
+ * Container: 304px, padding 8px, 4px gap, radius 4px, 1px Folders/frame-stroke outside.
+ * Header: 40px, padding 8px, 12px gap, H4 title (+ optional supportive text,
+ * Paragraph - Small) + add (`plus-large`) / sort icons, Divider/horizontal underneath
+ * (`showDivider`, default true).
+ * Items: stacked with no gap, 36px, padding 8px, radius 4px, 20×20 leading icon,
+ * Paragraph - Regular label.
+ * States: default, hover (ellipsis revealed), selected (Semi Bold + tinted),
+ * new (inline edit: 36px input, 1px outside stroke, 36×36 confirm button with
+ * Folders/item-new-icon), disabled.
  */
 export const Folders = forwardRef<HTMLDivElement, FoldersProps>(function Folders(
   {
     title,
+    supportiveText,
+    showDivider = true,
     items,
     value,
     onSelect,
@@ -120,9 +128,6 @@ export const Folders = forwardRef<HTMLDivElement, FoldersProps>(function Folders
     newItem = false,
     newItemDefaultValue = '',
     onConfirmNew,
-    multiSelect = false,
-    selectedValues,
-    onSelectedValuesChange,
     itemIcon,
     addIcon,
     sortIcon,
@@ -148,14 +153,6 @@ export const Folders = forwardRef<HTMLDivElement, FoldersProps>(function Folders
   }, [newItem, newItemDefaultValue]);
 
   const classes = ['sds-folders', className].filter(Boolean).join(' ');
-  const checked = selectedValues ?? [];
-
-  const toggleChecked = (itemValue: string) => {
-    const next = checked.includes(itemValue)
-      ? checked.filter((v) => v !== itemValue)
-      : [...checked, itemValue];
-    onSelectedValuesChange?.(next);
-  };
 
   const confirmNew = () => {
     onConfirmNew?.(draft);
@@ -172,7 +169,12 @@ export const Folders = forwardRef<HTMLDivElement, FoldersProps>(function Folders
   return (
     <div ref={ref} className={classes} {...rest}>
       <div className="sds-folders__header">
-        <h4 className="sds-folders__title">{title}</h4>
+        <div className="sds-folders__header-content">
+          <h4 className="sds-folders__title">{title}</h4>
+          {supportiveText && (
+            <p className="sds-folders__supportive-text">{supportiveText}</p>
+          )}
+        </div>
         <div className="sds-folders__header-actions">
           <button
             type="button"
@@ -197,17 +199,15 @@ export const Folders = forwardRef<HTMLDivElement, FoldersProps>(function Folders
         </div>
       </div>
 
-      <span className="sds-folders__divider" aria-hidden="true" />
+      {showDivider && <span className="sds-folders__divider" aria-hidden="true" />}
 
       <ul className="sds-folders__list">
         {items.map((item) => {
           const selected = item.value === value;
-          const isChecked = checked.includes(item.value);
           const itemClasses = [
             'sds-folders__item',
             selected && 'sds-folders__item--selected',
             item.disabled && 'sds-folders__item--disabled',
-            multiSelect && 'sds-folders__item--multiselect',
           ]
             .filter(Boolean)
             .join(' ');
@@ -215,15 +215,6 @@ export const Folders = forwardRef<HTMLDivElement, FoldersProps>(function Folders
           return (
             <li key={item.value} className="sds-folders__list-item">
               <div className={itemClasses}>
-                {multiSelect && !item.disabled && (
-                  <input
-                    type="checkbox"
-                    className="sds-folders__checkbox sds-folders__checkbox--lead"
-                    checked={isChecked}
-                    onChange={() => toggleChecked(item.value)}
-                    aria-label={`Select ${typeof item.label === 'string' ? item.label : item.value}`}
-                  />
-                )}
                 <button
                   type="button"
                   className="sds-folders__item-button"
@@ -248,15 +239,6 @@ export const Folders = forwardRef<HTMLDivElement, FoldersProps>(function Folders
                       {actionsIcon}
                     </span>
                   </button>
-                )}
-                {multiSelect && !item.disabled && (
-                  <input
-                    type="checkbox"
-                    className="sds-folders__checkbox sds-folders__checkbox--trail"
-                    checked={isChecked}
-                    onChange={() => toggleChecked(item.value)}
-                    aria-label={`Select ${typeof item.label === 'string' ? item.label : item.value}`}
-                  />
                 )}
               </div>
             </li>
