@@ -2,12 +2,23 @@ import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import './StatusChip.css';
 
+/**
+ * Status color. Maps to the Figma `State` property (set 9359:1696):
+ * `Default` → `default` (gray), `Neutral/Blue` → `blue` (info), `Success` → `success`,
+ * `Warning` → `warning`, `Alert` → `alert` (error).
+ */
 export type StatusChipVariant = 'default' | 'blue' | 'alert' | 'warning' | 'success';
 
 export interface StatusChipProps extends HTMLAttributes<HTMLSpanElement> {
-  /** Color carries the meaning: default (neutral), blue (info), success, warning, alert (error). */
+  /**
+   * Color carries the meaning (Figma `State`): default (gray), blue (Figma Neutral/Blue — info,
+   * in progress), success, warning, alert (failed, blocked, error). Defaults to `default`.
+   */
   variant?: StatusChipVariant;
-  /** Optional leading icon (16px, FontAwesome Duotone node). The icon is decorative (aria-hidden). */
+  /**
+   * Optional leading icon (Figma `Icon` / `Icon Change`): 16×16 FontAwesome Duotone node.
+   * The icon is decorative (aria-hidden).
+   */
   iconStart?: ReactNode;
   /**
    * Chip label — keep the text; status must not rely on color alone.
@@ -19,7 +30,10 @@ export interface StatusChipProps extends HTMLAttributes<HTMLSpanElement> {
 
 /**
  * Status Chip — a non-interactive chip communicating an item's status through color.
- * Spec: references/components/status-chip.md. 24px tall, padding 4px 8px, radius large; cursor default.
+ *
+ * Spotler Design System "Status Chip" (Figma set 9359:1696). Row, 24px tall, padding 4px 8px,
+ * gap 8px, radius 8px (large), items centered; 16px icon; label text style Paragraph - Small.
+ * Colors from the Status Chip/<state>-background|text|icon tokens. Cursor default.
  */
 export const StatusChip = forwardRef<HTMLSpanElement, StatusChipProps>(function StatusChip(
   { variant = 'default', iconStart, className, children, ...rest },

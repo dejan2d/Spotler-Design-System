@@ -1,7 +1,7 @@
-/* Empty State — Spotler Design System
+/* Empty State — Spotler Design System (Figma set 2477:44945)
    A placeholder shown when there is no content yet; explains why and offers a next action.
-   Column, centered, gap 12px, padding 32px; icon 32px; H3 heading typography.
-   All color/spacing/radius/type values are tokens.
+   Column, centered, gap 12px, padding 24px, radius large (8px); icon 60×60; H3 heading;
+   help text + inline text-link action on one row, gap 4px, Paragraph - Regular.
    NOTE: `page-backgorund` token typo preserved verbatim to match the Figma variable. */
 
 .sds-empty-state {
@@ -10,16 +10,29 @@
   align-items: center;
   text-align: center;
   gap: var(--spacing-s-12);
-  padding: var(--spacing-s-32);
+  box-sizing: border-box;
+  padding: var(--spacing-s-24);
+  border-radius: var(--border-large);
   font-family: var(--font-family);
 }
 
+/* 60×60 icon instance in Figma — no spacing token exists for 60px, value reproduced as-is. */
 .sds-empty-state__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* 32px illustration footprint; sourced from the spacing scale to avoid a magic value. */
-  font-size: var(--spacing-s-32);
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 60px;
+  line-height: 1;
+}
+
+/* Loading: the Loader (68×68 Dots lg in Figma) occupies the icon slot at its own size. */
+.sds-empty-state--loading .sds-empty-state__icon {
+  width: auto;
+  height: auto;
+  font-size: inherit;
 }
 
 .sds-empty-state__heading {
@@ -29,6 +42,15 @@
   font-weight: var(--font-h3-weight);
 }
 
+/* Help row: help text followed by the inline action, centered, gap 4px. */
+.sds-empty-state__help {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--spacing-s-4);
+}
+
 .sds-empty-state__help-text {
   margin: 0;
   font-size: var(--font-body-size);
@@ -36,11 +58,25 @@
   font-weight: var(--font-body-weight);
 }
 
+/* Action — Figma TextLink: Paragraph - Regular, action-text color, underline. */
 .sds-empty-state__action {
   display: inline-flex;
   align-items: center;
-  margin-top: var(--spacing-s-4);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+}
+
+.sds-empty-state__action a {
   color: inherit;
+  font: inherit;
+  text-decoration: underline;
+}
+
+.sds-empty-state__action a:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+  border-radius: var(--border-small);
 }
 
 /* ===== Page ===== */
@@ -94,7 +130,7 @@
   color: var(--empty-states-image-action-text);
 }
 
-/* ===== Loading (no icon token) ===== */
+/* ===== Loading (Loader in the icon slot; no icon token) ===== */
 .sds-empty-state--loading {
   background: var(--empty-states-loading-background);
 }

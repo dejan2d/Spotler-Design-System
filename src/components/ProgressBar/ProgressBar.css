@@ -1,12 +1,12 @@
-/* Progress Bar — Spotler Design System
-   A linear indicator of completion toward a known total.
-   Rounded track 8px tall (spacing-s-8) with a proportional fill; optional label.
-   Radius small; fill changes animate smoothly. All color/spacing/radius/type values are tokens. */
+/* Progress Bar — Spotler Design System (Figma "Progress bar", set 670:14965)
+   Row, gap 12px, items centered. Optional percentage label on each side
+   (Paragraph - Regular). Track 8px tall, radius 4px; fill radius 4px.
+   Types: Primary, Neutral, Disabled. All color/spacing/radius/type values are tokens. */
 
 .sds-progress-bar {
   display: flex;
   align-items: center;
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-12);
   font-family: var(--font-family);
 }
 
@@ -24,10 +24,11 @@
   transition: width 150ms ease-in-out;
 }
 
+/* Figma "Percentage" text layers — Text Styles/Body/Paragraph - Regular. */
 .sds-progress-bar__label {
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  font-weight: var(--font-caption-weight);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   white-space: nowrap;
 }
 
@@ -53,31 +54,19 @@
   color: var(--progress-bar-neutral-label);
 }
 
-/* ===== Indeterminate (unknown total) =====
-   No determinate width — a fixed-size fill slides across the track. */
-.sds-progress-bar--indeterminate .sds-progress-bar__fill {
-  width: 40%;
-  transition: none;
-  animation: sds-progress-bar-indeterminate 1.2s ease-in-out infinite;
+/* ===== Disabled (Figma Type=Disabled: Disabled/background, Disabled/icon, Disabled/text) ===== */
+.sds-progress-bar--disabled .sds-progress-bar__track {
+  background: var(--disabled-background);
 }
-
-@keyframes sds-progress-bar-indeterminate {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(250%);
-  }
+.sds-progress-bar--disabled .sds-progress-bar__fill {
+  background: var(--disabled-icon);
+}
+.sds-progress-bar--disabled .sds-progress-bar__label {
+  color: var(--disabled-text);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sds-progress-bar__fill {
     transition: none;
-  }
-  .sds-progress-bar--indeterminate .sds-progress-bar__fill {
-    /* Avoid motion sickness: hold a steady partial fill instead of sliding. */
-    animation: none;
-    transform: none;
-    width: 100%;
   }
 }

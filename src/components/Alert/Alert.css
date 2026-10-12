@@ -1,11 +1,14 @@
-/* Alert — Spotler Design System "Alert"
-   Container: padding 8px 16px, gap 12px, radius large (8px), min-width 500px.
-   Icon 20×20; H4 heading; Body Regular body; optional 8px auto-dismiss progress bar. */
+/* Alert — Spotler Design System "Alert" (Figma set 100:262)
+   Container: column, gap 12px (row ↔ loader), padding 8px 16px, radius large (8px), min-width 500px.
+   Row: icon / content / close vertically centered, gap 8px. Content: column, gap 4px.
+   Icon 20×20; H4 heading; Paragraph - Regular body; CTA links Paragraph - Semi Bold + underline.
+   Loader: neutral Progress bar (see ProgressBar) with left percentage label. */
 
 .sds-alert {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-8);
+  gap: var(--spacing-s-12);
+  box-sizing: border-box;
   min-width: 500px;
   padding: var(--spacing-s-8) var(--spacing-s-16);
   border-radius: var(--border-large);
@@ -14,8 +17,8 @@
 
 .sds-alert__main {
   display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-s-12);
+  align-items: center;
+  gap: var(--spacing-s-8);
 }
 
 .sds-alert__icon-start {
@@ -50,15 +53,18 @@
   font-weight: var(--font-body-weight);
 }
 
-/* Regular/Neutral variant embeds CTA links: Body Semi-Bold + underline.
-   Multiple CTAs must be separated by plain text so underlines never connect. */
-.sds-alert--regular .sds-alert__body a {
+/* Call to action — every variant (Figma CTA examples 3840:487/493/499/505/616):
+   Paragraph - Semi Bold + underline, body text colour.
+   Multiple CTAs must be separated by a space or other text so underlines never connect. */
+.sds-alert__body a {
   color: inherit;
-  font-weight: 600;
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
   text-decoration: underline;
 }
 
-.sds-alert--regular .sds-alert__body a:focus-visible {
+.sds-alert__body a:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
   border-radius: var(--border-small);
@@ -98,36 +104,9 @@
   height: 20px;
 }
 
-/* Auto-dismiss progress bar — 8px tall, neutral track/fill, radius small (4px).
-   Spec track #F8FAFA + fill #353B40 map to the progress-bar neutral tokens. */
+/* Auto-dismiss loader — a neutral ProgressBar filling the row width. */
 .sds-alert__progress {
-  position: relative;
   width: 100%;
-  height: var(--spacing-s-8);
-  border-radius: var(--border-small);
-  background: var(--progress-bar-neutral-background);
-  overflow: hidden;
-}
-
-.sds-alert__progress-fill {
-  display: block;
-  height: 100%;
-  width: 100%;
-  border-radius: var(--border-small);
-  background: var(--progress-bar-neutral-fill);
-  transform-origin: left center;
-  animation: sds-alert-countdown var(--sds-alert-progress-duration, 5000ms) linear forwards;
-}
-
-@keyframes sds-alert-countdown {
-  from { transform: scaleX(1); }
-  to { transform: scaleX(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sds-alert__progress-fill {
-    animation: none;
-  }
 }
 
 /* ===== Primary (Info) ===== */

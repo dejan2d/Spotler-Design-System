@@ -1,30 +1,45 @@
-import { forwardRef, useEffect, useRef } from 'react';
-import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { ProgressBar } from '../ProgressBar';
 import './Alert.css';
 
 /**
- * Visual intent of the alert.
+ * Visual intent of the alert. Maps to the Figma `Type` property (set 100:262):
+ * `Primary` → `primary`, `Regular` → `regular`, `Success` → `success`,
+ * `Warning` → `warrning`, `Error` → `error`.
  * Note: `warrning` preserves the Figma/design-token spelling verbatim.
  */
 export type AlertVariant = 'primary' | 'regular' | 'success' | 'warrning' | 'error';
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Visual intent. `primary` = Info, `regular` = Neutral (use for embedded CTA links),
-   * `success`, `warrning` (Figma token spelling), `error`. Defaults to `primary`.
+   * Visual intent (Figma `Type`). `primary` = Info, `regular` = Neutral, `success`,
+   * `warrning` (Figma token spelling), `error`. Defaults to `primary`.
    */
   variant?: AlertVariant;
-  /** Leading status icon (20×20, FontAwesome Duotone node) — variant-specific. */
+  /** Leading status icon (20×20, FontAwesome Duotone node) — variant-specific (Figma `Show Left Icon`). */
   iconStart?: ReactNode;
-  /** Optional H4 heading (17px/28px SemiBold). */
+  /** Optional heading — Figma `Show Header` / `Header Text`, text style H4. */
   header?: ReactNode;
-  /** Body text (14px/20px Regular). */
+  /**
+   * Body text (Figma `Text`), text style Paragraph - Regular.
+   * Call-to-action links (`<a>`) inside the body render in Paragraph - Semi Bold + underline
+   * on every variant. Separate multiple CTAs with a space or other text so the
+   * underlines never connect.
+   */
   children?: ReactNode;
   /**
-   * Dismiss handler. When set, a trailing close (fa-xmark) button is rendered and,
-   * if `autoDismiss` is true, the alert auto-dismisses after `autoDismissMs`.
+   * Dismiss handler. Required for the close button and for auto-dismiss: when set, a
+   * trailing close (fa-xmark) button renders (unless `dismissible` is false) and, while
+   * `autoDismiss` is true, the alert auto-dismisses after `autoDismissMs`.
    */
   onDismiss?: () => void;
+  /**
+   * Show the trailing close button when `onDismiss` is set (Figma `Dismisable`).
+   * Set to `false` to keep only the auto-dismiss loader.
+   * @default true
+   */
+  dismissible?: boolean;
   /** Accessible label for the dismiss button. Defaults to `"Dismiss"`. */
   dismissLabel?: string;
   /**
@@ -33,11 +48,13 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
    */
   dismissIcon?: ReactNode;
   /**
-   * When true (and `onDismiss` is set), the alert shows a countdown progress bar
-   * and auto-dismisses after `autoDismissMs`. Defaults to `false`.
+   * Show the auto-dismiss loader (Figma `Show Loader`, default on) and dismiss the alert
+   * after `autoDismissMs`. Only takes effect when `onDismiss` is set. Pass `false` for
+   * alerts that must persist until the user dismisses or resolves them.
+   * @default true
    */
   autoDismiss?: boolean;
-  /** Auto-dismiss duration in milliseconds. Defaults to `5000` (5s per spec). */
+  /** Auto-dismiss duration in milliseconds. Defaults to `5000` (5s per the Figma animation note). */
   autoDismissMs?: number;
   /**
    * Conveys urgency to assistive tech: `'polite'` (default) maps to `role="status"`,
@@ -47,12 +64,50 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
+ * Auto-dismiss loader — the Figma "Progress bar" instance embedded in every Alert variant
+ * (Type=Neutral, Show Left Label on, Show Label Right off). Starts at 0% (the state Figma
+ * shows) and fills to 100% over `durationMs`; the percentage label tracks it.
+ */
+function AlertLoader({ durationMs }: { durationMs: number }) {
+  const [pct, setPct] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    let start: number | null = null;
+    const tick = (now: number) => {
+      const begin = start ?? now;
+      start = begin;
+      const next = durationMs > 0 ? Math.min(100, Math.floor(((now - begin) / durationMs) * 100)) : 100;
+      setPct((prev) => (prev === next ? prev : next));
+      if (next < 100) frame = window.requestAnimationFrame(tick);
+    };
+    setPct(0);
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [durationMs]);
+
+  return (
+    <ProgressBar
+      className="sds-alert__progress"
+      variant="neutral"
+      value={pct}
+      showLeftLabel
+      showRightLabel={false}
+      aria-hidden="true"
+    />
+  );
+}
+
+/**
  * Alert — informs users of issues, warnings, or important updates that require attention.
  *
- * Spotler Design System "Alert".
- * Container: padding 8px 16px, gap 12px, radius 8px (large), min-width 500px.
- * Icon 20×20; heading H4 (17/28 SemiBold); body 14/20 Regular; both `#353B40`.
- * Optional 8px progress bar for auto-dismiss (5s). Persists until dismissed or resolved.
+ * Spotler Design System "Alert" (Figma set 100:262).
+ * Container: column, gap 12px (row ↔ loader), padding 8px 16px, radius 8px (large),
+ * min-width 500px. Row: icon, content and close button vertically centered, gap 8px.
+ * Content: column, gap 4px — heading H4, body Paragraph - Regular, both `#353B40`.
+ * Icon and close button 20×20. Loader: neutral Progress bar (8px track, left percentage
+ * label, gap 12px), shown by default when `onDismiss` is set; the alert auto-dismisses
+ * after 5s.
  */
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   {
@@ -61,9 +116,10 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
     header,
     children,
     onDismiss,
+    dismissible = true,
     dismissLabel = 'Dismiss',
     dismissIcon,
-    autoDismiss = false,
+    autoDismiss = true,
     autoDismissMs = 5000,
     liveness = 'polite',
     className,
@@ -72,6 +128,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   ref,
 ) {
   const showProgress = Boolean(onDismiss) && autoDismiss;
+  const showDismiss = Boolean(onDismiss) && dismissible;
 
   // Auto-dismiss timer — fires onDismiss once after autoDismissMs.
   const onDismissRef = useRef(onDismiss);
@@ -89,11 +146,6 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   ]
     .filter(Boolean)
     .join(' ');
-
-  // Custom property drives the progress-bar countdown duration in CSS.
-  const progressStyle = {
-    '--sds-alert-progress-duration': `${autoDismissMs}ms`,
-  } as CSSProperties;
 
   return (
     <div
@@ -113,7 +165,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
           {header && <p className="sds-alert__header">{header}</p>}
           {children && <div className="sds-alert__body">{children}</div>}
         </div>
-        {onDismiss && (
+        {showDismiss && (
           <button
             type="button"
             className="sds-alert__dismiss"
@@ -128,11 +180,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
           </button>
         )}
       </div>
-      {showProgress && (
-        <div className="sds-alert__progress" aria-hidden="true" style={progressStyle}>
-          <span className="sds-alert__progress-fill" />
-        </div>
-      )}
+      {showProgress && <AlertLoader durationMs={autoDismissMs} />}
     </div>
   );
 });
