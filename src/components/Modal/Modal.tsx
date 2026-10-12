@@ -2,45 +2,72 @@ import { forwardRef, useCallback, useEffect, useId, useRef } from 'react';
 import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import './Modal.css';
 
-/** Layout treatment of the dialog surface. Mirrors the Spotler "Modal" variants. */
-export type ModalVariant = 'default' | 'fullscreen';
+/** Figma "Modal" `Size` property: Small 740px · Medium 1020px · Large 1920px wide. */
+export type ModalSize = 'small' | 'medium' | 'large';
+
+/**
+ * Figma "Modal" `Type` property. The types share one surface; they differ in the footer
+ * actions (Figma "Modal actions"):
+ * - `regular` — Primary button.
+ * - `warning` — Warning button, then a Tertiary button.
+ * - `destructive` — Destructive button, then a Tertiary button.
+ * `warning` and `destructive` are confirmations, so the dialog is exposed as `role="alertdialog"`.
+ */
+export type ModalType = 'regular' | 'warning' | 'destructive';
 
 export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Whether the modal is open. When `false` nothing renders. */
   open: boolean;
   /** Called when the user requests to close (Esc, scrim click, or the close control). */
   onClose: () => void;
-  /** Dialog title — rendered in the header and used as the accessible label (`aria-labelledby`). */
+  /**
+   * Dialog title — rendered in the header (Figma Text Styles/Title Headings/H4,
+   * Headers/Modal/text) and used as the accessible label (`aria-labelledby`).
+   */
   title: ReactNode;
   /**
-   * Layout treatment. `default` is a centred card; `fullscreen` fills the viewport
-   * for editors / reports. In fullscreen the close action conventionally uses the
-   * Tertiary button style with a text label in the footer.
-   * @default 'default'
+   * Figma `Size`: `small` 740px · `medium` 1020px · `large` 1920px wide (capped to the
+   * viewport). Height hugs the content. Figma recommends `small` for Warning and Destructive.
+   * @default 'small'
    */
-  variant?: ModalVariant;
+  size?: ModalSize;
   /**
-   * Optional supporting text rendered under the title and wired to the dialog via
-   * `aria-describedby` so assistive tech announces it after the label.
+   * Figma `Type`. Put the matching buttons in `footer`: `regular` → `<Button variant="primary">`;
+   * `warning` → `<Button variant="warning">` + `<Button variant="tertiary">`;
+   * `destructive` → `<Button variant="destructive">` + `<Button variant="tertiary">`.
+   * `warning` / `destructive` set `role="alertdialog"`.
+   * @default 'regular'
    */
-  description?: ReactNode;
-  /** Optional leading icon in the header (20px). Use a FontAwesome Duotone icon node. */
+  type?: ModalType;
+  /**
+   * Optional leading icon in the header (Figma "Icon Left", 20×20, Headers/Modal/icon).
+   * Use a FontAwesome Duotone icon node.
+   */
   icon?: ReactNode;
   /**
-   * Icon node for the header close control. Provide a FontAwesome Duotone icon
-   * (e.g. `fa-xmark`). When omitted a CSS-drawn cross mark is rendered.
+   * Icon node for the header close control (Figma "Icon Right" = `xmark`, 20×20,
+   * Headers/Modal/close-icon). When omitted a CSS-drawn cross mark is rendered.
    */
   closeIcon?: ReactNode;
   /** Accessible label for the header close control. @default 'Close' */
   closeLabel?: string;
-  /** Footer content (typically Primary + Secondary buttons; Tertiary close in fullscreen). */
+  /**
+   * Footer content (Figma "Modal actions"): buttons left-aligned, 8px apart, the main action
+   * first. See `type` for which button variants to use.
+   */
   footer?: ReactNode;
+  /**
+   * Draws the optional 1px Monochrome/Gray-400 rule between content and actions (Figma
+   * "Modal actions" `Property 1=divider` / "modal content" `w - divider`).
+   * @default false
+   */
+  footerDivider?: boolean;
   /**
    * When `false`, clicking the scrim does not close the modal (use for unsaved-work guards).
    * @default true
    */
   closeOnScrimClick?: boolean;
-  /** Body content. */
+  /** Body content (Figma "modal content" slot). */
   children?: ReactNode;
 }
 
@@ -48,29 +75,36 @@ const FOCUSABLE =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 /**
- * Modal — Spotler Design System.
+ * Modal — Spotler Design System (Figma "Modal" set 910:12628, page Modals).
  *
  * A focused overlay dialog that interrupts the flow for a task, confirmation, or detail view.
- * Composes the Overlay surface tokens (header/footer `#FFFFFF`, body `#EAF6FF`) with the
- * Headers/Modal tokens (icon/text/close-icon `#353B40`). Sits above a scrim with the overlay shadow.
  *
- * Layout: centred card max-width 560px / max-height 90vh, radius 8px (`--border-large`),
- * header & footer padding 16px 24px, body padding 24px. `fullscreen` variant fills the viewport
- * for editors/reports. Accessibility: `role="dialog"` + `aria-modal="true"`, labelled by its
- * header, focus trapped while open, `Esc` to close, focus restored to the trigger on close.
- * Variants: Default, Fullscreen. States: open, closed (unmounted).
+ * Figma spec:
+ * - Surface: width Small 740 / Medium 1020 / Large 1920, height hugs content, radius 8px
+ *   (`--border-large`), effect Drop Shadow/200, Monochrome/White throughout.
+ * - Header ("Modal header"): padding 24/40/16/40, gap 16, 1px Monochrome/Gray-400 bottom
+ *   border; icon (20px) + title (H4) 8px apart; `xmark` close (20px) on the right.
+ * - Content ("modal content"): padding 24/40/24/40, gap 8.
+ * - Actions ("Modal actions"): padding 16/40/24/40, buttons left-aligned with 8px gap;
+ *   optional top divider.
+ * - Scrim ("Modal overlay" 910:23938): #0C0F16 at 50%.
+ *
+ * Accessibility: `role="dialog"` (`alertdialog` for Warning/Destructive) + `aria-modal="true"`,
+ * labelled by its header, focus trapped while open, `Esc` to close, focus restored to the
+ * trigger on close. States: open, closed (unmounted).
  */
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
   {
     open,
     onClose,
     title,
-    variant = 'default',
-    description,
+    size = 'small',
+    type = 'regular',
     icon,
     closeIcon,
     closeLabel = 'Close',
     footer,
+    footerDivider = false,
     closeOnScrimClick = true,
     className,
     children,
@@ -80,7 +114,6 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
 ) {
   const reactId = useId();
   const titleId = `${reactId}-title`;
-  const descriptionId = `${reactId}-description`;
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
@@ -143,29 +176,30 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
 
   if (!open) return null;
 
-  const scrimClasses = [
-    'sds-modal__scrim',
-    variant === 'fullscreen' && 'sds-modal__scrim--fullscreen',
+  const dialogClasses = [
+    'sds-modal',
+    `sds-modal--${size}`,
+    `sds-modal--${type}`,
+    className,
   ]
     .filter(Boolean)
     .join(' ');
 
-  const dialogClasses = ['sds-modal', `sds-modal--${variant}`, className]
+  const footerClasses = ['sds-modal__footer', footerDivider && 'sds-modal__footer--divider']
     .filter(Boolean)
     .join(' ');
 
   return (
-    <div className={scrimClasses} onClick={closeOnScrimClick ? onClose : undefined}>
+    <div className="sds-modal__scrim" onClick={closeOnScrimClick ? onClose : undefined}>
       <div
         ref={(node) => {
           dialogRef.current = node;
           if (typeof ref === 'function') ref(node);
           else if (ref) ref.current = node;
         }}
-        role="dialog"
+        role={type === 'regular' ? 'dialog' : 'alertdialog'}
         aria-modal="true"
         aria-labelledby={titleId}
-        aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
         className={dialogClasses}
         onClick={(event) => event.stopPropagation()}
@@ -173,20 +207,15 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
         {...rest}
       >
         <header className="sds-modal__header">
-          {icon && (
-            <span className="sds-modal__header-icon" aria-hidden="true">
-              {icon}
-            </span>
-          )}
-          <div className="sds-modal__heading">
+          <div className="sds-modal__heading-group">
+            {icon && (
+              <span className="sds-modal__header-icon" aria-hidden="true">
+                {icon}
+              </span>
+            )}
             <h2 id={titleId} className="sds-modal__title">
               {title}
             </h2>
-            {description && (
-              <p id={descriptionId} className="sds-modal__description">
-                {description}
-              </p>
-            )}
           </div>
           <button
             type="button"
@@ -207,7 +236,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
           </button>
         </header>
         <div className="sds-modal__body">{children}</div>
-        {footer && <footer className="sds-modal__footer">{footer}</footer>}
+        {footer && <footer className={footerClasses}>{footer}</footer>}
       </div>
     </div>
   );

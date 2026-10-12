@@ -1,105 +1,108 @@
-/* Modal — Spotler Design System
-   A focused overlay dialog that interrupts the flow for a task, confirmation, or detail view.
-   Composes the Overlay/* surface tokens with the Headers/Modal/* tokens.
-   Header bg #FFFFFF, Body surface #EAF6FF, Footer bg #FFFFFF, above a scrim with the overlay shadow.
-   All color / typography / radius / spacing values come from tokens. */
+/* Modal — Spotler Design System (Figma "Modal" set 910:12628, page Modals)
+   Size: Small 740 · Medium 1020 · Large 1920 wide; height hugs content; radius 8 (Border/Large);
+   effect Drop Shadow/200; every region is Monochrome/White.
+   Header 24/40/16/40, gap 16, 1px Monochrome/Gray-400 bottom border; title H4.
+   Content 24/40/24/40, gap 8. Actions 16/40/24/40, left-aligned, gap 8, optional top divider.
+   All color / typography / radius / spacing values come from tokens, except the scrim (below). */
 
 .sds-modal__scrim {
+  /* Figma "Modal overlay" 910:23938 → Rectangle 971:51482 uses a raw fill #0C0F16 at 50%
+     that is not bound to any variable, and no token with that value exists in the kit.
+     Kept as one local custom property; swap for the token once the kit adds a scrim token. */
+  --sds-modal-scrim: rgba(12, 15, 22, 0.5);
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--spacing-s-24);
-  /* No scrim token exists in the system; derive the 16% tint from Monochrome/Gray-1000 (#353B40),
-     the same base color as the overlay shadow, so no raw color is hardcoded. */
-  background: color-mix(in srgb, var(--monochrome-gray-1000) 16%, transparent);
+  background: var(--sds-modal-scrim);
   z-index: 1000;
 }
 
 .sds-modal {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 560px;
+  width: 740px;
+  max-width: 100%;
   max-height: 90vh;
   border-radius: var(--border-large);
-  box-shadow: var(--elevation-overlay);
+  background: var(--monochrome-white);
+  box-shadow: var(--drop-shadow-200);
   font-family: var(--font-family);
   overflow: hidden;
   outline: none;
 }
 
-/* ===== Fullscreen (editors / reports) ===== */
-.sds-modal__scrim--fullscreen {
-  padding: 0;
+/* ===== Size (Figma `Size`) ===== */
+.sds-modal--small {
+  width: 740px;
 }
 
-.sds-modal--fullscreen {
-  width: 100vw;
-  height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
-  border-radius: var(--border-none);
+.sds-modal--medium {
+  width: 1020px;
 }
 
-/* ===== Header ===== */
+.sds-modal--large {
+  width: 1920px;
+}
+
+/* ===== Header (Figma "Modal header") ===== */
 .sds-modal__header {
   display: flex;
   align-items: center;
+  gap: var(--spacing-s-16);
+  padding: var(--spacing-s-24) var(--spacing-s-40) var(--spacing-s-16);
+  background: var(--monochrome-white);
+  border-bottom: 1px solid var(--monochrome-gray-400);
+}
+
+/* Figma "H1": leading icon + title, 8px apart. */
+.sds-modal__heading-group {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
   gap: var(--spacing-s-8);
-  padding: var(--spacing-s-16) var(--spacing-s-24);
-  background: var(--overlay-header-background);
 }
 
 .sds-modal__header-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
   width: var(--spacing-s-20);
   height: var(--spacing-s-20);
   font-size: var(--spacing-s-20);
   color: var(--headers-modal-icon);
 }
 
-.sds-modal__heading {
+/* Text Styles/Title Headings/H4 */
+.sds-modal__title {
   flex: 1;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-s-4);
-}
-
-.sds-modal__title {
   margin: 0;
-  font-size: var(--font-h3-size);
-  line-height: var(--font-h3-line);
-  font-weight: var(--font-h3-weight);
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
   color: var(--headers-modal-text);
 }
 
-.sds-modal__description {
-  margin: 0;
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  font-weight: var(--font-body-weight);
-  color: var(--headers-modal-text);
-}
-
+/* Figma "Icon Right": `xmark`, 20×20, no button chrome. */
 .sds-modal__close {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
-  width: var(--spacing-s-32);
-  height: var(--spacing-s-32);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   border: none;
   border-radius: var(--border-circular);
   background: transparent;
   cursor: pointer;
-  padding: var(--spacing-s-4);
-  font-size: var(--spacing-s-16);
+  padding: 0;
+  font-size: var(--spacing-s-20);
   line-height: 1;
   color: var(--headers-modal-close-icon);
 }
@@ -132,23 +135,32 @@
   outline-offset: 2px;
 }
 
-/* ===== Body ===== */
+/* ===== Body (Figma "modal content") ===== */
 .sds-modal__body {
   flex: 1;
   overflow: auto;
-  padding: var(--spacing-s-24);
-  background: var(--overlay-body-background);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-24) var(--spacing-s-40);
+  background: var(--monochrome-white);
   color: var(--headers-modal-text);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
 }
 
-/* ===== Footer ===== */
+/* ===== Footer (Figma "Modal actions") ===== */
 .sds-modal__footer {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: var(--spacing-s-8);
-  padding: var(--spacing-s-16) var(--spacing-s-24);
-  background: var(--overlay-footer-background);
+  padding: var(--spacing-s-16) var(--spacing-s-40) var(--spacing-s-24);
+  background: var(--monochrome-white);
+}
+
+/* "Modal actions" `Property 1=divider`: 1px Monochrome/Gray-400 top border. */
+.sds-modal__footer--divider {
+  border-top: 1px solid var(--monochrome-gray-400);
 }

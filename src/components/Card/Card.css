@@ -1,6 +1,9 @@
-/* Card — Spotler Design System
-   Radius Border/Small (4px), Drop Shadow/50 (0 0 4px), inner padding 24px,
-   region gap 24px. Headings #002A4D, body #353B40. */
+/* Card — Spotler Design System (Figma page Cards)
+   All cards: radius Border/Small (4px), effect Drop Shadow/50.
+   Info / Product specific: padding 24, gap 24.
+   Content and Item: no outer padding; each section carries its own
+   (header 16/24, content 16/24/24/24 or 24/24/16/24, "In stock" row 24, actions 8/24/24/24).
+   Headings: H4 (Info), H3 (Content, Item). Body Paragraph - Regular. */
 
 .sds-card {
   display: flex;
@@ -9,7 +12,7 @@
   padding: var(--spacing-s-24);
   border-radius: var(--border-small);
   border: 1px solid transparent;
-  box-shadow: var(--elevation-resting);
+  box-shadow: var(--drop-shadow-50);
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
@@ -23,6 +26,7 @@
   gap: var(--spacing-s-8);
 }
 
+/* Text Styles/Title Headings/H4 (Info); Content and Item switch to H3 below. */
 .sds-card__heading {
   font-size: var(--font-h4-size);
   line-height: var(--font-h4-line);
@@ -33,20 +37,25 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
   width: var(--spacing-s-20);
   height: var(--spacing-s-20);
   font-size: var(--spacing-s-20);
 }
 
+/* Figma `xmark`, 20×20, no button chrome. */
 .sds-card__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   margin-left: auto;
   border: none;
   background: transparent;
   cursor: pointer;
-  padding: var(--spacing-s-4);
+  padding: 0;
   border-radius: var(--border-small);
   color: var(--cards-action-heading-close-icon);
 }
@@ -59,17 +68,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-s-16);
-  height: var(--spacing-s-16);
-  font-size: var(--spacing-s-16);
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
   line-height: 1;
 }
 
-/* ===== Divider (Info) ===== */
+/* ===== Divider (Info): header bottom rule, 16px below the heading ===== */
+.sds-card__header--divider {
+  padding-bottom: var(--spacing-s-16);
+  border-bottom: 1px solid var(--monochrome-gray-200);
+}
+
+/* Legacy standalone rule (pre-Figma-sync markup). */
 .sds-card__divider {
   margin: 0;
   border: none;
-  border-top: 1px solid var(--divider-horizontal);
+  border-top: 1px solid var(--monochrome-gray-200);
 }
 
 /* ===== Body / helper ===== */
@@ -78,6 +93,7 @@
   line-height: var(--font-body-line);
 }
 
+/* Text Styles/Body/Paragraph - Small */
 .sds-card__help-text {
   margin: 0;
   font-size: var(--font-caption-size);
@@ -85,18 +101,38 @@
   font-weight: var(--font-caption-weight);
 }
 
-/* ===== Media (Item) ===== */
+/* ===== Sections (Content / Item) ===== */
+.sds-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-24);
+}
+
+/* Item: headline + body, 16px apart. */
+.sds-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-16);
+}
+
+/* ===== Media (Figma "image placeholder": radius 4, Monochrome/Gray-600 fill) ===== */
 .sds-card__media {
   display: block;
   overflow: hidden;
   border-radius: var(--border-small);
-  background: var(--monochrome-gray-100);
+  background: var(--monochrome-gray-600);
 }
+/* 320×240 */
 .sds-card__media--four-three {
   aspect-ratio: 4 / 3;
 }
+/* Figma names this "13:9" but the frame is 320×180. */
 .sds-card__media--thirteen-nine {
-  aspect-ratio: 13 / 9;
+  aspect-ratio: 320 / 180;
+}
+/* "header img": 320×130 */
+.sds-card__media--header {
+  aspect-ratio: 320 / 130;
 }
 .sds-card__media > img,
 .sds-card__media > svg,
@@ -107,21 +143,43 @@
   object-fit: cover;
 }
 
-/* ===== Footer (Item / Action) ===== */
+/* ===== Item "In stock + price" row ===== */
+.sds-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-s-8);
+  padding: var(--spacing-s-24);
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--cards-action-additional-text);
+}
+
+/* ===== Actions row (Content / Item) ===== */
 .sds-card__footer {
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
 }
 
-/* ===== Info ===== */
+.sds-card__trailing-action {
+  display: inline-flex;
+  margin-left: auto;
+}
+
+/* ===== Info (Figma "Info card") ===== */
 .sds-card--info {
   background: var(--cards-info-background);
 }
 .sds-card--info .sds-card__heading {
   color: var(--cards-info-heading-text);
 }
+/* Info icon is 32×32. */
 .sds-card--info .sds-card__heading-icon {
+  width: var(--spacing-s-32);
+  height: var(--spacing-s-32);
+  font-size: var(--spacing-s-32);
   color: var(--cards-info-heading-icon);
 }
 .sds-card--info .sds-card__body {
@@ -131,34 +189,62 @@
   color: var(--cards-info-help-text);
 }
 
-/* ===== Action ===== */
-.sds-card--action {
+/* ===== Content (Figma "Content card") ===== */
+.sds-card--content {
+  gap: 0;
+  padding: 0;
   background: var(--cards-action-background);
 }
-.sds-card--action .sds-card__heading {
+.sds-card--content .sds-card__header {
+  padding: var(--spacing-s-16) var(--spacing-s-24);
+  background: var(--monochrome-white);
+  border-radius: var(--border-small) var(--border-small) 0 0;
+}
+.sds-card--content .sds-card__main {
+  padding: var(--spacing-s-16) var(--spacing-s-24) var(--spacing-s-24);
+}
+/* Text Styles/Title Headings/H3 */
+.sds-card--content .sds-card__heading {
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line);
+  font-weight: var(--font-h3-weight);
   color: var(--cards-action-heading-text);
 }
-.sds-card--action .sds-card__heading-icon {
+.sds-card--content .sds-card__heading-icon {
   color: var(--cards-action-heading-icon);
 }
-.sds-card--action .sds-card__body {
+.sds-card--content .sds-card__body {
   color: var(--cards-action-text);
 }
+.sds-card--content .sds-card__footer {
+  padding: var(--spacing-s-8) var(--spacing-s-24) var(--spacing-s-24);
+}
 
-/* ===== Item =====
-   No dedicated `Cards/Item` component tokens exist; reuse the Action heading/
-   body aliases that resolve to the same headline (#002A4D) and body (#353B40). */
+/* ===== Item (Figma "Item card"; binds the Cards/Action tokens) ===== */
 .sds-card--item {
+  gap: 0;
+  padding: 0;
   background: var(--cards-action-background);
 }
+.sds-card--item .sds-card__main {
+  padding: var(--spacing-s-24) var(--spacing-s-24) var(--spacing-s-16);
+}
+/* Text Styles/Title Headings/H3 */
 .sds-card--item .sds-card__heading {
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line);
+  font-weight: var(--font-h3-weight);
   color: var(--cards-action-card-headline);
 }
 .sds-card--item .sds-card__heading-icon {
   color: var(--cards-action-heading-icon);
 }
 .sds-card--item .sds-card__body {
-  color: var(--cards-action-additional-text);
+  padding: 0 var(--spacing-s-8);
+  color: var(--cards-action-text);
+}
+.sds-card--item .sds-card__footer {
+  padding: var(--spacing-s-8) var(--spacing-s-24) var(--spacing-s-24);
 }
 
 /* ===== Product Specific (selectable / stateful) ===== */
@@ -185,12 +271,11 @@
   color: var(--cards-product-specific-selected-text);
 }
 
-/* Disabled — no dedicated `Cards` disabled tokens; fall back to the shared
-   disabled foundation aliases (#E7ECED background, #9FACB3 text). */
+/* Disabled (Figma State=Disabled 864:65029): Disabled/background + Disabled/text,
+   no stroke, keeps Drop Shadow/50. */
 .sds-card--product-specific.sds-card--disabled {
   background: var(--disabled-background);
-  border-color: var(--disabled-stroke);
+  border-color: transparent;
   color: var(--disabled-text);
   cursor: not-allowed;
-  box-shadow: none;
 }

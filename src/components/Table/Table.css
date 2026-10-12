@@ -1,11 +1,12 @@
-/* Table — Spotler Design System
-   Spec: references/components/table.md. Tokens Table/cell-* and Table/header-*.
-   Container uses a flat border (Border/Default) rather than a shadow. */
+/* Table — Spotler Design System (Figma page Table)
+   Header cell ("Table header row" 382:1963): height 44, padding 8/16/8/8, gap 4, 1px bottom
+   stroke, Paragraph - Regular (Semi Bold when selected), 16px `sort` icon.
+   Body cell ("Table cell" 382:1979): height 52, padding 12/16/12/8, gap 8, 1px bottom stroke,
+   Paragraph - Regular (Semi Bold when selected).
+   States: Default, Hover, Selected, Disabled. Tokens Table/Header/*, Table/Cell/*, Disabled/*.
+   No outer border, radius or shadow (none in Figma); the caption is visually hidden. */
 
 .sds-table__container {
-  border: var(--border-default);
-  border-radius: var(--border-small);
-  overflow: hidden;
   font-family: var(--font-family);
 }
 
@@ -15,43 +16,72 @@
   font-family: var(--font-family);
 }
 
+/* Accessible name only — Figma shows no visible caption. */
 .sds-table__caption {
-  padding: var(--spacing-s-12) var(--spacing-s-16);
-  text-align: left;
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  color: var(--table-cell-default-help-text);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ===== Header ===== */
 .sds-table__header {
-  padding: var(--spacing-s-12) var(--spacing-s-16);
+  height: var(--spacing-s-44);
+  box-sizing: border-box;
+  padding: var(--spacing-s-8) var(--spacing-s-16) var(--spacing-s-8) var(--spacing-s-8);
   text-align: left;
   background: var(--table-header-default-background);
   color: var(--table-header-default-text);
   border-bottom: 1px solid var(--table-header-default-stroke);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
-  font-weight: var(--font-h4-weight);
+  font-weight: var(--font-body-weight);
   white-space: nowrap;
+  vertical-align: middle;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
+    border-color 150ms ease-in-out;
 }
 
-.sds-table__header--sortable:hover {
+.sds-table__header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-4);
+}
+
+.sds-table__header--sortable:not(.sds-table__header--disabled):hover {
   background: var(--table-header-hover-background);
   color: var(--table-header-hover-text);
   border-bottom-color: var(--table-header-hover-stroke);
 }
 
+/* State=Selected — the sorted column. Paragraph - Semi Bold. */
 .sds-table__header--active {
   background: var(--table-header-selected-background);
   color: var(--table-header-selected-text);
   border-bottom-color: var(--table-header-selected-stroke);
+  font-weight: var(--font-body-semibold-weight);
+}
+
+/* State=Disabled */
+.sds-table__header--disabled,
+.sds-table__header--disabled.sds-table__header--active {
+  background: var(--disabled-background);
+  color: var(--disabled-text);
+  border-bottom-color: var(--disabled-stroke);
+  font-weight: var(--font-body-weight);
 }
 
 .sds-table__header-label {
   display: inline-block;
 }
 
+/* Figma header text frame: label + sort icon, 4px apart. */
 .sds-table__sort-button {
   display: inline-flex;
   align-items: center;
@@ -67,33 +97,64 @@
   color: inherit;
 }
 
+.sds-table__sort-button:disabled {
+  cursor: not-allowed;
+}
+
 .sds-table__sort-button:focus-visible {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
 
+/* Figma `sort` icon, 16×16. */
 .sds-table__sort-icon {
-  font-size: var(--font-caption-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
   color: var(--table-header-default-icon);
+}
+
+.sds-table__sort-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sds-table__header--sortable:not(.sds-table__header--disabled):hover .sds-table__sort-icon {
+  color: var(--table-header-hover-icon);
 }
 
 .sds-table__header--active .sds-table__sort-icon {
   color: var(--table-header-selected-icon);
 }
 
+.sds-table__header--disabled .sds-table__sort-icon {
+  color: var(--disabled-icon);
+}
+
 /* ===== Cells / rows ===== */
 .sds-table__cell {
-  padding: var(--spacing-s-12) var(--spacing-s-16);
+  height: calc(var(--spacing-s-48) + var(--spacing-s-4));
+  box-sizing: border-box;
+  padding: var(--spacing-s-12) var(--spacing-s-16) var(--spacing-s-12) var(--spacing-s-8);
   background: var(--table-cell-default-background);
   color: var(--table-cell-default-text);
   border-bottom: 1px solid var(--table-cell-default-stroke);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   vertical-align: middle;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
+    border-color 150ms ease-in-out;
 }
 
-.sds-table__row {
-  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+.sds-table__cell-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
 }
 
 .sds-table__row:hover .sds-table__cell {
@@ -102,25 +163,40 @@
   border-bottom-color: var(--table-cell-hover-stroke);
 }
 
+/* State=Selected — Paragraph - Semi Bold in Table/Cell/selected-text. */
 .sds-table__row--selected .sds-table__cell,
 .sds-table__row--selected:hover .sds-table__cell {
   background: var(--table-cell-selected-background);
   color: var(--table-cell-selected-text);
   border-bottom-color: var(--table-cell-selected-stroke);
+  font-weight: var(--font-body-semibold-weight);
 }
 
-.sds-table__body .sds-table__row:last-child .sds-table__cell {
-  border-bottom: none;
+/* State=Disabled (wins over hover and selected). */
+.sds-table__row .sds-table__cell--disabled,
+.sds-table__row:hover .sds-table__cell--disabled,
+.sds-table__row--selected .sds-table__cell--disabled {
+  background: var(--disabled-background);
+  color: var(--disabled-text);
+  border-bottom-color: var(--disabled-stroke);
+  font-weight: var(--font-body-weight);
 }
 
-/* ===== Selection column ===== */
-.sds-table__header--select,
-.sds-table__cell--select {
-  width: 1%;
-  white-space: nowrap;
-}
-
+/* ===== Selection (system Checkbox; label kept for assistive tech only) ===== */
 .sds-table__checkbox {
-  cursor: pointer;
-  accent-color: var(--primary-conceptual-conceptual);
+  position: relative;
+  flex: none;
+}
+
+.sds-table__checkbox .sds-checkbox__text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

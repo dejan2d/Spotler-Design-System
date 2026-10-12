@@ -7,44 +7,70 @@ import type {
 } from 'react';
 import './Card.css';
 
-/** Visual/structural variant. Only `product-specific` is selectable/stateful. */
-export type CardVariant = 'info' | 'action' | 'item' | 'product-specific';
+/**
+ * Structural variant, one per Figma Cards component:
+ * `info` (Info card 864:67419), `content` (Content card 861:9052), `item` (Item card 864:67420),
+ * `product-specific` (Product specific card 864:64294 — the only selectable/stateful card).
+ */
+export type CardVariant = 'info' | 'content' | 'item' | 'product-specific';
 
-/** Aspect ratio of the `item` variant's leading image/media region. */
-export type CardImageRatio = '4:3' | '13:9';
+/**
+ * Ratio of the media region (Figma "image placeholder" 861:9119):
+ * `4:3` 320×240 · `13:9` 320×180 · `header` 320×130 (Figma "header img").
+ */
+export type CardImageRatio = '4:3' | '13:9' | 'header';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  /** Structural variant. Only `product-specific` is selectable/stateful. @default 'info' */
+  /** Structural variant. @default 'info' */
   variant?: CardVariant;
-  /** Optional heading icon (FontAwesome Duotone) shown before the heading. */
+  /**
+   * Optional heading icon (FontAwesome Duotone) shown before the heading, 8px apart.
+   * 32px on `info`, 20px elsewhere.
+   */
   headingIcon?: ReactNode;
-  /** Optional heading text. */
+  /**
+   * Optional heading text. Figma text style: H4 on `info`, H3 on `content` and `item`.
+   */
   heading?: ReactNode;
   /**
-   * `action` variant only — renders the close (xmark) control when set.
+   * `content` variant only — renders the close (`xmark`, 20px) control when set.
    * Provide the glyph via `closeIcon`; never hardcode a glyph.
    */
   onClose?: () => void;
-  /** Glyph for the `action` close control (FontAwesome Duotone `xmark`). */
+  /** Glyph for the `content` close control (FontAwesome Duotone `xmark`). */
   closeIcon?: ReactNode;
-  /** Accessible label for the `action` close control. @default 'Close' */
+  /** Accessible label for the `content` close control. @default 'Close' */
   closeLabel?: string;
   /**
-   * `info` variant only — divider between heading and body.
+   * `info` variant only — 1px Monochrome/Gray-200 rule under the heading, 16px below it.
    * @default true
    */
   divider?: boolean;
-  /** `info` variant only — small helper text below the body. */
+  /** `info` variant only — small helper text below the body (Paragraph - Small). */
   helpText?: ReactNode;
   /**
-   * `item` variant only — leading media. Pass an `<img>` (decorative images
-   * MUST use empty `alt=""`) or a placeholder node; rendered inside a ratio box.
+   * `item` and `content` variants — leading media (Figma "image placeholder", radius 4).
+   * Pass an `<img>` (decorative images MUST use empty `alt=""`) or a placeholder node;
+   * rendered inside a ratio box with the Monochrome/Gray-600 placeholder fill.
    */
   media?: ReactNode;
-  /** `item` variant only — aspect ratio of the media region. @default '4:3' */
+  /** `item` / `content` — ratio of the media region. @default '4:3' */
   imageRatio?: CardImageRatio;
-  /** `item`/`action` variant — footer region for status badges and actions. */
+  /**
+   * `item` variant only — the Figma "In stock + price" row (24px padding, items spread
+   * apart, Paragraph - Small in Cards/Action/additional-text), e.g. a label and a StatusChip.
+   */
+  meta?: ReactNode;
+  /**
+   * `item` / `content` — actions row (Figma "Actions": padding 8/24/24/24). Buttons sit
+   * left, 8px apart.
+   */
   footer?: ReactNode;
+  /**
+   * `item` / `content` — trailing control pushed to the right end of the actions row
+   * (Figma: a Secondary Icon button, 36px).
+   */
+  trailingAction?: ReactNode;
   /** `product-specific` only — selected state. Sets `aria-pressed`. */
   selected?: boolean;
   /** `product-specific` only — disabled state. Removes interactivity. */
@@ -53,16 +79,25 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
+const RATIO_MODIFIER: Record<CardImageRatio, string> = {
+  '4:3': 'four-three',
+  '13:9': 'thirteen-nine',
+  header: 'header',
+};
+
 /**
- * Card — Spotler Design System.
+ * Card — Spotler Design System (Figma page Cards).
  * Groups related content/actions on a single raised surface.
  *
- * Variants: Info (read-only icon + heading, divider, body, helper),
- * Action (heading + xmark close + actions footer), Item (media + headline +
- * body + footer), Product Specific (the only selectable/stateful card).
- *
- * Spec: radius 4px (Border/Small), Drop Shadow/50 (0 0 4px), inner padding 24px,
- * region gap 24px. Headings #002A4D, body #353B40.
+ * All cards: radius 4px (Border/Small), effect Drop Shadow/50.
+ * - Info: padding 24, gap 24; 32px icon + H4 heading over a 1px Monochrome/Gray-200 rule
+ *   (16px below), body, helper (Paragraph - Small).
+ * - Content: header 16/24 (20px icon + H3 + `xmark` close), content 16/24/24/24
+ *   (media + body, gap 24), actions 8/24/24/24.
+ * - Item: content 24/24/16/24 (media, then H3 headline + body 16px apart, body inset 8px),
+ *   "In stock + price" row 24, actions 8/24/24/24.
+ * - Product Specific: padding 24, gap 24; Default / Hover / Focus / Selected / Disabled
+ *   (Disabled keeps the shadow and has no border).
  */
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   {
@@ -76,7 +111,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     helpText,
     media,
     imageRatio = '4:3',
+    meta,
     footer,
+    trailingAction,
     selected = false,
     disabled = false,
     className,
@@ -88,9 +125,10 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   ref,
 ) {
   const isSelectable = variant === 'product-specific';
-  const showHeader = Boolean(heading || headingIcon || (variant === 'action' && onClose));
+  const isSectioned = variant === 'content' || variant === 'item';
+  const showHeader = Boolean(heading || headingIcon || (variant === 'content' && onClose));
   const showDivider = variant === 'info' && divider && showHeader;
-  const ratioModifier = imageRatio === '13:9' ? 'thirteen-nine' : 'four-three';
+  const hasBody = children != null && children !== false;
   const isInert = isSelectable && disabled;
 
   // The selectable variant is a real control: block activation when disabled and
@@ -119,6 +157,95 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     .filter(Boolean)
     .join(' ');
 
+  const mediaNode = isSectioned && media && (
+    <div
+      className={`sds-card__media sds-card__media--${RATIO_MODIFIER[imageRatio]}`}
+      data-ratio={imageRatio}
+    >
+      {media}
+    </div>
+  );
+
+  const headerNode = showHeader && (
+    <div
+      className={['sds-card__header', showDivider && 'sds-card__header--divider']
+        .filter(Boolean)
+        .join(' ')}
+    >
+      {headingIcon && (
+        <span className="sds-card__heading-icon" aria-hidden="true">
+          {headingIcon}
+        </span>
+      )}
+      {heading && <span className="sds-card__heading">{heading}</span>}
+      {variant === 'content' && onClose && (
+        <button
+          type="button"
+          className="sds-card__close"
+          aria-label={closeLabel}
+          onClick={onClose}
+        >
+          {closeIcon && (
+            <span className="sds-card__close-icon" aria-hidden="true">
+              {closeIcon}
+            </span>
+          )}
+        </button>
+      )}
+    </div>
+  );
+
+  const bodyNode = hasBody && <div className="sds-card__body">{children}</div>;
+
+  const footerNode = isSectioned && (footer || trailingAction) && (
+    <div className="sds-card__footer">
+      {footer}
+      {trailingAction && <span className="sds-card__trailing-action">{trailingAction}</span>}
+    </div>
+  );
+
+  let content: ReactNode;
+  if (variant === 'content') {
+    content = (
+      <>
+        {headerNode}
+        {(mediaNode || bodyNode) && (
+          <div className="sds-card__main">
+            {mediaNode}
+            {bodyNode}
+          </div>
+        )}
+        {footerNode}
+      </>
+    );
+  } else if (variant === 'item') {
+    content = (
+      <>
+        {(mediaNode || headerNode || bodyNode) && (
+          <div className="sds-card__main">
+            {mediaNode}
+            {(headerNode || bodyNode) && (
+              <div className="sds-card__text">
+                {headerNode}
+                {bodyNode}
+              </div>
+            )}
+          </div>
+        )}
+        {meta && <div className="sds-card__meta">{meta}</div>}
+        {footerNode}
+      </>
+    );
+  } else {
+    content = (
+      <>
+        {headerNode}
+        {bodyNode}
+        {variant === 'info' && helpText && <p className="sds-card__help-text">{helpText}</p>}
+      </>
+    );
+  }
+
   return (
     <div
       ref={ref}
@@ -133,53 +260,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
       onKeyDown={handleKeyDown}
       {...rest}
     >
-      {variant === 'item' && media && (
-        <div
-          className={`sds-card__media sds-card__media--${ratioModifier}`}
-          data-ratio={imageRatio}
-        >
-          {media}
-        </div>
-      )}
-
-      {showHeader && (
-        <div className="sds-card__header">
-          {headingIcon && (
-            <span className="sds-card__heading-icon" aria-hidden="true">
-              {headingIcon}
-            </span>
-          )}
-          {heading && <span className="sds-card__heading">{heading}</span>}
-          {variant === 'action' && onClose && (
-            <button
-              type="button"
-              className="sds-card__close"
-              aria-label={closeLabel}
-              onClick={onClose}
-            >
-              {closeIcon && (
-                <span className="sds-card__close-icon" aria-hidden="true">
-                  {closeIcon}
-                </span>
-              )}
-            </button>
-          )}
-        </div>
-      )}
-
-      {showDivider && <hr className="sds-card__divider" aria-hidden="true" />}
-
-      {children != null && children !== false && (
-        <div className="sds-card__body">{children}</div>
-      )}
-
-      {variant === 'info' && helpText && (
-        <p className="sds-card__help-text">{helpText}</p>
-      )}
-
-      {footer && (variant === 'item' || variant === 'action') && (
-        <div className="sds-card__footer">{footer}</div>
-      )}
+      {content}
     </div>
   );
 });
