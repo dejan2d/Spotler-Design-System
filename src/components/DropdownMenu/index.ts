@@ -4,5 +4,6 @@ export type {
   DropdownMenuSingleProps,
   DropdownMenuMultipleProps,
   DropdownMenuOption,
+  DropdownMenuCheckboxPosition,
   DropdownMenuState,
 } from './DropdownMenu';

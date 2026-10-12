@@ -1,5 +1,10 @@
 /* Text Field — Spotler Design System
-   Spec: references/components/text-field.md (Inputs system, Regular Text Field tokens) */
+   Figma: Inputs › Input Field (9396:14218), Size=Regular.
+   Root column gap 4px · label row gap 4px (label Paragraph - Semi Bold, "(optional)" Paragraph - Regular)
+   Field 40px tall, padding 8px 12px, gap 8px, radius 8px (Border/Large), 1px stroke
+   Icons 20×20 · help row = 16px icon + Paragraph - Small, gap 4px
+   States: default → filled → hover → focused → error → disabled, each bound to the
+   Inputs/Regular Text Field/<state>-* tokens (Disabled uses Disabled/*). */
 
 .sds-textfield {
   display: flex;
@@ -8,31 +13,191 @@
   font-family: var(--font-family);
 }
 
+/* ===== Label row ===== */
 .sds-textfield__label {
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
+  display: inline-flex;
+  align-items: baseline;
+  align-self: flex-start;
+  gap: var(--spacing-s-4);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
   color: var(--inputs-regular-text-field-default-label);
 }
 
+/* Figma `Label` = false: hidden visually, kept as the accessible name. */
+.sds-textfield__label--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .sds-textfield__optional {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   /* token name preserves the source 'deafult' typo to match the Figma variable id */
   color: var(--inputs-regular-text-field-deafult-label-optional-text);
 }
 
+/* ===== Field ===== */
 .sds-textfield__field {
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  min-height: var(--spacing-s-40);
   padding: var(--spacing-s-8) var(--spacing-s-12);
   background: var(--inputs-regular-text-field-default-background);
   border: 1px solid var(--inputs-regular-text-field-default-stroke);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
 }
 
+.sds-textfield__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
+}
+
+.sds-textfield__icon--start {
+  color: var(--inputs-regular-text-field-default-icon-start);
+}
+
+.sds-textfield__icon--end {
+  color: var(--inputs-regular-text-field-default-icon-end);
+}
+
+.sds-textfield__status-chip {
+  display: inline-flex;
+  flex: none;
+}
+
+.sds-textfield__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  /* A value outside the Focused/Error/Disabled states is the Filled look. */
+  color: var(--inputs-regular-text-field-filled-text);
+}
+
+.sds-textfield__input::placeholder {
+  color: var(--inputs-regular-text-field-default-text);
+  opacity: 1;
+}
+
+.sds-textfield__suffix {
+  flex: none;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--inputs-regular-text-field-default-sufix-text);
+}
+
+/* ===== Help text row ===== */
+.sds-textfield__hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-4);
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--inputs-regular-text-field-default-hint-message);
+}
+
+.sds-textfield__hint-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
+  color: var(--inputs-regular-text-field-default-hint-message-icon);
+}
+
+/* ===== Filled (has a value) ===== */
+.sds-textfield--filled .sds-textfield__label {
+  color: var(--inputs-regular-text-field-filled-label);
+}
+
+.sds-textfield--filled .sds-textfield__optional {
+  color: var(--inputs-regular-text-field-filled-label-optional-text);
+}
+
+.sds-textfield--filled .sds-textfield__field {
+  background: var(--inputs-regular-text-field-filled-background);
+  border-color: var(--inputs-regular-text-field-filled-stroke);
+}
+
+.sds-textfield--filled .sds-textfield__icon--start {
+  color: var(--inputs-regular-text-field-filled-icon-start);
+}
+
+.sds-textfield--filled .sds-textfield__icon--end {
+  color: var(--inputs-regular-text-field-filled-icon-end);
+}
+
+.sds-textfield--filled .sds-textfield__suffix {
+  color: var(--inputs-regular-text-field-filled-sufix-text);
+}
+
+.sds-textfield--filled .sds-textfield__hint {
+  color: var(--inputs-regular-text-field-filled-hint-message);
+}
+
+.sds-textfield--filled .sds-textfield__hint-icon {
+  color: var(--inputs-regular-text-field-filled-hint-message-icon);
+}
+
+/* ===== Hover =====
+   Hover label / optional / hint tokens resolve to the same values as Default. */
 .sds-textfield__field:hover {
   background: var(--inputs-regular-text-field-hover-background);
   border-color: var(--inputs-regular-text-field-hover-stroke);
+}
+
+.sds-textfield__field:hover .sds-textfield__input::placeholder {
+  color: var(--inputs-regular-text-field-hover-text);
+}
+
+.sds-textfield__field:hover .sds-textfield__icon--start {
+  color: var(--inputs-regular-text-field-hover-icon-start);
+}
+
+.sds-textfield__field:hover .sds-textfield__icon--end {
+  color: var(--inputs-regular-text-field-hover-icon-end);
+}
+
+.sds-textfield__field:hover .sds-textfield__suffix {
+  color: var(--inputs-regular-text-field-hover-sufix-text);
+}
+
+/* ===== Focused ===== */
+.sds-textfield:focus-within .sds-textfield__label {
+  color: var(--inputs-regular-text-field-focused-label);
+}
+
+.sds-textfield:focus-within .sds-textfield__optional {
+  color: var(--inputs-regular-text-field-focused-label-optional-text);
 }
 
 .sds-textfield__field:focus-within {
@@ -40,38 +205,40 @@
   border-color: var(--inputs-regular-text-field-focused-stroke);
 }
 
-.sds-textfield__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: var(--inputs-regular-text-field-default-icon-start);
+/* Figma note 9495:5893: text colour changes to gray-800 while typing. */
+.sds-textfield__field:focus-within .sds-textfield__input {
+  color: var(--inputs-regular-text-field-focused-text);
 }
 
-.sds-textfield__input {
-  flex: 1;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: var(--font-family);
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line);
-  color: var(--inputs-regular-text-field-filled-text);
-  min-width: 0;
+.sds-textfield__field:focus-within .sds-textfield__icon--start {
+  color: var(--inputs-regular-text-field-focused-icon-start);
 }
 
-.sds-textfield__input::placeholder {
-  color: var(--inputs-regular-text-field-default-text);
+.sds-textfield__field:focus-within .sds-textfield__icon--end {
+  color: var(--inputs-regular-text-field-focused-icon-end);
 }
 
-.sds-textfield__hint {
-  margin: 0;
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  color: var(--inputs-regular-text-field-default-hint-message);
+.sds-textfield__field:focus-within .sds-textfield__suffix {
+  color: var(--inputs-regular-text-field-focused-sufix-text);
 }
 
-/* ===== Error ===== */
+.sds-textfield:focus-within .sds-textfield__hint {
+  color: var(--inputs-regular-text-field-focused-hint-message);
+}
+
+.sds-textfield:focus-within .sds-textfield__hint-icon {
+  color: var(--inputs-regular-text-field-focused-hint-message-icon);
+}
+
+/* ===== Error (wins over filled / hover / focused) ===== */
+.sds-textfield.sds-textfield--error .sds-textfield__label {
+  color: var(--inputs-regular-text-field-error-label);
+}
+
+.sds-textfield.sds-textfield--error .sds-textfield__optional {
+  color: var(--inputs-regular-text-field-error-label-optional-text);
+}
+
 .sds-textfield--error .sds-textfield__field,
 .sds-textfield--error .sds-textfield__field:hover,
 .sds-textfield--error .sds-textfield__field:focus-within {
@@ -79,17 +246,54 @@
   border-color: var(--inputs-regular-text-field-error-stroke);
 }
 
-.sds-textfield--error .sds-textfield__hint {
+.sds-textfield--error .sds-textfield__field .sds-textfield__input {
   color: var(--inputs-regular-text-field-error-text);
 }
 
-/* ===== Disabled ===== */
-.sds-textfield--disabled .sds-textfield__field {
+.sds-textfield--error .sds-textfield__field .sds-textfield__icon--start {
+  color: var(--inputs-regular-text-field-error-icon-start);
+}
+
+.sds-textfield--error .sds-textfield__field .sds-textfield__icon--end {
+  color: var(--inputs-regular-text-field-error-icon-end);
+}
+
+.sds-textfield--error .sds-textfield__field .sds-textfield__suffix {
+  color: var(--inputs-regular-text-field-error-sufix-text);
+}
+
+.sds-textfield.sds-textfield--error .sds-textfield__hint {
+  color: var(--inputs-regular-text-field-error-hint-message);
+}
+
+.sds-textfield.sds-textfield--error .sds-textfield__hint-icon {
+  color: var(--inputs-regular-text-field-error-hint-message-icon);
+}
+
+/* ===== Disabled (wins over everything) ===== */
+.sds-textfield.sds-textfield--disabled .sds-textfield__label,
+.sds-textfield.sds-textfield--disabled .sds-textfield__optional,
+.sds-textfield.sds-textfield--disabled .sds-textfield__hint {
+  color: var(--disabled-text);
+}
+
+.sds-textfield--disabled .sds-textfield__field,
+.sds-textfield--disabled .sds-textfield__field:hover {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
 }
 
-.sds-textfield--disabled .sds-textfield__input {
+.sds-textfield--disabled .sds-textfield__field .sds-textfield__input,
+.sds-textfield--disabled .sds-textfield__field .sds-textfield__input::placeholder,
+.sds-textfield--disabled .sds-textfield__field .sds-textfield__suffix {
   color: var(--disabled-text);
+}
+
+.sds-textfield--disabled .sds-textfield__field .sds-textfield__icon,
+.sds-textfield.sds-textfield--disabled .sds-textfield__hint-icon {
+  color: var(--disabled-icon);
+}
+
+.sds-textfield--disabled .sds-textfield__input {
   cursor: not-allowed;
 }

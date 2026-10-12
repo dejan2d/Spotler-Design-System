@@ -6,13 +6,16 @@ export interface RadioButtonProps extends Omit<InputHTMLAttributes<HTMLInputElem
   /** Visible label. Required for accessibility — associated to the input via htmlFor. */
   label: ReactNode;
   /**
+   * Hides the label visually while keeping it as the accessible name
+   * (Figma `Label Right` boolean = false). @default false
+   */
+  hideLabel?: boolean;
+  /**
    * Shared group name. Every radio in one mutually-exclusive set MUST share the same
    * `name` so the browser enforces a single selection and arrow keys move between them.
    * Wrap the group in a fieldset/legend that states the group question.
    */
   name: string;
-  /** Optional helper text shown below the control (Body/Paragraph - Caption). */
-  hint?: string;
 }
 
 /**
@@ -23,18 +26,24 @@ export interface RadioButtonProps extends Omit<InputHTMLAttributes<HTMLInputElem
  * associated label so it is fully accessible by default; present radios in a
  * group sharing one `name`, wrapped in a fieldset/legend.
  *
- * Sizing: 20px circular control (Border/Circular), 10px inner dot, 12px label gap.
- * Label & hint use Body/Paragraph. States: default, checked — each combinable
- * with hover / focus / disabled. Default border resolves to #D4DBDE; the checked
- * dot is Primary (#005499) with a #BBC5CA border.
+ * Figma: Selectors › Radio button (232:591).
+ * - 4px component padding; 16×16 circle (Border/Circular, 1px inside stroke),
+ *   8×8 checked dot, 8px gap to the label; row vertically centred.
+ * - Label: Paragraph - Regular (`Radio Button/label`); `hideLabel` mirrors the Figma
+ *   `Label Right` boolean (label visually hidden, still the accessible name).
+ * - States (Check true/false): Default (`Radio Button/default-*`, `checked-*`),
+ *   Hover (`Radio Button/hover-*`, `checked-hover-*` — background changes, border
+ *   unchanged), Disabled (`Disabled/background`, `Disabled/stroke`, dot `Disabled/icon`,
+ *   label `Disabled/text`).
+ * - A 2px keyboard focus ring is added in code (no Figma Focused variant).
+ * - No help text: the Figma set has only `Label Right` and `Text` properties.
  */
 export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(function RadioButton(
-  { label, name, hint, id, disabled, className, ...rest },
+  { label, hideLabel = false, name, id, disabled, className, ...rest },
   ref,
 ) {
   const autoId = useId();
   const fieldId = id ?? autoId;
-  const hintId = `${fieldId}-hint`;
 
   const classes = ['sds-radio', disabled && 'sds-radio--disabled', className]
     .filter(Boolean)
@@ -51,22 +60,21 @@ export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(functi
             name={name}
             className="sds-radio__input"
             disabled={disabled}
-            aria-describedby={hint ? hintId : undefined}
             {...rest}
           />
           <span className="sds-radio__circle" aria-hidden="true">
             <span className="sds-radio__dot" />
           </span>
         </span>
-        <label className="sds-radio__label" htmlFor={fieldId}>
+        <label
+          className={['sds-radio__label', hideLabel && 'sds-radio__label--hidden']
+            .filter(Boolean)
+            .join(' ')}
+          htmlFor={fieldId}
+        >
           {label}
         </label>
       </div>
-      {hint && (
-        <p className="sds-radio__hint" id={hintId}>
-          {hint}
-        </p>
-      )}
     </div>
   );
 });

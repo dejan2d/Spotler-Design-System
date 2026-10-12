@@ -1,5 +1,9 @@
 /* Search Bar — Spotler Design System
-   Spec: references/components/search-bar.md (Inputs system, Search Bar tokens) */
+   Figma: Inputs › Search Bar (9450:6392).
+   Field 40px tall, padding 8px 12px, gap 8px, radius 8px (Border/Large), 1px stroke.
+   magnifying-glass (20×20) · value Paragraph - Regular · xmark (20×20).
+   States: Default, Hover, Focused, Selected (filled, closed), No Results (`empty`),
+   Error, Disabled — each bound to Inputs/Search Bar/<state>-* (Disabled uses Disabled/*). */
 
 .sds-search-bar {
   display: flex;
@@ -23,52 +27,47 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  min-height: var(--spacing-s-40);
   padding: var(--spacing-s-8) var(--spacing-s-12);
   background: var(--inputs-search-bar-default-background);
   border: 1px solid var(--inputs-search-bar-default-stroke);
-  border-radius: var(--border-small);
+  border-radius: var(--border-large);
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
-}
-
-.sds-search-bar__field:hover {
-  background: var(--inputs-search-bar-hover-background);
-  border-color: var(--inputs-search-bar-hover-stroke);
-}
-
-.sds-search-bar__field:focus-within {
-  background: var(--inputs-search-bar-focused-background);
-  border-color: var(--inputs-search-bar-focused-stroke);
 }
 
 .sds-search-bar__icon {
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
 }
 
 .sds-search-bar__icon--start {
   color: var(--inputs-search-bar-default-icon-start);
 }
 
-.sds-search-bar__field:focus-within .sds-search-bar__icon--start {
-  color: var(--inputs-search-bar-focused-icon-start);
-}
-
 .sds-search-bar__input {
   flex: 1;
   min-width: 0;
+  padding: 0;
   border: none;
   outline: none;
   background: transparent;
   font-family: var(--font-family);
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
-  color: var(--inputs-search-bar-focused-text);
+  font-weight: var(--font-body-weight);
+  /* A value in a closed field is the Selected (filled) look. */
+  color: var(--inputs-search-bar-selected-text);
 }
 
 .sds-search-bar__input::placeholder {
   color: var(--inputs-search-bar-default-text);
+  opacity: 1;
 }
 
 /* Hide native search clear/decoration — we render our own clear control. */
@@ -80,8 +79,11 @@
 
 .sds-search-bar__clear {
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
   padding: 0;
   border: none;
   background: transparent;
@@ -92,7 +94,6 @@
 
 .sds-search-bar__icon--end {
   color: var(--inputs-search-bar-focused-icon-end);
-  font-size: 14px;
 }
 
 .sds-search-bar__clear:focus-visible {
@@ -100,41 +101,90 @@
   outline-offset: 2px;
 }
 
-/* ===== Selected (active row look while a suggestion overlay is open) ===== */
-.sds-search-bar--selected .sds-search-bar__field,
-.sds-search-bar--selected .sds-search-bar__field:hover {
+/* ===== Selected (filled) — the field holds a value and is not focused =====
+   Figma State=Selected 9451:9153. Applied automatically when `value` is non-empty. */
+.sds-search-bar--filled .sds-search-bar__field {
   background: var(--inputs-search-bar-selected-background);
   border-color: var(--inputs-search-bar-selected-stroke);
 }
 
-.sds-search-bar--selected .sds-search-bar__input {
-  color: var(--inputs-search-bar-selected-text);
-}
-
-.sds-search-bar--selected .sds-search-bar__icon--start {
+.sds-search-bar--filled .sds-search-bar__icon--start {
   color: var(--inputs-search-bar-selected-icon-start);
 }
 
-.sds-search-bar--selected .sds-search-bar__icon--end {
+.sds-search-bar--filled .sds-search-bar__icon--end {
   color: var(--inputs-search-bar-selected-icon-end);
 }
 
-/* ===== Empty (active, no results) ===== */
+/* ===== Hover ===== */
+.sds-search-bar__field:hover {
+  background: var(--inputs-search-bar-hover-background);
+  border-color: var(--inputs-search-bar-hover-stroke);
+}
+
+.sds-search-bar__field:hover .sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-hover-icon-start);
+}
+
+.sds-search-bar__field:hover .sds-search-bar__input::placeholder {
+  color: var(--inputs-search-bar-hover-text);
+}
+
+/* ===== Focused ===== */
+.sds-search-bar__field:focus-within {
+  background: var(--inputs-search-bar-focused-background);
+  border-color: var(--inputs-search-bar-focused-stroke);
+}
+
+.sds-search-bar__field:focus-within .sds-search-bar__input {
+  color: var(--inputs-search-bar-focused-text);
+}
+
+.sds-search-bar__field:focus-within .sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-focused-icon-start);
+}
+
+.sds-search-bar__field:focus-within .sds-search-bar__icon--end {
+  color: var(--inputs-search-bar-focused-icon-end);
+}
+
+/* ===== Forced Selected (state="selected") ===== */
+.sds-search-bar--selected .sds-search-bar__field,
+.sds-search-bar--selected .sds-search-bar__field:hover,
+.sds-search-bar--selected .sds-search-bar__field:focus-within {
+  background: var(--inputs-search-bar-selected-background);
+  border-color: var(--inputs-search-bar-selected-stroke);
+}
+
+.sds-search-bar--selected .sds-search-bar__field .sds-search-bar__input {
+  color: var(--inputs-search-bar-selected-text);
+}
+
+.sds-search-bar--selected .sds-search-bar__field .sds-search-bar__icon--start {
+  color: var(--inputs-search-bar-selected-icon-start);
+}
+
+.sds-search-bar--selected .sds-search-bar__field .sds-search-bar__icon--end {
+  color: var(--inputs-search-bar-selected-icon-end);
+}
+
+/* ===== No Results (state="empty") — Figma State=No Results 9450:9105 ===== */
 .sds-search-bar--empty .sds-search-bar__field,
-.sds-search-bar--empty .sds-search-bar__field:hover {
+.sds-search-bar--empty .sds-search-bar__field:hover,
+.sds-search-bar--empty .sds-search-bar__field:focus-within {
   background: var(--inputs-search-bar-empty-background);
   border-color: var(--inputs-search-bar-empty-stroke);
 }
 
-.sds-search-bar--empty .sds-search-bar__input {
+.sds-search-bar--empty .sds-search-bar__field .sds-search-bar__input {
   color: var(--inputs-search-bar-empty-text);
 }
 
-.sds-search-bar--empty .sds-search-bar__icon--start {
+.sds-search-bar--empty .sds-search-bar__field .sds-search-bar__icon--start {
   color: var(--inputs-search-bar-empty-icon-start);
 }
 
-.sds-search-bar--empty .sds-search-bar__icon--end {
+.sds-search-bar--empty .sds-search-bar__field .sds-search-bar__icon--end {
   color: var(--inputs-search-bar-empty-icon-end);
 }
 
@@ -146,29 +196,34 @@
   border-color: var(--inputs-search-bar-error-stroke);
 }
 
-.sds-search-bar--error .sds-search-bar__input {
+.sds-search-bar--error .sds-search-bar__field .sds-search-bar__input {
   color: var(--inputs-search-bar-error-text);
 }
 
-.sds-search-bar--error .sds-search-bar__icon--start {
+.sds-search-bar--error .sds-search-bar__field .sds-search-bar__icon--start {
   color: var(--inputs-search-bar-error-icon-start);
 }
 
-.sds-search-bar--error .sds-search-bar__icon--end {
+.sds-search-bar--error .sds-search-bar__field .sds-search-bar__icon--end {
   color: var(--inputs-search-bar-error-icon-end);
 }
 
 /* ===== Disabled ===== */
-.sds-search-bar--disabled .sds-search-bar__field {
+.sds-search-bar--disabled .sds-search-bar__field,
+.sds-search-bar--disabled .sds-search-bar__field:hover {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
 }
 
-.sds-search-bar--disabled .sds-search-bar__input {
+.sds-search-bar--disabled .sds-search-bar__field .sds-search-bar__input,
+.sds-search-bar--disabled .sds-search-bar__field .sds-search-bar__input::placeholder {
   color: var(--disabled-text);
+}
+
+.sds-search-bar--disabled .sds-search-bar__input {
   cursor: not-allowed;
 }
 
-.sds-search-bar--disabled .sds-search-bar__icon--start {
-  color: var(--disabled-text);
+.sds-search-bar--disabled .sds-search-bar__field .sds-search-bar__icon--start {
+  color: var(--disabled-icon);
 }

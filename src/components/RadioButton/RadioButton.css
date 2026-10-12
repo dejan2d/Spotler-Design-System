@@ -1,33 +1,40 @@
 /* Radio Button — Spotler Design System
-   Spec: references/components/radio-button.md
-   Circular control + label. Always present radios in a group with a shared name. */
+   Figma: Selectors › Radio button (232:591).
+   Root padding 4px; row = 16×16 circle (1px inside stroke, Border/Circular) + 8px gap +
+   label (Paragraph - Regular, Radio Button/label), vertically centred.
+   Checked: 8×8 dot (Radio Button/checked-circle).
+   States (Check true/false): Default, Hover (Radio Button/hover-*, checked-hover-*),
+   Disabled (Disabled/*). Always present radios in a group with a shared name. */
 
 .sds-radio {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-s-4);
+  padding: var(--spacing-s-4);
   font-family: var(--font-family);
 }
 
 .sds-radio__row {
   display: flex;
   align-items: center;
-  gap: var(--spacing-s-12);
+  gap: var(--spacing-s-8);
 }
 
 .sds-radio__control {
   position: relative;
   display: inline-flex;
   flex: none;
-  width: 20px;
-  height: 20px;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
 }
 
+/* Native input sits on top, transparent; covers the circle plus the 4px component padding
+   (24×24 hit area). */
 .sds-radio__input {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: calc(-1 * var(--spacing-s-4));
+  left: calc(-1 * var(--spacing-s-4));
+  width: var(--spacing-s-24);
+  height: var(--spacing-s-24);
   margin: 0;
   opacity: 0;
   cursor: pointer;
@@ -37,8 +44,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  box-sizing: border-box;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
   background: var(--radio-button-default-background);
   border: 1px solid var(--radio-button-default-border);
   border-radius: var(--border-circular);
@@ -46,8 +54,8 @@
 }
 
 .sds-radio__dot {
-  width: 10px;
-  height: 10px;
+  width: var(--spacing-s-8);
+  height: var(--spacing-s-8);
   border-radius: var(--border-circular);
   background: var(--radio-button-checked-circle);
   transform: scale(0);
@@ -57,16 +65,23 @@
 .sds-radio__label {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
   color: var(--radio-button-label);
   cursor: pointer;
 }
 
-.sds-radio__hint {
-  margin: 0;
-  font-size: var(--font-caption-size);
-  line-height: var(--font-caption-line);
-  font-weight: var(--font-caption-weight);
-  color: var(--monochrome-gray-800);
+/* Figma `Label Right` = false: hidden visually, kept as the accessible name.
+   Absolutely positioned, so it adds no flex gap next to the circle. */
+.sds-radio__label--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ===== Checked ===== */
@@ -79,19 +94,31 @@
   transform: scale(1);
 }
 
-/* ===== Hover ===== */
-.sds-radio__input:hover:not(:disabled) ~ .sds-radio__circle {
-  border-color: var(--radio-button-checked-border);
+/* ===== Hover — Figma State=Hover: circle background changes, border unchanged ===== */
+.sds-radio:not(.sds-radio--disabled)
+  .sds-radio__row:hover
+  .sds-radio__input:not(:disabled)
+  ~ .sds-radio__circle {
+  background: var(--radio-button-hover-background);
+  border-color: var(--radio-button-hover-border);
 }
 
-/* ===== Focus ===== */
+.sds-radio:not(.sds-radio--disabled)
+  .sds-radio__row:hover
+  .sds-radio__input:checked:not(:disabled)
+  ~ .sds-radio__circle {
+  background: var(--radio-button-checked-hover-background);
+  border-color: var(--radio-button-checked-hover-border);
+}
+
+/* ===== Focus (code-only keyboard ring) ===== */
 .sds-radio__input:focus-visible ~ .sds-radio__circle {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
 
-/* ===== Disabled ===== */
-.sds-radio--disabled .sds-radio__circle {
+/* ===== Disabled (checked and unchecked: Disabled/background + Disabled/stroke) ===== */
+.sds-radio--disabled .sds-radio__input ~ .sds-radio__circle {
   background: var(--disabled-background);
   border-color: var(--disabled-stroke);
 }

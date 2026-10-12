@@ -3,12 +3,14 @@ import type { InputHTMLAttributes, ReactNode } from 'react';
 import './SearchBar.css';
 
 /**
- * Visual state of the Search Bar. Mirrors the Spotler "Search Bar" token set
- * (`default` / `hover` / `focused` / `selected` / `error` / `empty`).
+ * Visual state of the Search Bar. Mirrors the Figma Search Bar (9450:6392) `State`
+ * variants and the `Inputs/Search Bar/*` token groups:
+ * Default, Hover, Focused, Selected, No Results (`empty` tokens), Error, Disabled.
  *
- * `default`, `hover` and `focused` resolve automatically from CSS interaction
- * pseudo-classes — pass an explicit state only to force the look of `selected`
- * (active within an open suggestion overlay) or `empty` (active, no results).
+ * `default`, `hover`, `focused` and the filled Selected look resolve automatically
+ * (CSS interaction pseudo-classes + a non-empty `value`). Pass an explicit state only
+ * to force `selected` (a closed field holding an entered query) or `empty`
+ * (Figma "No Results": the query matched nothing).
  */
 export type SearchBarState = 'default' | 'selected' | 'empty';
 
@@ -23,10 +25,12 @@ export interface SearchBarProps
   /** Current query value (controlled). */
   value?: string;
   /**
-   * Forced visual state. Leave unset for the standard
-   * default/hover/focus model driven by CSS.
-   * - `selected`: active row look while a suggestion overlay is open.
-   * - `empty`: emphasised "active, no results" look.
+   * Forced visual state. Leave unset for the standard default/hover/focus/filled
+   * model driven by CSS and `value`.
+   * - `selected`: Figma State=Selected — a closed field holding an entered query
+   *   (`selected-*` tokens). Also applied automatically when `value` is non-empty
+   *   and the field is not focused.
+   * - `empty`: Figma State=No Results — the query matched nothing (`empty-*` tokens).
    * @default 'default'
    */
   state?: SearchBarState;
@@ -44,12 +48,12 @@ export interface SearchBarProps
    */
   clearLabel?: string;
   /**
-   * Leading icon slot (search/magnifier). Use a FontAwesome Duotone icon node
+   * Leading icon slot (search/magnifier), 20×20. Use a FontAwesome Duotone icon node
    * (e.g. `fa-magnifying-glass`). Rendered decorative (`aria-hidden`).
    */
   iconStart?: ReactNode;
   /**
-   * Trailing clear-icon slot (`xmark`). Use a FontAwesome Duotone icon node.
+   * Trailing clear-icon slot (`xmark`), 20×20. Use a FontAwesome Duotone icon node.
    * Rendered inside the clear button, which carries the accessible label.
    */
   iconClear?: ReactNode;
@@ -73,15 +77,19 @@ export interface SearchBarProps
 /**
  * Search Bar — Spotler Design System.
  *
- * A text field specialised for queries: a leading search (magnifier) icon, a
- * placeholder, and a trailing clear (`xmark`) control that appears when the
- * field is non-empty. Inherits the Inputs state model
- * (default / hover / focus / disabled) plus the `selected`, `empty` and `error`
- * looks from the Spotler "Search Bar" tokens.
+ * A text field specialised for queries: a leading search (`magnifying-glass`) icon,
+ * a placeholder, and a trailing clear (`xmark`) control that appears when the
+ * field is non-empty.
  *
- * Layout: row, gap 8px, padding 8px 12px, 1px stroke, radius `small` (4px),
- * body typography. Optionally drives the WAI-ARIA combobox pattern for a
- * suggestions overlay (`expanded` / `controlsId` / `activeDescendantId`).
+ * Figma: Inputs › Search Bar (9450:6392). Field 40px tall, padding 8px 12px,
+ * gap 8px, 1px stroke, radius 8px (Border/Large); icons 20×20; value in
+ * Paragraph - Regular. States: Default, Hover, Focused, Selected (filled),
+ * No Results (`state="empty"`), Error, Disabled — bound to `Inputs/Search Bar/*`
+ * (Disabled uses `Disabled/*`, including `Disabled/icon` for the magnifier).
+ *
+ * Optionally drives the WAI-ARIA combobox pattern for a suggestions overlay
+ * (`expanded` / `controlsId` / `activeDescendantId`). The Figma suggestion list
+ * (a Dropdown Menu below the Focused field) is not rendered by this component.
  */
 export const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(function SearchBar(
   {
@@ -112,6 +120,7 @@ export const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(function S
   const classes = [
     'sds-search-bar',
     error && 'sds-search-bar--error',
+    hasValue && !disabled && 'sds-search-bar--filled',
     state === 'selected' && 'sds-search-bar--selected',
     state === 'empty' && 'sds-search-bar--empty',
     disabled && 'sds-search-bar--disabled',
