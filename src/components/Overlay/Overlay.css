@@ -1,0 +1,148 @@
+/* Overlay — Spotler Design System (Figma page "Overlay": Template 5539:106957 =
+   header 5539:106654 + body 5539:106816 + footer 5539:106655)
+   Panel 600 wide (guideline 600–800), effect Drop Shadow/200, right-aligned 20px from the
+   right and bottom edges, full height from the app header down, slides in from the right.
+   Header 16/32/16/24, gap 16, radius 4/4/0/0, title H4 + optional 16px icon (gap 8),
+   Tertiary Icon button `xmark`, Divider. Body 16/24/16/24, gap 16, Overlay/body-background.
+   Footer 16/32/16/24, gap 16, radius 0/0/4/4, Divider then Buttons 16px apart, left-aligned.
+   Figma's paddings/gaps are raw (unbound) values; they map 1:1 to the Spacing tokens used here.
+   All colour / typography / radius / spacing values come from tokens, except the scrim (below). */
+
+.sds-overlay__scrim {
+  /* Figma's Overlay page draws no scrim; its guideline only says the background "can be
+     optionally dimmed". This reuses the Modal scrim ("Modal overlay" 910:23938: raw #0C0F16 at
+     50%, not bound to any variable — no scrim token exists in the kit). Swap for the token
+     once the kit adds one. */
+  --sds-overlay-scrim: rgba(12, 15, 22, 0.5);
+  position: fixed;
+  inset: 0;
+  background: var(--sds-overlay-scrim);
+  z-index: 1000;
+}
+
+.sds-overlay {
+  --sds-overlay-width: 600px;
+  --sds-overlay-offset-top: var(--spacing-s-20);
+  position: fixed;
+  top: var(--sds-overlay-offset-top);
+  right: var(--spacing-s-20);
+  bottom: var(--spacing-s-20);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-sizing: border-box;
+  width: var(--sds-overlay-width);
+  max-width: calc(100vw - 2 * var(--spacing-s-20));
+  box-shadow: var(--drop-shadow-200);
+  font-family: var(--font-family);
+  outline: none;
+  animation: sds-overlay-slide-in 200ms ease-in-out;
+}
+
+/* Guideline: "Should slide in smoothly from the right side of the screen." */
+@keyframes sds-overlay-slide-in {
+  from {
+    transform: translateX(calc(100% + var(--spacing-s-20)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* ===== Header (Figma "Overlay header" 5539:106654) ===== */
+.sds-overlay__header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-16);
+  padding: var(--spacing-s-16) var(--spacing-s-32) var(--spacing-s-16) var(--spacing-s-24);
+  border-radius: var(--border-small) var(--border-small) 0 0;
+  background: var(--overlay-header-background);
+}
+
+/* Frame 5539:106832: space-between, gap 16, top-aligned. */
+.sds-overlay__header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-s-16);
+}
+
+/* Frame 5539:106876 (`Header` boolean): title + optional icon, 8px apart, centred. */
+.sds-overlay__heading-group {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+}
+
+/* Text Styles/Title Headings/H4, Overlay/header-text */
+.sds-overlay__title {
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
+  color: var(--overlay-header-text);
+}
+
+/* `Header Icon` 5539:106878: `circle-info`, 16×16, Overlay/header-icon. */
+.sds-overlay__header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
+  color: var(--overlay-header-icon);
+}
+
+/* Icon button Tertiary (11157:52101) is pushed right even when the title is hidden. */
+.sds-overlay__close {
+  margin-left: auto;
+}
+
+/* ===== Body (Figma "Overlay body" 5539:106816) ===== */
+.sds-overlay__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-16);
+  padding: var(--spacing-s-16) var(--spacing-s-24);
+  background: var(--overlay-body-background);
+  /* Text Styles/Body/Paragraph - Regular, Monochrome/Gray - 1000 */
+  color: var(--monochrome-gray-1000);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+}
+
+/* ===== Footer (Figma "Overlay footer" 5539:106655) ===== */
+.sds-overlay__footer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-16);
+  padding: var(--spacing-s-16) var(--spacing-s-32) var(--spacing-s-16) var(--spacing-s-24);
+  border-radius: 0 0 var(--border-small) var(--border-small);
+  background: var(--overlay-footer-background);
+}
+
+/* Frame 11172:1813: Buttons left-aligned, 16px apart. */
+.sds-overlay__actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--spacing-s-16);
+}
+
+/* Reduced motion: appear instantly. */
+@media (prefers-reduced-motion: reduce) {
+  .sds-overlay {
+    animation: none;
+  }
+}

@@ -1,0 +1,102 @@
+/* Loader — Spotler Design System (Figma set 2268:70935, page "Loader")
+   Content column, items centered: graphic above the supporting text
+   (Paragraph - Regular, centered). Dots: gap 8px (Spacing/S-8). Logo: gap 16px.
+   Animation mirrors the Figma Load 1 → 4 prototype: each frame turns the graphic 90°
+   clockwise with Smart Animate, ease-out, 240ms (Dots) / 320ms (Logo), looping. */
+
+.sds-loader {
+  --sds-loader-dark: var(--loader-blue-dark-dots);
+  --sds-loader-light: var(--loader-blue-light-dots);
+  --sds-loader-text: var(--loader-blue-text);
+  --sds-loader-size: var(--spacing-s-20);
+  --sds-loader-step: 240ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  position: relative;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--sds-loader-text);
+  text-align: center;
+}
+
+.sds-loader__graphic {
+  display: block;
+  flex-shrink: 0;
+  width: var(--sds-loader-size);
+  height: var(--sds-loader-size);
+  transform-origin: 50% 50%;
+  animation: sds-loader-turn calc(var(--sds-loader-step) * 4) ease-out infinite;
+}
+
+/* Load 1 (0°) → Load 2 → Load 3 → Load 4 → Load 1, 90° clockwise per frame. The timing
+   function applies per keyframe interval, so every step eases out like Figma's. */
+@keyframes sds-loader-turn {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(90deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(270deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sds-loader__dot {
+  fill: var(--sds-loader-light);
+}
+.sds-loader__dot--dark {
+  fill: var(--sds-loader-dark);
+}
+
+.sds-loader__text {
+  display: block;
+}
+
+/* Figma `Show Text` off: kept for screen readers as the status label, hidden visually. */
+.sds-loader__text--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== Colour (Figma `Color`) ===== */
+.sds-loader--grey {
+  --sds-loader-dark: var(--loader-grey-dark-dots);
+  --sds-loader-light: var(--loader-grey-light-dots);
+  --sds-loader-text: var(--loader-grey-text);
+}
+
+/* ===== Dots sizes (Figma "Loader Small" / "Loader Medium" frames) ===== */
+.sds-loader--dots.sds-loader--xs { --sds-loader-size: var(--spacing-s-20); }
+.sds-loader--dots.sds-loader--sm { --sds-loader-size: var(--spacing-s-32); }
+.sds-loader--dots.sds-loader--md { --sds-loader-size: var(--spacing-s-48); }
+.sds-loader--dots.sds-loader--lg { --sds-loader-size: 68px; }
+
+/* ===== Logo (Figma Style=Logo, Blue only) =====
+   Gap 16px; logo fill Loader/blue-dark-dots; Figma binds the text to Loader/grey-text. */
+.sds-loader--logo {
+  --sds-loader-step: 320ms;
+  --sds-loader-text: var(--loader-grey-text);
+  gap: var(--spacing-s-16);
+}
+.sds-loader--logo .sds-loader__graphic {
+  color: var(--sds-loader-dark);
+}
+.sds-loader--logo.sds-loader--sm { --sds-loader-size: 50px; }
+.sds-loader--logo.sds-loader--md { --sds-loader-size: 75px; }
+.sds-loader--logo.sds-loader--lg { --sds-loader-size: 100px; }
+
+/* Reduced motion: hold the Load 1 frame; the status text still announces the wait. */
+@media (prefers-reduced-motion: reduce) {
+  .sds-loader__graphic {
+    animation: none;
+  }
+}

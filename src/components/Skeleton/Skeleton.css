@@ -1,0 +1,48 @@
+/* Skeleton — Spotler Design System (Figma "Skeleton Loader", set 4343:41133, page "Skeleton")
+   Pills with a 100px radius (unbound in Figma). Fill alternates Skeleton/content
+   (Load 1, 3) and Monochrome/Gray - 200 (Load 2, 4): Smart Animate, ease-out, 800ms
+   per step — a 1.6s loop here. Shapes are decorative (aria-hidden). */
+
+.sds-skeleton {
+  display: block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 100px;
+  background-color: var(--skeleton-content);
+  color: transparent;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+  animation: sds-skeleton-pulse 1.6s ease-out infinite;
+}
+
+/* Load 1 → Load 2 → Load 3 (= Load 1). The timing function applies per interval,
+   so each 800ms step eases out like Figma's Smart Animate. */
+@keyframes sds-skeleton-pulse {
+  0% { background-color: var(--skeleton-content); }
+  50% { background-color: var(--monochrome-gray-200); }
+  100% { background-color: var(--skeleton-content); }
+}
+
+/* One line of text: the zero-width-space content gives it the line box of the
+   inherited text style (19px for Paragraph - Regular, as in Figma). */
+.sds-skeleton--text {
+  white-space: nowrap;
+}
+
+/* Value / bar / button placeholder: Figma bars are 24px tall. */
+.sds-skeleton--block {
+  height: var(--spacing-s-24);
+}
+
+.sds-skeleton--circle {
+  border-radius: 50%;
+}
+
+/* Reduced motion: hold the Load 1 colour. */
+@media (prefers-reduced-motion: reduce) {
+  .sds-skeleton {
+    animation: none;
+  }
+}
