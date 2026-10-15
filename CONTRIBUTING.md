@@ -9,7 +9,6 @@ git clone <repo-url>
 cd spotler-react-components
 npm install
 npx tsc --noEmit   # typecheck
-open demo.html     # visual preview (no build needed)
 ```
 
 Requires Node 18+, React 18+. Open Sans must be loaded (see README).
@@ -66,8 +65,7 @@ Follow the pattern set by `Button/` and `TextField/` (the canonical exemplars):
    - Only CSS variable tokens — no hardcoded hex.
 5. **`index.ts`**: `export { X } from './X'; export type { XProps } from './X';`
 6. **Register it** in `src/index.ts` (keep the list alphabetical).
-7. **Add it to `demo.html`** under the right category section so it's visually reviewable.
-8. Run `npx tsc --noEmit` and check `demo.html`.
+7. Run `npx tsc --noEmit`.
 
 ## Conventions checklist (before opening a PR)
 
@@ -76,11 +74,11 @@ Follow the pattern set by `Button/` and `TextField/` (the canonical exemplars):
 - [ ] All states present (rest/hover/focus/selected/disabled/error as relevant)
 - [ ] Zero hardcoded colors — tokens only
 - [ ] Keyboard + screen-reader accessible; visible focus ring
-- [ ] Added to `src/index.ts` and `demo.html`
+- [ ] Added to `src/index.ts`
 - [ ] `npx tsc --noEmit` passes
 
 ## Branching & commits
 
 - Branch off `main`: `feat/<component>` or `fix/<thing>`.
 - Keep commits focused; reference the component name.
-- Open a PR; include a screenshot from `demo.html` for visual changes.
+- Open a PR; include a screenshot for visual changes.

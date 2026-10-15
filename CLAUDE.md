@@ -56,8 +56,7 @@ local copy.
 
 `forwardRef`, exported typed `Props`, merged `className`, spread `...rest`.
 BEM classes prefixed `sds-`. All states present (rest/hover/focus/selected/
-disabled/error as relevant). Register in `src/index.ts` (alphabetical) and add
-to `demo.html`. Then:
+disabled/error as relevant). Register in `src/index.ts` (alphabetical). Then:
 
 ```bash
 npx tsc --noEmit
