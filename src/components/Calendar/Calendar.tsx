@@ -63,6 +63,15 @@ function isSameMonth(a: Date, b: Date): boolean {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth();
 }
 
+/** Compare calendar days only (ignores the time of day). */
+function dayKey(date: Date): number {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+}
+
+function formatLong(date: Date): string {
+  return `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+}
+
 function addDays(date: Date, amount: number): Date {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
 }
@@ -89,13 +98,37 @@ function buildWeeks(month: Date): Date[][] {
   return weeks;
 }
 
+/** A date range for `selectionMode="range"`. `end` is `null` while only the start is picked. */
+export interface DateRange {
+  start: Date | null;
+  end: Date | null;
+}
+
+/** `single` picks one day (the default); `range` picks a start and an end day. */
+export type CalendarSelectionMode = 'single' | 'range';
+
 export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   /** Month to display. Any date within the desired month works. Defaults to today. */
   month?: Date;
-  /** Currently selected date. Pass `null` for no selection. */
+  /**
+   * `single` selects one day; `range` selects a start and an end day, drawn with the Figma
+   * Calendar Item DR - Left / DR - Center / DR - Right cells.
+   * @default 'single'
+   */
+  selectionMode?: CalendarSelectionMode;
+  /** `single` mode — currently selected date. Pass `null` for no selection. */
   value?: Date | null;
-  /** Called with the clicked / keyboard-activated day. */
+  /** `single` mode — called with the clicked / keyboard-activated day. */
   onSelect?: (date: Date) => void;
+  /** `range` mode — controlled range. Omit to let the calendar keep the range itself. */
+  rangeValue?: DateRange;
+  /** `range` mode — initial range when uncontrolled. @default { start: null, end: null } */
+  defaultRangeValue?: DateRange;
+  /**
+   * `range` mode — called after every pick. The first click starts a new range
+   * (`end: null`); the second click completes it (start and end are put in order).
+   */
+  onRangeSelect?: (range: DateRange) => void;
   /** Called whenever the visible month changes (prev/next controls or the Month / Year selects). */
   onMonthChange?: (month: Date) => void;
   /** Overrides "today" for the current-day marker (mainly for testing / time zones). */
@@ -126,16 +159,28 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
  *   Default `default-*`, Hover `hover-*`, Current Day 1px `current-stroke` + `current-text`,
  *   Previous Month (any day outside the month) `previous-*`, selected `selected-background` +
  *   `selected-text` (the Figma DR fill).
+ * - Range (`selectionMode="range"`, Calendar Item 1302:2061 / 1302:2071 / 1302:2063, as drawn in
+ *   Date picker 1302:11951 for 22–25): `selected-background` + `selected-text` on every day from
+ *   start to end. DR - Left (start): radius circular on the left, square on the right;
+ *   DR - Center (days between): square; DR - Right (end): square left, circular right. Cells sit
+ *   edge to edge, so the range reads as one band. A range of one day, or a start without an end
+ *   yet, uses the single selected circle.
  *
  * The keyboard focus rings are not designed in Figma; they are kept for accessibility.
- * Not implemented: Figma's date-range (DR - Left / Center / Right) selection.
- * Accessibility: role="grid" with arrow-key roving navigation, month paging and announced selection.
+ * Accessibility: role="grid" with arrow-key roving navigation, month paging and announced
+ * selection. In range mode the grid is aria-multiselectable, every day in the range has
+ * aria-selected, the start / end cells say so in their label, and the live region announces
+ * "Selected 22 July 2026 to 25 July 2026" (or the picked start while the end is pending).
  */
 export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calendar(
   {
     month,
+    selectionMode = 'single',
     value,
     onSelect,
+    rangeValue,
+    defaultRangeValue,
+    onRangeSelect,
     onMonthChange,
     today,
     ariaLabel = 'Calendar',
@@ -159,6 +204,17 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
     setViewMonth(startOfMonth(month!));
   }
 
+  const isRange = selectionMode === 'range';
+  const [internalRange, setInternalRange] = useState<DateRange>(
+    () => defaultRangeValue ?? { start: null, end: null },
+  );
+  const range = rangeValue ?? internalRange;
+  // Normalise so `rangeStart` <= `rangeEnd` whatever order the consumer passed.
+  const [rangeStart, rangeEnd]: [Date | null, Date | null] =
+    range.start && range.end && dayKey(range.end) < dayKey(range.start)
+      ? [range.end, range.start]
+      : [range.start, range.end];
+
   const labelId = useId();
   const statusId = useId();
   const monthSelectId = useId();
@@ -177,11 +233,12 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
 
   // Roving-tabindex anchor: the one day cell that is focusable in the grid.
   // Prefer the selected day, then today, then the first day of the month.
+  const anchor = isRange ? rangeStart : value;
   const activeDay = useMemo<Date>(() => {
-    if (value && isSameMonth(value, viewMonth)) return value;
+    if (anchor && isSameMonth(anchor, viewMonth)) return anchor;
     if (isSameMonth(todayDate, viewMonth)) return todayDate;
     return startOfMonth(viewMonth);
-  }, [value, todayDate, viewMonth]);
+  }, [anchor, todayDate, viewMonth]);
 
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -244,10 +301,30 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
     requestAnimationFrame(() => focusDay(next!));
   };
 
-  const selectedLabel =
-    value
-      ? `Selected ${value.getDate()} ${MONTHS[value.getMonth()]} ${value.getFullYear()}`
-      : '';
+  /** Range mode: first pick (or a pick after a completed range) starts over; the second completes it. */
+  const pickRangeDay = (day: Date) => {
+    let next: DateRange;
+    if (!rangeStart || rangeEnd) {
+      next = { start: day, end: null };
+    } else if (dayKey(day) < dayKey(rangeStart)) {
+      next = { start: day, end: rangeStart };
+    } else {
+      next = { start: rangeStart, end: day };
+    }
+    if (rangeValue === undefined) setInternalRange(next);
+    onRangeSelect?.(next);
+  };
+
+  let selectedLabel = '';
+  if (isRange) {
+    if (rangeStart && rangeEnd) {
+      selectedLabel = `Selected ${formatLong(rangeStart)} to ${formatLong(rangeEnd)}`;
+    } else if (rangeStart) {
+      selectedLabel = `Start date ${formatLong(rangeStart)}, select an end date`;
+    }
+  } else if (value) {
+    selectedLabel = `Selected ${formatLong(value)}`;
+  }
 
   const classes = ['sds-calendar', className].filter(Boolean).join(' ');
 
@@ -332,6 +409,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
         className="sds-calendar__grid"
         role="grid"
         aria-labelledby={labelId}
+        aria-multiselectable={isRange || undefined}
       >
         <div className="sds-calendar__weekdays" role="row">
           {WEEKDAYS.map((wd) => (
@@ -350,16 +428,41 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
             {week.map((day) => {
               const outside = !isSameMonth(day, viewMonth);
               const isToday = isSameDay(day, todayDate);
-              const isSelected = value ? isSameDay(day, value) : false;
               const isActive = isSameDay(day, activeDay);
+              // Range mode: a band from start to end (DR - Left / Center / Right); a lone start,
+              // or a one-day range, falls back to the single selected circle.
+              const key = dayKey(day);
+              const isBand = Boolean(
+                isRange && rangeStart && rangeEnd && dayKey(rangeStart) !== dayKey(rangeEnd),
+              );
+              const isRangeStart = isRange && rangeStart ? isSameDay(day, rangeStart) : false;
+              const isRangeEnd = isRange && rangeEnd ? isSameDay(day, rangeEnd) : false;
+              const inBand =
+                isBand && key >= dayKey(rangeStart!) && key <= dayKey(rangeEnd!);
+              const isSelected = isRange
+                ? inBand || isRangeStart || isRangeEnd
+                : value
+                  ? isSameDay(day, value)
+                  : false;
               const cellClasses = [
                 'sds-calendar__day',
                 outside && 'sds-calendar__day--previous',
                 isToday && 'sds-calendar__day--current',
                 isSelected && 'sds-calendar__day--selected',
+                inBand && isRangeStart && 'sds-calendar__day--range-start',
+                inBand && !isRangeStart && !isRangeEnd && 'sds-calendar__day--range-middle',
+                inBand && isRangeEnd && 'sds-calendar__day--range-end',
               ]
                 .filter(Boolean)
                 .join(' ');
+              const rangeNote =
+                isRangeStart && isRangeEnd
+                  ? ', start and end date'
+                  : isRangeStart
+                    ? ', start date'
+                    : isRangeEnd
+                      ? ', end date'
+                      : '';
               return (
                 <button
                   key={day.toISOString()}
@@ -370,10 +473,11 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
                   tabIndex={isActive ? 0 : -1}
                   aria-current={isToday ? 'date' : undefined}
                   aria-selected={isSelected}
-                  aria-label={`${day.getDate()} ${MONTHS[day.getMonth()]} ${day.getFullYear()}`}
+                  aria-label={`${formatLong(day)}${rangeNote}`}
                   onClick={() => {
                     if (outside) setMonth(day);
-                    onSelect?.(day);
+                    if (isRange) pickRangeDay(day);
+                    else onSelect?.(day);
                   }}
                   onKeyDown={(event) => handleKeyDown(event, day)}
                 >

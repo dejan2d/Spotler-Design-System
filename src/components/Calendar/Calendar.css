@@ -3,7 +3,8 @@
    Header 60px: Month / Year selects (Input Field Regular, 110×40, radius 8px, gap 20px) on the left,
    angle-left / angle-right 20×20 on the right.
    Weekday row + week rows: padding 0 4px, no gap; weekday row has a 1px Monochrome/Gray - 200 bottom stroke.
-   Day cell 44×44, circular, Paragraph - Regular in every state. */
+   Day cell 44×44, circular, Paragraph - Regular in every state.
+   Date range: DR - Left / Center / Right cells (left-rounded / square / right-rounded). */
 
 .sds-calendar {
   display: inline-flex;
@@ -227,6 +228,21 @@
 .sds-calendar__day--selected:hover {
   background: var(--date-picker-selected-background);
   color: var(--date-picker-selected-text);
+}
+
+/* Date range — Calendar Item DR - Left (1302:2061), DR - Center (1302:2071), DR - Right (1302:2063).
+   Same selected-background / selected-text as above; only the corners change so the cells,
+   which sit edge to edge, read as one band. */
+.sds-calendar__day--range-start {
+  border-radius: var(--border-circular) 0 0 var(--border-circular);
+}
+
+.sds-calendar__day--range-middle {
+  border-radius: 0;
+}
+
+.sds-calendar__day--range-end {
+  border-radius: 0 var(--border-circular) var(--border-circular) 0;
 }
 
 /* Visually-hidden live region for announcing the current selection. */
