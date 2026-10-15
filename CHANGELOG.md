@@ -5,6 +5,10 @@ _Do not edit by hand — it is overwritten on each run. This table is mirrored i
 
 | Date | Commit | Author | Change | Files |
 | --- | --- | --- | --- | --- |
+| 2026-10-15 | `376d2a1` | Dejan Skondric | Document the new components | 3 files |
+| 2026-10-15 | `256ae6d` | Dejan Skondric | Add range modes to Slider and Calendar from Figma | 6 files |
+| 2026-10-15 | `dbf8f44` | Dejan Skondric | Add the Figma components that were missing from code | 28 files |
+| 2026-10-15 | `fd52b55` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-10-15 | `1f4f599` | Dejan Skondric | Update docs and the design-system skill to match the Figma-synced library | 5 files |
 | 2026-10-15 | `0c5da2b` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-10-15 | `be8ab1a` | Dejan Skondric | Remove the demo page | 4 files |
