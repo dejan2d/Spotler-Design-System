@@ -1,9 +1,10 @@
 /* Slider — Spotler Design System
-   Figma: "Slider" component set 8247:42854 (page 93:103), Style=Single.
+   Figma: "Slider" component set 8247:42854 (page 93:103), Style=Single and Style=Range.
    Min width 150px · slider area 44px tall · rail 4px · fill 6px · thumb 20×20 circle
    Counter tooltip 4px above the thumb: padding 8px 12px, radius 4px, 16×8 arrow, Drop Shadow/50
    Values row (min / max) directly under the slider area: Paragraph - Regular.
-   No visible label (visually hidden accessible name). The tooltip overflows above the box, as in Figma. */
+   No visible label (visually hidden accessible name). The tooltip overflows above the box, as in Figma.
+   Style=Range: two thumbs, fill between their centres, one tooltip per thumb with Drop Shadow/100. */
 
 .sds-slider {
   display: flex;
@@ -157,6 +158,45 @@
   border-top: var(--spacing-s-8) solid var(--slider-rest-range-background);
 }
 
+/* ===== Style=Range (8247:42855 / 8247:43050 / 8247:43122) =====
+   --sds-slider-low / --sds-slider-high (0..1) are set inline. */
+
+/* *SliderTrack runs from the lower thumb centre to the upper thumb centre */
+.sds-slider--range .sds-slider__fill {
+  left: calc(var(--spacing-s-20) / 2 + (100% - var(--spacing-s-20)) * var(--sds-slider-low, 0));
+  width: calc((100% - var(--spacing-s-20)) * (var(--sds-slider-high, 1) - var(--sds-slider-low, 0)));
+}
+
+/* Range counter tooltips use effect style Drop Shadow/100 (Single uses Drop Shadow/50) */
+.sds-slider--range .sds-slider__tooltip {
+  filter: drop-shadow(var(--drop-shadow-100));
+}
+
+.sds-slider__tooltip--low {
+  left: calc(var(--spacing-s-20) / 2 + (100% - var(--spacing-s-20)) * var(--sds-slider-low, 0));
+}
+
+.sds-slider__tooltip--high {
+  left: calc(var(--spacing-s-20) / 2 + (100% - var(--spacing-s-20)) * var(--sds-slider-high, 1));
+}
+
+/* Two stacked inputs: only the thumbs take the pointer, so either thumb can be grabbed. */
+.sds-slider--range .sds-slider__input {
+  pointer-events: none;
+}
+
+.sds-slider--range .sds-slider__input::-webkit-slider-thumb {
+  pointer-events: auto;
+}
+
+.sds-slider--range .sds-slider__input::-moz-range-thumb {
+  pointer-events: auto;
+}
+
+.sds-slider__input--top {
+  z-index: 1;
+}
+
 /* ===== Values row — min (left) / max (right) ===== */
 /* Figma stacks the Values row directly under the 44px slider area (no gap). */
 .sds-slider__values {
@@ -205,9 +245,29 @@
   color: var(--slider-hover-range-text);
 }
 
+/* Hover tooltip value: Slider/hover-text */
+.sds-slider:not(.sds-slider--disabled):hover .sds-slider__tooltip-bubble {
+  color: var(--slider-hover-text);
+}
+
 
 /* ===== Focus — not designed in Figma; kept for keyboard users ===== */
 .sds-slider__input:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+/* Range: the two inputs overlap, so the ring goes on the focused thumb instead of the box. */
+.sds-slider--range .sds-slider__input:focus-visible {
+  outline: none;
+}
+
+.sds-slider--range .sds-slider__input:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+.sds-slider--range .sds-slider__input:focus-visible::-moz-range-thumb {
   outline: 2px solid var(--primary-conceptual-conceptual);
   outline-offset: 2px;
 }
