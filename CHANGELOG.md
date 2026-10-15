@@ -5,6 +5,15 @@ _Do not edit by hand — it is overwritten on each run. This table is mirrored i
 
 | Date | Commit | Author | Change | Files |
 | --- | --- | --- | --- | --- |
+| 2026-10-12 | `58856c5` | Dejan Skondric | Match pickers, slider and upload to Figma (Slider, ColorPicker, Calendar, DatePicker, TimePicker, Upload) | 14 files |
+| 2026-10-12 | `24afb93` | Dejan Skondric | Match navigation components to Figma (Tabs, Stepper, Accordion, ContextMenu, Folders, Pagination, Navigation, Breadcrumb) | 17 files |
+| 2026-10-12 | `34c3455` | Dejan Skondric | Match inputs and selectors to Figma (TextField, DropdownMenu, SearchBar, Checkbox, RadioButton) | 11 files |
+| 2026-10-12 | `016946f` | Dejan Skondric | Match display components to Figma (Modal, Header, Card, Avatar, Table) | 12 files |
+| 2026-10-12 | `e55b0f1` | Dejan Skondric | Match dashboard components to Figma (KpiCard, ActionCard, Bar/Line/Pie charts) | 13 files |
+| 2026-10-12 | `7e9f0c8` | Dejan Skondric | Match button family to Figma (Button, IconButton, SegmentedButton, Switch) and remove Link | 13 files |
+| 2026-10-12 | `534dcc6` | Dejan Skondric | Match feedback components to Figma (Alert, Badge, Tooltip, EmptyState, ProgressBar, StatusChip) | 13 files |
+| 2026-10-09 | `90dba0f` | Dejan Skondric | Sync foundation and component tokens with Figma | 2 files |
+| 2026-08-24 | `4b47ec7` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-08-24 | `a0ffca4` | Dejan Skondric | Add CLAUDE.md so design rules apply automatically in Claude Code | 1 file |
 | 2026-08-21 | `c9a6eee` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-08-21 | `85f4d9e` | Dejan Skondric | Add spotler-icons skill to stop placeholder icons in designs | 2 files |
