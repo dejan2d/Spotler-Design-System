@@ -59,9 +59,8 @@ export interface TooltipProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'con
  * Spotler Design System "Tooltip" (Figma set 458:11945).
  * Surface: padding 16px, radius 8px (large), max width 300px (wraps beyond), hugs shorter
  * text; text Paragraph - Regular; Tooltip/background + Tooltip/text. Pointer: 16×8 triangle
- * centered on the edge facing the anchor, 4px from the anchor. Shadow: Figma's effect style
- * "OBSOLETE - Drop Shadow/100" (0 1px 4px #0C0C0D @5% + 0 1px 4px #0C0C0D @10%) applied to
- * surface and pointer together. Opens after 150ms, closes after 100ms.
+ * centered on the edge facing the anchor, 4px from the anchor. Shadow: effect style
+ * Drop Shadow/100 applied to surface and pointer together. Opens after 150ms, closes after 100ms.
  *
  * Accessibility: role="tooltip"; associated via aria-describedby; reachable on keyboard
  * focus, dismissed on blur/mouse-out and Esc.

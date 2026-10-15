@@ -36,9 +36,10 @@ export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
  * - No visible label: `label` is the visually hidden accessible name.
  * - Slider area 44px tall. Rail 4px, radius circular, `Slider/rest-range-slider-background`.
  *   Fill (`*SliderTrack`) 6px, radius circular, `Slider/rest-range-slider-fill`.
- *   Thumb 20×20 circle, `Slider/rest-range-slider-circle`.
+ *   Thumb 20×20 circle, `Slider/rest-range-slider-circle`, three raw drop shadows
+ *   (0 1px 4px — Gray 5%, 10%, black 25%).
  * - Counter tooltip 4px above the thumb: padding 8px 12px, radius 4px, `Slider/rest-range-background`,
- *   value in Paragraph - Regular `Slider/rest-text`, 16×8 arrow, effect style Drop Shadow/100.
+ *   value in Paragraph - Regular `Slider/rest-text`, 16×8 arrow, effect style Drop Shadow/50.
  *   As in Figma it overflows above the component box; leave room above the slider.
  * - Values row under the rail: min (left) and max (right) in Paragraph - Regular `Slider/rest-range-text`.
  * - Hover: `Slider/hover-*` rail, fill, thumb and value-label tokens; the thumb gets Figma's four
