@@ -1,7 +1,7 @@
 /* Slider — Spotler Design System
    Figma: "Slider" component set 8247:42854 (page 93:103), Style=Single.
    Min width 150px · slider area 44px tall · rail 4px · fill 6px · thumb 20×20 circle
-   Counter tooltip 4px above the thumb: padding 8px 12px, radius 4px, 16×8 arrow, Drop Shadow/100
+   Counter tooltip 4px above the thumb: padding 8px 12px, radius 4px, 16×8 arrow, Drop Shadow/50
    Values row (min / max) directly under the slider area: Paragraph - Regular.
    No visible label (visually hidden accessible name). The tooltip overflows above the box, as in Figma. */
 
@@ -94,6 +94,11 @@
   border: none;
   border-radius: var(--border-circular);
   background: var(--slider-rest-range-slider-circle);
+  /* Figma *SliderThumb (Rest): three raw drop shadows, no effect style. */
+  box-shadow:
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: background-color 150ms ease-in-out;
 }
@@ -105,6 +110,11 @@
   border: none;
   border-radius: var(--border-circular);
   background: var(--slider-rest-range-slider-circle);
+  /* Figma *SliderThumb (Rest): three raw drop shadows, no effect style. */
+  box-shadow:
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: background-color 150ms ease-in-out;
 }
@@ -119,7 +129,7 @@
   flex-direction: column;
   align-items: center;
   transform: translateX(-50%);
-  filter: drop-shadow(var(--drop-shadow-100));
+  filter: drop-shadow(var(--drop-shadow-50));
   pointer-events: none;
 }
 

@@ -2,9 +2,7 @@
    Surface: padding 16px, radius large (8px), max width 300px (wraps beyond), Paragraph - Regular,
    Tooltip/background + Tooltip/text. Pointer: 16×8 triangle centered on the edge facing the anchor,
    4px from the anchor (Figma usage example 458:12000).
-   Shadow: Figma applies effect style "OBSOLETE - Drop Shadow/100" to the whole component
-   (surface + pointer). It has no token, so its raw values are reproduced here:
-   0 1px 4px #0C0C0D @5% + 0 1px 4px #0C0C0D @10%. */
+   Shadow: effect style Drop Shadow/100 on the whole component (surface + pointer). */
 
 .sds-tooltip {
   position: relative;
@@ -39,7 +37,7 @@
   text-align: left;
   white-space: normal;
   overflow-wrap: break-word;
-  filter: drop-shadow(0 1px 4px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 4px rgba(12, 12, 13, 0.1));
+  filter: drop-shadow(var(--drop-shadow-100));
   pointer-events: none;
 }
 
