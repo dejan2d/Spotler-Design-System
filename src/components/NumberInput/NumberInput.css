@@ -1,0 +1,378 @@
+/* Number Input — Spotler Design System
+   Figma: Inputs › Number Input (9414:19701).
+   Root column gap 4px · label row gap 4px (label Paragraph - Semi Bold, "(optional)" Paragraph - Regular)
+   Field 40px tall, padding 8px 12px, gap 8px, radius 8px (Border/Large), 1px inside stroke
+   Slots: Icon Start · Prefix · value · Sufix · Icon End · circle-minus · circle-plus (icons 20×20)
+   Help row = 16px icon + Paragraph - Small, gap 4px
+   States: default → filled → hover → focused → error → disabled, each bound to the
+   Inputs/Number Input/<state>-* tokens (Disabled uses Disabled/*). */
+
+.sds-number-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  font-family: var(--font-family);
+}
+
+/* ===== Label row ===== */
+.sds-number-input__label {
+  display: inline-flex;
+  align-items: baseline;
+  align-self: flex-start;
+  gap: var(--spacing-s-4);
+  font-size: var(--font-body-semibold-size);
+  line-height: var(--font-body-semibold-line);
+  font-weight: var(--font-body-semibold-weight);
+  color: var(--inputs-number-input-default-label);
+}
+
+.sds-number-input__optional {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  /* token name preserves the source 'deafult' typo to match the Figma variable id */
+  color: var(--inputs-number-input-deafult-label-optional-text);
+}
+
+/* ===== Field ===== */
+.sds-number-input__field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  min-height: var(--spacing-s-40);
+  padding: var(--spacing-s-8) var(--spacing-s-12);
+  background: var(--inputs-number-input-default-background);
+  border: 1px solid var(--inputs-number-input-default-stroke);
+  border-radius: var(--border-large);
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.sds-number-input__icon,
+.sds-number-input__step {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  font-size: var(--spacing-s-20);
+}
+
+.sds-number-input__icon--start {
+  color: var(--inputs-number-input-default-icon-start);
+}
+
+.sds-number-input__icon--end {
+  color: var(--inputs-number-input-default-icon-end);
+}
+
+/* Stepper buttons: bare 20×20 icons, as in Figma (no button chrome). */
+.sds-number-input__step {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: var(--border-circular);
+  background: transparent;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.sds-number-input__step--decrement {
+  color: var(--inputs-number-input-default-icon-decrement);
+}
+
+.sds-number-input__step--increment {
+  color: var(--inputs-number-input-default-icon-increment);
+}
+
+/* Keyboard focus ring — the one accessibility addition Figma has no counterpart for. */
+.sds-number-input__step:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+.sds-number-input__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  /* A value outside the Focused/Error/Disabled states is the Filled look. */
+  color: var(--inputs-number-input-filled-text);
+  text-overflow: ellipsis;
+  /* Hide the browser's native spinners — the Figma stepper icons replace them. */
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.sds-number-input__input::-webkit-inner-spin-button,
+.sds-number-input__input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sds-number-input__input::placeholder {
+  color: var(--inputs-number-input-default-text);
+  opacity: 1;
+}
+
+.sds-number-input__prefix,
+.sds-number-input__suffix {
+  flex: none;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+}
+
+.sds-number-input__prefix {
+  color: var(--inputs-number-input-default-prefix-text);
+}
+
+.sds-number-input__suffix {
+  color: var(--inputs-number-input-default-sufix-text);
+}
+
+/* ===== Help text row ===== */
+.sds-number-input__hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s-4);
+  margin: 0;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--inputs-number-input-default-hint-message);
+}
+
+.sds-number-input__hint-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
+  color: var(--inputs-number-input-default-hint-message-icon);
+}
+
+/* ===== Filled (has a value) ===== */
+.sds-number-input--filled .sds-number-input__label {
+  color: var(--inputs-number-input-filled-label);
+}
+
+.sds-number-input--filled .sds-number-input__optional {
+  color: var(--inputs-number-input-filled-label-optional-text);
+}
+
+.sds-number-input--filled .sds-number-input__field {
+  background: var(--inputs-number-input-filled-background);
+  border-color: var(--inputs-number-input-filled-stroke);
+}
+
+.sds-number-input--filled .sds-number-input__icon--start {
+  color: var(--inputs-number-input-filled-icon-start);
+}
+
+.sds-number-input--filled .sds-number-input__icon--end {
+  color: var(--inputs-number-input-filled-icon-end);
+}
+
+.sds-number-input--filled .sds-number-input__prefix {
+  color: var(--inputs-number-input-filled-prefix-text);
+}
+
+.sds-number-input--filled .sds-number-input__suffix {
+  color: var(--inputs-number-input-filled-sufix-text);
+}
+
+.sds-number-input--filled .sds-number-input__step--decrement {
+  color: var(--inputs-number-input-filled-icon-decrement);
+}
+
+.sds-number-input--filled .sds-number-input__step--increment {
+  color: var(--inputs-number-input-filled-icon-increment);
+}
+
+.sds-number-input--filled .sds-number-input__hint {
+  color: var(--inputs-number-input-filled-hint-message);
+}
+
+.sds-number-input--filled .sds-number-input__hint-icon {
+  color: var(--inputs-number-input-filled-hint-message-icon);
+}
+
+/* ===== Hover =====
+   Hover label / optional / hint tokens resolve to the same values as Default. */
+.sds-number-input__field:hover {
+  background: var(--inputs-number-input-hover-background);
+  border-color: var(--inputs-number-input-hover-stroke);
+}
+
+.sds-number-input__field:hover .sds-number-input__input::placeholder {
+  color: var(--inputs-number-input-hover-text);
+}
+
+.sds-number-input__field:hover .sds-number-input__icon--start {
+  color: var(--inputs-number-input-hover-icon-start);
+}
+
+.sds-number-input__field:hover .sds-number-input__icon--end {
+  color: var(--inputs-number-input-hover-icon-end);
+}
+
+.sds-number-input__field:hover .sds-number-input__prefix {
+  color: var(--inputs-number-input-hover-prefix-text);
+}
+
+.sds-number-input__field:hover .sds-number-input__suffix {
+  color: var(--inputs-number-input-hover-sufix-text);
+}
+
+.sds-number-input__field:hover .sds-number-input__step--decrement {
+  color: var(--inputs-number-input-hover-icon-decrement);
+}
+
+.sds-number-input__field:hover .sds-number-input__step--increment {
+  color: var(--inputs-number-input-hover-icon-increment);
+}
+
+/* ===== Focused ===== */
+.sds-number-input:focus-within .sds-number-input__label {
+  color: var(--inputs-number-input-focused-label);
+}
+
+.sds-number-input:focus-within .sds-number-input__optional {
+  color: var(--inputs-number-input-focused-label-optional-text);
+}
+
+.sds-number-input__field:focus-within {
+  background: var(--inputs-number-input-focused-background);
+  border-color: var(--inputs-number-input-focused-stroke);
+}
+
+/* Focused variant colours the typed value with focused-text (as TextField does). */
+.sds-number-input__field:focus-within .sds-number-input__input {
+  color: var(--inputs-number-input-focused-text);
+}
+
+.sds-number-input__field:focus-within .sds-number-input__icon--start {
+  color: var(--inputs-number-input-focused-icon-start);
+}
+
+.sds-number-input__field:focus-within .sds-number-input__icon--end {
+  color: var(--inputs-number-input-focused-icon-end);
+}
+
+.sds-number-input__field:focus-within .sds-number-input__prefix {
+  color: var(--inputs-number-input-focused-prefix-text);
+}
+
+.sds-number-input__field:focus-within .sds-number-input__suffix {
+  color: var(--inputs-number-input-focused-sufix-text);
+}
+
+.sds-number-input__field:focus-within .sds-number-input__step--decrement {
+  color: var(--inputs-number-input-focused-icon-decrement);
+}
+
+.sds-number-input__field:focus-within .sds-number-input__step--increment {
+  color: var(--inputs-number-input-focused-icon-increment);
+}
+
+.sds-number-input:focus-within .sds-number-input__hint {
+  color: var(--inputs-number-input-focused-hint-message);
+}
+
+.sds-number-input:focus-within .sds-number-input__hint-icon {
+  color: var(--inputs-number-input-focused-hint-message-icon);
+}
+
+/* ===== Error (wins over filled / hover / focused) ===== */
+.sds-number-input.sds-number-input--error .sds-number-input__label {
+  color: var(--inputs-number-input-error-label);
+}
+
+.sds-number-input.sds-number-input--error .sds-number-input__optional {
+  color: var(--inputs-number-input-error-label-optional-text);
+}
+
+.sds-number-input--error .sds-number-input__field,
+.sds-number-input--error .sds-number-input__field:hover,
+.sds-number-input--error .sds-number-input__field:focus-within {
+  background: var(--inputs-number-input-error-background);
+  border-color: var(--inputs-number-input-error-stroke);
+}
+
+.sds-number-input--error .sds-number-input__field .sds-number-input__input {
+  color: var(--inputs-number-input-error-text);
+}
+
+.sds-number-input--error .sds-number-input__field .sds-number-input__icon--start {
+  color: var(--inputs-number-input-error-icon-start);
+}
+
+.sds-number-input--error .sds-number-input__field .sds-number-input__icon--end {
+  color: var(--inputs-number-input-error-icon-end);
+}
+
+.sds-number-input--error .sds-number-input__field .sds-number-input__prefix {
+  color: var(--inputs-number-input-error-prefix-text);
+}
+
+.sds-number-input--error .sds-number-input__field .sds-number-input__suffix {
+  color: var(--inputs-number-input-error-sufix-text);
+}
+
+.sds-number-input--error .sds-number-input__field .sds-number-input__step--decrement {
+  color: var(--inputs-number-input-error-icon-decrement);
+}
+
+.sds-number-input--error .sds-number-input__field .sds-number-input__step--increment {
+  color: var(--inputs-number-input-error-icon-increment);
+}
+
+.sds-number-input.sds-number-input--error .sds-number-input__hint {
+  color: var(--inputs-number-input-error-hint-message);
+}
+
+.sds-number-input.sds-number-input--error .sds-number-input__hint-icon {
+  color: var(--inputs-number-input-error-hint-message-icon);
+}
+
+/* ===== Disabled (wins over everything) ===== */
+.sds-number-input.sds-number-input--disabled .sds-number-input__label,
+.sds-number-input.sds-number-input--disabled .sds-number-input__optional,
+.sds-number-input.sds-number-input--disabled .sds-number-input__hint {
+  color: var(--disabled-text);
+}
+
+.sds-number-input--disabled .sds-number-input__field,
+.sds-number-input--disabled .sds-number-input__field:hover {
+  background: var(--disabled-background);
+  border-color: var(--disabled-stroke);
+}
+
+.sds-number-input--disabled .sds-number-input__field .sds-number-input__input,
+.sds-number-input--disabled .sds-number-input__field .sds-number-input__input::placeholder,
+.sds-number-input--disabled .sds-number-input__field .sds-number-input__prefix,
+.sds-number-input--disabled .sds-number-input__field .sds-number-input__suffix {
+  color: var(--disabled-text);
+}
+
+.sds-number-input--disabled .sds-number-input__field .sds-number-input__icon,
+.sds-number-input--disabled .sds-number-input__field .sds-number-input__step,
+.sds-number-input.sds-number-input--disabled .sds-number-input__hint-icon {
+  color: var(--disabled-icon);
+}
+
+.sds-number-input--disabled .sds-number-input__input,
+.sds-number-input--disabled .sds-number-input__step {
+  cursor: not-allowed;
+}

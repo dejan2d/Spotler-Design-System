@@ -1,0 +1,65 @@
+/* ImageGrid — Spotler Design System (Figma "Image grid" set 2912:124565, page "Image grid")
+   `Size` = how many of the 12 layout-grid columns each image spans:
+   2 → 6 per row · 3 → 4 per row · 4 → 3 per row · 6 → 2 per row.
+   Gutter 24 on both axes ("24 (fixed gutter)" in the page examples).
+   Tile: vertical, gap 16; image 4:3, radius 0, cover; name Paragraph - Regular, Gray-1000.
+   Figma's gaps are raw (unbound) values; they map 1:1 to the Spacing tokens used here. */
+
+.sds-image-grid {
+  --sds-image-grid-per-row: 6;
+  display: grid;
+  grid-template-columns: repeat(var(--sds-image-grid-per-row), minmax(0, 1fr));
+  gap: var(--spacing-s-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-family);
+}
+
+/* ===== Size (Figma `Size`) ===== */
+.sds-image-grid--span-2 {
+  --sds-image-grid-per-row: 6;
+}
+
+.sds-image-grid--span-3 {
+  --sds-image-grid-per-row: 4;
+}
+
+.sds-image-grid--span-4 {
+  --sds-image-grid-per-row: 3;
+}
+
+.sds-image-grid--span-6 {
+  --sds-image-grid-per-row: 2;
+}
+
+/* Variant frame: vertical stack, gap 16, left-aligned. */
+.sds-image-grid__item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-s-16);
+}
+
+/* "Rectangle 34624808": 4:3, no radius, image fill scale mode Fill. */
+.sds-image-grid__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Text Styles/Body/Paragraph - Regular, Monochrome/Gray - 1000 (`Text` property).
+   Figma hugs the text on one line; long names are truncated so they never cross the gutter. */
+.sds-image-grid__name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--monochrome-gray-1000);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+}

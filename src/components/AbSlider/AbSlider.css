@@ -1,0 +1,240 @@
+/* AB Slider — Spotler Design System
+   Figma: "AB slider" component set 2087:72323 (page "Slider").
+   300px wide · slider area 20px tall · rail 4px (Gray - 400) · fill 6px split A (Primary) / B (Success - Darker)
+   Thumb 20×20 white circle, 1px outside stroke Gray - 200, three raw drop shadows.
+   Legend 4px below: A / B / Rest columns centred under their rail segment,
+   name Paragraph - Regular, values Paragraph - Small (percentage + bracketed count). */
+
+.sds-ab-slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-4);
+  width: 300px;
+  font-family: var(--font-family);
+  /* --sds-ab-slider-pct (0..1) is set inline */
+}
+
+/* Figma has no visible label: the accessible name is visually hidden. */
+.sds-ab-slider__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== Slider area (Figma "Slider" frame, 20px tall) ===== */
+.sds-ab-slider__control {
+  position: relative;
+  height: var(--spacing-s-20);
+}
+
+/* Rail — 4px at y 8–12, Monochrome/Gray - 400 */
+.sds-ab-slider__rail {
+  position: absolute;
+  top: var(--spacing-s-8);
+  left: 0;
+  right: 0;
+  height: var(--spacing-s-4);
+  border-radius: var(--border-circular);
+  background: var(--monochrome-gray-400);
+}
+
+/* Fill — 6px at y 7–13, from the start to the share, split evenly into A and B */
+.sds-ab-slider__fill {
+  position: absolute;
+  top: 7px;
+  left: 0;
+  display: flex;
+  width: calc(100% * var(--sds-ab-slider-pct, 0));
+  height: 6px;
+}
+
+.sds-ab-slider__segment {
+  flex: 1 1 0;
+}
+
+/* A — Primary/Conceptual/Conceptual, left end rounded */
+.sds-ab-slider__segment--a {
+  border-radius: var(--border-circular) 0 0 var(--border-circular);
+  background: var(--primary-conceptual-conceptual);
+}
+
+/* B — Semantic/Green - Success/Success - Darker, right end rounded */
+.sds-ab-slider__segment--b {
+  border-radius: 0 var(--border-circular) var(--border-circular) 0;
+  background: var(--semantic-green-success-success-darker);
+}
+
+/* Native range input — fills the 20px area; only the thumb is painted. */
+.sds-ab-slider__input {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: var(--border-circular);
+  cursor: pointer;
+}
+
+.sds-ab-slider__input::-webkit-slider-runnable-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+.sds-ab-slider__input::-moz-range-track {
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+/* Thumb (Figma `handle`): white circle, 1px outside stroke Monochrome/Gray - 200 (drawn as a 1px
+   spread ring), plus Figma's three raw drop shadows (no effect style exists for them). */
+.sds-ab-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  border: none;
+  border-radius: var(--border-circular);
+  background: var(--monochrome-white);
+  box-shadow:
+    0 0 0 1px var(--monochrome-gray-200),
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.sds-ab-slider__input::-moz-range-thumb {
+  width: var(--spacing-s-20);
+  height: var(--spacing-s-20);
+  border: none;
+  border-radius: var(--border-circular);
+  background: var(--monochrome-white);
+  box-shadow:
+    0 0 0 1px var(--monochrome-gray-200),
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+/* ===== Hover (Figma State=Hover): Gray - 200 thumb + a fourth raw shadow (0 4px 4px black 10%) ===== */
+.sds-ab-slider:not(.sds-ab-slider--disabled):hover .sds-ab-slider__input::-webkit-slider-thumb {
+  background: var(--monochrome-gray-200);
+  box-shadow:
+    0 0 0 1px var(--monochrome-gray-200),
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.1),
+    0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sds-ab-slider:not(.sds-ab-slider--disabled):hover .sds-ab-slider__input::-moz-range-thumb {
+  background: var(--monochrome-gray-200);
+  box-shadow:
+    0 0 0 1px var(--monochrome-gray-200),
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.1),
+    0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Focus — not designed in Figma; kept for keyboard users ===== */
+.sds-ab-slider__input:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 2px;
+}
+
+/* ===== Legend — one column per group, centred under its rail segment =====
+   All columns share one grid cell so the row takes the height of the tallest column. */
+.sds-ab-slider__legend {
+  display: grid;
+}
+
+.sds-ab-slider__group {
+  grid-area: 1 / 1;
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: calc(100% * var(--sds-ab-slider-centre, 0));
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Text Styles/Body/Paragraph - Regular */
+.sds-ab-slider__group-name {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--monochrome-gray-1000);
+}
+
+/* Figma `Support values` — Text Styles/Body/Paragraph - Small, two lines */
+.sds-ab-slider__group-values {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+}
+
+.sds-ab-slider__group-percent {
+  color: var(--monochrome-gray-1000);
+}
+
+.sds-ab-slider__group-count {
+  color: var(--monochrome-gray-600);
+}
+
+/* ===== Disabled (Figma State=Disabled) ===== */
+.sds-ab-slider--disabled .sds-ab-slider__input {
+  cursor: not-allowed;
+}
+
+.sds-ab-slider--disabled .sds-ab-slider__rail {
+  background: var(--disabled-background);
+}
+
+.sds-ab-slider--disabled .sds-ab-slider__fill {
+  opacity: 0.5;
+}
+
+.sds-ab-slider--disabled .sds-ab-slider__input::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 1px var(--disabled-background),
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}
+
+.sds-ab-slider--disabled .sds-ab-slider__input::-moz-range-thumb {
+  box-shadow:
+    0 0 0 1px var(--disabled-background),
+    0 1px 4px rgba(12, 12, 13, 0.05),
+    0 1px 4px rgba(12, 12, 13, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}
+
+.sds-ab-slider--disabled .sds-ab-slider__group-name,
+.sds-ab-slider--disabled .sds-ab-slider__group-percent,
+.sds-ab-slider--disabled .sds-ab-slider__group-count {
+  color: var(--disabled-text);
+}

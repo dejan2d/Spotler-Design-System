@@ -1,0 +1,170 @@
+/* Action Chip — Spotler Design System (Figma set 9359:1554, page "Chips & Badges")
+   Row, 24px tall (fixed), hugs content, padding 4px 8px, gap 8px, radius large (8px),
+   items centered. 1px INSIDE stroke drawn as an inset box-shadow so it never changes
+   the size. Icons 16px; label Paragraph - Small (Semi Bold when Selected).
+
+   The box is .sds-action-chip; the chip <button> fills it and carries the padding.
+   With a separate trailing action button (--with-action) the box keeps the right
+   padding and the 8px gap, so the geometry stays 8 + icon + 8 + label + 8 + action + 8. */
+
+.sds-action-chip {
+  /* Per-state colours (Figma Action Chip/<state>-* variables). */
+  --sds-action-chip-background: var(--action-chip-rest-background);
+  --sds-action-chip-stroke: var(--action-chip-rest-stroke);
+  --sds-action-chip-text: var(--action-chip-rest-text);
+  --sds-action-chip-icon: var(--action-chip-rest-icon);
+  --sds-action-chip-action-icon: var(--monochrome-gray-1000);
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--spacing-s-24);
+  border-radius: var(--border-large);
+  background: var(--sds-action-chip-background);
+  box-shadow: inset 0 0 0 1px var(--sds-action-chip-stroke);
+  /* Invisible normally; becomes the chip outline in forced-colors mode. */
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  color: var(--sds-action-chip-text);
+  font-family: var(--font-family);
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  white-space: nowrap;
+  user-select: none;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out,
+    box-shadow 150ms ease-in-out;
+}
+
+.sds-action-chip--with-action {
+  gap: var(--spacing-s-8);
+  padding-right: var(--spacing-s-8);
+}
+
+.sds-action-chip__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: var(--spacing-s-4) var(--spacing-s-8);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sds-action-chip--with-action .sds-action-chip__button {
+  padding-right: 0;
+}
+
+/* The Figma Focused state (below) is the focus indicator for the chip button. */
+.sds-action-chip__button:focus {
+  outline: none;
+}
+
+.sds-action-chip__icon,
+.sds-action-chip__action,
+.sds-action-chip__action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--spacing-s-16);
+  height: var(--spacing-s-16);
+  font-size: var(--spacing-s-16);
+}
+
+.sds-action-chip__icon {
+  color: var(--sds-action-chip-icon);
+}
+
+.sds-action-chip__label {
+  display: inline-block;
+}
+
+/* Trailing action icon — Figma "Chip Action Icon" (set 9376:2129), 16×16, radius 4px,
+   icon bound to Monochrome/Gray - 1000. */
+.sds-action-chip__action {
+  box-sizing: border-box;
+  border-radius: var(--border-small);
+  color: var(--sds-action-chip-action-icon);
+}
+
+.sds-action-chip__action--button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+/* Chip Action Icon `Hover` variant (9376:2130): Monochrome/Gray - 200 background. */
+.sds-action-chip__action--button:hover:not(:disabled) {
+  background: var(--monochrome-gray-200);
+}
+
+/* Keyboard focus ring for the separate action button — not designed in Figma;
+   kept as the accessibility exception. */
+.sds-action-chip__action--button:focus {
+  outline: none;
+}
+.sds-action-chip__action--button:focus-visible {
+  outline: 2px solid var(--primary-conceptual-conceptual);
+  outline-offset: 1px;
+}
+
+/* ===== Hover (Figma State=Hover, 9359:1555) =====
+   :where() keeps the specificity low so keyboard focus (below) wins over hover. */
+.sds-action-chip:where(:not(.sds-action-chip--disabled):not(.sds-action-chip--selected)):hover {
+  --sds-action-chip-background: var(--action-chip-hover-background);
+  --sds-action-chip-stroke: var(--action-chip-hover-stroke);
+  --sds-action-chip-text: var(--action-chip-hover-text);
+  --sds-action-chip-icon: var(--action-chip-hover-icon);
+}
+
+/* ===== Selected (Figma State=Selected, 9359:1575) ===== */
+.sds-action-chip--selected {
+  --sds-action-chip-background: var(--action-chip-selected-background);
+  --sds-action-chip-stroke: var(--action-chip-selected-stroke);
+  --sds-action-chip-text: var(--action-chip-selected-text);
+  --sds-action-chip-icon: var(--action-chip-selected-icon);
+  font-size: var(--font-caption-semibold-size);
+  line-height: var(--font-caption-semibold-line);
+  font-weight: var(--font-caption-semibold-weight);
+}
+
+/* ===== Focused (Figma State=Focused, 9359:1595) — keyboard focus of the chip button ===== */
+.sds-action-chip:has(.sds-action-chip__button:focus-visible) {
+  --sds-action-chip-background: var(--action-chip-focused-background);
+  --sds-action-chip-stroke: var(--action-chip-focused-border);
+  --sds-action-chip-text: var(--action-chip-focused-text);
+  --sds-action-chip-icon: var(--action-chip-focused-icon);
+}
+/* Selected + focused (not drawn in Figma): keep the selected fill so the selection
+   stays visible, with the focused border. */
+.sds-action-chip--selected:has(.sds-action-chip__button:focus-visible) {
+  --sds-action-chip-background: var(--action-chip-selected-background);
+}
+
+/* ===== Disabled (Figma State=Disabled, 9359:1609) ===== */
+.sds-action-chip--disabled {
+  --sds-action-chip-background: var(--disabled-background);
+  --sds-action-chip-stroke: var(--disabled-stroke);
+  --sds-action-chip-text: var(--disabled-text);
+  --sds-action-chip-icon: var(--disabled-icon);
+  --sds-action-chip-action-icon: var(--disabled-icon);
+  /* Figma: the disabled chip uses Paragraph - Small, also when selected. */
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+}
+.sds-action-chip--disabled .sds-action-chip__button,
+.sds-action-chip--disabled .sds-action-chip__action--button {
+  cursor: default;
+}

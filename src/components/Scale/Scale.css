@@ -1,0 +1,138 @@
+/* Scale — Spotler Design System
+   Figma: "Scale" component set 5790:55967 (page "Diagrams & Stats").
+   Fixed width: Small 141px, Big 609px. Column gap 8px: Name + Value · Divider · Graph + Value.
+   Name + Value gap 2px (H4 title, Paragraph - Regular value). Graph + Value gap 8px.
+   Graph: equal bars, no radius, gap 4px (Small) / 6px (Big), masked by the Figma `Scale mask`
+   vector (exponential curve or straight diagonal). Labels: Paragraph - Small, space-between. */
+
+.sds-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.sds-scale--small {
+  width: 141px;
+}
+
+.sds-scale--big {
+  width: 609px;
+}
+
+/* ===== Name + Value (Figma `Show name`) ===== */
+.sds-scale__header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Text Styles/Title Headings/H4 */
+.sds-scale__name {
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line);
+  font-weight: var(--font-h4-weight);
+  color: var(--diagrams-scale-title);
+}
+
+/* Text Styles/Body/Paragraph - Regular */
+.sds-scale__value {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: var(--font-body-weight);
+  color: var(--diagrams-scale-value);
+}
+
+/* Figma's Divider instance is 0px tall in the auto layout (centre stroke), so the next block
+   starts 8px below the line; the -1px cancels the 1px rule height to keep that rhythm. */
+.sds-scale__divider {
+  margin-bottom: -1px;
+}
+
+/* ===== Graph + Value ===== */
+.sds-scale__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s-8);
+}
+
+/* Bars row, clipped by the Figma `Scale mask` */
+.sds-scale__graph {
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-s-4);
+}
+
+.sds-scale--big .sds-scale__graph {
+  gap: 6px;
+}
+
+.sds-scale--small.sds-scale--exponential .sds-scale__graph {
+  height: 41px;
+}
+
+.sds-scale--small.sds-scale--linear .sds-scale__graph {
+  height: 42px;
+}
+
+.sds-scale--big.sds-scale--exponential .sds-scale__graph {
+  height: 129px;
+}
+
+.sds-scale--big.sds-scale--linear .sds-scale__graph {
+  height: 127px;
+}
+
+/* Type=Exponential — the Figma `Scale mask` outline (drawn at 141×41, the same normalised curve
+   is used at Big), stretched to the graph box. The SVG fill is only the mask's alpha. */
+.sds-scale--exponential .sds-scale__graph {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 141 41' preserveAspectRatio='none'%3E%3Cpath d='M0 41C0 41 5.727 40.788 14.66 40.172C15.129 40.14 15.608 40.106 16.095 40.072C19.874 39.803 24.165 39.465 28.797 39.046C29.231 39.006 29.668 38.966 30.107 38.926C34.119 38.554 38.368 38.122 42.746 37.62C43.213 37.567 43.681 37.513 44.151 37.458C48.289 36.973 52.531 36.427 56.79 35.812C57.258 35.745 57.726 35.677 58.194 35.607C62.43 34.982 66.672 34.288 70.833 33.519C71.303 33.432 71.771 33.345 72.238 33.256C76.562 32.436 80.788 31.533 84.814 30.54C85.285 30.424 85.753 30.307 86.219 30.188C88.427 29.626 90.57 29.036 92.631 28.416C94.753 27.778 96.845 27.06 98.898 26.279C99.369 26.1 99.838 25.918 100.305 25.732C104.74 23.969 108.983 21.925 112.942 19.773C113.4 19.524 113.855 19.274 114.306 19.022C119.001 16.4 123.268 13.652 126.945 11.086C127.456 10.729 127.955 10.376 128.443 10.028C136.228 4.461 141 0 141 0L141 41Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 141 41' preserveAspectRatio='none'%3E%3Cpath d='M0 41C0 41 5.727 40.788 14.66 40.172C15.129 40.14 15.608 40.106 16.095 40.072C19.874 39.803 24.165 39.465 28.797 39.046C29.231 39.006 29.668 38.966 30.107 38.926C34.119 38.554 38.368 38.122 42.746 37.62C43.213 37.567 43.681 37.513 44.151 37.458C48.289 36.973 52.531 36.427 56.79 35.812C57.258 35.745 57.726 35.677 58.194 35.607C62.43 34.982 66.672 34.288 70.833 33.519C71.303 33.432 71.771 33.345 72.238 33.256C76.562 32.436 80.788 31.533 84.814 30.54C85.285 30.424 85.753 30.307 86.219 30.188C88.427 29.626 90.57 29.036 92.631 28.416C94.753 27.778 96.845 27.06 98.898 26.279C99.369 26.1 99.838 25.918 100.305 25.732C104.74 23.969 108.983 21.925 112.942 19.773C113.4 19.524 113.855 19.274 114.306 19.022C119.001 16.4 123.268 13.652 126.945 11.086C127.456 10.729 127.955 10.376 128.443 10.028C136.228 4.461 141 0 141 0L141 41Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Type=Linear — the Figma `Scale mask` triangle: bottom-left → top-right → bottom-right */
+.sds-scale--linear .sds-scale__graph {
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+
+/* Empty bar — Diagrams/Scale/background-light-blue */
+.sds-scale__bar {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--diagrams-scale-background-light-blue);
+}
+
+/* Filled bar — Diagrams/Scale/fill-dark-blue */
+.sds-scale__bar--filled {
+  background: var(--diagrams-scale-fill-dark-blue);
+}
+
+/* Color=AI */
+.sds-scale--ai .sds-scale__bar {
+  background: var(--diagrams-scale-background-light-purple);
+}
+
+.sds-scale--ai .sds-scale__bar--filled {
+  background: var(--diagrams-scale-fill-dark-purple);
+}
+
+/* ===== Values (Figma `Show labels`) — Text Styles/Body/Paragraph - Small ===== */
+.sds-scale__labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sds-scale__label {
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-line);
+  font-weight: var(--font-caption-weight);
+  color: var(--diagrams-scale-labels);
+  text-align: center;
+  white-space: nowrap;
+}
