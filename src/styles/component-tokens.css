@@ -1,4 +1,4 @@
-/* Spotler Design System — Component Tokens (850 tokens) */
+/* Spotler Design System — Component Tokens (852 tokens) */
 /* Mirrors the Figma "Component Colors" variable collection. Figma is the source of truth. */
 
 :root {
@@ -186,9 +186,11 @@
   --color-picker-empty-background: #FFFFFF;
   --color-picker-empty-border: #E7ECED;
   --color-picker-empty-text: #8795A0;
+  --color-picker-empty-icon: #8795A0;
   --color-picker-filled-background: #FFFFFF;
   --color-picker-filled-stroke: #E7ECED;
   --color-picker-filled-text: #353B40;
+  --color-picker-filled-icon: #353B40;
   --color-picker-label: #353B40;
   --color-picker-hint-message: #616D76;
   --color-picker-hint-message-icon: #616D76;
