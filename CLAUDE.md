@@ -1,7 +1,7 @@
 # Spotler Design System — working notes for Claude
 
 React + TypeScript component library implementing the Spotler Design System.
-41 components, driven entirely by design tokens. See `README.md` for the
+40 components, driven entirely by design tokens. See `README.md` for the
 library itself and `CONTRIBUTING.md` for the full component authoring guide.
 
 ## Always load these skills
@@ -35,10 +35,17 @@ than adding a second one.
 
 **Tokens, never hardcoded values.** Every colour, and most spacing and radii,
 references a CSS variable: `var(--button-primary-rest-background)`, not
-`#005499`. Tokens are generated from the Spotler kit — regenerate them, don't
-hand-edit `src/styles/tokens.css` or `component-tokens.css`.
+`#005499`. `src/styles/tokens.css` and `component-tokens.css` mirror the
+Figma library variables one to one (852 component tokens); when a value
+changes in Figma, change it here to match.
 
-**Token names keep the kit's original typos** — `Warrning`, `alet-darker`,
+**Figma is the source of truth, by the letter.** Sizes, spacing, states,
+variants, defaults and tokens follow the Spotler Figma library — the **Documentation** file ([hKM1NrLRl0xREa8oSHdQ1K](https://www.figma.com/design/hKM1NrLRl0xREa8oSHdQ1K/)) for variables, text styles and effects, and the **Components** file ([ZqqeU7ELDEFXivhwaTHH4P](https://www.figma.com/design/ZqqeU7ELDEFXivhwaTHH4P/)) for components. Code differences are fixed
+toward Figma. Features with no Figma counterpart are not added; keyboard focus
+rings are the one accessibility exception. If Figma still uses an OBSOLETE
+colour, text style or shadow, fix it in Figma first, then mirror it here.
+
+**Token names keep Figma's original typos** — `Warrning`, `alet-darker`,
 `backgorund`, `Uplifiting`. They map to Figma variable IDs. Do not "fix" them.
 
 **Icons: Font Awesome Pro 7.1.0 Duotone Regular only**, from the 4,701 in

@@ -1,11 +1,11 @@
 # Spotler React Components
 
-A React + TypeScript component library implementing the **Spotler Design System**. Every component is driven entirely by design tokens (CSS custom properties) generated directly from the Spotler kit — no hardcoded colors, spacing, or radii.
+A React + TypeScript component library implementing the **Spotler Design System**. Every component is driven entirely by design tokens (CSS custom properties) that mirror the Spotler Figma library — no hardcoded colors, spacing, or radii. Figma is the source of truth: components follow it variant for variant, state for state.
 
 ## What's inside
 
-- **41 components** across 6 categories (buttons, inputs, display, feedback, navigation, dashboard)
-- **Design tokens as CSS variables** — 50 foundation colors, the 4px spacing scale, corner radius, elevation, typography, plus all **842 component-level tokens**
+- **40 components** across 6 categories (buttons, inputs, display, feedback, navigation, dashboard)
+- **Design tokens as CSS variables** — 50 foundation colors, the 4px spacing scale, corner radius, elevation, typography, breakpoints, plus all **852 component-level tokens**
 - **Accessibility built in** — semantic elements, ARIA, keyboard support, visible focus states
 - **One folder per component**: `Component.tsx` + `Component.css` + `index.ts`
 
@@ -52,12 +52,12 @@ src/
 ├── index.ts                      # barrel — re-exports every component
 ├── styles/
 │   ├── tokens.css                # foundation tokens (color, spacing, radius, type, elevation)
-│   ├── component-tokens.css      # all 842 component tokens
+│   ├── component-tokens.css      # all 852 component tokens
 │   └── global.css                # imports both + base .sds-root styles
 └── components/
     ├── Button/ Button.tsx Button.css index.ts
     ├── TextField/ ...
-    └── … (41 components)
+    └── … (40 components)
 ```
 
 ## Components
@@ -66,7 +66,7 @@ src/
 **Inputs & forms:** TextField, SearchBar, DropdownMenu, Checkbox, RadioButton, Switch, Slider, DatePicker, TimePicker, Calendar, Upload, ColorPicker
 **Display:** Card, ActionCard, KpiCard, Avatar, Table, Header, Modal, Divider
 **Feedback:** Alert, Badge, StatusChip, ProgressBar, Tooltip, EmptyState
-**Navigation:** Navigation, Folders, Tabs, Breadcrumb, ContextMenu, Pagination, Stepper, Accordion
+**Navigation:** Navigation, Folders, Tabs, ContextMenu, Pagination, Stepper, Accordion, Breadcrumb (deprecated)
 **Dashboard:** BarChart, LineChart, PieChart (presentational wrappers — bring your own plotting)
 
 ## Design tokens
@@ -86,7 +86,7 @@ All styling references CSS variables. Examples:
 --inputs-regular-text-field-focused-stroke: #005499;
 ```
 
-> **Token names preserve the kit's original spelling**, including known typos (`Warrning`, `alet-darker`, `backgorund`, `Uplifiting`) so they stay linked to the Figma variable IDs. Don't "fix" them.
+> **Token names preserve Figma's original spelling**, including known typos (`Warrning`, `alet-darker`, `backgorund`, `Uplifiting`) so they stay linked to the Figma variable IDs. Don't "fix" them.
 
 ## Conventions
 
@@ -96,5 +96,7 @@ All styling references CSS variables. Examples:
 
 ## Notes & known gaps
 
-- A few components compose foundation tokens where the kit has no dedicated component token (e.g. Breadcrumb, Modal scrim). These are documented inline in the component CSS.
+- A few components compose foundation tokens where Figma has no dedicated component token (e.g. Modal scrim). These are documented inline in the component CSS.
+- **Breadcrumb is deprecated** — Figma marks it "don't use". It stays for existing screens only.
+- Keyboard focus rings are the one state not drawn in Figma; they are kept for accessibility.
 - The chart components are **presentational wrappers** (header, legend, color exports) — plug in your charting library of choice for the actual plots.
