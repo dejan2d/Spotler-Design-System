@@ -94,10 +94,6 @@ All styling references CSS variables. Examples:
 - Components use `forwardRef` and spread extra props to the root element
 - BEM-style class names prefixed `sds-` (e.g. `sds-button`, `sds-button--primary`, `sds-button__label`)
 
-## Preview
-
-Open `demo.html` in a browser to see components rendered with the real tokens (no build step required).
-
 ## Notes & known gaps
 
 - A few components compose foundation tokens where the kit has no dedicated component token (e.g. Breadcrumb, Modal scrim). These are documented inline in the component CSS.
