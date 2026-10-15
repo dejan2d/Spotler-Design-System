@@ -1,7 +1,7 @@
 # Spotler Design System — working notes for Claude
 
 React + TypeScript component library implementing the Spotler Design System.
-40 components, driven entirely by design tokens. See `README.md` for the
+49 components, driven entirely by design tokens. See `README.md` for the
 library itself and `CONTRIBUTING.md` for the full component authoring guide.
 
 ## Always load these skills

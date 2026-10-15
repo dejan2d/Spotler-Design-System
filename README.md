@@ -4,7 +4,7 @@ A React + TypeScript component library implementing the **Spotler Design System*
 
 ## What's inside
 
-- **40 components** across 6 categories (buttons, inputs, display, feedback, navigation, dashboard)
+- **49 components** across 6 categories (buttons, inputs, display, feedback, navigation, dashboard)
 - **Design tokens as CSS variables** — 50 foundation colors, the 4px spacing scale, corner radius, elevation, typography, breakpoints, plus all **852 component-level tokens**
 - **Accessibility built in** — semantic elements, ARIA, keyboard support, visible focus states
 - **One folder per component**: `Component.tsx` + `Component.css` + `index.ts`
@@ -57,17 +57,17 @@ src/
 └── components/
     ├── Button/ Button.tsx Button.css index.ts
     ├── TextField/ ...
-    └── … (40 components)
+    └── … (49 components)
 ```
 
 ## Components
 
 **Buttons & actions:** Button (incl. TextLink), IconButton, SegmentedButton
-**Inputs & forms:** TextField, SearchBar, DropdownMenu, Checkbox, RadioButton, Switch, Slider, DatePicker, TimePicker, Calendar, Upload, ColorPicker
-**Display:** Card, ActionCard, KpiCard, Avatar, Table, Header, Modal, Divider
-**Feedback:** Alert, Badge, StatusChip, ProgressBar, Tooltip, EmptyState
+**Inputs & forms:** TextField, BigTextField, NumberInput, SearchBar, DropdownMenu, Checkbox, RadioButton, Switch, Slider (single and range), AbSlider, DatePicker, TimePicker, Calendar (single date and range), Upload, ColorPicker
+**Display:** Card, ActionCard, KpiCard, Avatar, Table, Header, Modal, Overlay, ImageGrid, Divider, ActionChip
+**Feedback:** Alert, Badge, StatusChip, ProgressBar, Loader, Skeleton, Tooltip, EmptyState
 **Navigation:** Navigation, Folders, Tabs, ContextMenu, Pagination, Stepper, Accordion, Breadcrumb (deprecated)
-**Dashboard:** BarChart, LineChart, PieChart (presentational wrappers — bring your own plotting)
+**Dashboard:** BarChart, LineChart, PieChart (presentational wrappers — bring your own plotting), Scale
 
 ## Design tokens
 
