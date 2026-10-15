@@ -20,7 +20,7 @@ src/
 ├── index.ts                   # barrel — re-exports every component
 ├── styles/
 │   ├── tokens.css             # foundation tokens (color, spacing, radius, type, elevation)
-│   ├── component-tokens.css   # all 842 component tokens
+│   ├── component-tokens.css   # all 852 component tokens
 │   └── global.css             # imports both + base .sds-root styles
 └── components/<PascalName>/
     ├── <PascalName>.tsx
@@ -30,7 +30,7 @@ src/
 
 ## Design tokens are the source of truth
 
-Tokens are **generated** from the Spotler kit, not hand-written. The CSS files in `src/styles/` come from `spotler-make-kit/kit/guidelines/`. If a token value changes in the kit, regenerate — don't edit `tokens.css` / `component-tokens.css` by hand.
+The CSS files in `src/styles/` mirror the Spotler Figma library — the **Documentation** file ([hKM1NrLRl0xREa8oSHdQ1K](https://www.figma.com/design/hKM1NrLRl0xREa8oSHdQ1K/)) for variables, text styles and effects, and the **Components** file ([ZqqeU7ELDEFXivhwaTHH4P](https://www.figma.com/design/ZqqeU7ELDEFXivhwaTHH4P/)) for components one to one. When a variable, text style or effect changes in Figma, update the matching token here so the values stay identical. Figma is the source of truth: if code and Figma disagree, the code changes. If Figma still uses an OBSOLETE colour, text style or shadow, fix it in Figma first.
 
 **Never hardcode colors.** Every color, and most spacing/radius, must reference a CSS variable:
 
@@ -45,13 +45,13 @@ background: #005499;
 padding: 8px 16px;
 ```
 
-> Token names preserve the kit's original spelling, **including typos** (`Warrning`, `alet-darker`, `backgorund`, `Uplifiting`). Keep them — they map to Figma variable IDs.
+> Token names preserve Figma's original spelling, **including typos** (`Warrning`, `alet-darker`, `backgorund`, `Uplifiting`). Keep them — they map to Figma variable IDs.
 
 ## Adding or editing a component
 
 Follow the pattern set by `Button/` and `TextField/` (the canonical exemplars):
 
-1. **Read the spec** in the Spotler kit: `spotler-make-kit/kit/guidelines/components/<name>.md`.
+1. **Read the component in Figma** (Components file) — every variant, state, size, spacing value, text style, effect and bound variable. Build exactly that; add no states Figma doesn't have (focus rings excepted).
 2. **Create the folder** `src/components/<PascalName>/` with three files.
 3. **`<PascalName>.tsx`**:
    - Use `forwardRef`.

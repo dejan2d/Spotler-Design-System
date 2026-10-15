@@ -44,7 +44,7 @@ One skill per Spotler product. Attach the skill for the product you are designin
 
 | Skill file | What it does |
 |---|---|
-| `spotler-design-system.skill` | **Claude Code** — the full design system for developers: all foundation tokens, 842 component tokens, per-component guidelines for all 36+ components. |
+| `spotler-design-system.skill` | **Claude Code** — the full design system for developers: all foundation tokens, 852 component tokens, per-component guidelines for every component in the library. |
 | `spotler-design-principles.skill` | The 6 Spotler design pillars (Design, Layout, Consistency, Interaction, Simplicity, Accessibility). Useful in both contexts. |
 | `spotler-icons.skill` | Icon selection and usage: the 4,701-icon Font Awesome Pro Duotone Regular set, the action-to-icon map, and the rules that stop placeholder icons ending up in a design. Useful in both contexts. |
 
@@ -152,7 +152,7 @@ With the correct product skill, the AI understands user roles, real workflows, c
 ## Keeping skills up to date
 
 - **Product skills** — regenerate when product logic, user roles, or terminology changes.
-- **Design system skills** — regenerate from the Spotler Kit when tokens or component specs change.
+- **Design system skills** — update from the Figma library and `src/` when tokens or component specs change.
 - **Icon skill** — regenerate `references/icon-index.md` from `src/icons/duotone-regular/` when the
   Font Awesome Pro version is bumped, and extend `references/action-icon-map.md` whenever a new
   recurring action needs a house-standard icon.
