@@ -5,6 +5,8 @@ _Do not edit by hand — it is overwritten on each run. This table is mirrored i
 
 | Date | Commit | Author | Change | Files |
 | --- | --- | --- | --- | --- |
+| 2026-10-15 | `5dd2307` | Dejan Skondric | Add Color Picker icon tokens from Figma | 1 file |
+| 2026-10-15 | `bf43076` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-10-15 | `d6f4fed` | Dejan Skondric | Sync Tooltip and Slider shadows with the republished Figma library | 4 files |
 | 2026-10-15 | `0a0198b` | github-actions[bot] | docs: update CHANGELOG.md [skip ci] | 1 file |
 | 2026-10-12 | `58856c5` | Dejan Skondric | Match pickers, slider and upload to Figma (Slider, ColorPicker, Calendar, DatePicker, TimePicker, Upload) | 14 files |
